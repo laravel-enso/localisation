@@ -12,7 +12,6 @@ use LaravelEnso\Select\Traits\SelectListBuilderTrait;
 
 class LocalisationController extends Controller
 {
-
     use DataTable, SelectListBuilderTrait;
 
     protected $tableStructureClass = LocalisationTableStructure::class;
@@ -35,26 +34,25 @@ class LocalisationController extends Controller
     public function store(ValidateLanguageRequest $request, Language $localisation)
     {
         \DB::transaction(function () use ($localisation) {
-
             $localisation->fill(request()->all());
-            $locale   = Language::allExceptDefault()->first();
+            $locale = Language::allExceptDefault()->first();
             $langFile = (array) $this->readLangFileContent($locale->name);
             $langFile = $this->clearArrayValues($langFile);
 
-            \File::put(resource_path('lang/' . $localisation->name . '.json'), json_encode($langFile));
+            \File::put(resource_path('lang/'.$localisation->name.'.json'), json_encode($langFile));
 
             $localisation->save();
         });
 
         flash()->success(__('Language Created'));
 
-        return redirect('system/localisation/' . $localisation->id . '/edit');
+        return redirect('system/localisation/'.$localisation->id.'/edit');
     }
 
     private function clearArrayValues($array)
     {
-        $keys     = array_keys($array);
-        $values   = array_fill(0, count($keys), null);
+        $keys = array_keys($array);
+        $values = array_fill(0, count($keys), null);
         $newArray = array_combine($keys, $values);
 
         return $newArray;
@@ -62,7 +60,6 @@ class LocalisationController extends Controller
 
     public function edit(Language $localisation)
     {
-
         return view('localisation::edit', compact('localisation'));
     }
 
@@ -70,7 +67,7 @@ class LocalisationController extends Controller
     {
         $localisation->fill(request()->all())->save();
 
-        flash()->success(__("The Changes have been saved!"));
+        flash()->success(__('The Changes have been saved!'));
 
         return back();
     }
@@ -86,13 +83,13 @@ class LocalisationController extends Controller
 
     public function destroy(Language $localisation)
     {
-        \File::delete(resource_path('lang/' . $localisation->name . '.json'));
+        \File::delete(resource_path('lang/'.$localisation->name.'.json'));
 
         $localisation->delete();
 
         return [
             'level'   => 'success',
-            'message' => __("Operation was successfull"),
+            'message' => __('Operation was successfull'),
         ];
     }
 
@@ -105,7 +102,7 @@ class LocalisationController extends Controller
 
     private function readLangFileContent($locale)
     {
-        return json_decode(\File::get(resource_path('lang/' . $locale . '.json')));
+        return json_decode(\File::get(resource_path('lang/'.$locale.'.json')));
     }
 
     public function saveLangFile()
@@ -115,38 +112,35 @@ class LocalisationController extends Controller
         $languages = Language::allExceptDefault()->where('name', '<>', request()->locale)->get()->pluck('name');
 
         foreach ($languages as $locale) {
-
             $this->updateLocalisationFile($locale);
         }
 
         return [
 
             'level'   => 'success',
-            'message' => __("Operation was successfull"),
+            'message' => __('Operation was successfull'),
         ];
     }
 
     private function saveToDisk($langFile, $locale)
     {
-        \File::put(resource_path('lang/' . $locale . '.json'), json_encode($langFile));
+        \File::put(resource_path('lang/'.$locale.'.json'), json_encode($langFile));
     }
 
     private function updateLocalisationFile($locale)
     {
-        $langFile     = (array) $this->readLangFileContent($locale);
-        $keysToAdd    = array_diff_key(request()->langFile, $langFile);
-        $keysToAdd    = $this->clearArrayValues($keysToAdd);
+        $langFile = (array) $this->readLangFileContent($locale);
+        $keysToAdd = array_diff_key(request()->langFile, $langFile);
+        $keysToAdd = $this->clearArrayValues($keysToAdd);
         $keysToRemove = array_diff_key($langFile, request()->langFile);
 
         foreach ($keysToRemove as $keyToRemove => $value) {
-
             unset($langFile[$keyToRemove]);
         }
 
         $langFile = array_merge($keysToAdd, $langFile);
 
         if (count($keysToAdd) || count($keysToRemove)) {
-
             $this->saveToDisk($langFile, $locale);
         }
     }
