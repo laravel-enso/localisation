@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateLanguagesTable extends Migration
 {
@@ -12,8 +12,7 @@ class CreateLanguagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('languages', function(Blueprint $table) {
-
+        Schema::create('languages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('display_name');
@@ -28,7 +27,7 @@ class CreateLanguagesTable extends Migration
                 (2,'en','English-GB','flag-icon-gb')"
         );
 
-        $now = "'" . date("Y-m-d H:i:s") . "'";
+        $now = "'".date('Y-m-d H:i:s')."'";
 
         DB::update("update `languages` set created_at = $now, updated_at = $now");
     }
