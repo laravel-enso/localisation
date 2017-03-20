@@ -35,7 +35,7 @@ class LocalisationController extends Controller
     {
         \DB::transaction(function () use ($localisation) {
             $localisation->fill($request->all());
-            $locale   = Language::allExceptDefault()->first();
+            $locale = Language::allExceptDefault()->first();
             $langFile = (array) $this->readLangFileContent($locale->name);
             $langFile = $this->clearArrayValues($langFile);
 
