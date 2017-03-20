@@ -36,7 +36,7 @@ class LocalisationController extends Controller
     {
         \DB::transaction(function () use ($localisation) {
 
-            $localisation->fill(request()->all());
+            $localisation->fill($request->all());
             $locale   = Language::allExceptDefault()->first();
             $langFile = (array) $this->readLangFileContent($locale->name);
             $langFile = $this->clearArrayValues($langFile);
@@ -68,7 +68,7 @@ class LocalisationController extends Controller
 
     public function update(ValidateLanguageRequest $request, Language $localisation)
     {
-        $localisation->fill(request()->all())->save();
+        $localisation->fill($request->all())->save();
 
         flash()->success(__("The Changes have been saved!"));
 
@@ -138,7 +138,7 @@ class LocalisationController extends Controller
         $keysToAdd    = $this->clearArrayValues($keysToAdd);
         $keysToRemove = array_diff_key($langFile, request()->langFile);
 
-        foreach ($keysToRemove as $keyToRemove => $value) {
+        foreach (array_keys($keysToRemove) as $keyToRemove) {
 
             unset($langFile[$keyToRemove]);
         }
