@@ -27,7 +27,7 @@ class LocalisationServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views/system/localisation', 'localisation');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'localisation');
 
         $this->app['router']->aliasMiddleware('setLanguage', SetLanguage::class);
 
@@ -38,8 +38,12 @@ class LocalisationServiceProvider extends ServiceProvider
         ], 'localisation-migration');
 
         $this->publishes([
-            __DIR__.'/../resources' => base_path('resources/assets/js/components/core'),
-        ], 'documents-resources');
+            __DIR__.'/../resources/views' => base_path('resources/views/vendor/laravel-enso/localisation'),
+        ], 'localisation-views');
+
+        $this->publishes([
+            __DIR__.'/../resources/assets/js/localisation' => base_path('resources/assets/js/vendor/laravel-enso/localisation'),
+        ], 'localisation-assets');
     }
 
     /**
