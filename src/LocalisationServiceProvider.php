@@ -38,11 +38,11 @@ class LocalisationServiceProvider extends ServiceProvider
         ], 'localisation-migration');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/laravel-enso/localisation'),
+            __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-enso/localisation'),
         ], 'localisation-views');
 
         $this->publishes([
-            __DIR__.'/../resources/assets/js/localisation' => base_path('resources/assets/js/vendor/laravel-enso/localisation'),
+            __DIR__.'/../resources/assets/js' => resource_path('assets/js/vendor/laravel-enso/localisation'),
         ], 'localisation-assets');
     }
 
