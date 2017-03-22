@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('core::layouts.app')
 
 @section('pageTitle', __("Localisation"))
 
@@ -10,14 +10,14 @@
     <a class="btn btn-primary" href="/system/localisation/editTexts">
         {{ __("Edit Texts") }}
     </a>
-    @include('partials.breadcrumbs')
+    @include('core::partials.breadcrumbs')
 </section>
 <section class="content">
     <div class="row" v-cloak>
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
             <data-table source="/system/localisation">
                 <span slot="data-table-title">{{ __("Languages") }}</span>
-                @include('partials.modal')
+                @include('core::partials.modal')
             </data-table>
         </div>
     </div>
@@ -25,5 +25,5 @@
 @endsection
 
 @push('scripts')
-<script type="text/javascript" src="{{ asset('/js/system/localisation/index.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/vendor/laravel-enso/pages/localisation/index.js') }}"></script>
 @endpush

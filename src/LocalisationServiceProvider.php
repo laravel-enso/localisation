@@ -42,7 +42,7 @@ class LocalisationServiceProvider extends ServiceProvider
         ], 'localisation-views');
 
         $this->publishes([
-            __DIR__.'/../resources/assets/js' => resource_path('assets/js/vendor/laravel-enso/localisation'),
+            __DIR__.'/../resources/assets/js' => resource_path('assets/js/vendor/laravel-enso/pages/localisation'),
         ], 'localisation-assets');
     }
 

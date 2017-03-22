@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('core::layouts.app')
 
 @section('pageTitle', __("Localisation"))
 
 @section('content')
 
     <section class="content-header">
-        @include('partials.breadcrumbs')
+        @include('core::partials.breadcrumbs')
     </section>
     <section class="content">
         <div class="row" v-cloak>
