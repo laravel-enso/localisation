@@ -4,8 +4,8 @@ Library for LaravelEnso localisation management
 
 # Don't forget to
 
-artisan vendor:publish --tag=localisation-migrations
-artisan vendor:publish --tag=localisation-resources
+artisan vendor:publish --tag=localisation-views
+artisan vendor:publish --tag=localisation-assets
 
 php artisan migrate
 
