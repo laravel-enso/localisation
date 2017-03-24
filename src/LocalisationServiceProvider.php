@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Localisation\App\Commands\Generate;
 use LaravelEnso\Localisation\App\Commands\Scan;
 use LaravelEnso\Localisation\App\Commands\Sync;
-use LaravelEnso\Localisation\App\Http\Middleware\SetLanguage;
 
 class LocalisationServiceProvider extends ServiceProvider
 {
@@ -25,7 +24,7 @@ class LocalisationServiceProvider extends ServiceProvider
     private function publishesDepedencies()
     {
         $this->publishes([
-            __DIR__.'/database/migrations' => database_path('migrations')
+            __DIR__.'/database/migrations' => database_path('migrations'),
         ], 'core-migration');
 
         $this->publishes([
