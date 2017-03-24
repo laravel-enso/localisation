@@ -8,7 +8,7 @@ use LaravelEnso\Core\App\Models\Language;
 use LaravelEnso\DataTable\App\Traits\DataTable;
 use LaravelEnso\Localisation\App\DataTable\LocalisationTableStructure;
 use LaravelEnso\Localisation\App\Http\Requests\ValidateLanguageRequest;
-use LaravelEnso\Select\Traits\SelectListBuilderTrait;
+use LaravelEnso\Select\App\Traits\SelectListBuilderTrait;
 
 class LocalisationController extends Controller
 {
