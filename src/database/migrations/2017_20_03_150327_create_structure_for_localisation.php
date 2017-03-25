@@ -1,17 +1,14 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForLocalisation extends Migration
+class CreateStructureForLocalisation extends StructureMigration
 {
-    use StructureSupport;
-
-    private $permissionsGroup = [
+    protected $permissionsGroup = [
         'name' => 'system.localisation', 'description' => 'Localisation Permissions Group',
     ];
 
-    private $permissions = [
+    protected $permissions = [
         ['name' => 'system.localisation.initTable', 'description' => 'Init table data for localisation', 'type' => 0],
         ['name' => 'system.localisation.getTableData', 'description' => 'Get table data for localisation', 'type' => 0],
         ['name' => 'system.localisation.create', 'description' => 'Create Langugage', 'type' => 1],
@@ -25,10 +22,9 @@ class CreateStructureForLocalisation extends Migration
         ['name' => 'system.localisation.destroy', 'description' => 'Delete Language', 'type' => 1],
     ];
 
-    private $menu = [
+    protected $menu = [
         'name' => 'Localisation', 'icon' => 'fa fa-fw fa-language', 'link' => 'system/localisation', 'has_children' => 0,
     ];
 
-    private $parentMenu = 'System';
-    private $roles;
+    protected $parentMenu = 'System';
 }
