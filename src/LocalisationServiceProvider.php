@@ -3,9 +3,9 @@
 namespace LaravelEnso\Localisation;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Localisation\App\Commands\Generate;
-use LaravelEnso\Localisation\App\Commands\Scan;
-use LaravelEnso\Localisation\App\Commands\Sync;
+use LaravelEnso\Localisation\app\Commands\Generate;
+use LaravelEnso\Localisation\app\Commands\Scan;
+use LaravelEnso\Localisation\app\Commands\Sync;
 
 class LocalisationServiceProvider extends ServiceProvider
 {

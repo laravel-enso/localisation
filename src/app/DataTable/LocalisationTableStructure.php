@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Localisation\App\DataTable;
+namespace LaravelEnso\Localisation\app\DataTable;
 
-use LaravelEnso\DataTable\App\Classes\Abstracts\TableStructure;
+use LaravelEnso\DataTable\app\Classes\Abstracts\TableStructure;
 
 class LocalisationTableStructure extends TableStructure
 {

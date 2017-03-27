@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\App\Traits;
+namespace LaravelEnso\Localisation\app\Traits;
 
 trait Logger
 {

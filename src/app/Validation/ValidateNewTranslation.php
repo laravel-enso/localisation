@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Localisation\App\Validation;
+namespace LaravelEnso\Localisation\app\Validation;
 
-use LaravelEnso\Localisation\App\Traits\Logger;
+use LaravelEnso\Localisation\app\Traits\Logger;
 
 class ValidateNewTranslation
 {

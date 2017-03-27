@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\Localisation\App\Commands;
+namespace LaravelEnso\Localisation\app\Commands;
 
 use Illuminate\Console\Command;
-use LaravelEnso\Localisation\App\Classes\CodeFilesManager;
-use LaravelEnso\Localisation\App\Classes\LocaleManager;
-use LaravelEnso\Localisation\App\Traits\Logger;
-use LaravelEnso\Localisation\App\Validation\ValidateNewTranslation;
+use LaravelEnso\Localisation\app\Classes\CodeFilesManager;
+use LaravelEnso\Localisation\app\Classes\LocaleManager;
+use LaravelEnso\Localisation\app\Traits\Logger;
+use LaravelEnso\Localisation\app\Validation\ValidateNewTranslation;
 
 class Sync extends Command
 {

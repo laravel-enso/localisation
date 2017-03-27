@@ -1,14 +1,14 @@
 <?php
 
-namespace LaravelEnso\Localisation\App\Http\Controllers;
+namespace LaravelEnso\Localisation\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use LaravelEnso\Core\App\Models\Language;
-use LaravelEnso\DataTable\App\Traits\DataTable;
-use LaravelEnso\Localisation\App\DataTable\LocalisationTableStructure;
-use LaravelEnso\Localisation\App\Http\Requests\ValidateLanguageRequest;
-use LaravelEnso\Select\App\Traits\SelectListBuilderTrait;
+use LaravelEnso\Core\app\Models\Language;
+use LaravelEnso\DataTable\app\Traits\DataTable;
+use LaravelEnso\Localisation\app\DataTable\LocalisationTableStructure;
+use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
+use LaravelEnso\Select\app\Traits\SelectListBuilderTrait;
 
 class LocalisationController extends Controller
 {

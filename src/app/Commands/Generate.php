@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Localisation\App\Commands;
+namespace LaravelEnso\Localisation\app\Commands;
 
 use Illuminate\Console\Command;
-use LaravelEnso\Localisation\App\Classes\LangFilesManager;
-use LaravelEnso\Localisation\App\Classes\LocaleManager;
+use LaravelEnso\Localisation\app\Classes\LangFilesManager;
+use LaravelEnso\Localisation\app\Classes\LocaleManager;
 
 class Generate extends Command
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\App\Classes;
+namespace LaravelEnso\Localisation\app\Classes;
 
 class LangFilesManager
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace LaravelEnso\Localisation\App\Commands;
+namespace LaravelEnso\Localisation\app\Commands;
 
 use Illuminate\Console\Command;
-use LaravelEnso\Localisation\App\Classes\CodeFilesManager;
-use LaravelEnso\Localisation\App\Classes\LangFilesManager;
-use LaravelEnso\Localisation\App\Classes\LocaleManager;
-use LaravelEnso\Localisation\App\Traits\Logger;
-use LaravelEnso\Localisation\App\Validation\ValidateLegacyTranslation;
+use LaravelEnso\Localisation\app\Classes\CodeFilesManager;
+use LaravelEnso\Localisation\app\Classes\LangFilesManager;
+use LaravelEnso\Localisation\app\Classes\LocaleManager;
+use LaravelEnso\Localisation\app\Traits\Logger;
+use LaravelEnso\Localisation\app\Validation\ValidateLegacyTranslation;
 
 class Scan extends Command
 {
