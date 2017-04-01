@@ -115,8 +115,7 @@
 
     <script>
 
-        var vm = new Vue({
-
+        let vm = new Vue({
             el: '#app',
             data: {
                 langFile: {},
@@ -131,25 +130,20 @@
             },
             computed: {
                 filteredLangFile: function() {
-
                     if (!this.queryString) {
-
                         return this.langFile;
                     }
 
-                    var self = this,
+                    let self = this,
                         langFile = JSON.parse(JSON.stringify(self.langFile)),
                         keys = Object.keys(self.langFile);
 
-                    var matchingKeys = keys.filter(function(key) {
-
+                    let matchingKeys = keys.filter(function(key) {
                         return key.toLowerCase().indexOf(self.queryString.toLowerCase()) > -1;
                     });
 
                     for (let key in langFile) {
-
                         if (matchingKeys.indexOf(key) === -1) {
-
                             delete langFile[key];
                         }
                     }
@@ -157,39 +151,30 @@
                     return langFile;
                 },
                 isNewKey: function() {
-
                     return this.queryString && Object.keys(this.filteredLangFile).indexOf(this.queryString) === -1;
                 },
             },
             methods: {
                 getLangFile: function() {
-
                     axios.get('/system/localisation/getLangFile/' + this.selectedLocale).then((response) => {
-
                         this.langFile = response.data;
                     }).catch((error) => {
-
                         toastr[error.data.level](error.data.message);
                     });
                 },
                 saveLangFile: function() {
-
                     axios.patch('/system/localisation/saveLangFile', {
-
                         langFile: this.langFile,
                         locale: this.selectedLocale
                     }).then((response) => {
-
                         toastr[response.data.level](response.data.message);
                         this.langFileIsChanged = false;
                     }).catch((error) => {
-
                         toastr[error.data.level](error.data.message);
                     });
                 },
                 addKeyToLangFile: function() {
-
-                    var obj = {},
+                    let obj = {},
                         self = this;
 
                     obj[this.queryString] = null;
@@ -199,24 +184,19 @@
                     this.langFileIsChanged = true;
                 },
                 removeKey: function(key) {
-
                     Vue.delete(this.langFile, key);
                 },
                 blurIt: function(id) {
-
-                    var input = document.getElementById(id);
+                    let input = document.getElementById(id);
                         input.blur();
                 },
                 focusIt: function(id) {
-
                     if (!id) {
-
                         id = Object.keys(this.filteredLangFile)[0];
                     }
 
                     this.$nextTick(function() {
-
-                        var input = document.getElementById(id);
+                        let input = document.getElementById(id);
                         input.focus();
                     });
                 }
