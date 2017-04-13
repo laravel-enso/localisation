@@ -173,7 +173,7 @@
                     }).then((response) => {
                         toastr[response.data.level](response.data.message);
                         this.langFileIsChanged = false;
-                    }.catch((error) => {
+                    }).catch((error) => {
                         if (error.response.data.level) {
                             toastr[error.response.data.level](error.response.data.message);
                         }
