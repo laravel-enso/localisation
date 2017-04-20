@@ -30,10 +30,6 @@ class LocalisationServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso/localisation'),
         ], 'localisation-views');
-
-        $this->publishes([
-            __DIR__.'/resources/assets/js' => resource_path('assets/js/vendor/laravel-enso/pages/localisation'),
-        ], 'localisation-assets');
     }
 
     private function registerCommands()
