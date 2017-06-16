@@ -10,7 +10,7 @@ class LegacyLangManager
         $files = collect(\File::files(resource_path('lang').'/'.$defaultLocale));
         \File::makeDirectory(resource_path('lang').'/'.$locale);
 
-        $files->each(function($file) use ($locale) {
+        $files->each(function ($file) use ($locale) {
             $this->create($file, $locale);
         });
     }

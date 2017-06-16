@@ -8,7 +8,7 @@ class JsonLangManager
 {
     public function getContent($locale)
     {
-        return json_decode(\File::get(resource_path('lang/' . $locale . '.json')));
+        return json_decode(\File::get(resource_path('lang/'.$locale.'.json')));
     }
 
     public function update($locale, $langFile)
@@ -16,7 +16,7 @@ class JsonLangManager
         $this->saveToDisk($locale, $langFile);
         $this->processDifferences($locale, $langFile);
 
-        return [ 'message' => __('Operation was successfull') ];
+        return ['message' => __('Operation was successfull')];
     }
 
     public function createEmptyLangFile($locale)
@@ -36,19 +36,19 @@ class JsonLangManager
 
     public function delete($langFile)
     {
-        \File::delete(resource_path('lang/' . $langFile . '.json'));
+        \File::delete(resource_path('lang/'.$langFile.'.json'));
     }
 
     private function saveToDisk($locale, $langFile)
     {
-        \File::put(resource_path('lang/' . $locale . '.json'), json_encode($langFile));
+        \File::put(resource_path('lang/'.$locale.'.json'), json_encode($langFile));
     }
 
     private function processDifferences($locale, $newLangFile)
     {
         $locales = Language::allExceptDefault()->where('name', '<>', $locale)->pluck('name');
 
-        $locales->each(function($locale) use ($newLangFile){
+        $locales->each(function ($locale) use ($newLangFile) {
             $this->updateDifferences($locale, $newLangFile);
         });
     }
@@ -72,7 +72,7 @@ class JsonLangManager
             unset($langFile[$keyToRemove]);
         }
 
-        return [ count($keysToRemove), $langFile ];
+        return [count($keysToRemove), $langFile];
     }
 
     private function addNewKeys(array $langFile, $newLangFile)
@@ -81,7 +81,7 @@ class JsonLangManager
         $arrayToAdd = $this->clearArrayValues($keysToAdd);
         $langFile = array_merge($arrayToAdd, $langFile);
 
-        return [ count($keysToAdd), $langFile ];
+        return [count($keysToAdd), $langFile];
     }
 
     private function clearArrayValues($array)

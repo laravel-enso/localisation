@@ -22,7 +22,7 @@ class LocalisationService
 
     public function getTableQuery()
     {
-    	return Language::select(\DB::raw('languages.id as DT_RowId, languages.display_name,
+        return Language::select(\DB::raw('languages.id as DT_RowId, languages.display_name,
             languages.name, languages.flag, languages.created_at, languages.updated_at'));
     }
 
@@ -46,7 +46,7 @@ class LocalisationService
 
         flash()->success(__('Language Created'));
 
-        return redirect('system/localisation/' . $localisation->id . '/edit');
+        return redirect('system/localisation/'.$localisation->id.'/edit');
     }
 
     public function edit(Language $localisation)

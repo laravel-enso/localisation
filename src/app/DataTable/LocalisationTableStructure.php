@@ -9,14 +9,14 @@ class LocalisationTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'crtNo'         => __('#'),
-            'actionButtons' => __('Actions'),
-            'render'        => [2, 3, 4],
-            'notSearchable' => [3, 4],
-            'headerAlign'   => 'center',
-            'bodyAlign'     => 'center',
-            'tableClass'    => 'table display compact',
-            'dom'           => 'lfrtip',
+            'crtNo'           => __('#'),
+            'actionButtons'   => __('Actions'),
+            'render'          => [2, 3, 4],
+            'notSearchable'   => [3, 4],
+            'headerAlign'     => 'center',
+            'bodyAlign'       => 'center',
+            'tableClass'      => 'table display compact',
+            'dom'             => 'lfrtip',
             'columns'         => [
                 0 => [
                     'label' => __('Display Name'),
