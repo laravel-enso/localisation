@@ -3,42 +3,28 @@
 namespace LaravelEnso\Localisation\app\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ValidateLanguageRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         $localisation = $this->route('localisation');
+        $nameUnique = Rule::unique('languages', 'name');
 
         if ($this->_method == 'PATCH') {
-            return [
-
-                'name'         => 'required|unique:languages,name,'.$localisation->id.',id',
-                'display_name' => 'required',
-                'flag'         => 'required',
-            ];
-        } else {
-            return [
-
-                'name'         => 'required|unique:languages',
-                'display_name' => 'required',
-                'flag'         => 'required',
-            ];
+            $nameUnique = $this->_method == 'PATCH' ? $nameUnique->ignore($localisation->id) : $nameUnique;
         }
+
+        return [
+            'name'         => [ 'required', $nameUnique ],
+            'display_name' => 'required',
+            'flag'         => 'required',
+        ];
     }
 }

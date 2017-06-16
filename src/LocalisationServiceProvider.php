@@ -9,38 +9,17 @@ use LaravelEnso\Localisation\app\Commands\Sync;
 
 class LocalisationServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
     public function boot()
     {
         $this->publishesDepedencies();
-        $this->registerCommands();
         $this->loadDependencies();
     }
 
     private function publishesDepedencies()
     {
         $this->publishes([
-            __DIR__.'/database/migrations' => database_path('migrations'),
-        ], 'localisation-migration');
-
-        $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso/localisation'),
         ], 'localisation-views');
-    }
-
-    private function registerCommands()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                Generate::class,
-                Scan::class,
-                Sync::class,
-            ]);
-        }
     }
 
     private function loadDependencies()
@@ -50,11 +29,6 @@ class LocalisationServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
     public function register()
     {
         //

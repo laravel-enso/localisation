@@ -23,24 +23,34 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <vue-select :options="languagesList"
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="col-xs-6 col-md-3">
+                                    <vue-select :options="locales"
                                         v-model="selectedLocale"
-                                        @input="getLangFile">
+                                        @input="getLangFile()"
+                                        placeholder="{{ __('Choose language') }}">
                                     </vue-select>
                                 </div>
-                                <div class="col-xs-6">
-                                    <button @click="saveLangFile"
-                                        v-if="langFileIsChanged"
-                                        class="btn btn-success pull-right">
-                                        {{ __('Save Configuration') }}
-                                    </button>
+                                <div class="col-xs-6 col-md-3">
+                                    <transition name="fade">
+                                        <div class="margin-top-sm pull-right" v-if="keysCount">
+                                            {{ __("You have a total of") }} <b>@{{ keysCount }}</b> {{ __('translations') }}
+                                        </div>
+                                    </transition>
+                                </div>
+                                <div class="col-xs-12 col-md-3 col-md-offset-3">
+                                    <transition name="fade">
+                                        <button @click="saveLangFile()"
+                                            v-if="hasChanges"
+                                            class="btn btn-success pull-right">
+                                            {{ __('Save Configuration') }}
+                                        </button>
+                                    </transition>
                                 </div>
                             </div>
-                            <div class="row margin-top-md" v-if="selectedLocale">
-                                <div class="col-xs-9">
+                            <div class="col-xs-12 margin-top-md" v-if="selectedLocale">
+                                <div class="col-xs-12 col-md-6">
                                     <div class="input-group">
                                         <input type="text"
                                             id="search-input"
@@ -48,60 +58,54 @@
                                             v-select-on-focus
                                             placeholder="{{ __('Search') }}"
                                             class="form-control"
-                                            v-model="queryString"
-                                            @keyup.enter="isNewKey ? addKeyToLangFile() : focusIt(null)">
-                                        <i class="fa fa-search input-group-addon" @click="focusIt('search-input')"></i>
+                                            v-model="query"
+                                            @keyup.enter="isNewKey ? addKey() : focusIt(null)">
+                                        <i class="fa fa-search input-group-addon"></i>
                                     </div>
                                 </div>
-                                <div class="col-xs-3">
-                                    <button class="btn btn-success pull-right"
-                                        v-if="isNewKey"
-                                        @click="addKeyToLangFile">
-                                        {{ __('Add Key') }}
-                                    </button>
+                                <div class="col-xs-12 col-md-3 col-md-offset-3">
+                                    <transition name="fade">
+                                        <button class="btn btn-success pull-right"
+                                            v-if="isNewKey"
+                                            @click="addKey()">
+                                            {{ __('Add Key') }}
+                                        </button>
+                                    </transition>
                                 </div>
                             </div>
-                            <div class="row" v-if="selectedLocale" :style="windowHeightCss">
-
-                            <div class="col-xs-3 text-center">
-                                <hr>
-                                <p style="font-size: 16px">
-                                    {{ __("Key Name") }}
-                                </p>
-                            </div>
-                            <div class="col-xs-9 text-center">
-                                <hr>
-                                <p style="font-size: 16px">
-                                    {{ __("Key Value") }}
-                                </p>
-                            </div>
-                            <div v-for="(value, key) in filteredLangFile" class="col-xs-12">
-                                <div class="col-xs-6 well well-sm">
-                                    @{{ key }}
+                            <div class="col-xs-12" v-if="selectedLocale" :style="windowHeightCss">
+                                <div class="col-xs-3 text-center">
+                                    <hr>
+                                    <p style="font-size: 16px">
+                                        {{ __("Key Name") }}
+                                    </p>
                                 </div>
-                                <div class="col-xs-6">
-                                    <div class="input-group">
-                                        <input type="text"
-                                            v-select-on-focus
-                                            v-model="langFile[key]"
-                                            :id="key"
-                                            class="form-control"
-                                            @keyup.enter="focusIt('search-input')"
-                                            @input="langFileIsChanged = true">
-                                        <span class="input-group-addon">
-                                            <i class="btn btn-xs btn-danger fa fa-trash-o"
-                                                @click="removeKey(key)"></i>
-                                        </span>
+                                <div class="col-xs-9 text-center">
+                                    <hr>
+                                    <p style="font-size: 16px">
+                                        {{ __("Key Value") }}
+                                    </p>
+                                </div>
+                                <div v-for="(value, key) in filteredLangFile" class="col-xs-12">
+                                    <div class="col-xs-6 well well-sm">
+                                        @{{ key }}
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                v-select-on-focus
+                                                v-model="langFile[key]"
+                                                :id="key"
+                                                class="form-control"
+                                                @keyup.enter="focusIt('search-input')">
+                                            <span class="input-group-addon">
+                                                <i class="btn btn-xs btn-danger fa fa-trash-o"
+                                                    @click="removeKey(key)"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <button @click="saveLangFile"
-                                    v-if="langFile.length"
-                                    class="btn btn-primary"
-                                    style="float:right">
-                                    {{ __("Save Configuration") }}
-                            </button>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -115,99 +119,102 @@
 
     <script>
 
-        var vm = new Vue({
+        let vm = new Vue({
             el: '#app',
+
             data: {
                 langFile: {},
-                languagesList: JSON.parse('{!! $languaguesList !!}'),
+                locales: {!! $locales !!},
                 selectedLocale: null,
-                queryString: null,
-                langFileIsChanged: false,
+                query: null,
+                hasChanges: false,
                 windowHeightCss: {
                     'max-height': $(window).height() - 370 + 'px',
                     'overflow-y': 'scroll'
                 }
             },
+
             computed: {
-                filteredLangFile: function() {
-                    if (!this.queryString) {
+                filteredLangFile() {
+                    if (!this.query) {
                         return this.langFile;
                     }
 
-                    var self = this,
+                    let self = this,
                         langFile = JSON.parse(JSON.stringify(self.langFile)),
                         keys = Object.keys(self.langFile);
 
-                    var matchingKeys = keys.filter(function(key) {
-                        return key.toLowerCase().indexOf(self.queryString.toLowerCase()) > -1;
+                    let matchingKeys = keys.filter(function(key) {
+                        return key.toLowerCase().indexOf(self.query.toLowerCase()) > -1;
                     });
 
                     for (let key in langFile) {
-
                         if (matchingKeys.indexOf(key) === -1) {
-
                             delete langFile[key];
                         }
                     }
 
                     return langFile;
                 },
-                isNewKey: function() {
-                    return this.queryString && Object.keys(this.filteredLangFile).indexOf(this.queryString) === -1;
+                isNewKey() {
+                    return this.query && Object.keys(this.filteredLangFile).indexOf(this.query) === -1;
                 },
+                keysCount() {
+                    return Object.keys(this.langFile).length;
+                }
             },
-            methods: {
-                getLangFile: function() {
-                    axios.get('/system/localisation/getLangFile/' + this.selectedLocale).then((response) => {
-                        this.langFile = response.data;
-                    }).catch((error) => {
-                        if (error.response.data.level) {
-                            toastr[error.response.data.level](error.response.data.message);
-                        }
-                    });
-                },
-                saveLangFile: function() {
-                    axios.patch('/system/localisation/saveLangFile', {
-                        langFile: this.langFile,
-                        locale: this.selectedLocale
-                    }).then((response) => {
-                        toastr[response.data.level](response.data.message);
-                        this.langFileIsChanged = false;
-                    }).catch((error) => {
-                        if (error.response.data.level) {
-                            toastr[error.response.data.level](error.response.data.message);
-                        }
-                    });
-                },
-                addKeyToLangFile: function() {
-                    var obj = {},
-                        self = this;
 
-                    obj[this.queryString] = null;
-                    this.langFile = Object.assign({}, obj, this.langFile);
-                    this.focusIt(self.queryString);
-                    this.queryString = null;
-                    this.langFileIsChanged = true;
+            watch: {
+                langFile: {
+                    handler(newValue, oldValue) {
+                        if (Object.keys(oldValue).length) {
+                            this.hasChanges = true;
+                        }
+                    },
+                    deep: true
+                }
+            },
+
+            methods: {
+                getLangFile() {
+                    axios.get('/system/localisation/getLangFile/' + this.selectedLocale).then(response => {
+                        this.langFile = response.data;
+                    }).catch(error => {
+                        this.reportEnsoException(error);
+                    });
                 },
-                removeKey: function(key) {
-                    Vue.delete(this.langFile, key);
+                saveLangFile() {
+                    axios.patch('/system/localisation/saveLangFile',
+                        { langFile: this.langFile, locale: this.selectedLocale }
+                    ).then(response => {
+                        toastr.success(response.data.message);
+                        this.hasChanges = false;
+                    }).catch(error => {
+                        this.reportEnsoException(error);
+                    });
                 },
-                blurIt: function(id) {
-                    var input = document.getElementById(id);
-                        input.blur();
+                addKey() {
+                    let obj = {},
+                        self = this;
+                    obj[this.query] = null;
+                    this.$set($this.LangFile, this.query, null);
+                    // this.langFile = Object.assign({}, obj, this.langFile);
+                    this.query = null;
+                    this.focusIt();
                 },
-                focusIt: function(id) {
-                    if (!id) {
-                        id = Object.keys(this.filteredLangFile)[0];
-                    }
+                removeKey(key) {
+                    this.$delete(this.langFile, key);
+                },
+                focusIt(id = null) {
+                    id = id || Object.keys(this.filteredLangFile)[0];
 
                     this.$nextTick(function() {
-                        var input = document.getElementById(id);
-                        input.focus();
+                        document.getElementById(id).focus();
                     });
                 }
             }
         });
+
     </script>
 
 @endpush

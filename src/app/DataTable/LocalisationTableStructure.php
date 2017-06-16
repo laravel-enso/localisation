@@ -2,14 +2,13 @@
 
 namespace LaravelEnso\Localisation\app\DataTable;
 
-use LaravelEnso\DataTable\app\Classes\Abstracts\TableStructure;
+use LaravelEnso\DataTable\app\Classes\TableStructure;
 
 class LocalisationTableStructure extends TableStructure
 {
     public function __construct()
     {
         $this->data = [
-
             'crtNo'         => __('#'),
             'actionButtons' => __('Actions'),
             'render'        => [2, 3, 4],
@@ -18,7 +17,6 @@ class LocalisationTableStructure extends TableStructure
             'bodyAlign'     => 'center',
             'tableClass'    => 'table display compact',
             'dom'           => 'lfrtip',
-
             'columns'         => [
                 0 => [
                     'label' => __('Display Name'),
