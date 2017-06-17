@@ -8,11 +8,12 @@ LaravelEnso localisation management depedency
 
 # Use
 
-If you need to customize the views run php artisan vendor:publish --tag=logmanager-views
+Publish the vue component with php artisan vendor:publish --tag=localisation-component
+If you need to customize the views run php artisan vendor:publish --tag=localisation-views
 
 # Note
 
-Included in LaraveEnso Core & Coreplus
+This depedency is included in LaraveEnso Core & Coreplus
 
 ## TO DO
 
