@@ -3,9 +3,9 @@
 namespace LaravelEnso\Localisation\app\Http\Services;
 
 use Illuminate\Http\Request;
-use LaravelEnso\Core\app\Models\Language;
 use LaravelEnso\Localisation\app\Classes\JsonLangManager;
 use LaravelEnso\Localisation\app\Classes\LegacyLangManager;
+use LaravelEnso\Localisation\app\Models\Language;
 
 class LocalisationService
 {

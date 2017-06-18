@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Localisation\app\Classes;
 
-use LaravelEnso\Core\app\Models\Language;
+use LaravelEnso\Localisation\app\Models\Language;
 
 class JsonLangManager
 {
