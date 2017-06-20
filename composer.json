@@ -1,7 +1,7 @@
 {
     "name": "laravel-enso/localisation",
-    "description": "Library for LaravelEnso localisation management",
-    "type": "library",
+    "description": "LaravelEnso localisation management depedency",
+    "type": "dependency",
     "license": "MIT",
     "authors": [
         {

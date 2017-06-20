@@ -9,7 +9,6 @@ LaravelEnso localisation management depedency
 # Use
 
 Publish the vue component with php artisan vendor:publish --tag=localisation-component
-If you need to customize the views run php artisan vendor:publish --tag=localisation-views
 
 # Note
 

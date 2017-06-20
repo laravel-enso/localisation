@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use LaravelEnso\Localisation\app\Models\Language;
 
 class CreateLanguagesTable extends Migration
 {
@@ -15,16 +16,16 @@ class CreateLanguagesTable extends Migration
             $table->timestamps();
         });
 
-        DB::insert(
+        $languages = [
+            ['name' => 'ro', 'display_name' => 'Romana', 'flag' => 'flag-icon-ro'],
+            ['name' => 'en', 'display_name' => 'English-GB', 'flag' => 'flag-icon-gb']
+        ];
 
-            "INSERT INTO `languages` (`id`, `name`, `display_name`, `flag`) VALUES
-                (1,'ro','Romana','flag-icon-ro'),
-                (2,'en','English-GB','flag-icon-gb')"
-        );
-
-        $now = "'".date('Y-m-d H:i:s')."'";
-
-        DB::update("update `languages` set created_at = $now, updated_at = $now");
+        \DB::transaction(function() use ($languages) {
+            foreach ($languages as $language) {
+                Language::create($language);
+            }
+        });
     }
 
     public function down()
