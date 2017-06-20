@@ -5,11 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateLanguagesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('languages', function (Blueprint $table) {
@@ -32,11 +27,6 @@ class CreateLanguagesTable extends Migration
         DB::update("update `languages` set created_at = $now, updated_at = $now");
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('languages');
