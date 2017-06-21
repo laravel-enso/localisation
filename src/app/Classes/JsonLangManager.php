@@ -21,7 +21,7 @@ class JsonLangManager
 
     public function createEmptyLangFile($locale)
     {
-        $language = Language::allExceptDefault()->first();
+        $language = Language::extra()->first();
         $langFile = (array) $this->getContent($language->name);
         $langFile = $this->clearArrayValues($langFile);
         $this->saveToDisk($locale, $langFile);
@@ -46,7 +46,7 @@ class JsonLangManager
 
     private function processDifferences($locale, $newLangFile)
     {
-        $locales = Language::allExceptDefault()->where('name', '<>', $locale)->pluck('name');
+        $locales = Language::extra()->where('name', '<>', $locale)->pluck('name');
 
         $locales->each(function ($locale) use ($newLangFile) {
             $this->updateDifferences($locale, $newLangFile);

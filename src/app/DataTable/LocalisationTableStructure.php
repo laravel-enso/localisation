@@ -11,7 +11,7 @@ class LocalisationTableStructure extends TableStructure
         $this->data = [
             'crtNo'           => __('#'),
             'actionButtons'   => __('Actions'),
-            'render'          => [2, 3, 4],
+            'render'          => [2],
             'notSearchable'   => [3, 4],
             'headerAlign'     => 'center',
             'bodyAlign'       => 'center',

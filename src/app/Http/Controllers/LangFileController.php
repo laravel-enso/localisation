@@ -27,7 +27,7 @@ class LangFileController
 
     public function editTexts()
     {
-        $localisations = Language::allExceptDefault()->pluck('display_name', 'name');
+        $localisations = Language::extra()->pluck('display_name', 'name');
         $locales = $this->buildSelectList($localisations);
 
         return view('laravel-enso/localisation::editTexts', compact('locales'));
@@ -35,6 +35,6 @@ class LangFileController
 
     public function saveLangFile()
     {
-        return $this->jsonLang->update($this->request->locale, $this->request->langFile);
+        return $this->jsonLang->update($this->request->get('locale'), $this->request->get('langFile'));
     }
 }
