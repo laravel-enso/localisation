@@ -7,7 +7,7 @@ use LaravelEnso\Helpers\Traits\DMYTimestamps;
 
 class Language extends Model
 {
-	use DMYTimestamps;
+    use DMYTimestamps;
 
     protected $fillable = ['name', 'display_name', 'flag'];
 
