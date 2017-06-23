@@ -3,11 +3,11 @@
 namespace LaravelEnso\Localisation\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Helpers\Traits\DMYTimestamps;
+use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 
 class Language extends Model
 {
-    use DMYTimestamps;
+    use FormattedTimestamps;
 
     protected $fillable = ['name', 'display_name', 'flag'];
 

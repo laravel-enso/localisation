@@ -21,7 +21,7 @@ class JsonLangManager
 
     public function createEmptyLangFile($locale)
     {
-        $language = Language::extra()->first();
+        $language = Language::extra()->orderBy('id')->first();
         $langFile = (array) $this->getContent($language->name);
         $langFile = $this->clearArrayValues($langFile);
         $this->saveToDisk($locale, $langFile);
