@@ -73,35 +73,35 @@
                                     </transition>
                                 </div>
                             </div>
-                            <div class="col-xs-12" v-if="selectedLocale" :style="windowHeightCss">
-                                <div class="col-xs-3 text-center">
-                                    <hr>
-                                    <p style="font-size: 16px">
-                                        {{ __("Key Name") }}
-                                    </p>
-                                </div>
-                                <div class="col-xs-9 text-center">
-                                    <hr>
-                                    <p style="font-size: 16px">
-                                        {{ __("Key Value") }}
-                                    </p>
-                                </div>
-                                <div v-for="(value, key) in filteredLangFile" class="col-xs-12">
-                                    <div class="col-xs-6 well well-sm">
-                                        @{{ key }}
+                            <div class="col-xs-12" v-if="selectedLocale">
+                                <div class="col-xs-12" :style="windowHeightCss" style="background:#fff">
+                                    <div class="col-xs-3 text-center">
+                                        <p style="font-size: 16px">
+                                            {{ __("Key Name") }}
+                                        </p>
                                     </div>
-                                    <div class="col-xs-6">
-                                        <div class="input-group">
-                                            <input type="text"
-                                                v-select-on-focus
-                                                v-model="langFile[key]"
-                                                :id="key"
-                                                class="form-control"
-                                                @keyup.enter="focusIt('search-input')">
-                                            <span class="input-group-addon">
-                                                <i class="btn btn-xs btn-danger fa fa-trash-o"
-                                                    @click="removeKey(key)"></i>
-                                            </span>
+                                    <div class="col-xs-9 text-center">
+                                        <p style="font-size: 16px">
+                                            {{ __("Key Value") }}
+                                        </p>
+                                    </div>
+                                    <div v-for="(value, key) in filteredLangFile" class="col-xs-12">
+                                        <div class="col-xs-6 well well-sm">
+                                            @{{ key }}
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="input-group">
+                                                <input type="text"
+                                                    v-select-on-focus
+                                                    v-model="langFile[key]"
+                                                    :id="key"
+                                                    class="form-control"
+                                                    @keyup.enter="focusIt('search-input')">
+                                                <span class="input-group-addon">
+                                                    <i class="btn btn-xs btn-danger fa fa-trash-o"
+                                                        @click="removeKey(key)"></i>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
