@@ -16,15 +16,19 @@ class ValidateLanguageRequest extends FormRequest
     {
         $localisation = $this->route('localisation');
         $nameUnique = Rule::unique('languages', 'name');
+        $displayNameUnique = Rule::unique('languages', 'display_name');
+        $flagUnique = Rule::unique('languages', 'flag');
 
         if ($this->_method == 'PATCH') {
-            $nameUnique = $this->_method == 'PATCH' ? $nameUnique->ignore($localisation->id) : $nameUnique;
+            $nameUnique = $nameUnique->ignore($localisation->id);
+            $displayNameUnique = $displayNameUnique->ignore($localisation->id);
+            $flagUnique = $flagUnique->ignore($localisation->id);
         }
 
         return [
             'name'         => ['required', $nameUnique],
-            'display_name' => 'required',
-            'flag'         => 'required',
+            'display_name' => ['required', $displayNameUnique],
+            'flag' => ['required', $flagUnique]
         ];
     }
 }

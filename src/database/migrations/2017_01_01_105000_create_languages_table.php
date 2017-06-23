@@ -10,9 +10,9 @@ class CreateLanguagesTable extends Migration
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('display_name');
-            $table->string('flag');
+            $table->string('name')->unique();
+            $table->string('display_name')->unique();
+            $table->string('flag')->unique();
             $table->timestamps();
         });
 

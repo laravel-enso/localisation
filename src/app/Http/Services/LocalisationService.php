@@ -10,14 +10,14 @@ use LaravelEnso\Localisation\app\Models\Language;
 class LocalisationService
 {
     private $request;
-    private $jsonLang;
     private $legacyLang;
+    private $jsonLang;
 
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->jsonLang = new JsonLangManager();
         $this->legacyLang = new LegacyLangManager();
+        $this->jsonLang = new JsonLangManager();
     }
 
     public function getTableQuery()
@@ -40,8 +40,8 @@ class LocalisationService
     {
         \DB::transaction(function () use (&$localisation) {
             $localisation = $localisation->create($this->request->all());
-            $this->jsonLang->createEmptyLangFile($localisation->name);
             $this->legacyLang->createLocale($localisation->name);
+            $this->jsonLang->createEmptyLangFile($localisation->name);
         });
 
         flash()->success(__('Language Created'));
