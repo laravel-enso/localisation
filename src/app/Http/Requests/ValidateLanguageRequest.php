@@ -28,7 +28,7 @@ class ValidateLanguageRequest extends FormRequest
         return [
             'name'         => ['required', $nameUnique],
             'display_name' => ['required', $displayNameUnique],
-            'flag' => ['required', $flagUnique]
+            'flag'         => ['required', $flagUnique],
         ];
     }
 }
