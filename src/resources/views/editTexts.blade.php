@@ -73,8 +73,8 @@
                                     </transition>
                                 </div>
                             </div>
-                            <div class="col-xs-12" v-if="selectedLocale">
-                                <div class="col-xs-12" :style="windowHeightCss" style="background:#fff">
+                            <div class="col-xs-12" v-if="selectedLocale" style="padding-top: 20px">
+                                <div class="col-xs-12" :style="windowHeightCss">
                                     <div class="col-xs-3 text-center">
                                         <p style="font-size: 16px">
                                             {{ __("Key Name") }}
@@ -85,7 +85,7 @@
                                             {{ __("Key Value") }}
                                         </p>
                                     </div>
-                                    <div v-for="(value, key) in filteredLangFile" class="col-xs-12">
+                                    <div v-for="key in filteredKeys" class="col-xs-12">
                                         <div class="col-xs-6 well well-sm">
                                             @{{ key }}
                                         </div>
@@ -135,32 +135,32 @@
             },
 
             computed: {
-                filteredLangFile() {
-                    if (!this.query) {
-                        return this.langFile;
-                    }
-
-                    let self = this,
-                        langFile = JSON.parse(JSON.stringify(self.langFile)),
-                        keys = Object.keys(self.langFile);
-
-                    let matchingKeys = keys.filter(function(key) {
-                        return key.toLowerCase().indexOf(self.query.toLowerCase()) > -1;
+                langKeys() {
+                    return Object.keys(this.langFile);
+                },
+                sortedKeys() {
+                    return this.langKeys.sort((a,b) => {
+                        if(a < b) return -1;
+                        if(a > b) return 1;
+                        return 0;
                     });
-
-                    for (let key in langFile) {
-                        if (matchingKeys.indexOf(key) === -1) {
-                            delete langFile[key];
-                        }
+                },
+                filteredKeys() {
+                    if (!this.query) {
+                        return this.sortedKeys;
                     }
 
-                    return langFile;
+                    let self = this;
+
+                    return this.langKeys.filter(key => {
+                        return key.indexOf(self.query) > -1;
+                    });
                 },
                 isNewKey() {
-                    return this.query && Object.keys(this.filteredLangFile).indexOf(this.query) === -1;
+                    return this.query && this.filteredKeys.indexOf(this.query) === -1;
                 },
                 keysCount() {
-                    return Object.keys(this.langFile).length;
+                    return this.langKeys.length;
                 }
             },
 
@@ -194,19 +194,14 @@
                     });
                 },
                 addKey() {
-                    let obj = {},
-                        self = this;
-                    obj[this.query] = null;
-                    this.$set($this.LangFile, this.query, null);
-                    // this.langFile = Object.assign({}, obj, this.langFile);
-                    this.query = null;
+                    this.$set(this.langFile, this.query, null);
                     this.focusIt();
                 },
                 removeKey(key) {
                     this.$delete(this.langFile, key);
                 },
                 focusIt(id = null) {
-                    id = id || Object.keys(this.filteredLangFile)[0];
+                    id = id || this.query;
 
                     this.$nextTick(function() {
                         document.getElementById(id).focus();
