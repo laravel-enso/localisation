@@ -9,6 +9,8 @@ use LaravelEnso\Localisation\app\Models\Language;
 
 class LocalisationService
 {
+    const FlagClassPrefix = 'flag-icon flag-icon-';
+
     private $request;
     private $legacyLang;
     private $jsonLang;
@@ -39,7 +41,9 @@ class LocalisationService
     public function store(Language $localisation)
     {
         \DB::transaction(function () use (&$localisation) {
-            $localisation = $localisation->create($this->request->all());
+            $localisation->fill($this->request->all());
+            $localisation->flag = self::FlagClassPrefix.$localisation->name;
+            $localisation->save();
             $this->legacyLang->createLocale($localisation->name);
             $this->jsonLang->createEmptyLangFile($localisation->name);
         });
@@ -58,7 +62,9 @@ class LocalisationService
     {
         \DB::transaction(function () use ($localisation) {
             $oldName = $localisation->name;
-            $localisation->update($this->request->all());
+            $localisation->fill($this->request->all());
+            $localisation->flag = self::FlagClassPrefix.$localisation->name;
+            $localisation->save();
             $this->jsonLang->rename($oldName, $localisation->name);
             $this->legacyLang->renameFolder($oldName, $localisation->name);
         });

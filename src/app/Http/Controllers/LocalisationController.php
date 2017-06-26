@@ -60,6 +60,8 @@ class LocalisationController extends Controller
 
     public function destroy(Language $localisation)
     {
+        $this->authorize('destroy', $localisation);
+
         return $this->localisation->destroy($localisation);
     }
 }

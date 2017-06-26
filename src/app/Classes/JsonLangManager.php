@@ -8,7 +8,7 @@ class JsonLangManager
 {
     public function getContent($locale)
     {
-        return json_decode(\File::get(resource_path('lang/'.$locale.'.json')));
+        return json_decode(\File::get(resource_path('lang'.DIRECTORY_SEPARATOR.$locale.'.json')));
     }
 
     public function update($locale, $langFile)
@@ -30,18 +30,18 @@ class JsonLangManager
     public function rename($oldName, $newName)
     {
         return $oldName !== $newName
-            ? \File::move(resource_path('lang').'/'.$oldName.'.json', resource_path('lang').'/'.$newName.'.json')
+            ? \File::move(resource_path('lang').DIRECTORY_SEPARATOR.$oldName.'.json', resource_path('lang').DIRECTORY_SEPARATOR.$newName.'.json')
             : false;
     }
 
     public function delete($langFile)
     {
-        \File::delete(resource_path('lang/'.$langFile.'.json'));
+        \File::delete(resource_path('lang'.DIRECTORY_SEPARATOR.$langFile.'.json'));
     }
 
     private function saveToDisk($locale, $langFile)
     {
-        \File::put(resource_path('lang/'.$locale.'.json'), json_encode($langFile));
+        \File::put(resource_path('lang'.DIRECTORY_SEPARATOR.$locale.'.json'), json_encode($langFile));
     }
 
     private function processDifferences($locale, $newLangFile)

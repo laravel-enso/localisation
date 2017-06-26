@@ -12,11 +12,11 @@ class LegacyLangManager
 
     private function createDir(string $locale)
     {
-        if (\File::isDirectory(resource_path('lang').'/'.$locale)) {
-            throw new \EnsoException(__("Can't create the language files because legacy folder already exists".' '.resource_path('lang').'/'.$locale));
+        if (\File::isDirectory(resource_path('lang').DIRECTORY_SEPARATOR.$locale)) {
+            throw new \EnsoException(__("Can't create the language files because legacy folder already exists".' '.resource_path('lang').DIRECTORY_SEPARATOR.$locale));
         }
 
-        \File::makeDirectory(resource_path('lang').'/'.$locale);
+        \File::makeDirectory(resource_path('lang').DIRECTORY_SEPARATOR.$locale);
 
         return $this;
     }
@@ -24,7 +24,7 @@ class LegacyLangManager
     private function createLangs($locale)
     {
         $defaultLocale = config('app.fallback_locale');
-        $files = collect(\File::files(resource_path('lang').'/'.$defaultLocale));
+        $files = collect(\File::files(resource_path('lang').DIRECTORY_SEPARATOR.$defaultLocale));
 
         $files->each(function ($file) use ($locale) {
             $this->createLang($file, $locale);
@@ -33,20 +33,20 @@ class LegacyLangManager
 
     private function createLang($file, $locale)
     {
-        $fileName = last(explode('/', $file));
+        $fileName = last(explode(DIRECTORY_SEPARATOR, $file));
         $content = \File::get($file);
-        \File::put(resource_path('lang').'/'.$locale.'/'.$fileName, $content);
+        \File::put(resource_path('lang').DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$fileName, $content);
     }
 
     public function renameFolder($oldName, $newName)
     {
         return $oldName !== $newName
-            ? \File::move(resource_path('lang/'.$oldName), resource_path('lang/'.$newName))
+            ? \File::move(resource_path('lang'.DIRECTORY_SEPARATOR.$oldName), resource_path('lang'.DIRECTORY_SEPARATOR.$newName))
             : false;
     }
 
     public function delete($locale)
     {
-        \File::deleteDirectory(resource_path('lang/'.$locale));
+        \File::deleteDirectory(resource_path('lang'.DIRECTORY_SEPARATOR.$locale));
     }
 }

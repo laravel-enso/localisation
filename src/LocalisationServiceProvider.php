@@ -16,11 +16,11 @@ class LocalisationServiceProvider extends ServiceProvider
     private function publishesDepedencies()
     {
         $this->publishes([
-            __DIR__.'/resources/assets/js/components' => resource_path('assets/js/vendor/laravel-enso/components'),
+            __DIR__.'/resources/assets/js/components' => resource_path('assets/js/vendor/laravel-enso/components/sidebar'),
         ], 'localisation-component');
 
         $this->publishes([
-            __DIR__.'/resources/assets/js/components' => resource_path('assets/js/vendor/laravel-enso/components'),
+            __DIR__.'/resources/assets/js/components' => resource_path('assets/js/vendor/laravel-enso/components/sidebar'),
         ], 'localisation-update');
     }
 
@@ -38,6 +38,6 @@ class LocalisationServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
+        $this->app->register(AuthServiceProvider::class);
     }
 }

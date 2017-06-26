@@ -1,13 +1,13 @@
 <template>
 
 	<label class="control-sidebar-subheading">
-		<slot name="language"></slot>
+		{{ store.labels.language }}
 		<li class="dropdown pull-right" style="list-style-type: none;">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	            <i class="flag-icon" :class="language.flag"></i>
+	            <i :class="language.flag"></i>
             </a>
             <ul class="dropdown-menu language-selector">
-                <li v-for="language in languages">
+                <li v-for="language in store.languages">
                   	<a @click="setLanguage(language.name)">
                     	<i class="flag-icon" :class="language.flag">
                     	</i>
@@ -23,32 +23,25 @@
 
 	export default {
 
-		props: {
-			languages: {
-				type: Array,
-				required: true
-			}
-		},
-
 		data() {
 			return {
-				globalPreferences: Preferences
+				store: Store
 			}
 		},
 
 		computed: {
 			language() {
-	        	let lang = this.globalPreferences.lang;
+				let self = this;
 
-	        	return this.languages.find(function(language) {
-	        		return language.name === lang;
+	        	return this.store.languages.find(function(language) {
+	        		return language.name === self.store.user.preferences.global.lang;
 	        	});
 	        }
 		},
 
 		methods: {
 			setLanguage(lang) {
-		    	this.globalPreferences.lang = lang;
+		    	this.store.user.preferences.global.lang = lang;
 				this.$emit('changed');
 		    }
 		}
