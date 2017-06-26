@@ -12,11 +12,11 @@ class LanguagePolicy
 
     public function destroy(User $user, Language $language)
     {
-        return $this->isNotDefault($user, $language)
+        return $this->isNotDefault($language)
             && $this->isNotUserLocale($user, $language);
     }
 
-    private function isNotDefault(User $user, Language $language)
+    private function isNotDefault(Language $language)
     {
         if ($language->name === config('app.fallback_locale')) {
             throw new \EnsoException(__("You can't remove the fallback locale"));
