@@ -153,7 +153,7 @@
                     let self = this;
 
                     return this.langKeys.filter(key => {
-                        return key.indexOf(self.query) > -1;
+                        return key.toLowerCase().indexOf(self.query.toLowerCase()) > -1;
                     });
                 },
                 isNewKey() {
