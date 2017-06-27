@@ -21,7 +21,7 @@ class LocalisationServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/assets/js/components' => resource_path('assets/js/vendor/laravel-enso/components/sidebar'),
-        ], 'update');
+        ], 'enso-update');
     }
 
     private function loadDependencies()

@@ -4,21 +4,22 @@
 [![Total Downloads](https://poser.pugx.org/laravel-enso/localisation/downloads)](https://packagist.org/packages/laravel-enso/localisation)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/localisation/version)](https://packagist.org/packages/laravel-enso/localisation)
 
-[Laravel Enso](https://github.com/laravel-enso/Enso) localisation management dependency
+Localisation management dependency for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
-### Use
+### Publishes
 
-Publish the VueJS component with `php artisan vendor:publish --tag=localisation-component`
-
-### Can publish
 - `php artisan vendor:publish --tag=localisation-component` - the VueJS component 
-- `php artisan vendor:publish --tag=update` - a common alias for when wanting to update the VueJS component, 
+- `php artisan vendor:publish --tag=enso-update` - a common alias for when wanting to update the VueJS component, 
 once a newer version is released
 
-### Note
+### Notes
 
-This dependency comes included in [Laravel Enso Core](https://github.com/laravel-enso/Core)
+The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with this package included.
 
 ### TO DO
 
 - [ ] sync-json command / button
+
+### Contributions
+
+are welcome
