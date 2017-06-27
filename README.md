@@ -6,6 +6,13 @@
 
 Localisation management dependency for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
+### Details
+
+- allows an easier management of languages, keys and translations in the context of a multi language application
+- uses the newer Laravel `__()` translation method and stores keys and translations inside a json file
+- permits adding as many languages as you require and the easy creation of translations for the keys you need
+- a language selector VueJS component is included, that can be used to set the current language for the active user
+
 ### Publishes
 
 - `php artisan vendor:publish --tag=localisation-component` - the VueJS component 
