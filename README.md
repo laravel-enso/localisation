@@ -6,6 +6,11 @@
 
 Localisation management dependency for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
+![Screenshot](https://laravel-enso.github.io/localisation/screenshots/Selection_010.png)
+
+![Screenshot](https://laravel-enso.github.io/localisation/screenshots/Selection_011.png)
+
+
 ### Details
 
 - allows an easier management of languages, keys and translations in the context of a multi language application
