@@ -8,7 +8,9 @@ Localisation management dependency for [Laravel Enso](https://github.com/laravel
 
 ![Screenshot](https://laravel-enso.github.io/localisation/screenshots/Selection_010.png)
 
-![Screenshot](https://laravel-enso.github.io/localisation/screenshots/Selection_011.png)
+[![Watch the demo](https://laravel-enso.github.io/localisation/screenshots/Selection_011.png)](https://laravel-enso.github.io/localisation/videos/demo_01.webm)
+<sup>click on the photo to view a short demo in compatible browsers</sup>
+
 
 
 ### Details
