@@ -8,7 +8,9 @@ class JsonLangManager
 {
     public function getContent($locale)
     {
-        return json_decode(\File::get(resource_path('lang'.DIRECTORY_SEPARATOR.$locale.'.json')));
+        return json_decode(\File::get(
+            resource_path('lang'.DIRECTORY_SEPARATOR.$locale.'.json')
+        ));
     }
 
     public function update($locale, $langFile)
@@ -22,16 +24,21 @@ class JsonLangManager
     public function createEmptyLangFile($locale)
     {
         $language = Language::extra()->orderBy('id')->first();
-        $langFile = (array) $this->getContent($language->name);
+
+        $langFile = $language
+            ? (array) $this->getContent($language->name)
+            : [];
+
         $langFile = $this->clearArrayValues($langFile);
         $this->saveToDisk($locale, $langFile);
     }
 
     public function rename($oldName, $newName)
     {
-        return $oldName !== $newName
-            ? \File::move(resource_path('lang').DIRECTORY_SEPARATOR.$oldName.'.json', resource_path('lang').DIRECTORY_SEPARATOR.$newName.'.json')
-            : false;
+        return $oldName === $newName ?: \File::move(
+            resource_path('lang').DIRECTORY_SEPARATOR.$oldName.'.json',
+            resource_path('lang').DIRECTORY_SEPARATOR.$newName.'.json'
+        );
     }
 
     public function delete($langFile)
@@ -41,12 +48,17 @@ class JsonLangManager
 
     private function saveToDisk($locale, $langFile)
     {
-        \File::put(resource_path('lang'.DIRECTORY_SEPARATOR.$locale.'.json'), json_encode($langFile));
+        \File::put(
+            resource_path('lang'.DIRECTORY_SEPARATOR.$locale.'.json'),
+            json_encode($langFile, JSON_FORCE_OBJECT)
+        );
     }
 
     private function processDifferences($locale, $newLangFile)
     {
-        $locales = Language::extra()->where('name', '<>', $locale)->pluck('name');
+        $locales = Language::extra()
+            ->where('name', '<>', $locale)
+            ->pluck('name');
 
         $locales->each(function ($locale) use ($newLangFile) {
             $this->updateDifferences($locale, $newLangFile);
@@ -86,6 +98,10 @@ class JsonLangManager
 
     private function clearArrayValues($array)
     {
+        if (empty($array)) {
+            return $array;
+        }
+
         $keys = array_keys($array);
         $values = array_fill(0, count($keys), null);
         $newArray = array_combine($keys, $values);
