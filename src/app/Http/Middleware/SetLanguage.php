@@ -8,7 +8,7 @@ class SetLanguage
 {
     public function handle($request, Closure $next)
     {
-    	$language = $request->user()->getLanguage();
+        $language = $request->user()->getLanguage();
         app()->setLocale($language);
         \Date::setLocale($language);
 
