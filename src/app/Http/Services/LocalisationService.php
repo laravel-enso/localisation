@@ -43,9 +43,9 @@ class LocalisationService
         \DB::transaction(function () use (&$localisation) {
             $localisation->fill($this->request->all());
             $localisation->flag = self::FlagClassPrefix.$localisation->name;
-            $localisation->save();
             $this->legacyLang->createLocale($localisation->name);
             $this->jsonLang->createEmptyLangFile($localisation->name);
+            $localisation->save();
         });
 
         flash()->success(__('Language Created'));
