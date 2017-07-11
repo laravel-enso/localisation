@@ -18,7 +18,7 @@ class JsonLangManager
         $this->saveToDisk($locale, $langFile);
         $this->processDifferences($locale, $langFile);
 
-        return ['message' => __('Operation was successfull')];
+        return ['message' => __('Operation was successful')];
     }
 
     public function createEmptyLangFile($locale)
