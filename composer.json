@@ -1,12 +1,19 @@
 {
     "name": "laravel-enso/localisation",
     "description": "Localisation management dependency for Laravel Enso",
+    "keywords": [
+        "laravel-enso",
+        "localisation"
+    ],
+    "homepage": "https://github.com/laravel-enso/Localisation",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mishu",
-            "email": "mishu@xtelecom.ro"
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -17,6 +24,14 @@
     "autoload": {
         "psr-4": {
             "LaravelEnso\\Localisation\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\LocalisationServiceProvider"
+            ],
+            "aliases": {}
         }
     }
 }

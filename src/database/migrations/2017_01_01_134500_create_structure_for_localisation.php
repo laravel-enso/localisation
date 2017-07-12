@@ -11,6 +11,7 @@ class CreateStructureForLocalisation extends StructureMigration
     protected $permissions = [
         ['name' => 'system.localisation.initTable', 'description' => 'Init table data for localisation', 'type' => 0, 'default' => false],
         ['name' => 'system.localisation.getTableData', 'description' => 'Get table data for localisation', 'type' => 0, 'default' => false],
+        ['name' => 'system.localisation.exportExcel', 'description' => 'Export excel for localisation', 'type' => 0, 'default' => false],
         ['name' => 'system.localisation.create', 'description' => 'Create langugage', 'type' => 1, 'default' => false],
         ['name' => 'system.localisation.edit', 'description' => 'Edit language', 'type' => 1, 'default' => false],
         ['name' => 'system.localisation.editTexts', 'description' => 'Edit lang file', 'type' => 1, 'default' => false],
