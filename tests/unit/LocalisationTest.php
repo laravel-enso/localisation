@@ -5,8 +5,6 @@ use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
-use LaravelEnso\Localisation\app\Classes\JsonLangManager;
-use LaravelEnso\Localisation\app\Classes\LegacyLangManager;
 use LaravelEnso\Localisation\app\Models\Language;
 use Tests\TestCase;
 
@@ -47,7 +45,7 @@ class LocalisationTest extends TestCase
         $name = $this->faker->countryCode;
         $response = $this->post('/system/localisation', [
             'display_name' => $this->faker->country,
-            'name'       => $name,
+            'name'         => $name,
         ]);
         $language = Language::whereName($name)->first();
 
@@ -137,7 +135,7 @@ class LocalisationTest extends TestCase
         $name = strtolower($this->faker->countryCode);
         $this->post('/system/localisation', [
             'display_name' => strtolower($this->faker->country),
-            'name'       => $name,
+            'name'         => $name,
         ]);
         $language = Language::whereName($name)->first();
 
@@ -146,7 +144,7 @@ class LocalisationTest extends TestCase
 
     private function setLanguage($language)
     {
-        $preferences = (new DefaultPreferences)->getData();
+        $preferences = (new DefaultPreferences())->getData();
         $preferences->global->lang = $language->name;
         $preference = new Preference(['value' => $preferences]);
         $preference->user_id = 1;
