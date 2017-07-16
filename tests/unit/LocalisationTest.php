@@ -104,7 +104,7 @@ class LocalisationTest extends TestCase
     {
         $language = Language::whereName(config('app.fallback_locale'))->first();
 
-        $response = $this->delete('/system/localisation/'.$language->id);
+        $this->delete('/system/localisation/'.$language->id);
 
         $this->assertTrue(session('flash_notification')[0]->level === 'danger');
         $this->assertEquals($language, $language->fresh());
@@ -116,7 +116,7 @@ class LocalisationTest extends TestCase
         $language = $this->createNewLanguage();
         $this->setLanguage($language);
 
-        $response = $this->delete('/system/localisation/'.$language->id);
+        $this->delete('/system/localisation/'.$language->id);
 
         $this->assertTrue(session('flash_notification')[1]->level === 'danger');
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
