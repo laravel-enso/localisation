@@ -16,9 +16,8 @@
     <section class="content">
         <div class="row" v-cloak>
             <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <data-table source="/system/localisation">
-                    <span slot="data-table-title">{{ __("Languages") }}</span>
-                    @include('laravel-enso/core::partials.modal')
+                <data-table source="/system/localisation"
+                    id="localisation">
                 </data-table>
             </div>
         </div>
