@@ -10,7 +10,7 @@ class LocalisationTableStructure extends TableStructure
     {
         $this->data = [
             'crtNo'         => __('#'),
-            'tableName'     => __("Languages"),
+            'tableName'     => __('Languages'),
             'actionButtons' => __('Actions'),
             'render'        => [2],
             'notSearchable' => [3, 4],
