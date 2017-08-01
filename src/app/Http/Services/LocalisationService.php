@@ -22,12 +22,6 @@ class LocalisationService
         $this->jsonLang = new JsonLangManager();
     }
 
-    public function getTableQuery()
-    {
-        return Language::select(\DB::raw('languages.id as DT_RowId, languages.display_name,
-            languages.name, languages.flag, languages.created_at, languages.updated_at'));
-    }
-
     public function index()
     {
         return view('laravel-enso/localisation::index');
@@ -69,7 +63,7 @@ class LocalisationService
             $this->legacyLang->renameFolder($oldName, $localisation->name);
         });
 
-        flash()->success(__('The Changes have been saved!'));
+        flash()->success(__(config('labels.savedChanges')));
 
         return back();
     }
@@ -82,6 +76,6 @@ class LocalisationService
             $this->legacyLang->delete($localisation->name);
         });
 
-        return ['message' => __('Operation was successful')];
+        return ['message' => __(config('labels.successfulOperation'))];
     }
 }

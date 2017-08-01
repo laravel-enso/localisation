@@ -49,7 +49,7 @@
 
     <script>
 
-        let vm = new Vue({
+        const vm = new Vue({
             el: '#app'
         });
 

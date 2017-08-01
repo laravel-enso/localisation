@@ -27,8 +27,10 @@ class LanguagePolicy
 
     private function isNotUserLocale(User $user, Language $language)
     {
-        if ($language->name === $user->getLanguage()) {
-            throw new \EnsoException(__("You can't remove the language that you are currently using"));
+        if ($language->name === $user->preferences->global->lang) {
+            throw new \EnsoException(
+                __("You can't remove the language that you are currently using")
+            );
         }
 
         return true;
