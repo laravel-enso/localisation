@@ -5,12 +5,10 @@ namespace LaravelEnso\Localisation\app\Http\Controllers;
 use Illuminate\Http\Request;
 use LaravelEnso\Localisation\app\Classes\JsonLangManager;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Select\app\Traits\SelectListBuilder;
+use LaravelEnso\Select\app\Classes\SelectListBuilder;
 
 class LangFileController
 {
-    use SelectListBuilder;
-
     private $request;
     private $jsonLang;
 
@@ -28,7 +26,7 @@ class LangFileController
     public function editTexts()
     {
         $localisations = Language::extra()->pluck('display_name', 'name');
-        $locales = $this->buildSelectList($localisations);
+        $locales = SelectListBuilder::buildSelectList($localisations);
 
         return view('laravel-enso/localisation::editTexts', compact('locales'));
     }

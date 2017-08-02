@@ -22,11 +22,6 @@ class LocalisationService
         $this->jsonLang = new JsonLangManager();
     }
 
-    public function index()
-    {
-        return view('laravel-enso/localisation::index');
-    }
-
     public function create(Language $localisation)
     {
         return view('laravel-enso/localisation::create', compact('localisation'));

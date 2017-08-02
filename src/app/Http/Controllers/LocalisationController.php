@@ -19,7 +19,7 @@ class LocalisationController extends Controller
 
     public function index()
     {
-        return $this->localisation->index();
+        return view('laravel-enso/localisation::index');
     }
 
     public function create(Language $localisation)
