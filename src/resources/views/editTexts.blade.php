@@ -1,5 +1,23 @@
 @extends('laravel-enso/core::layouts.app')
 
+@section('css')
+
+    <style>
+
+        div.edit-label-area {
+            overflow-y: auto;
+            box-shadow: inset 0px 5px 8px -5px rgba(0,0,0,0.3), inset 0px -5px 8px -5px rgba(0,0,0,0.5);
+            padding: 8px;
+        }
+
+        div.read-only-label {
+            font-style: italic;
+        }
+
+    </style>
+
+@endsection
+
 @section('pageTitle', __("Localisation"))
 
 @section('content')
@@ -49,7 +67,7 @@
                                     </transition>
                                 </div>
                             </div>
-                            <div class="col-xs-12 margin-top-md" v-if="selectedLocale">
+                            <div class="col-xs-12 margin-top-md margin-bottom-md" v-if="selectedLocale">
                                 <div class="col-xs-12 col-md-6">
                                     <div class="input-group">
                                         <input type="text"
@@ -74,7 +92,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12" v-if="selectedLocale" style="padding-top: 20px">
-                                <div class="col-xs-12" :style="windowHeightCss">
+                                <div class="col-xs-12 edit-label-area" :style="windowHeightCss">
                                     <div class="col-xs-3 text-center">
                                         <p style="font-size: 16px">
                                             {{ __("Key Name") }}
@@ -85,9 +103,9 @@
                                             {{ __("Key Value") }}
                                         </p>
                                     </div>
-                                    <div v-for="key in filteredKeys" class="col-xs-12">
-                                        <div class="col-xs-6 well well-sm">
-                                            @{{ key }}
+                                    <div v-for="key in filteredKeys" class="col-xs-12 margin-bottom-md">
+                                        <div class="col-xs-6 read-only-label">
+                                            <input type="text" class="form-control" readonly :value="key">
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="input-group">
@@ -130,7 +148,7 @@
                 hasChanges: false,
                 windowHeightCss: {
                     'max-height': $(window).height() - 370 + 'px',
-                    'overflow-y': 'scroll'
+                    'overflow-y': 'auto'
                 }
             },
 
