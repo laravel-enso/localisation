@@ -3,6 +3,7 @@
 namespace LaravelEnso\Localisation\app\Http\Services;
 
 use Illuminate\Http\Request;
+use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\Localisation\app\Classes\JsonLangManager;
 use LaravelEnso\Localisation\app\Classes\LegacyLangManager;
 use LaravelEnso\Localisation\app\Models\Language;
@@ -22,9 +23,15 @@ class LocalisationService
         $this->jsonLang = new JsonLangManager();
     }
 
-    public function create(Language $localisation)
+    public function create()
     {
-        return view('laravel-enso/localisation::create', compact('localisation'));
+        $form = (new FormBuilder(__DIR__.'/../../Forms/localisation.json'))
+            ->setAction('POST')
+            ->setTitle('Create Language')
+            ->setUrl('/system/localisation')
+            ->getData();
+
+        return view('laravel-enso/localisation::create', compact('form'));
     }
 
     public function store(Language $localisation)
@@ -37,14 +44,21 @@ class LocalisationService
             $localisation->save();
         });
 
-        flash()->success(__('Language Created'));
-
-        return redirect('system/localisation/'.$localisation->id.'/edit');
+        return [
+            'message'  => __('The language was created!'),
+            'redirect' => '/system/localisation/' . $localisation->id . '/edit',
+        ];
     }
 
     public function edit(Language $localisation)
     {
-        return view('laravel-enso/localisation::edit', compact('localisation'));
+        $form = (new FormBuilder(__DIR__.'/../../Forms/localisation.json', $localisation))
+            ->setAction('PATCH')
+            ->setTitle('Edit Language')
+            ->setUrl('/system/localisation/' . $localisation->id)
+            ->getData();
+
+        return view('laravel-enso/localisation::edit', compact('form'));
     }
 
     public function update(Language $localisation)
@@ -58,9 +72,9 @@ class LocalisationService
             $this->legacyLang->renameFolder($oldName, $localisation->name);
         });
 
-        flash()->success(__(config('labels.savedChanges')));
-
-        return back();
+        return [
+            'message' => __(config('labels.savedChanges')),
+        ];
     }
 
     public function destroy(Language $localisation)

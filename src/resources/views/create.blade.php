@@ -4,38 +4,16 @@
 
 @section('content')
 
-    <section class="content-header">
-        @include('laravel-enso/menumanager::breadcrumbs')
-    </section>
-    <section class="content">
-        <div class="row" v-cloak>
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            {{ __("Create Language") }}
-                        </div>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool btn-sm" data-widget="collapse">
-                                <i class="fa fa-minus">
-                                </i>
-                            </button>
-                        </div>
+    <page v-cloak>
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <vue-form :data="form">
+                <template slot="flag" scope="props">
+                    <div class="well well-sm" style="height:34px">
                     </div>
-                    <div class="box-body">
-                        {!! Form::open(['method' => 'POST', 'url' => '/system/localisation']) !!}
-                        <div class="row">
-                            @include('laravel-enso/localisation::form')
-                      </div>
-                        <center>
-                            {!! Form::submit(__("Save"), ['class' => 'btn btn-primary ']) !!}
-                        </center>
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-            </div>
+                </template>
+            </vue-form>
         </div>
-    </section>
+    </page>
 
 @endsection
 
@@ -44,7 +22,11 @@
     <script>
 
         const vm = new Vue({
-            el: '#app'
+            el: '#app',
+
+            data: {
+                form: {!! $form !!}
+            }
         });
 
     </script>

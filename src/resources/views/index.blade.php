@@ -4,24 +4,22 @@
 
 @section('content')
 
-    <section class="content-header">
-        <a class="btn btn-primary" href="/system/localisation/create">
-            {{ __("Create Language") }}
-        </a>
-        <a class="btn btn-primary" href="/system/localisation/editTexts">
-            {{ __("Edit Texts") }}
-        </a>
-        @include('laravel-enso/menumanager::breadcrumbs')
-    </section>
-    <section class="content">
-        <div class="row" v-cloak>
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <data-table source="/system/localisation"
-                    id="localisation">
-                </data-table>
-            </div>
+    <page :custom-render="customRender"
+        v-cloak>
+        <span slot="header">
+            <a class="btn btn-primary" href="/system/localisation/create">
+                {{ __("Create Language") }}
+            </a>
+            <a class="btn btn-primary" href="/system/localisation/editTexts">
+                {{ __("Edit Texts") }}
+            </a>
+        </span>
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <data-table source="/system/localisation"
+                id="localisation">
+            </data-table>
         </div>
-</section>
+    </page>
 
 @endsection
 

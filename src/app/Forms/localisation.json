@@ -1,0 +1,35 @@
+{
+    "title": null,
+    "action": null,
+    "url": null,
+    "wrapperClass": "col-md-6",
+    "theme": "success",
+    "solid": false,
+    "storeSubmit": "Create",
+    "updateSubmit": "Save",
+    "deleteSubmit": "Delete",
+    "attributes": [{
+        "label": "Display Name",
+        "column": "display_name",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
+        "label": "Name",
+        "column": "name",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
+        "label": "Flag",
+        "column": "flag",
+        "value": false,
+        "config": {
+            "custom": "true"
+        }
+    }]
+}

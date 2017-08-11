@@ -22,104 +22,99 @@
 
 @section('content')
 
-    <section class="content-header">
-        @include('laravel-enso/menumanager::breadcrumbs')
-    </section>
-    <section class="content">
-        <div class="row" v-cloak>
-            <div class="col-xs-12">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            {{ __("Edit Texts") }}
-                        </div>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool btn-sm" data-widget="collapse">
-                                <i class="fa fa-minus">
-                                </i>
-                            </button>
-                        </div>
+    <page v-cloak>
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div class="box-title">
+                        {{ __("Edit Texts") }}
                     </div>
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="col-xs-6 col-md-3">
-                                    <vue-select :options="locales"
-                                        v-model="selectedLocale"
-                                        @input="getLangFile()"
-                                        placeholder="{{ __('Choose language') }}">
-                                    </vue-select>
-                                </div>
-                                <div class="col-xs-6 col-md-3">
-                                    <transition name="fade">
-                                        <div class="margin-top-sm pull-right" v-if="keysCount">
-                                            {{ __("You have a total of") }} <b>@{{ keysCount }}</b> {{ __('translations') }}
-                                        </div>
-                                    </transition>
-                                </div>
-                                <div class="col-xs-12 col-md-3 col-md-offset-3">
-                                    <transition name="fade">
-                                        <button @click="saveLangFile()"
-                                            v-if="hasChanges"
-                                            class="btn btn-success pull-right">
-                                            {{ __('Save Configuration') }}
-                                        </button>
-                                    </transition>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool btn-sm" data-widget="collapse">
+                            <i class="fa fa-minus">
+                            </i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="col-xs-6 col-md-3">
+                                <vue-select :options="locales"
+                                    v-model="selectedLocale"
+                                    @input="getLangFile()"
+                                    placeholder="{{ __('Choose language') }}">
+                                </vue-select>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <transition name="fade">
+                                    <div class="margin-top-sm pull-right" v-if="keysCount">
+                                        {{ __("You have a total of") }} <b>@{{ keysCount }}</b> {{ __('translations') }}
+                                    </div>
+                                </transition>
+                            </div>
+                            <div class="col-xs-12 col-md-3 col-md-offset-3">
+                                <transition name="fade">
+                                    <button @click="saveLangFile()"
+                                        v-if="hasChanges"
+                                        class="btn btn-success pull-right">
+                                        {{ __('Save Configuration') }}
+                                    </button>
+                                </transition>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 margin-top-md margin-bottom-md" v-if="selectedLocale">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="input-group">
+                                    <input type="text"
+                                        id="search-input"
+                                        v-focus
+                                        v-select-on-focus
+                                        placeholder="{{ __('Search') }}"
+                                        class="form-control"
+                                        v-model="query"
+                                        @keyup.enter="isNewKey ? addKey() : focusIt(null)">
+                                    <i class="fa fa-search input-group-addon"></i>
                                 </div>
                             </div>
-                            <div class="col-xs-12 margin-top-md margin-bottom-md" v-if="selectedLocale">
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="input-group">
-                                        <input type="text"
-                                            id="search-input"
-                                            v-focus
-                                            v-select-on-focus
-                                            placeholder="{{ __('Search') }}"
-                                            class="form-control"
-                                            v-model="query"
-                                            @keyup.enter="isNewKey ? addKey() : focusIt(null)">
-                                        <i class="fa fa-search input-group-addon"></i>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-3 col-md-offset-3">
-                                    <transition name="fade">
-                                        <button class="btn btn-success pull-right"
-                                            v-if="isNewKey"
-                                            @click="addKey()">
-                                            {{ __('Add Key') }}
-                                        </button>
-                                    </transition>
-                                </div>
+                            <div class="col-xs-12 col-md-3 col-md-offset-3">
+                                <transition name="fade">
+                                    <button class="btn btn-success pull-right"
+                                        v-if="isNewKey"
+                                        @click="addKey()">
+                                        {{ __('Add Key') }}
+                                    </button>
+                                </transition>
                             </div>
-                            <div class="col-xs-12" v-if="selectedLocale" style="padding-top: 20px">
-                                <div class="col-xs-12 edit-label-area" :style="windowHeightCss">
-                                    <div class="col-xs-3 text-center">
-                                        <p style="font-size: 16px">
-                                            {{ __("Key Name") }}
-                                        </p>
+                        </div>
+                        <div class="col-xs-12" v-if="selectedLocale" style="padding-top: 20px">
+                            <div class="col-xs-12 edit-label-area" :style="windowHeightCss">
+                                <div class="col-xs-3 text-center">
+                                    <p style="font-size: 16px">
+                                        {{ __("Key Name") }}
+                                    </p>
+                                </div>
+                                <div class="col-xs-9 text-center">
+                                    <p style="font-size: 16px">
+                                        {{ __("Key Value") }}
+                                    </p>
+                                </div>
+                                <div v-for="key in filteredKeys" class="col-xs-12 margin-bottom-md">
+                                    <div class="col-xs-6 read-only-label">
+                                        <input type="text" class="form-control" readonly :value="key">
                                     </div>
-                                    <div class="col-xs-9 text-center">
-                                        <p style="font-size: 16px">
-                                            {{ __("Key Value") }}
-                                        </p>
-                                    </div>
-                                    <div v-for="key in filteredKeys" class="col-xs-12 margin-bottom-md">
-                                        <div class="col-xs-6 read-only-label">
-                                            <input type="text" class="form-control" readonly :value="key">
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="input-group">
-                                                <input type="text"
-                                                    v-select-on-focus
-                                                    v-model="langFile[key]"
-                                                    :id="key"
-                                                    class="form-control"
-                                                    @keyup.enter="focusIt('search-input')">
-                                                <span class="input-group-addon">
-                                                    <i class="btn btn-xs btn-danger fa fa-trash-o"
-                                                        @click="removeKey(key)"></i>
-                                                </span>
-                                            </div>
+                                    <div class="col-xs-6">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                v-select-on-focus
+                                                v-model="langFile[key]"
+                                                :id="key"
+                                                class="form-control"
+                                                @keyup.enter="focusIt('search-input')">
+                                            <span class="input-group-addon">
+                                                <i class="btn btn-xs btn-danger fa fa-trash-o"
+                                                    @click="removeKey(key)"></i>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +124,7 @@
                 </div>
             </div>
         </div>
-</section>
+    </page>
 
 @endsection
 

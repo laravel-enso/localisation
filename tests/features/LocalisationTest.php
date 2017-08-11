@@ -43,14 +43,19 @@ class LocalisationTest extends TestCase
     public function store()
     {
         $name = $this->faker->countryCode;
+
         $response = $this->post('/system/localisation', [
             'display_name' => $this->faker->country,
             'name'         => $name,
         ]);
+
         $language = Language::whereName($name)->first();
 
-        $response->assertRedirect('/system/localisation/'.$language->id.'/edit');
-        $response->assertSessionHas('flash_notification');
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+            'message' => 'The language was created!',
+            'redirect'=>'/system/localisation/'.$language->id.'/edit'
+        ]);
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
 
@@ -65,7 +70,7 @@ class LocalisationTest extends TestCase
         $response = $this->get('/system/localisation/'.$language->id.'/edit');
 
         $response->assertStatus(200);
-        $response->assertViewHas('localisation', $language);
+        $response->assertViewHas('form');
         $this->cleanUp($language);
     }
 
@@ -78,8 +83,10 @@ class LocalisationTest extends TestCase
 
         $response = $this->patch('/system/localisation/'.$language->id, $language->toArray());
 
-        $response->assertStatus(302);
-        $response->assertSessionHas('flash_notification');
+        $response = $this->patch('/system/localisation/'.$language->id, $language->toArray())
+            ->assertStatus(200)
+            ->assertJson(['message' => __(config('labels.savedChanges'))]);
+
         $this->assertTrue($language->fresh()->name === 'edited');
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
@@ -118,7 +125,7 @@ class LocalisationTest extends TestCase
 
         $this->delete('/system/localisation/'.$language->id);
 
-        $this->assertTrue(session('flash_notification')[1]->level === 'danger');
+        $this->assertTrue(session('flash_notification')[0]->level === 'danger');
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
         $this->cleanUp($language);
