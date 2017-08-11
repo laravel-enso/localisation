@@ -46,7 +46,7 @@ class LocalisationService
 
         return [
             'message'  => __('The language was created!'),
-            'redirect' => '/system/localisation/' . $localisation->id . '/edit',
+            'redirect' => '/system/localisation/'.$localisation->id.'/edit',
         ];
     }
 
@@ -55,7 +55,7 @@ class LocalisationService
         $form = (new FormBuilder(__DIR__.'/../../Forms/localisation.json', $localisation))
             ->setAction('PATCH')
             ->setTitle('Edit Language')
-            ->setUrl('/system/localisation/' . $localisation->id)
+            ->setUrl('/system/localisation/'.$localisation->id)
             ->getData();
 
         return view('laravel-enso/localisation::edit', compact('form'));

@@ -54,7 +54,7 @@ class LocalisationTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
             'message' => 'The language was created!',
-            'redirect'=>'/system/localisation/'.$language->id.'/edit'
+            'redirect'=> '/system/localisation/'.$language->id.'/edit',
         ]);
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
