@@ -55,6 +55,7 @@ class LocalisationService
         $form = (new FormBuilder(__DIR__.'/../../Forms/localisation.json', $localisation))
             ->setAction('PATCH')
             ->setTitle('Edit Language')
+            ->setValue('flag_sufix', substr($localisation->flag, -2))
             ->setUrl('/system/localisation/'.$localisation->id)
             ->getData();
 
@@ -66,7 +67,7 @@ class LocalisationService
         \DB::transaction(function () use ($localisation) {
             $oldName = $localisation->name;
             $localisation->fill($this->request->all());
-            $localisation->flag = self::FlagClassPrefix.$localisation->name;
+            $localisation->flag = self::FlagClassPrefix.$this->request->get('flag_sufix');
             $localisation->save();
             $this->jsonLang->rename($oldName, $localisation->name);
             $this->legacyLang->renameFolder($oldName, $localisation->name);

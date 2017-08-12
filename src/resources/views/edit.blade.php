@@ -18,9 +18,7 @@
                 <template slot="flag" scope="props">
                     <div class="well well-sm" style="height:34px">
                         <span v-if="props.element.value">
-                            @{{ props.element.value}}
-                            <i class="pull-right"
-                                :class="props.element.value">
+                            <i :class="props.element.value">
                             </i>
                         </span>
                     </div>

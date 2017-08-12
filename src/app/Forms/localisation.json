@@ -2,12 +2,13 @@
     "title": null,
     "action": null,
     "url": null,
+    "icon": "fa fa-language",
     "wrapperClass": "col-md-6",
     "theme": "success",
     "solid": false,
-    "storeSubmit": "Create",
-    "updateSubmit": "Save",
-    "deleteSubmit": "Delete",
+    "submitStore": "Create",
+    "submitUpdate": "Save",
+    "submitDelete": "Delete",
     "attributes": [{
         "label": "Display Name",
         "column": "display_name",
@@ -25,9 +26,17 @@
             "content": "text"
         }
     }, {
+        "label": "Flag Sufix",
+        "column": "flag_sufix",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
         "label": "Flag",
         "column": "flag",
-        "value": false,
+        "value": null,
         "config": {
             "custom": "true"
         }
