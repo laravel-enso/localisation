@@ -5,7 +5,6 @@ namespace LaravelEnso\Localisation\app\Http\Controllers;
 use Illuminate\Http\Request;
 use LaravelEnso\Localisation\app\Classes\JsonLangManager;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Select\app\Classes\SelectListBuilder;
 
 class LangFileController
 {
