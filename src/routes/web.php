@@ -14,7 +14,7 @@ Route::middleware(['web', 'auth', 'core'])
 
                 Route::get('editTexts', 'LangFileController@editTexts')
                     ->name('editTexts');
-                Route::get('getLangFile/{locale}', 'LangFileController@getLangFile')
+                Route::get('getLangFile/{language}', 'LangFileController@getLangFile')
                     ->name('getLangFile');
                 Route::patch('saveLangFile', 'LangFileController@saveLangFile')
                     ->name('saveLangFile');

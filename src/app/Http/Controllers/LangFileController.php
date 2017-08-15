@@ -18,15 +18,14 @@ class LangFileController
         $this->jsonLang = new JsonLangManager();
     }
 
-    public function getLangFile($locale)
+    public function getLangFile(Language $language)
     {
-        return response()->json($this->jsonLang->getContent($locale));
+        return response()->json($this->jsonLang->getContent($language->name));
     }
 
     public function editTexts()
     {
-        $localisations = Language::extra()->pluck('display_name', 'name');
-        $locales = SelectListBuilder::buildSelectList($localisations);
+        $locales = Language::extra()->pluck('display_name', 'id');
 
         return view('laravel-enso/localisation::editTexts', compact('locales'));
     }
