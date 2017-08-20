@@ -88,7 +88,7 @@ class LocalisationService
 
         return [
             'message'  => __(config('labels.successfulOperation')),
-            'redirect' => '/system/localisation/',
+            'redirect' => '/system/localisation',
         ];
     }
 }
