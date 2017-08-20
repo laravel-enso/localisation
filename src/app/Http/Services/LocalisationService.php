@@ -86,6 +86,9 @@ class LocalisationService
             $this->legacyLang->delete($localisation->name);
         });
 
-        return ['message' => __(config('labels.successfulOperation'))];
+        return [
+            'message'  => __(config('labels.successfulOperation')),
+            'redirect' => '/system/localisation/',
+        ];
     }
 }
