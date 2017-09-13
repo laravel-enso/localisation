@@ -29,8 +29,8 @@ class LangFileController
         return view('laravel-enso/localisation::editTexts', compact('locales'));
     }
 
-    public function saveLangFile()
+    public function saveLangFile(Language $language)
     {
-        return $this->jsonLang->update($this->request->get('locale'), $this->request->get('langFile'));
+        return $this->jsonLang->update($language->name, $this->request->get('langFile'));
     }
 }

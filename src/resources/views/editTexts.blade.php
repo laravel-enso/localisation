@@ -41,9 +41,9 @@
                         <div class="col-xs-12">
                             <div class="col-xs-6 col-md-3">
                                 <vue-select :options="locales"
-                                    v-model="selectedLocale"
-                                    @input="getLangFile()"
-                                    placeholder="{{ __('Choose language') }}">
+                                            v-model="selectedLocale"
+                                            @input="getLangFile()"
+                                            placeholder="{{ __('Choose language') }}">
                                 </vue-select>
                             </div>
                             <div class="col-xs-6 col-md-3">
@@ -56,8 +56,8 @@
                             <div class="col-xs-12 col-md-3 col-md-offset-3">
                                 <transition name="fade">
                                     <button @click="saveLangFile()"
-                                        v-if="hasChanges"
-                                        class="btn btn-success pull-right">
+                                            v-if="hasChanges"
+                                            class="btn btn-success pull-right">
                                         {{ __('Save Configuration') }}
                                     </button>
                                 </transition>
@@ -67,21 +67,21 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="input-group">
                                     <input type="text"
-                                        id="search-input"
-                                        v-focus
-                                        v-select-on-focus
-                                        placeholder="{{ __('Search') }}"
-                                        class="form-control"
-                                        v-model="query"
-                                        @keyup.enter="isNewKey ? addKey() : focusIt(null)">
+                                           id="search-input"
+                                           v-focus
+                                           v-select-on-focus
+                                           placeholder="{{ __('Search') }}"
+                                           class="form-control"
+                                           v-model="query"
+                                           @keyup.enter="isNewKey ? addKey() : focusIt(null)">
                                     <i class="fa fa-search input-group-addon"></i>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-3 col-md-offset-3">
                                 <transition name="fade">
                                     <button class="btn btn-success pull-right"
-                                        v-if="isNewKey"
-                                        @click="addKey()">
+                                            v-if="isNewKey"
+                                            @click="addKey()">
                                         {{ __('Add Key') }}
                                     </button>
                                 </transition>
@@ -106,14 +106,14 @@
                                     <div class="col-xs-6">
                                         <div class="input-group">
                                             <input type="text"
-                                                v-select-on-focus
-                                                v-model="langFile[key]"
-                                                :id="key"
-                                                class="form-control"
-                                                @keyup.enter="focusIt('search-input')">
+                                                   v-select-on-focus
+                                                   v-model="langFile[key]"
+                                                   :id="key"
+                                                   class="form-control"
+                                                   @keyup.enter="focusIt('search-input')">
                                             <span class="input-group-addon">
                                                 <i class="btn btn-xs btn-danger fa fa-trash-o"
-                                                    @click="removeKey(key)"></i>
+                                                   @click="removeKey(key)"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -197,8 +197,8 @@
                     });
                 },
                 saveLangFile() {
-                    axios.patch('/system/localisation/saveLangFile',
-                        { langFile: this.langFile, locale: this.selectedLocale }
+                    axios.patch('/system/localisation/saveLangFile/' + this.selectedLocale,
+                        { langFile: this.langFile}
                     ).then(response => {
                         toastr.success(response.data.message);
                         this.hasChanges = false;
