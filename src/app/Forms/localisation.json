@@ -1,19 +1,14 @@
 {
     "title": null,
-    "action": null,
-    "url": null,
+    "method": null,
+    "prefix": "system.localisation",
     "icon": "fa fa-language",
-    "wrapperClass": "col-md-6",
-    "theme": "success",
-    "solid": false,
-    "submitStore": "Create",
-    "submitUpdate": "Save",
-    "submitDelete": "Delete",
-    "attributes": [{
+    "columns": "1",
+    "fields": [{
         "label": "Display Name",
         "column": "display_name",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -21,7 +16,7 @@
         "label": "Name",
         "column": "name",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -29,7 +24,7 @@
         "label": "Flag Sufix",
         "column": "flag_sufix",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -37,7 +32,7 @@
         "label": "Flag",
         "column": "flag",
         "value": null,
-        "config": {
+        "meta": {
             "custom": "true"
         }
     }]

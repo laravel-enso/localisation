@@ -7,13 +7,16 @@ use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestDataTable;
 
 class LocalisationTest extends TestHelper
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, TestDataTable, TestCreateForm;
 
     private $faker;
     private $name;
+    private $prefix = 'system.localisation';
 
     protected function setUp()
     {
@@ -26,26 +29,9 @@ class LocalisationTest extends TestHelper
     }
 
     /** @test */
-    public function index()
-    {
-        $this->get('/system/localisation')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/localisation::index');
-    }
-
-    /** @test */
-    public function create()
-    {
-        $this->get('/system/localisation/create')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/localisation::create')
-            ->assertViewHas('form');
-    }
-
-    /** @test */
     public function store()
     {
-        $response = $this->post('/system/localisation', $this->postParams());
+        $response = $this->post(route('system.localisation.store', [], false), $this->postParams());
 
         $language = Language::whereName($this->name)->first();
 
@@ -66,10 +52,9 @@ class LocalisationTest extends TestHelper
     {
         $language = $this->createLanguage();
 
-        $this->get('/system/localisation/'.$language->id.'/edit')
+        $this->get(route('system.localisation.edit', $language->id, false))
             ->assertStatus(200)
-            ->assertViewIs('laravel-enso/localisation::edit')
-            ->assertViewHas('form');
+            ->assertJsonStructure(['form']);
 
         $this->cleanUp($language);
     }
@@ -77,16 +62,16 @@ class LocalisationTest extends TestHelper
     /** @test */
     public function update()
     {
-        $this->post('/system/localisation', $this->postParams());
+        $this->post(route('system.localisation.store', [], false), $this->postParams());
         $language = Language::whereName($this->name)->first();
 
         $language->name = 'xx';
 
         $this->patch(
-            '/system/localisation/'.$language->id,
+            route('system.localisation.update', $language->id, false),
             $language->toArray() + ['flag_sufix' => $language->name]
         )->assertStatus(200)
-            ->assertJson(['message' => __(config('labels.savedChanges'))]);
+            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
 
         $this->assertEquals($language->name, $language->fresh()->name);
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
@@ -98,10 +83,10 @@ class LocalisationTest extends TestHelper
     /** @test */
     public function destroy()
     {
-        $this->post('/system/localisation', $this->postParams());
+        $this->post(route('system.localisation.store', [], false), $this->postParams());
         $language = Language::whereName($this->name)->first();
 
-        $this->delete('/system/localisation/'.$language->id)
+        $this->delete(route('system.localisation.destroy', $language->id, false))
             ->assertStatus(200)
             ->assertJsonFragment(['message']);
 
@@ -114,8 +99,10 @@ class LocalisationTest extends TestHelper
     {
         $language = Language::whereName(config('app.fallback_locale'))->first();
 
-        $this->delete('/system/localisation/'.$language->id)
-            ->assertSessionHas('flash_notification');
+        $this->expectException(EnsoException::class);
+
+        $this->delete(route('system.localisation.destroy', $language->id, false))
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals($language, $language->fresh());
     }
@@ -123,13 +110,15 @@ class LocalisationTest extends TestHelper
     /** @test */
     public function cant_destroy_if_language_is_in_use()
     {
-        $this->post('/system/localisation', $this->postParams());
+        $this->post(route('system.localisation.store', [], false), $this->postParams());
         $language = Language::whereName($this->name)->first();
         $this->setLanguage($language);
 
-        $this->delete('/system/localisation/'.$language->id)
+        $this->expectException(EnsoException::class);
+
+        $this->delete(route('system.localisation.destroy', $language->id, false))
             ->assertStatus(302)
-            ->assertSessionHas('flash_notification');
+            ->assertJsonStructure(['message']);
 
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
         $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));

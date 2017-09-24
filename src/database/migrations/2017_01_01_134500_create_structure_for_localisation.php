@@ -16,7 +16,6 @@ class CreateStructureForLocalisation extends StructureMigration
         ['name' => 'system.localisation.edit', 'description' => 'Edit language', 'type' => 1, 'default' => false],
         ['name' => 'system.localisation.editTexts', 'description' => 'Edit lang file', 'type' => 1, 'default' => false],
         ['name' => 'system.localisation.getLangFile', 'description' => 'Get selected lang file content', 'type' => 0, 'default' => false],
-        ['name' => 'system.localisation.index', 'description' => 'Localisation index', 'type' => 0, 'default' => false],
         ['name' => 'system.localisation.saveLangFile', 'description' => 'Save edited lang file', 'type' => 1, 'default' => false],
         ['name' => 'system.localisation.store', 'description' => 'Save newly created language', 'type' => 1, 'default' => false],
         ['name' => 'system.localisation.update', 'description' => 'Save edited language', 'type' => 1, 'default' => false],

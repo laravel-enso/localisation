@@ -8,29 +8,20 @@ use LaravelEnso\Localisation\app\Models\Language;
 
 class LangFileController
 {
-    private $request;
-    private $jsonLang;
-
-    public function __construct(Request $request)
+    public function getLangFile(Language $language, JsonLangManager $service)
     {
-        $this->request = $request;
-        $this->jsonLang = new JsonLangManager();
-    }
-
-    public function getLangFile(Language $language)
-    {
-        return response()->json($this->jsonLang->getContent($language->name));
+        return response()->json($service->getContent($language->name));
     }
 
     public function editTexts()
     {
         $locales = Language::extra()->pluck('display_name', 'id');
 
-        return view('laravel-enso/localisation::editTexts', compact('locales'));
+        return compact('locales');
     }
 
-    public function saveLangFile()
+    public function saveLangFile(Request $request, JsonLangManager $service)
     {
-        return $this->jsonLang->update($this->request->get('locale'), $this->request->get('langFile'));
+        return $service->update($request->get('locale'), $request->get('langFile'));
     }
 }

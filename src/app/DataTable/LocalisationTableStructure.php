@@ -9,14 +9,20 @@ class LocalisationTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'tableName'     => __('Languages'),
-            'crtNo'         => __('#'),
-            'actionButtons' => __('Actions'),
-            'render'        => [2],
-            'notSearchable' => [3, 4],
-            'headerAlign'   => 'center',
-            'bodyAlign'     => 'center',
-            'columns'       => [
+            'name'                => __('Languages'),
+            'icon'                => 'fa fa-language',
+            'crtNo'               => __('#'),
+            'actions'             => __('Actions'),
+            'actionButtons'       => ['edit', 'destroy'],
+            'headerButtons'       => ['create', 'exportExcel'],
+            'customActionButtons' => [
+                ['icon' => 'fa fa-sliders', 'class' => 'is-info', 'event' => 'edit-texts', 'route' => 'system.localisation.editTexts'],
+            ],
+            'render'              => [2],
+            'notSearchable'       => [3, 4],
+            'headerAlign'         => 'center',
+            'bodyAlign'           => 'center',
+            'columns'             => [
                 0 => [
                     'label' => __('Display Name'),
                     'data'  => 'display_name',

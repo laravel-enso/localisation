@@ -10,15 +10,13 @@ use LaravelEnso\Localisation\app\Models\Language;
 
 class LocalisationService
 {
-    const FlagClassPrefix = 'flag-icon flag-icon-';
+    private const FlagClassPrefix = 'flag-icon flag-icon-';
 
-    private $request;
     private $legacyLang;
     private $jsonLang;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $this->request = $request;
         $this->legacyLang = new LegacyLangManager();
         $this->jsonLang = new JsonLangManager();
     }
@@ -26,18 +24,17 @@ class LocalisationService
     public function create()
     {
         $form = (new FormBuilder(__DIR__.'/../../Forms/localisation.json'))
-            ->setAction('POST')
+            ->setMethod('POST')
             ->setTitle('Create Language')
-            ->setUrl('/system/localisation')
             ->getData();
 
-        return view('laravel-enso/localisation::create', compact('form'));
+        return compact('form');
     }
 
-    public function store(Language $localisation)
+    public function store(Request $request, Language $localisation)
     {
-        \DB::transaction(function () use (&$localisation) {
-            $localisation->fill($this->request->all());
+        \DB::transaction(function () use ($request, &$localisation) {
+            $localisation->fill($request->all());
             $localisation->flag = self::FlagClassPrefix.$localisation->name;
             $this->legacyLang->createLocale($localisation->name);
             $this->jsonLang->createEmptyLangFile($localisation->name);
@@ -46,35 +43,34 @@ class LocalisationService
 
         return [
             'message'  => __('The language was created!'),
-            'redirect' => '/system/localisation/'.$localisation->id.'/edit',
+            'redirect' => route('system.localisation.edit', $localisation->id, false),
         ];
     }
 
     public function edit(Language $localisation)
     {
         $form = (new FormBuilder(__DIR__.'/../../Forms/localisation.json', $localisation))
-            ->setAction('PATCH')
+            ->setMethod('PATCH')
             ->setTitle('Edit Language')
             ->setValue('flag_sufix', substr($localisation->flag, -2))
-            ->setUrl('/system/localisation/'.$localisation->id)
             ->getData();
 
-        return view('laravel-enso/localisation::edit', compact('form'));
+        return compact('form');
     }
 
-    public function update(Language $localisation)
+    public function update(Request $request, Language $localisation)
     {
-        \DB::transaction(function () use ($localisation) {
+        \DB::transaction(function () use ($request, $localisation) {
             $oldName = $localisation->name;
-            $localisation->fill($this->request->all());
-            $localisation->flag = self::FlagClassPrefix.$this->request->get('flag_sufix');
+            $localisation->fill($request->all());
+            $localisation->flag = self::FlagClassPrefix.$request->get('flag_sufix');
             $localisation->save();
             $this->jsonLang->rename($oldName, $localisation->name);
             $this->legacyLang->renameFolder($oldName, $localisation->name);
         });
 
         return [
-            'message' => __(config('labels.savedChanges')),
+            'message' => __(config('enso.labels.savedChanges')),
         ];
     }
 
@@ -87,8 +83,8 @@ class LocalisationService
         });
 
         return [
-            'message'  => __(config('labels.successfulOperation')),
-            'redirect' => '/system/localisation',
+            'message'  => __(config('enso.labels.successfulOperation')),
+            'redirect' => route('system.localisation.index', [], false),
         ];
     }
 }

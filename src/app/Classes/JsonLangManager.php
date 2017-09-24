@@ -18,7 +18,7 @@ class JsonLangManager
         $this->saveToDisk($locale, $langFile);
         $this->processDifferences($locale, $langFile);
 
-        return ['message' => __(config('labels.successfulOperation'))];
+        return ['message' => __(config('enso.labels.successfulOperation'))];
     }
 
     public function createEmptyLangFile($locale)
