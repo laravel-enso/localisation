@@ -22,6 +22,6 @@ Route::middleware(['web', 'auth', 'core'])
 
         Route::prefix('system')->as('system.')
             ->group(function () {
-                Route::resource('localisation', 'LocalisationController', ['except' => ['show', 'index']]);
+                Route::resource('localisation', 'LocalisationController', ['except' => ['show']]);
             });
     });

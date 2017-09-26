@@ -10,13 +10,20 @@ class LocalisationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/localisation');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->app['router']->aliasMiddleware('set-language', SetLanguage::class);
+
+        $this->publishes([
+            __DIR__.'/resources/assets/js' => resource_path('assets/js'),
+        ], 'localisation-assets');
+
+        $this->publishes([
+            __DIR__.'/resources/assets/js' => resource_path('assets/js'),
+        ], 'enso-assets');
     }
 
     public function register()
     {
-        $this->app->register(AuthServiceProvider::class);
+        //
     }
 }

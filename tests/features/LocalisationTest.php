@@ -7,8 +7,8 @@ use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
-use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
-use LaravelEnso\TestHelper\app\Classes\Traits\TestDataTable;
+use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Traits\TestDataTable;
 
 class LocalisationTest extends TestHelper
 {
