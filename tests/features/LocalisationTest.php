@@ -2,17 +2,19 @@
 
 use App\User;
 use Faker\Factory;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
 use LaravelEnso\TestHelper\app\Traits\TestDataTable;
+use Tests\TestCase;
 
-class LocalisationTest extends TestHelper
+class LocalisationTest extends TestCase
 {
-    use DatabaseMigrations, TestDataTable, TestCreateForm;
+    use DatabaseMigrations, SignIn, TestDataTable, TestCreateForm;
 
     private $faker;
     private $name;
@@ -22,9 +24,9 @@ class LocalisationTest extends TestHelper
     {
         parent::setUp();
 
-        // $this->disableExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->faker = Factory::create();
-        $this->name = strtolower($this->faker->countryCode);
+        $this->name  = strtolower($this->faker->countryCode);
         $this->signIn(User::first());
     }
 
@@ -38,11 +40,11 @@ class LocalisationTest extends TestHelper
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'message'  => 'The language was created!',
-                'redirect' => '/system/localisation/'.$language->id.'/edit',
+                'redirect' => '/system/localisation/' . $language->id . '/edit',
             ]);
 
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
+        $this->assertTrue(\File::exists(resource_path('lang/' . $language->name)));
+        $this->assertTrue(\File::exists(resource_path('lang/' . $language->name . '.json')));
 
         $this->cleanUp($language);
     }
@@ -74,8 +76,8 @@ class LocalisationTest extends TestHelper
             ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
 
         $this->assertEquals($language->name, $language->fresh()->name);
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
+        $this->assertTrue(\File::exists(resource_path('lang/' . $language->name)));
+        $this->assertTrue(\File::exists(resource_path('lang/' . $language->name . '.json')));
 
         $this->cleanUp($language);
     }
@@ -90,8 +92,8 @@ class LocalisationTest extends TestHelper
             ->assertStatus(200)
             ->assertJsonFragment(['message']);
 
-        $this->assertFalse(\File::exists(resource_path('lang/'.$language->name)));
-        $this->assertFalse(\File::exists(resource_path('lang/'.$language->name.'.json')));
+        $this->assertFalse(\File::exists(resource_path('lang/' . $language->name)));
+        $this->assertFalse(\File::exists(resource_path('lang/' . $language->name . '.json')));
     }
 
     /** @test */
@@ -99,9 +101,10 @@ class LocalisationTest extends TestHelper
     {
         $language = Language::whereName(config('app.fallback_locale'))->first();
 
-        $this->expectException(EnsoException::class);
+        $this->expectException(AuthorizationException::class);
 
         $this->delete(route('system.localisation.destroy', $language->id, false))
+            ->assertStatus(403)
             ->assertJsonStructure(['message']);
 
         $this->assertEquals($language, $language->fresh());
@@ -114,22 +117,20 @@ class LocalisationTest extends TestHelper
         $language = Language::whereName($this->name)->first();
         $this->setLanguage($language);
 
-        $this->expectException(EnsoException::class);
-
         $this->delete(route('system.localisation.destroy', $language->id, false))
-            ->assertStatus(302)
+            ->assertStatus(403)
             ->assertJsonStructure(['message']);
 
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
+        $this->assertTrue(\File::exists(resource_path('lang/' . $language->name)));
+        $this->assertTrue(\File::exists(resource_path('lang/' . $language->name . '.json')));
 
         $this->cleanUp($language);
     }
 
     private function cleanUp($language)
     {
-        \File::delete(resource_path('lang'.DIRECTORY_SEPARATOR.$language->name.'.json'));
-        \File::deleteDirectory(resource_path('lang'.DIRECTORY_SEPARATOR.$language->name));
+        \File::delete(resource_path('lang' . DIRECTORY_SEPARATOR . $language->name . '.json'));
+        \File::deleteDirectory(resource_path('lang' . DIRECTORY_SEPARATOR . $language->name));
     }
 
     private function createLanguage()
@@ -143,16 +144,16 @@ class LocalisationTest extends TestHelper
             'display_name' => strtolower($this->faker->country),
             'name'         => $this->name,
             'flag_sufix'   => $this->name,
-            'flag'         => 'flag-icon flag-icon-'.$this->name,
+            'flag'         => 'flag-icon flag-icon-' . $this->name,
         ];
     }
 
     private function setLanguage($language)
     {
-        $preferences = (new DefaultPreferences())->getData();
+        $preferences               = (new DefaultPreferences())->getData();
         $preferences->global->lang = $language->name;
-        $preference = new Preference(['value' => $preferences]);
-        $preference->user_id = 1;
+        $preference                = new Preference(['value' => $preferences]);
+        $preference->user_id       = 1;
         $preference->save();
     }
 }

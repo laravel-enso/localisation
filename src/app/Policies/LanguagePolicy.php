@@ -18,21 +18,11 @@ class LanguagePolicy
 
     private function isNotDefault(Language $language)
     {
-        if ($language->name === config('app.fallback_locale')) {
-            throw new \EnsoException(__("You can't remove the fallback locale"));
-        }
-
-        return true;
+        return $language->name !== config('app.fallback_locale');
     }
 
     private function isNotUserLocale(User $user, Language $language)
     {
-        if ($language->name === $user->preferences->global->lang) {
-            throw new \EnsoException(
-                __("You can't remove the language that you are currently using")
-            );
-        }
-
-        return true;
+        return $language->name !== $user->preferences->global->lang;
     }
 }
