@@ -3,7 +3,7 @@
 use App\User;
 use Faker\Factory;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
 use LaravelEnso\Localisation\app\Models\Language;
@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 class LocalisationTest extends TestCase
 {
-    use DatabaseMigrations, SignIn, TestDataTable, TestCreateForm;
+    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
 
     private $faker;
     private $name;
