@@ -12,7 +12,7 @@ class LocalisationService
 {
     const FlagClassPrefix = 'flag-icon flag-icon-';
 
-    const FormPath = __DIR__ . '/../../Forms/localisation.json';
+    const FormPath = __DIR__.'/../../Forms/localisation.json';
 
     private $legacyLang;
     private $jsonLang;
@@ -20,7 +20,7 @@ class LocalisationService
     public function __construct()
     {
         $this->legacyLang = new LegacyLangManager();
-        $this->jsonLang   = new JsonLangManager();
+        $this->jsonLang = new JsonLangManager();
     }
 
     public function create()
@@ -37,7 +37,7 @@ class LocalisationService
     {
         \DB::transaction(function () use ($request, &$localisation) {
             $localisation->fill($request->all());
-            $localisation->flag = self::FlagClassPrefix . $localisation->name;
+            $localisation->flag = self::FlagClassPrefix.$localisation->name;
             $this->legacyLang->createLocale($localisation->name);
             $this->jsonLang->createEmptyLangFile($localisation->name);
             $localisation->save();
@@ -66,7 +66,7 @@ class LocalisationService
         \DB::transaction(function () use ($request, $localisation) {
             $oldName = $localisation->name;
             $localisation->fill($request->all());
-            $localisation->flag = self::FlagClassPrefix . $request->get('flag_sufix');
+            $localisation->flag = self::FlagClassPrefix.$request->get('flag_sufix');
             $localisation->save();
             $this->jsonLang->rename($oldName, $localisation->name);
             $this->legacyLang->renameFolder($oldName, $localisation->name);
