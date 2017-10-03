@@ -21,7 +21,7 @@ class LocalisationTest extends TestHelper
 
         // $this->disableExceptionHandling();
         $this->faker = Factory::create();
-        $this->name  = strtolower($this->faker->countryCode);
+        $this->name = strtolower($this->faker->countryCode);
         $this->signIn(User::first());
     }
 
@@ -54,14 +54,14 @@ class LocalisationTest extends TestHelper
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'message'  => 'The language was created!',
-                'redirect' => '/system/localisation/' . $language->id . '/edit',
+                'redirect' => '/system/localisation/'.$language->id.'/edit',
             ]);
 
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name))
+            \File::exists(resource_path('lang/'.$language->name))
         );
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name . '.json'))
+            \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
 
         $this->cleanUp($language);
@@ -102,10 +102,10 @@ class LocalisationTest extends TestHelper
 
         $this->assertEquals('xx', $language->fresh()->name);
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name))
+            \File::exists(resource_path('lang/'.$language->name))
         );
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name . '.json'))
+            \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
 
         $this->cleanUp($language);
@@ -118,7 +118,7 @@ class LocalisationTest extends TestHelper
             route('system.localisation.store', [], false),
             $this->postParams()
         );
-        $language     = Language::whereName($this->name)->first();
+        $language = Language::whereName($this->name)->first();
         $languageName = $language->name;
 
         $this->delete(
@@ -130,10 +130,10 @@ class LocalisationTest extends TestHelper
             ]);
 
         $this->assertFalse(
-            \File::exists(resource_path('lang/' . $languageName))
+            \File::exists(resource_path('lang/'.$languageName))
         );
         $this->assertFalse(
-            \File::exists(resource_path('lang/' . $languageName . '.json'))
+            \File::exists(resource_path('lang/'.$languageName.'.json'))
         );
     }
 
@@ -164,14 +164,13 @@ class LocalisationTest extends TestHelper
             ->assertStatus(500);
 
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name))
+            \File::exists(resource_path('lang/'.$language->name))
         );
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name . '.json'))
+            \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
 
         $this->cleanUp($language);
-
     }
 
     private function createLanguage()
@@ -185,26 +184,26 @@ class LocalisationTest extends TestHelper
             'display_name' => strtolower($this->faker->country),
             'name'         => $this->name,
             'flag_sufix'   => $this->name,
-            'flag'         => 'flag-icon flag-icon-' . $this->name,
+            'flag'         => 'flag-icon flag-icon-'.$this->name,
         ];
     }
 
     private function setLanguage($language)
     {
-        $preferences               = (new DefaultPreferences())->getData();
+        $preferences = (new DefaultPreferences())->getData();
         $preferences->global->lang = $language->name;
-        $preference                = new Preference(['value' => $preferences]);
-        $preference->user_id       = 1;
+        $preference = new Preference(['value' => $preferences]);
+        $preference->user_id = 1;
         $preference->save();
     }
 
     private function cleanUp($language)
     {
         \File::delete(
-            resource_path('lang' . DIRECTORY_SEPARATOR . $language->name . '.json')
+            resource_path('lang'.DIRECTORY_SEPARATOR.$language->name.'.json')
         );
         \File::deleteDirectory(
-            resource_path('lang' . DIRECTORY_SEPARATOR . $language->name)
+            resource_path('lang'.DIRECTORY_SEPARATOR.$language->name)
         );
     }
 }
