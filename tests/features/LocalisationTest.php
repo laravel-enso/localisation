@@ -2,7 +2,6 @@
 
 use App\User;
 use Faker\Factory;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
@@ -48,10 +47,10 @@ class LocalisationTest extends TestCase
             ]);
 
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name))
+            \File::exists(resource_path('lang/'.$language->name))
         );
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name . '.json'))
+            \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
 
         $this->cleanUp($language);
@@ -85,15 +84,15 @@ class LocalisationTest extends TestCase
             $language->toArray() + ['flag_sufix' => $language->name]
         )->assertStatus(200)
             ->assertJson([
-                'message' => __(config('enso.labels.savedChanges'))
+                'message' => __(config('enso.labels.savedChanges')),
             ]);
 
         $this->assertEquals('xx', $language->fresh()->name);
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name))
+            \File::exists(resource_path('lang/'.$language->name))
         );
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name . '.json'))
+            \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
 
         $this->cleanUp($language);
@@ -106,7 +105,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->postParams()
         );
-        $language     = Language::whereName($this->name)->first();
+        $language = Language::whereName($this->name)->first();
         $languageName = $language->name;
 
         $this->delete(
@@ -118,10 +117,10 @@ class LocalisationTest extends TestCase
             ]);
 
         $this->assertFalse(
-            \File::exists(resource_path('lang/' . $languageName))
+            \File::exists(resource_path('lang/'.$languageName))
         );
         $this->assertFalse(
-            \File::exists(resource_path('lang/' . $languageName . '.json'))
+            \File::exists(resource_path('lang/'.$languageName.'.json'))
         );
     }
 
@@ -152,14 +151,13 @@ class LocalisationTest extends TestCase
             ->assertStatus(403);
 
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name))
+            \File::exists(resource_path('lang/'.$language->name))
         );
         $this->assertTrue(
-            \File::exists(resource_path('lang/' . $language->name . '.json'))
+            \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
 
         $this->cleanUp($language);
-
     }
 
     private function createLanguage()
@@ -173,26 +171,26 @@ class LocalisationTest extends TestCase
             'display_name' => strtolower($this->faker->country),
             'name'         => $this->name,
             'flag_sufix'   => $this->name,
-            'flag'         => 'flag-icon flag-icon-' . $this->name,
+            'flag'         => 'flag-icon flag-icon-'.$this->name,
         ];
     }
 
     private function setLanguage($language)
     {
-        $preferences               = (new DefaultPreferences())->getData();
+        $preferences = (new DefaultPreferences())->getData();
         $preferences->global->lang = $language->name;
-        $preference                = new Preference(['value' => $preferences]);
-        $preference->user_id       = 1;
+        $preference = new Preference(['value' => $preferences]);
+        $preference->user_id = 1;
         $preference->save();
     }
 
     private function cleanUp($language)
     {
         \File::delete(
-            resource_path('lang' . DIRECTORY_SEPARATOR . $language->name . '.json')
+            resource_path('lang'.DIRECTORY_SEPARATOR.$language->name.'.json')
         );
         \File::deleteDirectory(
-            resource_path('lang' . DIRECTORY_SEPARATOR . $language->name)
+            resource_path('lang'.DIRECTORY_SEPARATOR.$language->name)
         );
     }
 }
