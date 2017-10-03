@@ -33,7 +33,10 @@ class LocalisationTest extends TestCase
     /** @test */
     public function store()
     {
-        $response = $this->post(route('system.localisation.store', [], false), $this->postParams());
+        $response = $this->post(
+            route('system.localisation.store', [], false),
+            $this->postParams()
+        );
 
         $language = Language::whereName($this->name)->first();
 
@@ -44,8 +47,12 @@ class LocalisationTest extends TestCase
                 'id'       => $language->id,
             ]);
 
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
+        $this->assertTrue(
+            \File::exists(resource_path('lang/' . $language->name))
+        );
+        $this->assertTrue(
+            \File::exists(resource_path('lang/' . $language->name . '.json'))
+        );
 
         $this->cleanUp($language);
     }
@@ -65,7 +72,10 @@ class LocalisationTest extends TestCase
     /** @test */
     public function update()
     {
-        $this->post(route('system.localisation.store', [], false), $this->postParams());
+        $this->post(
+            route('system.localisation.store', [], false),
+            $this->postParams()
+        );
         $language = Language::whereName($this->name)->first();
 
         $language->name = 'xx';
@@ -74,11 +84,17 @@ class LocalisationTest extends TestCase
             route('system.localisation.update', $language->id, false),
             $language->toArray() + ['flag_sufix' => $language->name]
         )->assertStatus(200)
-            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
+            ->assertJson([
+                'message' => __(config('enso.labels.savedChanges'))
+            ]);
 
-        $this->assertEquals($language->name, $language->fresh()->name);
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
+        $this->assertEquals('xx', $language->fresh()->name);
+        $this->assertTrue(
+            \File::exists(resource_path('lang/' . $language->name))
+        );
+        $this->assertTrue(
+            \File::exists(resource_path('lang/' . $language->name . '.json'))
+        );
 
         $this->cleanUp($language);
     }
@@ -86,52 +102,64 @@ class LocalisationTest extends TestCase
     /** @test */
     public function destroy()
     {
-        $this->post(route('system.localisation.store', [], false), $this->postParams());
-        $language = Language::whereName($this->name)->first();
+        $this->post(
+            route('system.localisation.store', [], false),
+            $this->postParams()
+        );
+        $language     = Language::whereName($this->name)->first();
+        $languageName = $language->name;
 
-        $this->delete(route('system.localisation.destroy', $language->id, false))
-            ->assertStatus(200)
-            ->assertJsonFragment(['message']);
+        $this->delete(
+            route('system.localisation.destroy', $language->id, false)
+        )->assertStatus(200)
+            ->assertJson([
+                'message'  => 'The operation was successful',
+                'redirect' => 'system.localisation.index',
+            ]);
 
-        $this->assertFalse(\File::exists(resource_path('lang/'.$language->name)));
-        $this->assertFalse(\File::exists(resource_path('lang/'.$language->name.'.json')));
+        $this->assertFalse(
+            \File::exists(resource_path('lang/' . $languageName))
+        );
+        $this->assertFalse(
+            \File::exists(resource_path('lang/' . $languageName . '.json'))
+        );
     }
 
     /** @test */
     public function cant_destroy_default_language()
     {
-        $language = Language::whereName(config('app.fallback_locale'))->first();
-
-        $this->expectException(AuthorizationException::class);
+        $language = $this->createLanguage();
+        config()->set('app.fallback_locale', $language->name);
 
         $this->delete(route('system.localisation.destroy', $language->id, false))
-            ->assertStatus(403)
-            ->assertJsonStructure(['message']);
+            ->assertStatus(403);
 
-        $this->assertEquals($language, $language->fresh());
+        $this->assertNotNull($language->fresh());
     }
 
     /** @test */
     public function cant_destroy_if_language_is_in_use()
     {
-        $this->post(route('system.localisation.store', [], false), $this->postParams());
+        $this->post(
+            route('system.localisation.store', [], false),
+            $this->postParams()
+        );
         $language = Language::whereName($this->name)->first();
+
         $this->setLanguage($language);
 
         $this->delete(route('system.localisation.destroy', $language->id, false))
-            ->assertStatus(403)
-            ->assertJsonStructure(['message']);
+            ->assertStatus(403);
 
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name)));
-        $this->assertTrue(\File::exists(resource_path('lang/'.$language->name.'.json')));
+        $this->assertTrue(
+            \File::exists(resource_path('lang/' . $language->name))
+        );
+        $this->assertTrue(
+            \File::exists(resource_path('lang/' . $language->name . '.json'))
+        );
 
         $this->cleanUp($language);
-    }
 
-    private function cleanUp($language)
-    {
-        \File::delete(resource_path('lang'.DIRECTORY_SEPARATOR.$language->name.'.json'));
-        \File::deleteDirectory(resource_path('lang'.DIRECTORY_SEPARATOR.$language->name));
     }
 
     private function createLanguage()
@@ -145,16 +173,26 @@ class LocalisationTest extends TestCase
             'display_name' => strtolower($this->faker->country),
             'name'         => $this->name,
             'flag_sufix'   => $this->name,
-            'flag'         => 'flag-icon flag-icon-'.$this->name,
+            'flag'         => 'flag-icon flag-icon-' . $this->name,
         ];
     }
 
     private function setLanguage($language)
     {
-        $preferences = (new DefaultPreferences())->getData();
+        $preferences               = (new DefaultPreferences())->getData();
         $preferences->global->lang = $language->name;
-        $preference = new Preference(['value' => $preferences]);
-        $preference->user_id = 1;
+        $preference                = new Preference(['value' => $preferences]);
+        $preference->user_id       = 1;
         $preference->save();
+    }
+
+    private function cleanUp($language)
+    {
+        \File::delete(
+            resource_path('lang' . DIRECTORY_SEPARATOR . $language->name . '.json')
+        );
+        \File::deleteDirectory(
+            resource_path('lang' . DIRECTORY_SEPARATOR . $language->name)
+        );
     }
 }
