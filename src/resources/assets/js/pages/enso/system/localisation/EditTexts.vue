@@ -170,8 +170,6 @@
         	init() {
         		axios.get(this.$route.path).then(response => {
 	        		this.locales = response.data.locales;
-	        	}).catch(error => {
-	        		this.handleError(error);
 	        	});
         	},
             getLangFile() {
@@ -181,8 +179,6 @@
 
                 axios.get('/system/localisation/getLangFile/' + this.selectedLocale).then(response => {
                     this.langFile = response.data;
-                }).catch(error => {
-                    this.handleError(error);
                 });
             },
             saveLangFile() {
@@ -195,7 +191,6 @@
                     toastr.success(response.data.message);
                 }).catch(error => {
                 	this.loading = false;
-                    this.handleError(error);
                 });
             },
             addKey() {
