@@ -87,7 +87,7 @@ class LocalisationService
 
         return [
             'message'  => __(config('enso.labels.successfulOperation')),
-            'redirect' => 'administration.localisation.index',
+            'redirect' => 'system.localisation.index',
         ];
     }
 }
