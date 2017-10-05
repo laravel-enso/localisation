@@ -13,7 +13,7 @@ class JsonLangManager
         ));
     }
 
-    public function update($locale, $langFile)
+    public function update($langFile, $locale)
     {
         $this->saveToDisk($locale, $langFile);
         $this->processDifferences($locale, $langFile);

@@ -1,10 +1,10 @@
 <?php
 
-Route::middleware(['auth:api', 'api', 'core'])
-    ->prefix('api')
+Route::middleware(['web', 'auth', 'core'])
+    ->prefix('api/system')->as('system.')
     ->namespace('LaravelEnso\Localisation\app\Http\Controllers')
     ->group(function () {
-        Route::prefix('system/localisation')->as('system.localisation.')
+        Route::prefix('localisation')->as('localisation.')
             ->group(function () {
                 Route::get('initTable', 'LocalisationTableController@initTable')
                     ->name('initTable');
@@ -21,8 +21,5 @@ Route::middleware(['auth:api', 'api', 'core'])
                     ->name('saveLangFile');
             });
 
-        Route::prefix('system')->as('system.')
-            ->group(function () {
-                Route::resource('localisation', 'LocalisationController', ['except' => ['show']]);
-            });
+        Route::resource('localisation', 'LocalisationController', ['except' => ['show']]);
     });

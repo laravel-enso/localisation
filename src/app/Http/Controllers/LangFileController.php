@@ -20,8 +20,8 @@ class LangFileController
         return compact('locales');
     }
 
-    public function saveLangFile(Request $request, JsonLangManager $service)
+    public function saveLangFile(Request $request, Language $language, JsonLangManager $service)
     {
-        return $service->update($request->get('locale'), $request->get('langFile'));
+        return $service->update($request->get('langFile'), $language->name);
     }
 }

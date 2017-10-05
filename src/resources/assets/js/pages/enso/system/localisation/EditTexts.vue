@@ -148,7 +148,7 @@
                 });
             },
             isNewKey() {
-                return this.query && this.filteredKeys.indexOf(this.query) === -1;
+                return this.selectedLocale && this.query && this.filteredKeys.indexOf(this.query) === -1;
             },
             keysCount() {
                 return this.langKeys.length;
@@ -168,7 +168,7 @@
 
         methods: {
         	init() {
-        		axios.get(this.$route.path).then(response => {
+        		axios.get(route('system.localisation.editTexts', [], false)).then(response => {
 	        		this.locales = response.data.locales;
 	        	});
         	},
@@ -177,15 +177,15 @@
             		return this.langFile = {};
             	}
 
-                axios.get('/system/localisation/getLangFile/' + this.selectedLocale).then(response => {
+                axios.get(route('system.localisation.getLangFile', this.selectedLocale, false)).then(response => {
                     this.langFile = response.data;
                 });
             },
             saveLangFile() {
             	this.loading = true;
 
-                axios.patch('/system/localisation/saveLangFile',
-                    { langFile: this.langFile, locale: this.selectedLocale }
+                axios.patch(route('system.localisation.saveLangFile', this.selectedLocale, false).toString(),
+                    { langFile: this.langFile }
                 ).then(response => {
                 	this.loading = false;
                     toastr.success(response.data.message);
