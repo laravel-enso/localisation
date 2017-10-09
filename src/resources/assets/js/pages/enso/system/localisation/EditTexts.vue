@@ -170,7 +170,9 @@
         	init() {
         		axios.get(route('system.localisation.editTexts', [], false)).then(response => {
 	        		this.locales = response.data.locales;
-	        	});
+	        	}).catch(error => {
+					this.handleError(error);
+	            });
         	},
             getLangFile() {
             	if (!this.selectedLocale) {
@@ -179,7 +181,9 @@
 
                 axios.get(route('system.localisation.getLangFile', this.selectedLocale, false)).then(response => {
                     this.langFile = response.data;
-                });
+                }).catch(error => {
+					this.handleError(error);
+	            });
             },
             saveLangFile() {
             	this.loading = true;
@@ -191,6 +195,7 @@
                     toastr.success(response.data.message);
                 }).catch(error => {
                 	this.loading = false;
+                	this.handleError(error);
                 });
             },
             addKey() {
