@@ -7,7 +7,7 @@
     <page v-cloak>
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
             <vue-form :data="form">
-                <template slot="flag" scope="props">
+                <template slot="flag" slot-scope="props">
                     <div class="well well-sm" style="height:34px">
                     </div>
                 </template>
