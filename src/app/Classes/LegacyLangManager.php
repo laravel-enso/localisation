@@ -2,6 +2,8 @@
 
 namespace LaravelEnso\Localisation\app\Classes;
 
+use Symfony\Component\Finder\SplFileInfo;
+
 class LegacyLangManager
 {
     public function createLocale(string $locale)
@@ -33,10 +35,11 @@ class LegacyLangManager
         });
     }
 
-    private function createLang($file, $locale)
+    private function createLang(SplFileInfo $file, $locale)
     {
-        $fileName = last(explode(DIRECTORY_SEPARATOR, $file));
-        $content = \File::get($file);
+        $filePath = $file->getRealPath();
+        $fileName = last(explode(DIRECTORY_SEPARATOR, $filePath));
+        $content = \File::get($filePath);
 
         \File::put(
             resource_path('lang').DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$fileName,
