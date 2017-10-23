@@ -50,7 +50,7 @@ the language he has currently set as active in his preferences
 ### Publishes
 
 - `php artisan vendor:publish --tag=localisation-assets` - the VueJS components and pages
-- `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the VueJS component,
+- `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the VueJS assets,
 once a newer version is released, can be used with the `--force` flag
 
 ### TO DO
