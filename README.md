@@ -17,18 +17,18 @@ Localisation management dependency for [Laravel Enso](https://github.com/laravel
 ### Features
 
 - allows an easier management of languages, keys and translations in the context of a multi language application
-- uses the newer Laravel `__()` translation method and stores keys and translations inside a json file
-- permits adding as many languages as you require and the easy creation of translations for the keys you need
-- a language selector VueJS component is included, that can be used to set the current language for the active user
+- uses the newer Laravel `__()` translation method and stores keys and translations inside a JSON file
+- permits adding as many languages as you require and the quick creation of translations for the keys you need
+- the language selector is easily accessible in the right-hand sidebar
 
 ### Under the Hood
 
 - the `languages` table stores the available languages for localisation
    - `name` - the language code, e.g. 'en'
-   - `display_name` - the lable for the language, visible in the UI, e.g. 'English'
+   - `display_name` - the label for the language, visible in the UI, e.g. 'English'
    - `flag` - the icon class used for showing the flag
 
-- when translating, the new Laravel mechanism is used, respectively the function `__()`
+- when translating, the new Laravel mechanism is used, respectively the `__()` function 
 - the main language is considered to be english
 - the keys are, by convention, in english and in a human readable format e.g. 'Date of Birth', and if a key is not found, the value of the key is used instead
 - the keys and the values for the keys are kept in `resources/lang/*code*.json`  where code is the language code, e.g. 'de' for german, with the exception for the english language, since keys are already in english
@@ -42,11 +42,16 @@ Localisation management dependency for [Laravel Enso](https://github.com/laravel
     - the language folder and its contents are removed
     - the JSON language file is removed
 
+- the `set-language` middleware is used to set the locale for the backend, for each request, depending on 
+the user's language preference
+- the `LanguagePolicy` ensures that when deleting a language, a user cannot delete the default language, or 
+the language he has currently set as active in his preferences
+
 ### Publishes
 
-- `php artisan vendor:publish --tag=localisation-component` - the VueJS component
-- `php artisan vendor:publish --tag=enso-update` - a common alias for when wanting to update the VueJS component,
-once a newer version is released
+- `php artisan vendor:publish --tag=localisation-assets` - the VueJS components and pages
+- `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the VueJS component,
+once a newer version is released, can be used with the `--force` flag
 
 ### TO DO
 
@@ -55,6 +60,13 @@ once a newer version is released
 ### Notes
 
 The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with this package included.
+
+Depends on:
+ - [Core](https://github.com/laravel-enso/Core) for middleware, user and preferences models 
+ - [Structure manager](https://github.com/laravel-enso/StructureManager) for the migrations
+ - [Datatable](https://github.com/laravel-enso/Datatable) for displaying the list of languages
+ - [FormBuilder](https://github.com/laravel-enso/FormBuilder) for creating the forms when managing languages
+ - [Helpers](https://github.com/laravel-enso/Helpers) for utility classes and traits
 
 <!--h-->
 ### Contributions
