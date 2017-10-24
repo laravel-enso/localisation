@@ -9,9 +9,9 @@
 
 Localisation management dependency for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
-[![Screenshot](https://laravel-enso.github.io/localisation/screenshots/Selection_010_thumb.png)](https://laravel-enso.github.io/localisation/screenshots/Selection_010.png)
+[![Screenshot](https://laravel-enso.github.io/localisation/screenshots/bulma_010_thumb.png)](https://laravel-enso.github.io/localisation/screenshots/bulma_010.png)
 
-[![Watch the demo](https://laravel-enso.github.io/localisation/screenshots/Selection_011_thumb.png)](https://laravel-enso.github.io/localisation/videos/demo_01.webm)
+[![Watch the demo](https://laravel-enso.github.io/localisation/screenshots/bulma_011_thumb.png)](https://laravel-enso.github.io/localisation/videos/bulma_demo_01.webm)
 <sup>click on the photo to view a short demo in compatible browsers</sup>
 
 ### Features
@@ -46,6 +46,7 @@ Localisation management dependency for [Laravel Enso](https://github.com/laravel
 the user's language preference
 - the `LanguagePolicy` ensures that when deleting a language, a user cannot delete the default language, or 
 the language he has currently set as active in his preferences
+- the list of languages and the translations are loaded after login, so the changes will be available at the next login
 
 ### Publishes
 
