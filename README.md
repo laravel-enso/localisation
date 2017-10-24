@@ -46,7 +46,8 @@ Localisation management dependency for [Laravel Enso](https://github.com/laravel
 the user's language preference
 - the `LanguagePolicy` ensures that when deleting a language, a user cannot delete the default language, or 
 the language he has currently set as active in his preferences
-- the list of languages and the translations are loaded after login, so the changes will be available at the next login
+- the list of languages and the translations are loaded on app init, so the changes will be available at the next login
+or at a page refresh
 
 ### Publishes
 
