@@ -18,11 +18,11 @@ class LocalisationTableStructure extends TableStructure
             'customActionButtons' => [
                 ['icon' => 'fa fa-sliders', 'class' => 'is-info', 'event' => 'edit-texts', 'route' => 'system.localisation.editTexts'],
             ],
-            'render'              => [2],
-            'notSearchable'       => [3, 4],
-            'headerAlign'         => 'center',
-            'bodyAlign'           => 'center',
-            'columns'             => [
+            'render'        => [2],
+            'notSearchable' => [3, 4],
+            'headerAlign'   => 'center',
+            'bodyAlign'     => 'center',
+            'columns'       => [
                 0 => [
                     'label' => __('Display Name'),
                     'data'  => 'display_name',
