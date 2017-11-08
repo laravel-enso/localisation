@@ -20,6 +20,11 @@ class LocalisationServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js'),
         ], 'enso-assets');
+
+        $this->publishes([
+            __DIR__.'/resources/lang' => resource_path('lang'),
+            __DIR__.'/resources/dt-lang' => resource_path('dt-lang'),
+        ], 'localisation-lang-files');
     }
 
     public function register()
