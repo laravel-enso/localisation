@@ -14,6 +14,6 @@ return [
      */
 
     'failed'   => 'Deze inloggegevens komen niet voor in onze database.',
-    'throttle' => 'Te veel inlogpogingen. Probeer het opnieuw over :seconds seconden.'
+    'throttle' => 'Te veel inlogpogingen. Probeer het opnieuw over :seconds seconden.',
 
 ];

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use LaravelEnso\Localisation\app\Models\Language;
 
@@ -14,8 +12,8 @@ class InsertLocaleNl extends Migration
      */
     public function up()
     {
-        Language::firstOrCreate(	['name' => 'nl'], 
-					['display_name' => 'Nederlands', 'flag' => 'flag-icon flag-icon-nl']);
+        Language::firstOrCreate(['name' => 'nl'],
+                    ['display_name' => 'Nederlands', 'flag' => 'flag-icon flag-icon-nl']);
     }
 
     /**
