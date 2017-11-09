@@ -19,6 +19,7 @@ class CreateLanguagesTable extends Migration
         $languages = [
             ['name' => 'ro', 'display_name' => 'Romana', 'flag' => 'flag-icon flag-icon-ro'],
             ['name' => 'en', 'display_name' => 'English-GB', 'flag' => 'flag-icon flag-icon-gb'],
+            ['name' => 'de', 'display_name' => 'German', 'flag' => 'flag-icon flag-icon-de'],
         ];
 
         \DB::transaction(function () use ($languages) {
