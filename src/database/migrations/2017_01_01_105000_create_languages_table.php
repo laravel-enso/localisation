@@ -20,7 +20,7 @@ class CreateLanguagesTable extends Migration
             ['name' => 'ro', 'display_name' => 'Romana', 'flag' => 'flag-icon flag-icon-ro'],
             ['name' => 'en', 'display_name' => 'English-GB', 'flag' => 'flag-icon flag-icon-gb'],
             ['name' => 'de', 'display_name' => 'German', 'flag' => 'flag-icon flag-icon-de'],
-            ['name' => 'nl', 'display_name' => 'Nederlands', 'flag' => 'flag-icon flag-icon-nl']
+            ['name' => 'nl', 'display_name' => 'Nederlands', 'flag' => 'flag-icon flag-icon-nl'],
         ];
 
         \DB::transaction(function () use ($languages) {
