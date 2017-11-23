@@ -6,11 +6,11 @@ Route::middleware(['web', 'auth', 'core'])
     ->group(function () {
         Route::prefix('localisation')->as('localisation.')
             ->group(function () {
-                Route::get('initTable', 'LocalisationTableController@initTable')
+                Route::get('initTable', 'LocalisationTableController@init')
                     ->name('initTable');
-                Route::get('getTableData', 'LocalisationTableController@getTableData')
+                Route::get('getTableData', 'LocalisationTableController@data')
                     ->name('getTableData');
-                Route::get('exportExcel', 'LocalisationTableController@exportExcel')
+                Route::get('exportExcel', 'LocalisationTableController@excel')
                     ->name('exportExcel');
 
                 Route::get('editTexts', 'LangFileController@editTexts')
