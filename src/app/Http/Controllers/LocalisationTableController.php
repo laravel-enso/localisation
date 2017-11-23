@@ -11,7 +11,7 @@ class LocalisationTableController extends Controller
 {
     use Datatable, Excel;
 
-    private const Template = __DIR__.'/../../Tables/localisation.json';
+    private const Template = __DIR__ . '/../../Tables/localisation.json';
 
     public function query()
     {
@@ -19,9 +19,5 @@ class LocalisationTableController extends Controller
             'languages.id as dtRowId, languages.display_name, languages.name,
             languages.flag, languages.created_at, languages.updated_at'
         ));
-    }
-
-    public function getTableQuery()
-    {
     }
 }
