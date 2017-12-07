@@ -21,6 +21,7 @@ class CreateLanguagesTable extends Migration
             ['name' => 'en', 'display_name' => 'English-GB', 'flag' => 'flag-icon flag-icon-gb'],
             ['name' => 'de', 'display_name' => 'German', 'flag' => 'flag-icon flag-icon-de'],
             ['name' => 'nl', 'display_name' => 'Nederlands', 'flag' => 'flag-icon flag-icon-nl'],
+            ['name' => 'fr', 'display_name' => 'Français', 'flag' => 'flag-icon flag-icon-fr'],
         ];
 
         \DB::transaction(function () use ($languages) {
