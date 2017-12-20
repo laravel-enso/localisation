@@ -3,10 +3,10 @@
 namespace LaravelEnso\Localisation\app\Http\Services;
 
 use Illuminate\Http\Request;
+use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\Localisation\app\Classes\JsonLangManager;
 use LaravelEnso\Localisation\app\Classes\LegacyLangManager;
-use LaravelEnso\Localisation\app\Models\Language;
 
 class LocalisationService
 {
@@ -44,9 +44,9 @@ class LocalisationService
         });
 
         return [
-            'message'  => __('The language was created!'),
+            'message' => __('The language was created!'),
             'redirect' => 'system.localisation.edit',
-            'id'       => $localisation->id,
+            'id' => $localisation->id,
         ];
     }
 
@@ -86,7 +86,7 @@ class LocalisationService
         });
 
         return [
-            'message'  => __(config('enso.labels.successfulOperation')),
+            'message' => __(config('enso.labels.successfulOperation')),
             'redirect' => 'system.localisation.index',
         ];
     }

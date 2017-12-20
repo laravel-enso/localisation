@@ -3,9 +3,9 @@
 namespace LaravelEnso\Localisation\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
-use LaravelEnso\Localisation\app\Http\Services\LocalisationService;
 use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Localisation\app\Http\Services\LocalisationService;
+use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
 
 class LocalisationController extends Controller
 {
