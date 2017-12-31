@@ -4,7 +4,7 @@ namespace LaravelEnso\Localisation\app\Http\Services;
 
 use Illuminate\Http\Request;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\FormBuilder\app\Classes\Form;
 use LaravelEnso\Localisation\app\Classes\JsonLangManager;
 use LaravelEnso\Localisation\app\Classes\LegacyLangManager;
 
@@ -25,10 +25,9 @@ class LocalisationService
 
     public function create()
     {
-        $form = (new FormBuilder(self::FormPath))
-            ->setMethod('POST')
-            ->setTitle('Create Language')
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->create()
+            ->get();
 
         return compact('form');
     }
@@ -52,11 +51,10 @@ class LocalisationService
 
     public function edit(Language $localisation)
     {
-        $form = (new FormBuilder(self::FormPath, $localisation))
-            ->setMethod('PATCH')
-            ->setTitle('Edit Language')
-            ->setValue('flag_sufix', substr($localisation->flag, -2))
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->edit($localisation)
+            ->value('flag_sufix', substr($localisation->flag, -2))
+            ->get();
 
         return compact('form');
     }

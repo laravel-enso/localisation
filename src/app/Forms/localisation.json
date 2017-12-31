@@ -1,12 +1,9 @@
 {
-    "title": null,
-    "method": null,
-    "prefix": "system.localisation",
-    "icon": "fa fa-language",
+    "routePrefix": "system.localisation",
     "columns": "1",
     "fields": [{
         "label": "Display Name",
-        "column": "display_name",
+        "name": "display_name",
         "value": null,
         "meta": {
             "type": "input",
@@ -14,7 +11,7 @@
         }
     }, {
         "label": "Name",
-        "column": "name",
+        "name": "name",
         "value": null,
         "meta": {
             "type": "input",
@@ -22,7 +19,7 @@
         }
     }, {
         "label": "Flag Sufix",
-        "column": "flag_sufix",
+        "name": "flag_sufix",
         "value": null,
         "meta": {
             "type": "input",
@@ -30,7 +27,7 @@
         }
     }, {
         "label": "Flag",
-        "column": "flag",
+        "name": "flag",
         "value": null,
         "meta": {
             "custom": "true"
