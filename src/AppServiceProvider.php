@@ -5,7 +5,7 @@ namespace LaravelEnso\Localisation;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
 
-class LocalisationServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
