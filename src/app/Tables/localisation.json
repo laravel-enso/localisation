@@ -6,17 +6,18 @@
     "icon": "fa fa-language",
     "crtNo": true,
     "buttons": [
-        "create",
+        "excel",
         {
             "type": "global",
-            "icon": "fa fa-sliders",
+            "icon": "fa fa-pencil-square-o",
             "class": "is-primary",
             "routeSuffix": "editTexts",
             "event": "edit-texts",
             "action": "router",
             "label": "Edit Texts"
         },
-        "excel", "edit", "destroy"],
+        "create", "edit", "destroy"
+    ],
     "columns": [
         {
             "label": "Display Name",
