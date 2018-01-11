@@ -1,4 +1,4 @@
-import LocalisationEdit from '../../../../pages/enso/system/localisation/Edit.vue';
+const LocalisationEdit = () => import('../../../pages/system/localisation/Edit.vue');
 
 export default {
     name: 'system.localisation.edit',

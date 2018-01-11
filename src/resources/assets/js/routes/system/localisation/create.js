@@ -1,4 +1,4 @@
-import LocalisationCreate from '../../../../pages/enso/system/localisation/Create.vue';
+const LocalisationCreate = () => import('../../../pages/system/localisation/Create.vue');
 
 export default {
     name: 'system.localisation.create',

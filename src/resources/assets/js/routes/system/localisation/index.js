@@ -1,4 +1,4 @@
-import LocalisationIndex from '../../../../pages/enso/system/localisation/Index.vue';
+const LocalisationIndex = () => import('../../../pages/system/localisation/Index.vue');
 
 export default {
     name: 'system.localisation.index',

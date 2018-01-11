@@ -68,7 +68,9 @@
         <div class="translations"
             :style="transDiv"
             v-if="selectedLocale">
-            <div v-for="key in filteredKeys" class="column">
+            <div class="column"
+                v-for="(key, index) in filteredKeys"
+                :key="index">
                 <div class="columns">
                     <div class="column is-half">
                         <input type="text" class="input" disabled :value="key">
@@ -102,7 +104,7 @@
 <script>
 
 import { mapGetters, mapState } from 'vuex';
-import VueSelect from '../../../../components/enso/select/VueSelect.vue';
+import VueSelect from '../../../components/enso/select/VueSelect.vue';
 
 export default {
     components: { VueSelect },

@@ -6,16 +6,9 @@
                 class="box animated fadeIn"
                 v-if="initialised">
                 <template slot="flag" slot-scope="props">
-                    <div class="control has-icons-right">
-                        <input class="input"
-                            type="text"
-                            disabled
-                            :value="props.field.value">
-                        <span class="icon is-small is-right">
-                            <i class="is-icon" :class="props.field.value">
-                            </i>
-                        </span>
-                    </div>
+                    <input class="input"
+                        type="text"
+                        disabled>
                 </template>
             </vue-form>
         </div>
@@ -25,7 +18,7 @@
 
 <script>
 
-import VueForm from '../../../../components/enso/vueforms/VueForm.vue';
+import VueForm from '../../../components/enso/vueforms/VueForm.vue';
 
 export default {
     components: { VueForm },
@@ -38,7 +31,7 @@ export default {
     },
 
     created() {
-        axios.get(route(this.$route.name, this.$route.params.id, false)).then((response) => {
+        axios.get(route(this.$route.name, null, false)).then((response) => {
             this.form = response.data.form;
             this.initialised = true;
         }).catch(error => this.handleError(error));
