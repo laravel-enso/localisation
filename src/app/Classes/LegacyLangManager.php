@@ -2,6 +2,8 @@
 
 namespace LaravelEnso\Localisation\app\Classes;
 
+use LaravelEnso\Localisation\app\Exceptions\LocalisationException;
+
 class LegacyLangManager
 {
     public function createLocale(string $locale)
@@ -13,9 +15,10 @@ class LegacyLangManager
     private function createDir(string $locale)
     {
         if (\File::isDirectory(resource_path('lang').DIRECTORY_SEPARATOR.$locale)) {
-            throw new \EnsoException(
-                __("Can't create the language files because legacy folder already exists".' '.resource_path('lang').DIRECTORY_SEPARATOR.$locale)
-            );
+            throw new LocalisationException(__(
+                "Can't create the language for locale :locale files because the legacy folder :folder already exists",
+                ['locale' => $locale, 'folder' => resource_path('lang').DIRECTORY_SEPARATOR.$locale]
+            ));
         }
 
         \File::makeDirectory(resource_path('lang').DIRECTORY_SEPARATOR.$locale);
