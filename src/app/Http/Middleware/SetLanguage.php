@@ -9,6 +9,7 @@ class SetLanguage
     public function handle($request, Closure $next)
     {
         $language = $request->user()->preferences->global->lang;
+
         app()->setLocale($language);
 
         return $next($request);

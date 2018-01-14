@@ -9,37 +9,30 @@ use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
 
 class LocalisationController extends Controller
 {
-    private $service;
-
-    public function __construct(LocalisationService $service)
+    public function create(LocalisationService $service)
     {
-        $this->service = $service;
+        return $service->create();
     }
 
-    public function create()
+    public function store(ValidateLanguageRequest $request, Language $localisation, LocalisationService $service)
     {
-        return $this->service->create();
+        return $service->store($request, $localisation);
     }
 
-    public function store(ValidateLanguageRequest $request, Language $localisation)
+    public function edit(Language $localisation, LocalisationService $service)
     {
-        return $this->service->store($request, $localisation);
+        return $service->edit($localisation);
     }
 
-    public function edit(Language $localisation)
+    public function update(ValidateLanguageRequest $request, Language $localisation, LocalisationService $service)
     {
-        return $this->service->edit($localisation);
+        return $service->update($request, $localisation);
     }
 
-    public function update(ValidateLanguageRequest $request, Language $localisation)
-    {
-        return $this->service->update($request, $localisation);
-    }
-
-    public function destroy(Language $localisation)
+    public function destroy(Language $localisation, LocalisationService $service)
     {
         $this->authorize('destroy', $localisation);
 
-        return $this->service->destroy($localisation);
+        return $service->destroy($localisation);
     }
 }
