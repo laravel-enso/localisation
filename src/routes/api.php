@@ -13,11 +13,11 @@ Route::middleware(['web', 'auth', 'core'])
                 Route::get('exportExcel', 'LocalisationTableController@excel')
                     ->name('exportExcel');
 
-                Route::get('editTexts', 'LangFileController@editTexts')
+                Route::get('editTexts', 'JsonFileController@index')
                     ->name('editTexts');
-                Route::get('getLangFile/{language}', 'LangFileController@getLangFile')
+                Route::get('getLangFile/{language}', 'JsonFileController@edit')
                     ->name('getLangFile');
-                Route::patch('saveLangFile/{language}', 'LangFileController@saveLangFile')
+                Route::patch('saveLangFile/{language}', 'JsonFileController@update')
                     ->name('saveLangFile');
             });
 

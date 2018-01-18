@@ -41,9 +41,9 @@ class LocalisationTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message'  => 'The language was created!',
+                'message' => 'The language was created!',
                 'redirect' => 'system.localisation.edit',
-                'id'       => $language->id,
+                'id' => $language->id,
             ]);
 
         $this->assertTrue(
@@ -112,7 +112,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.destroy', $language->id, false)
         )->assertStatus(200)
             ->assertJson([
-                'message'  => 'The operation was successful',
+                'message' => 'The operation was successful',
                 'redirect' => 'system.localisation.index',
             ]);
 
@@ -169,15 +169,15 @@ class LocalisationTest extends TestCase
     {
         return [
             'display_name' => strtolower($this->faker->country),
-            'name'         => $this->name,
-            'flag_sufix'   => $this->name,
-            'flag'         => 'flag-icon flag-icon-'.$this->name,
+            'name' => $this->name,
+            'flag_sufix' => $this->name,
+            'flag' => 'flag-icon flag-icon-'.$this->name,
         ];
     }
 
     private function setLanguage($language)
     {
-        $preferences = (new DefaultPreferences())->getData();
+        $preferences = (new DefaultPreferences())->data();
         $preferences->global->lang = $language->name;
         $preference = new Preference(['value' => $preferences]);
         $preference->user_id = 1;
