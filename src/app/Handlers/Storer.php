@@ -20,7 +20,10 @@ class Storer
         $localisation = null;
 
         \DB::transaction(function () use (&$localisation) {
-            $localisation = Language::create($this->request);
+            $localisation = new Language();
+            $localisation = $localisation
+                ->storeWithFlagSufix($this->request, $this->request['flag_sufix']);
+
             (new LegacyStorer($this->request['name']))->create();
             (new JsonStorer($this->request['name']))->create();
             $localisation->save();

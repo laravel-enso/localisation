@@ -23,7 +23,7 @@ class Updater
     {
         \DB::transaction(function () {
             $oldName = $this->localisation->name;
-            $this->localisation->update($this->request);
+            $this->localisation->updateWithFlagSufix($this->request, $this->request['flag_sufix']);
             $this->updateLangFiles($oldName, $this->request['name']);
         });
     }

@@ -10,9 +10,19 @@ class Language extends Model
 
     protected $fillable = ['name', 'display_name', 'flag'];
 
-    public function setFlagAttribute()
+    public function updateWithFlagSufix($attributes, string $sufix)
     {
-        $this->attributes['flag'] = self::FlagClassPrefix.$this->name;
+        $this->fill($attributes);
+        $this->flag = self::FlagClassPrefix.$sufix;
+        $this->update();
+    }
+
+    public function storeWithFlagSufix($attributes, string $sufix)
+    {
+        $this->fill($attributes);
+        $this->flag = self::FlagClassPrefix.$sufix;
+
+        return tap($this)->save();
     }
 
     public function scopeExtra($query)
