@@ -1,6 +1,6 @@
 {
     "routePrefix": "system.localisation",
-    "columns": "1",
+    "columns": "2",
     "fields": [{
         "label": "Display Name",
         "name": "display_name",
