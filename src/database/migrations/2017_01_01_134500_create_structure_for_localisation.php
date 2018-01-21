@@ -24,7 +24,7 @@ class CreateStructureForLocalisation extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Localisation', 'icon' => 'fa fa-fw fa-language', 'link' => 'system.localisation.index', 'has_children' => false,
+        'name' => 'Localisation', 'icon' => 'fas fa-fw fa-language', 'link' => 'system.localisation.index', 'has_children' => false,
     ];
 
     protected $parentMenu = 'System';
