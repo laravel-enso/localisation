@@ -16,7 +16,7 @@ class LocalisationTableController extends Controller
     public function query()
     {
         return Language::select(\DB::raw(
-            'languages.id as dtRowId, languages.display_name, languages.name,
+            'languages.id as "dtRowId", languages.display_name, languages.name,
             languages.flag, languages.created_at, languages.updated_at'
         ));
     }
