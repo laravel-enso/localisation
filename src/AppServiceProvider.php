@@ -23,7 +23,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang'),
-            __DIR__.'/resources/dt-lang' => resource_path('dt-lang'),
         ], 'localisation-lang-files');
     }
 
