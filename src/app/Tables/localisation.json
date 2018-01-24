@@ -3,13 +3,13 @@
     "readSuffix": "getTableData",
     "writeSuffix": null,
     "name": "Languages",
-    "icon": "fas fa-language",
+    "icon": "language",
     "crtNo": true,
     "buttons": [
         "excel",
         {
             "type": "global",
-            "icon": "fas fa-edit",
+            "icon": "edit",
             "class": "is-primary",
             "routeSuffix": "editTexts",
             "event": "edit-texts",
