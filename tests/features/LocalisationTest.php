@@ -13,7 +13,7 @@ class LocalisationTest extends TestHelper
     use DatabaseMigrations;
 
     private $faker;
-    private $name;
+    const NAME = 'xx';
 
     protected function setUp()
     {
@@ -21,14 +21,12 @@ class LocalisationTest extends TestHelper
 
         // $this->disableExceptionHandling();
         $this->faker = Factory::create();
-        $this->name = strtolower($this->faker->countryCode);
         $this->signIn(User::first());
     }
 
     /** @test */
     public function index()
-    {
-        $this->get('/system/localisation')
+    {        $this->get('/system/localisation')
             ->assertStatus(200)
             ->assertViewIs('laravel-enso/localisation::index');
     }
@@ -49,7 +47,7 @@ class LocalisationTest extends TestHelper
             '/system/localisation', $this->postParams()
         );
 
-        $language = Language::whereName($this->name)->first();
+        $language = Language::whereName(self::NAME)->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
@@ -88,9 +86,9 @@ class LocalisationTest extends TestHelper
             route('system.localisation.store', [], false),
             $this->postParams()
         );
-        $language = Language::whereName($this->name)->first();
+        $language = Language::whereName(self::NAME)->first();
 
-        $language->name = 'xx';
+        $language->name = 'zz';
 
         $this->patch(
             route('system.localisation.update', $language->id, false),
@@ -100,7 +98,7 @@ class LocalisationTest extends TestHelper
                 'message' => 'The changes have been saved',
             ]);
 
-        $this->assertEquals('xx', $language->fresh()->name);
+        $this->assertEquals('zz', $language->fresh()->name);
         $this->assertTrue(
             \File::exists(resource_path('lang/'.$language->name))
         );
@@ -118,7 +116,7 @@ class LocalisationTest extends TestHelper
             route('system.localisation.store', [], false),
             $this->postParams()
         );
-        $language = Language::whereName($this->name)->first();
+        $language = Language::whereName(self::NAME)->first();
         $languageName = $language->name;
 
         $this->delete(
@@ -158,7 +156,7 @@ class LocalisationTest extends TestHelper
             route('system.localisation.store', [], false),
             $this->postParams()
         );
-        $language = Language::whereName($this->name)->first();
+        $language = Language::whereName(self::NAME)->first();
 
         $this->setLanguage($language);
 
@@ -184,9 +182,9 @@ class LocalisationTest extends TestHelper
     {
         return [
             'display_name' => strtolower($this->faker->country),
-            'name'         => $this->name,
-            'flag_sufix'   => $this->name,
-            'flag'         => 'flag-icon flag-icon-'.$this->name,
+            'name'         => self::NAME,
+            'flag_sufix'   => self::NAME,
+            'flag'         => 'flag-icon flag-icon-'.self::NAME,
         ];
     }
 
