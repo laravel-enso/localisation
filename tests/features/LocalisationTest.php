@@ -26,7 +26,8 @@ class LocalisationTest extends TestHelper
 
     /** @test */
     public function index()
-    {        $this->get('/system/localisation')
+    {
+        $this->get('/system/localisation')
             ->assertStatus(200)
             ->assertViewIs('laravel-enso/localisation::index');
     }
