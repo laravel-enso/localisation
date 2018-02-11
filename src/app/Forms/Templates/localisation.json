@@ -30,7 +30,9 @@
         "name": "flag",
         "value": null,
         "meta": {
-            "custom": "true"
+            "custom": "true",
+            "type": "text",
+            "disabled": true
         }
     }]
 }
