@@ -107,7 +107,7 @@
 import { mapGetters, mapState } from 'vuex';
 import fontawesome from '@fortawesome/fontawesome';
 import { faSearch, faTrashAlt } from '@fortawesome/fontawesome-free-solid/shakable.es';
-import VueSelect from '../../../components/enso/vueforms/VueSelect.vue';
+import VueSelect from '../../../components/enso/select/VueSelect.vue';
 
 fontawesome.library.add(faSearch, faTrashAlt);
 
@@ -242,7 +242,6 @@ export default {
 
     .has-shadow-bottom {
         -webkit-box-shadow: 0px 3px 5px -4px lightgray;
-        -moz-box-shadow: 0px 3px 5px -4px lightgray;
         box-shadow: 0px 3px 5px -4px lightgray;
     }
 
