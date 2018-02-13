@@ -49,6 +49,16 @@ the language he has currently set as active in his preferences
 - the list of languages and the translations are loaded on app init, so the changes will be available at the next login
 or at a page refresh
 
+### Usage Notes
+
+Please note that because we want to keep the compiled size down, throughout the enso ecosistem, 
+icons are imported selectively.
+
+What this means for the localisation package, is that when adding a new language, you should also make sure you 
+import the required flag icon SVG and declare the corresponding class. The proper place to include the new icon is:
+
+`resources/assets/sass/flags.scss`
+
 ### Publishes
 
 - `php artisan vendor:publish --tag=localisation-assets` - the VueJS components and pages
