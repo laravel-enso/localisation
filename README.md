@@ -57,7 +57,7 @@ icons are imported selectively.
 What this means for the localisation package, is that when adding a new language, you should also make sure you 
 import the required flag icon SVG and declare the corresponding class. The proper place to include the new icon is:
 
-`resources/assets/sass/flags.scss`
+`resources/assets/sass/app.scss`
 
 ### Publishes
 
