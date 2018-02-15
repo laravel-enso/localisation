@@ -18,7 +18,8 @@ class LocalisationForm
 
     public function create()
     {
-        return $this->form->create();
+        return $this->form->hide('flag')
+            ->create();
     }
 
     public function edit(Language $language)
