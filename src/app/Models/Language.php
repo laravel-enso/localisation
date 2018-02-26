@@ -3,12 +3,17 @@
 namespace LaravelEnso\Localisation\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Helpers\app\Traits\IsActive;
 
 class Language extends Model
 {
+    use IsActive;
+
     const FlagClassPrefix = 'flag-icon flag-icon-';
 
-    protected $fillable = ['name', 'display_name', 'flag'];
+    protected $fillable = ['name', 'display_name', 'flag', 'is_active'];
+
+    protected $casts = ['is_active' => 'boolean'];
 
     public function updateWithFlagSufix($attributes, string $sufix)
     {

@@ -34,5 +34,13 @@
             "type": "text",
             "disabled": true
         }
+    }, {
+        "label": "Active",
+        "name": "is_active",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
     }]
 }
