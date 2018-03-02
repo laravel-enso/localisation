@@ -11,7 +11,14 @@ class JsonFileController
 {
     public function index()
     {
-        $locales = Language::extra()->pluck('display_name', 'id');
+        $locales = Language::extra()->get(['display_name', 'id']);
+
+        $locales = $locales->map(function ($locale) {
+            $locale->name = $locale->display_name;
+            unset($locale->display_name);
+
+            return $locale;
+        });
 
         return compact('locales');
     }
