@@ -24,7 +24,7 @@ class LocalisationForm
 
     public function edit(Language $language)
     {
-        $language->flag_suffix = substr($language->flag, -2);
+        $language->flag_sufix = substr($language->flag, -2);
 
         return $this->form
             ->edit($language);
