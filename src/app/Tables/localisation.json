@@ -1,0 +1,62 @@
+{
+    "routePrefix": "system.localisation",
+    "readSuffix": "getTableData",
+    "writeSuffix": null,
+    "name": "Languages",
+    "icon": "language",
+    "crtNo": true,
+    "buttons": [
+        "excel",
+        {
+            "type": "global",
+            "icon": "edit",
+            "class": "is-primary",
+            "routeSuffix": "editTexts",
+            "event": "edit-texts",
+            "action": "router",
+            "label": "Edit Texts"
+        },
+        "create", "edit", "destroy"
+    ],
+    "columns": [
+        {
+            "label": "Display Name",
+            "name": "display_name",
+            "data": "languages.display_name",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Name",
+            "name": "name",
+            "data": "languages.name",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Flag",
+            "name": "flag",
+            "data": "languages.flag",
+            "meta": ["render", "sortable"]
+        },
+        {
+            "label": "Active",
+            "name": "is_active",
+            "data": "languages.is_active",
+            "meta": [
+                "sortable",
+                "boolean"
+            ]
+        },
+        {
+            "label": "Created At",
+            "name": "created_at",
+            "data": "languages.created_at",
+            "meta": ["sortable"]
+        },
+        {
+            "label": "Updated At",
+            "name": "updated_at",
+            "data": "languages.updated_at",
+            "meta": ["sortable"]
+        }
+    ]
+}

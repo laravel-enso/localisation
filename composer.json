@@ -18,12 +18,14 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "laravel/framework": "5.5.*",
-        "laravel-enso/core": "2.0.*",
-        "laravel-enso/datatable": "2.0.*",
-        "laravel-enso/formbuilder": "2.0.*",
-        "laravel-enso/helpers": "1.4.*",
-        "laravel-enso/structuremanager": "2.0.*",
+        "laravel-enso/core": "2.2.*",
+        "laravel-enso/formbuilder": "2.4.*",
+        "laravel-enso/helpers": "1.7.*",
+        "laravel-enso/select": "2.3.*",
+        "laravel-enso/structuremanager": "2.1.*",
+        "laravel-enso/vuedatatable": "1.0.*"
+    },
+    "require-dev": {
         "laravel-enso/testhelper": "1.4.*"
     },
     "autoload": {
@@ -34,7 +36,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelEnso\\Localisation\\LocalisationServiceProvider",
+                "LaravelEnso\\Localisation\\AppServiceProvider",
                 "LaravelEnso\\Localisation\\AuthServiceProvider"
             ],
             "aliases": {}

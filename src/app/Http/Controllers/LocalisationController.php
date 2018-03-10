@@ -3,43 +3,54 @@
 namespace LaravelEnso\Localisation\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
-use LaravelEnso\Localisation\app\Http\Services\LocalisationService;
+use LaravelEnso\Localisation\app\Handlers\Storer;
 use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Localisation\app\Handlers\Updater;
+use LaravelEnso\Localisation\app\Handlers\Destroyer;
+use LaravelEnso\Localisation\app\Forms\Builders\LocalisationForm;
+use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
 
 class LocalisationController extends Controller
 {
-    private $service;
-
-    public function __construct(LocalisationService $service)
+    public function create(LocalisationForm $form)
     {
-        $this->service = $service;
+        return ['form' => $form->create()];
     }
 
-    public function create()
+    public function store(ValidateLanguageRequest $request)
     {
-        return $this->service->create();
+        $localisation = (new Storer($request->all()))->create();
+
+        return [
+            'message' => __('The language was created!'),
+            'redirect' => 'system.localisation.edit',
+            'id' => $localisation->id,
+        ];
     }
 
-    public function store(ValidateLanguageRequest $request, Language $localisation)
+    public function edit(Language $localisation, LocalisationForm $form)
     {
-        return $this->service->store($request, $localisation);
-    }
-
-    public function edit(Language $localisation)
-    {
-        return $this->service->edit($localisation);
+        return ['form' => $form->edit($localisation)];
     }
 
     public function update(ValidateLanguageRequest $request, Language $localisation)
     {
-        return $this->service->update($request, $localisation);
+        (new Updater($localisation, $request->all()))->run();
+
+        return [
+            'message' => __(config('enso.labels.savedChanges')),
+        ];
     }
 
     public function destroy(Language $localisation)
     {
         $this->authorize('destroy', $localisation);
 
-        return $this->service->destroy($localisation);
+        (new Destroyer($localisation))->run();
+
+        return [
+            'message' => __(config('enso.labels.successfulOperation')),
+            'redirect' => 'system.localisation.index',
+        ];
     }
 }

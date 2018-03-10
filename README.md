@@ -2,7 +2,7 @@
 # Localisation Manager
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/235db862227e460792a72a1e65427d1f)](https://www.codacy.com/app/laravel-enso/Localisation?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/Localisation&amp;utm_campaign=Badge_Grade)
 [![StyleCI](https://styleci.io/repos/85617309/shield?branch=master)](https://styleci.io/repos/85617309)
-[![License](https://poser.pugx.org/laravel-enso/localisation/license)](https://https://packagist.org/packages/laravel-enso/localisation)
+[![License](https://poser.pugx.org/laravel-enso/localisation/license)](https://packagist.org/packages/laravel-enso/localisation)
 [![Total Downloads](https://poser.pugx.org/laravel-enso/localisation/downloads)](https://packagist.org/packages/laravel-enso/localisation)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/localisation/version)](https://packagist.org/packages/laravel-enso/localisation)
 <!--/h-->
@@ -48,6 +48,16 @@ the user's language preference
 the language he has currently set as active in his preferences
 - the list of languages and the translations are loaded on app init, so the changes will be available at the next login
 or at a page refresh
+
+### Usage Notes
+
+Please note that because we want to keep the compiled size down, throughout the enso ecosistem, 
+icons are imported selectively.
+
+What this means for the localisation package, is that when adding a new language, you should also make sure you 
+import the required flag icon SVG and declare the corresponding class. The proper place to include the new icon is:
+
+`resources/assets/sass/app.scss`
 
 ### Publishes
 

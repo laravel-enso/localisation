@@ -3,15 +3,34 @@
 namespace LaravelEnso\Localisation\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Helpers\Traits\FormattedTimestamps;
+use LaravelEnso\Helpers\app\Traits\IsActive;
 
 class Language extends Model
 {
-    use FormattedTimestamps;
+    use IsActive;
 
-    protected $fillable = ['name', 'display_name', 'flag'];
+    const FlagClassPrefix = 'flag-icon flag-icon-';
 
-    public static function scopeExtra($query)
+    protected $fillable = ['name', 'display_name', 'flag', 'is_active'];
+
+    protected $casts = ['is_active' => 'boolean'];
+
+    public function updateWithFlagSufix($attributes, string $sufix)
+    {
+        $this->fill($attributes);
+        $this->flag = self::FlagClassPrefix.$sufix;
+        $this->update();
+    }
+
+    public function storeWithFlagSufix($attributes, string $sufix)
+    {
+        $this->fill($attributes);
+        $this->flag = self::FlagClassPrefix.$sufix;
+
+        return tap($this)->save();
+    }
+
+    public function scopeExtra($query)
     {
         return $query->where('name', '<>', config('app.fallback_locale'));
     }

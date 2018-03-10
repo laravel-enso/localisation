@@ -14,9 +14,8 @@ use Tests\TestCase;
 class LocalisationTest extends TestCase
 {
     use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
-
+    const NAME = 'xx';
     private $faker;
-    private $name;
     private $prefix = 'system.localisation';
 
     protected function setUp()
@@ -25,7 +24,6 @@ class LocalisationTest extends TestCase
 
         // $this->withoutExceptionHandling();
         $this->faker = Factory::create();
-        $this->name = strtolower($this->faker->countryCode);
         $this->signIn(User::first());
     }
 
@@ -37,13 +35,13 @@ class LocalisationTest extends TestCase
             $this->postParams()
         );
 
-        $language = Language::whereName($this->name)->first();
+        $language = Language::whereName(self::NAME)->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message'  => 'The language was created!',
+                'message' => 'The language was created!',
                 'redirect' => 'system.localisation.edit',
-                'id'       => $language->id,
+                'id' => $language->id,
             ]);
 
         $this->assertTrue(
@@ -75,9 +73,9 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->postParams()
         );
-        $language = Language::whereName($this->name)->first();
+        $language = Language::whereName(self::NAME)->first();
 
-        $language->name = 'xx';
+        $language->name = 'zz';
 
         $this->patch(
             route('system.localisation.update', $language->id, false),
@@ -87,7 +85,7 @@ class LocalisationTest extends TestCase
                 'message' => __(config('enso.labels.savedChanges')),
             ]);
 
-        $this->assertEquals('xx', $language->fresh()->name);
+        $this->assertEquals('zz', $language->fresh()->name);
         $this->assertTrue(
             \File::exists(resource_path('lang/'.$language->name))
         );
@@ -105,14 +103,14 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->postParams()
         );
-        $language = Language::whereName($this->name)->first();
+        $language = Language::whereName(self::NAME)->first();
         $languageName = $language->name;
 
         $this->delete(
             route('system.localisation.destroy', $language->id, false)
         )->assertStatus(200)
             ->assertJson([
-                'message'  => 'The operation was successful',
+                'message' => 'The operation was successful',
                 'redirect' => 'system.localisation.index',
             ]);
 
@@ -143,7 +141,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->postParams()
         );
-        $language = Language::whereName($this->name)->first();
+        $language = Language::whereName(self::NAME)->first();
 
         $this->setLanguage($language);
 
@@ -169,15 +167,15 @@ class LocalisationTest extends TestCase
     {
         return [
             'display_name' => strtolower($this->faker->country),
-            'name'         => $this->name,
-            'flag_sufix'   => $this->name,
-            'flag'         => 'flag-icon flag-icon-'.$this->name,
+            'name' => self::NAME,
+            'flag_sufix' => self::NAME,
+            'flag' => 'flag-icon flag-icon-'.self::NAME,
         ];
     }
 
     private function setLanguage($language)
     {
-        $preferences = (new DefaultPreferences())->getData();
+        $preferences = (new DefaultPreferences())->data();
         $preferences->global->lang = $language->name;
         $preference = new Preference(['value' => $preferences]);
         $preference->user_id = 1;

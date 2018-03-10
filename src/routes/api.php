@@ -6,18 +6,18 @@ Route::middleware(['web', 'auth', 'core'])
     ->group(function () {
         Route::prefix('localisation')->as('localisation.')
             ->group(function () {
-                Route::get('initTable', 'LocalisationTableController@initTable')
+                Route::get('initTable', 'LocalisationTableController@init')
                     ->name('initTable');
-                Route::get('getTableData', 'LocalisationTableController@getTableData')
+                Route::get('getTableData', 'LocalisationTableController@data')
                     ->name('getTableData');
-                Route::get('exportExcel', 'LocalisationTableController@exportExcel')
+                Route::get('exportExcel', 'LocalisationTableController@excel')
                     ->name('exportExcel');
 
-                Route::get('editTexts', 'LangFileController@editTexts')
+                Route::get('editTexts', 'JsonFileController@index')
                     ->name('editTexts');
-                Route::get('getLangFile/{language}', 'LangFileController@getLangFile')
+                Route::get('getLangFile/{language}', 'JsonFileController@edit')
                     ->name('getLangFile');
-                Route::patch('saveLangFile/{language}', 'LangFileController@saveLangFile')
+                Route::patch('saveLangFile/{language}', 'JsonFileController@update')
                     ->name('saveLangFile');
             });
 
