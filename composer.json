@@ -21,7 +21,7 @@
         "laravel-enso/core": "2.2.*",
         "laravel-enso/formbuilder": "2.4.*",
         "laravel-enso/helpers": "1.7.*",
-        "laravel-enso/select": "2.3.*",
+        "laravel-enso/select": "2.4.*",
         "laravel-enso/structuremanager": "2.1.*",
         "laravel-enso/vuedatatable": "1.0.*"
     },
