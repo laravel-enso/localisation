@@ -12,12 +12,17 @@ class Updater extends Handler
     public function __construct(Language $language, array $updatedLangFile)
     {
         $this->updatedLangFile = $updatedLangFile;
-        $this->locale = $language->name;
+        $this->locale = $language->name ?? null;
     }
 
     public function run()
     {
         $this->saveToDisk($this->locale, $this->updatedLangFile);
+        $this->processDifferences();
+    }
+
+    public function add()
+    {
         $this->processDifferences();
     }
 

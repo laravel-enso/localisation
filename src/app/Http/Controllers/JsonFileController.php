@@ -34,4 +34,14 @@ class JsonFileController
 
         return ['message' => __(config('enso.labels.successfulOperation'))];
     }
+
+    public function add(Request $request)
+    {
+        //print_r($request->get('langFile'));
+        //print_r($request->get('langKey'));
+        $a = [$request->get('langKey') => ""];
+        (new Updater(new Language, $a))->add();
+
+        return ['message' => __(config('enso.labels.successfulOperation'))];
+    }
 }
