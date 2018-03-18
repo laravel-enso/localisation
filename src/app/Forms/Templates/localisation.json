@@ -1,46 +1,48 @@
 {
     "routePrefix": "system.localisation",
-    "columns": "2",
-    "fields": [{
-        "label": "Display Name",
-        "name": "display_name",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Name",
-        "name": "name",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Flag Sufix",
-        "name": "flag_sufix",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Flag",
-        "name": "flag",
-        "value": null,
-        "meta": {
-            "custom": "true",
-            "type": "text",
-            "disabled": true
-        }
-    }, {
-        "label": "Active",
-        "name": "is_active",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
+    "sections": [{
+        "columns": "2",
+        "fields": [{
+            "label": "Display Name",
+            "name": "display_name",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Name",
+            "name": "name",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Flag Sufix",
+            "name": "flag_sufix",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Flag",
+            "name": "flag",
+            "value": null,
+            "meta": {
+                "custom": "true",
+                "type": "text",
+                "disabled": true
+            }
+        }, {
+            "label": "Active",
+            "name": "is_active",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }]
     }]
 }
