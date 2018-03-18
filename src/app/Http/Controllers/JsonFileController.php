@@ -37,7 +37,7 @@ class JsonFileController
 
     public function add(Request $request)
     {
-        $data = [$request->get('langKey') => ""];
+        $data = [$request->get('langKey') => ''];
         (new Updater(new Language, $a))->add();
 
         return ['message' => __(config('enso.labels.successfulOperation'))];
