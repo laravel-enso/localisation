@@ -19,8 +19,8 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('getLangFile');
                 Route::patch('saveLangFile/{language}', 'JsonFileController@update')
                     ->name('saveLangFile');
-                Route::patch('addLangKey', 'JsonFileController@add')
-                    ->name('addLangKey');
+                Route::patch('addKey', 'JsonFileController@addKey')
+                    ->name('addKey');
             });
 
         Route::resource('localisation', 'LocalisationController', ['except' => ['show']]);

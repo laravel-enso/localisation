@@ -12,7 +12,7 @@ class Updater extends Handler
     public function __construct(Language $language, array $updatedLangFile)
     {
         $this->updatedLangFile = $updatedLangFile;
-        $this->locale = $language->name ?? null;
+        $this->locale = $language->name;
     }
 
     public function run()
@@ -21,7 +21,7 @@ class Updater extends Handler
         $this->processDifferences();
     }
 
-    public function add()
+    public function addKey()
     {
         $this->processDifferences();
     }
@@ -40,6 +40,7 @@ class Updater extends Handler
     {
         $extraLangFile = (array) $this->jsonFileContent($this->jsonFileName($locale));
         [$removedCount, $extraLangFile] = $this->removeExtraKeys($extraLangFile);
+
         [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
 
         if ($addedCount || $removedCount) {
@@ -52,7 +53,7 @@ class Updater extends Handler
         $keysToRemove = collect($extraLangFile)
             ->diffKeys($this->updatedLangFile);
 
-        $keysToRemove->each(function ($keyToRemove) use ($extraLangFile) {
+        $keysToRemove->each(function ($valueToRemove, $keyToRemove) use (&$extraLangFile) {
             unset($extraLangFile[$keyToRemove]);
         });
 
