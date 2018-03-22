@@ -28,5 +28,4 @@ class Merger extends Handler
 
         $this->saveToDisk($locale, array_merge($core, $app), '');
     }
-
 }

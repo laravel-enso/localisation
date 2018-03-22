@@ -44,6 +44,4 @@ abstract class Handler
             '--locale' => $locale,
         ]);
     }
-
-
 }
