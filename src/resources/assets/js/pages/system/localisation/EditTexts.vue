@@ -7,7 +7,6 @@
                     <div class="columns is-multiline">
                         <div class="column is-half">
                             <vue-select :options="locales"
-                                :i18n="__"
                                 v-model="selectedLocale"
                                 @input="getLangFile()"
                                 :placeholder="__('Choose language')">
@@ -22,15 +21,15 @@
                         <div class="column animated fadeIn"
                             v-if="selectedLocale">
                             <div class="field">
-                                <p class="control has-icons-right">
-                                    <input type="search"
+                                <p class="control has-icons-left">
+                                    <input type="text"
                                         class="input"
                                         v-focus
                                         v-select-on-focus
                                         :placeholder="__('Search')"
                                         v-model="query"
                                         @keyup.enter="isNewKey ? addKey() : focusIt(null)">
-                                    <span class="icon is-small is-right">
+                                    <span class="icon is-small is-left">
                                         <fa icon="search"></fa>
                                     </span>
                                 </p>
@@ -54,6 +53,25 @@
                                 :class="{ 'is-loading': loading }">
                                 {{ __('Update') }}
                             </button>
+                        </div>
+                    </div>
+                    <div class="columns is-mobile has-text-right"
+                        v-if="selectedLocale">
+                        <div class="column">
+                            <label class="label">{{ __('Core') }}
+                                <vue-switch class="has-margin-left-medium"
+                                    v-model="filterCore"
+                                    size="is-large">
+                                </vue-switch>{{ __('App') }}
+                            </label>
+                        </div>
+                        <div class="column">
+                            <label class="label">{{ __('Only missing') }}
+                                <vue-switch class="has-margin-left-medium"
+                                    v-model="filterMissing"
+                                    size="is-large">
+                                </vue-switch>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -105,30 +123,32 @@
 
 <script>
 
-import { mapGetters, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import fontawesome from '@fortawesome/fontawesome';
 import { faSearch, faTrashAlt } from '@fortawesome/fontawesome-free-solid/shakable.es';
 import VueSelect from '../../../components/enso/select/VueSelect.vue';
+import VueSwitch from '../../../components/enso/vueforms/VueSwitch.vue';
 
 fontawesome.library.add(faSearch, faTrashAlt);
 
 export default {
-    components: { VueSelect },
+    components: { VueSelect, VueSwitch },
 
     data() {
         return {
             langFile: {},
-            locales: [],
+            locales: [ 'de' ],
             selectedLocale: null,
             query: null,
             boxHeight: 0,
             loading: false,
+            filterMissing: false,
+            filterCore: false,
         };
     },
 
     computed: {
         ...mapState('layout', ['isMobile']),
-        ...mapGetters('locale', ['__']),
         styleObject() {
             return {
                 'max-height': this.boxHeight,
@@ -137,7 +157,9 @@ export default {
             };
         },
         langKeys() {
-            return Object.keys(this.langFile);
+            return this.filterMissing
+                ? Object.keys(this.langFile).filter(key => !this.langFile[key])
+                : Object.keys(this.langFile);
         },
         sortedKeys() {
             return this.langKeys.sort((a, b) => {

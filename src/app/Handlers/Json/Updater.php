@@ -8,16 +8,18 @@ class Updater extends Handler
 {
     private $locale;
     private $updatedLangFile;
+    private $subDir;
 
-    public function __construct(Language $language, array $updatedLangFile)
+    public function __construct(Language $language, array $updatedLangFile, string $subDir = null)
     {
         $this->updatedLangFile = $updatedLangFile;
         $this->locale = $language->name;
+        $this->subDir = $subDir;
     }
 
     public function run()
     {
-        $this->saveToDisk($this->locale, $this->updatedLangFile)
+        $this->saveToDisk($this->locale, $this->updatedLangFile, $this->subDir)
             ->merge($this->locale);
         $this->processDifferences();
     }
@@ -52,7 +54,7 @@ class Updater extends Handler
         }
 
         if ($addedCount || $removedCount) {
-            $this->saveToDisk($locale, $extraLangFile)
+            $this->saveToDisk($locale, $extraLangFile, $this->subDir)
                 ->merge($locale);
         }
     }
