@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace LaravelEnso\Localisation\app\Console;
 

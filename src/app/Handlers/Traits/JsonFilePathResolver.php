@@ -4,8 +4,8 @@ namespace LaravelEnso\Localisation\app\Handlers\Traits;
 
 trait JsonFilePathResolver
 {
-	private $coreDir = "enso";
-    private $appDir = "app";
+	private $coreDir = 'enso';
+    private $appDir = 'app';
 
     protected function jsonFileName($locale, $subDir = '')
     {
@@ -22,7 +22,8 @@ trait JsonFilePathResolver
         return $this->jsonFileName($locale, $this->appDir);
     }
 
-    protected function getUpdateDir() {
+    protected function getUpdateDir()
+    {
         return config('enso.localisation.core') ? $this->coreDir : $this->appDir;
     }
 }

@@ -48,7 +48,7 @@ class Updater extends Handler
         if ($remove) {
             [$removedCount, $extraLangFile] = $this->removeExtraKeys($extraLangFile);
         }
-        
+
         if ($add) {
             [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
         }

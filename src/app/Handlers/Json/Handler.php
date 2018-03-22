@@ -41,7 +41,7 @@ abstract class Handler
     protected function merge(string $locale)
     {
         Artisan::call('localisation:merge', [
-            '--locale' => $locale
+            '--locale' => $locale,
         ]);
     }
 
