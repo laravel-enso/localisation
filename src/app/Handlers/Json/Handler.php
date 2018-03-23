@@ -37,8 +37,8 @@ abstract class Handler
     protected function saveToDisk(string $locale, array $langFile, string $subDir = null)
     {
         \File::put(
-            $this->jsonFileName($locale, $subDir),
-            json_encode($langFile, JSON_FORCE_OBJECT)
+            $this->jsonFileName($locale, $subDir), 
+            json_encode($langFile, JSON_FORCE_OBJECT | ($subDir ? JSON_PRETTY_PRINT : 0))
         );
     }
 
