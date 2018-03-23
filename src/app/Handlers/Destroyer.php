@@ -22,6 +22,8 @@ class Destroyer
         \DB::transaction(function () {
             $this->localisation->delete();
             \File::deleteDirectory($this->legacyFolderName($this->localisation->name));
+            \File::delete($this->jsonFileName($this->localisation->name, 'enso'));
+            \File::delete($this->jsonFileName($this->localisation->name, 'app'));
             \File::delete($this->jsonFileName($this->localisation->name));
         });
     }
