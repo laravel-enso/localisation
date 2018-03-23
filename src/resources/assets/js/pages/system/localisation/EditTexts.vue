@@ -137,6 +137,7 @@ export default {
     data() {
         return {
             langFile: {},
+            originalLangFile: {},
             locales: [],
             selectedLocale: null,
             query: null,
@@ -158,7 +159,7 @@ export default {
         },
         langKeys() {
             return this.filterMissing
-                ? Object.keys(this.langFile).filter(key => !this.langFile[key])
+                ? Object.keys(this.originalLangFile).filter(key => !this.originalLangFile[key])
                 : Object.keys(this.langFile);
         },
         sortedKeys() {
@@ -219,6 +220,7 @@ export default {
         getLangFile() {
             if (!this.selectedLocale) {
                 this.langFile = {};
+                this.updateOriginal();
                 return;
             }
 
@@ -226,10 +228,11 @@ export default {
 
             axios.get(route('system.localisation.getLangFile', {
                 subDir: this.subDir,
-                language: this.selectedLocale
+                language: this.selectedLocale,
             }, false)).then(({ data }) => {
                 this.loading = false;
                 this.langFile = data;
+                this.updateOriginal();
             }).catch((error) => {
                 this.loading = false;
                 this.handleError(error);
@@ -245,6 +248,7 @@ export default {
                 langFile: this.langFile,
             }).then(({ data }) => {
                 this.loading = false;
+                console.log(data.message);
                 this.$toastr.success(data.message);
             }).catch((error) => {
                 this.loading = false;
@@ -253,10 +257,12 @@ export default {
         },
         addKey() {
             this.$set(this.langFile, this.query, null);
+            this.updateOriginal();
             this.focusIt();
         },
         removeKey(key) {
             this.$delete(this.langFile, key);
+            this.updateOriginal();
         },
         focusIt(id = null) {
             id = id || this.query;
@@ -268,6 +274,9 @@ export default {
         setBoxHeight() {
             this.boxHeight = document.body.clientHeight - (this.isMobile ? 420 : 388);
         },
+        updateOriginal() {
+            this.originalLangFile = JSON.parse(JSON.stringify(this.langFile));
+        }
     },
 };
 

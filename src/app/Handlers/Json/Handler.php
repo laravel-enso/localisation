@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Localisation\app\Handlers\Json;
 
-use Illuminate\Support\Facades\Artisan;
+use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Handlers\Traits\JsonFilePathResolver;
 
 abstract class Handler
@@ -24,24 +24,43 @@ abstract class Handler
         );
     }
 
-    protected function saveToDisk(string $locale, array $json, string $subDir = null)
+    protected function saveMerged(string $locale, array $langFile)
     {
-        if (is_null($subDir)) {
-            $subDir = $this->getUpdateDir();
-        }
-
-        \File::put(
-            $this->jsonFileName($locale, $subDir),
-            json_encode($json, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT)
-        );
-
-        return $this;
+        $this->saveToDisk($locale, $langFile);
     }
 
-    protected function merge(string $locale)
+    protected function savePartial(string $locale, array $langFile, string $subDir)
     {
-        Artisan::call('localisation:merge', [
-            '--locale' => $locale,
-        ]);
+        $this->saveToDisk($locale, $langFile, $subDir);
+    }
+
+    protected function saveToDisk(string $locale, array $langFile, string $subDir = null)
+    {
+        \File::put(
+            $this->jsonFileName($locale, $subDir),
+            json_encode($langFile, JSON_FORCE_OBJECT)
+        );
+    }
+
+    protected function merge(string $locale = null)
+    {
+        $languages = Language::extra();
+
+        if ($locale) {
+            $languages->where('name', $locale);
+        }
+
+        $languages->pluck('name')
+            ->each(function ($locale) {
+                $this->mergeLocale($locale);
+            });
+    }
+
+    private function mergeLocale(string $locale)
+    {
+        $core = (array) $this->jsonFileContent($this->coreJsonFileName($locale));
+        $app = (array) $this->jsonFileContent($this->appJsonFileName($locale));
+
+        $this->saveMerged($locale, array_merge($core, $app));
     }
 }

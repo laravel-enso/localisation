@@ -3,6 +3,7 @@
 namespace LaravelEnso\Localisation;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelEnso\Localisation\app\Console\AddNewRoute;
 use LaravelEnso\Localisation\app\Console\MergeCommand;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
 
@@ -27,11 +28,12 @@ class AppServiceProvider extends ServiceProvider
         ], 'enso-assets');
 
         $this->publishes([
-            __DIR__.'/resources/lang/enso' => resource_path('lang/enso'),
+            __DIR__.'/resources/lang' => resource_path('lang'),
         ], 'localisation-lang-files');
 
         $this->commands([
             MergeCommand::class,
+            AddNewRoute::class,
         ]);
     }
 

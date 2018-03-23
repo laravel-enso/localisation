@@ -15,9 +15,9 @@ Route::middleware(['web', 'auth', 'core'])
 
                 Route::get('editTexts', 'JsonFileController@index')
                     ->name('editTexts');
-                Route::get('getLangFile/{subDir}/{language}', 'JsonFileController@edit')
+                Route::get('getLangFile/{language}/{subDir}', 'JsonFileController@edit')
                     ->name('getLangFile');
-                Route::patch('saveLangFile/{subDir}/{language}', 'JsonFileController@update')
+                Route::patch('saveLangFile/{language}/{subDir}', 'JsonFileController@update')
                     ->name('saveLangFile');
                 Route::patch('addKey', 'JsonFileController@addKey')
                     ->name('addKey');
