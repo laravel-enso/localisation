@@ -22,7 +22,7 @@ class Storer extends Handler
         );
 
         $this->savePartial($this->locale, $core->all(), 'enso');
-        
+
         $app = $this->newTranslations(
             $this->existingTranslations('app')
         );

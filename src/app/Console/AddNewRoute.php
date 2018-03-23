@@ -29,7 +29,7 @@ class AddNewRoute extends Command
                 'name' => 'system.localisation.addKey',
                 'description' => 'Add new lang key',
                 'type' => 1,
-                'default' => false
+                'default' => false,
             ]);
 
             $permission->roles()->sync(Role::whereName('admin')->first()->id);
