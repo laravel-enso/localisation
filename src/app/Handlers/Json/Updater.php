@@ -8,37 +8,54 @@ class Updater extends Handler
 {
     private $locale;
     private $updatedLangFile;
+    private $subDir;
 
-    public function __construct(Language $language, array $updatedLangFile)
+    public function __construct(Language $language, array $updatedLangFile, string $subDir = null)
     {
         $this->updatedLangFile = $updatedLangFile;
         $this->locale = $language->name;
+        $this->subDir = $subDir;
     }
 
     public function run()
     {
-        $this->saveToDisk($this->locale, $this->updatedLangFile);
+        $this->saveToDisk($this->locale, $this->updatedLangFile, $this->subDir)
+            ->merge($this->locale);
         $this->processDifferences();
     }
 
-    private function processDifferences()
+    public function addKey()
+    {
+        $this->processDifferences(false, true);
+    }
+
+    private function processDifferences(bool $remove = true, bool $add = true)
     {
         Language::extra()
             ->where('name', '<>', $this->locale)
             ->pluck('name')
-            ->each(function ($locale) {
-                $this->updateDifferences($locale);
+            ->each(function ($locale) use ($remove, $add) {
+                $this->updateDifferences($locale, $remove, $add);
             });
     }
 
-    private function updateDifferences(string $locale)
+    private function updateDifferences(string $locale, bool $remove = true, bool $add = true)
     {
-        $extraLangFile = (array) $this->jsonFileContent($this->jsonFileName($locale));
-        [$removedCount, $extraLangFile] = $this->removeExtraKeys($extraLangFile);
-        [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
+        $removedCount = $addedCount = 0;
+
+        $extraLangFile = (array) $this->jsonFileContent($this->jsonFileName($locale, $this->getUpdateDir()));
+
+        if ($remove) {
+            [$removedCount, $extraLangFile] = $this->removeExtraKeys($extraLangFile);
+        }
+
+        if ($add) {
+            [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
+        }
 
         if ($addedCount || $removedCount) {
-            $this->saveToDisk($locale, $extraLangFile);
+            $this->saveToDisk($locale, $extraLangFile, $this->subDir)
+                ->merge($locale);
         }
     }
 
@@ -47,7 +64,7 @@ class Updater extends Handler
         $keysToRemove = collect($extraLangFile)
             ->diffKeys($this->updatedLangFile);
 
-        $keysToRemove->each(function ($keyToRemove) use ($extraLangFile) {
+        $keysToRemove->each(function ($valueToRemove, $keyToRemove) use (&$extraLangFile) {
             unset($extraLangFile[$keyToRemove]);
         });
 

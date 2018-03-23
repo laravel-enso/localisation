@@ -11,9 +11,9 @@ class Reader
 
     private $jsonFile;
 
-    public function __construct(Language $language)
+    public function __construct(Language $language, string $subDir = '')
     {
-        $this->jsonFile = $this->jsonFileName($language->name);
+        $this->jsonFile = $this->jsonFileName($language->name, $subDir);
     }
 
     public function content()

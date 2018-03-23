@@ -3,6 +3,7 @@
 namespace LaravelEnso\Localisation;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelEnso\Localisation\app\Console\MergeCommand;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware('set-language', SetLanguage::class);
 
         $this->publishes([
+            __DIR__.'/config' => config_path('enso'),
+        ], 'localisation-config');
+
+        $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js'),
         ], 'localisation-assets');
 
@@ -22,8 +27,12 @@ class AppServiceProvider extends ServiceProvider
         ], 'enso-assets');
 
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang'),
+            __DIR__.'/resources/lang/enso' => resource_path('lang/enso'),
         ], 'localisation-lang-files');
+
+        $this->commands([
+            MergeCommand::class,
+        ]);
     }
 
     public function register()

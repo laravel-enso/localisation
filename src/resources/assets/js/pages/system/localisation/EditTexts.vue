@@ -58,6 +58,14 @@
                     <div class="columns is-mobile has-text-right"
                         v-if="selectedLocale">
                         <div class="column">
+                            <label class="label">{{ __('Core') }}
+                                <vue-switch class="has-margin-left-medium has-margin-right-medium"
+                                    v-model="filterCore"
+                                    size="is-large">
+                                </vue-switch>{{ __('App') }}
+                            </label>
+                        </div>
+                        <div class="column">
                             <label class="label">{{ __('Only missing') }}
                                 <vue-switch class="has-margin-left-medium"
                                     v-model="filterMissing"
@@ -135,6 +143,7 @@ export default {
             boxHeight: 0,
             loading: false,
             filterMissing: false,
+            filterCore: true,
         };
     },
 
@@ -176,12 +185,18 @@ export default {
         keysCount() {
             return this.langKeys.length;
         },
+        subDir() {
+            return this.filterCore ? 'app' : 'enso';
+        },
     },
 
     watch: {
         isMobile: {
             handler: 'setBoxHeight',
         },
+        filterCore: {
+            handler: 'getLangFile',
+        }
     },
 
     created() {
@@ -209,7 +224,10 @@ export default {
 
             this.loading = true;
 
-            axios.get(route('system.localisation.getLangFile', this.selectedLocale, false)).then(({ data }) => {
+            axios.get(route('system.localisation.getLangFile', {
+                subDir: this.subDir,
+                language: this.selectedLocale
+            }, false)).then(({ data }) => {
                 this.loading = false;
                 this.langFile = data;
             }).catch((error) => {
@@ -220,7 +238,10 @@ export default {
         saveLangFile() {
             this.loading = true;
 
-            axios.patch(route('system.localisation.saveLangFile', this.selectedLocale, false).toString(), {
+            axios.patch(route('system.localisation.saveLangFile', {
+                subDir: this.subDir,
+                language: this.selectedLocale
+            }, false).toString(), {
                 langFile: this.langFile,
             }).then(({ data }) => {
                 this.loading = false;
