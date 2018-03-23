@@ -138,7 +138,7 @@ export default {
         return {
             langFile: {},
             locales: [],
-            selectedLocale: null, 
+            selectedLocale: null,
             query: null,
             boxHeight: 0,
             loading: false,
