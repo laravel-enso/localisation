@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js'),
+            __DIR__.'/resources/lang/enso' => resource_path('lang/enso'),
         ], 'enso-assets');
 
         $this->publishes([
