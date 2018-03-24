@@ -35,6 +35,8 @@ class Updater
         }
 
         $this->updateJson($oldName, $newName);
+        $this->updateAppJson($oldName, $newName);
+        $this->updateEnsoJson($oldName, $newName);
         $this->updateLegacyFolder($oldName, $newName);
     }
 
@@ -43,6 +45,22 @@ class Updater
         \File::move(
             $this->jsonFileName($oldName),
             $this->jsonFileName($newName)
+        );
+    }
+
+    public function updateAppJson($oldName, $newName)
+    {
+        \File::move(
+            $this->jsonFileName($oldName, 'app'),
+            $this->jsonFileName($newName, 'app')
+        );
+    }
+
+    public function updateEnsoJson($oldName, $newName)
+    {
+        \File::move(
+            $this->jsonFileName($oldName, 'enso'),
+            $this->jsonFileName($newName, 'enso')
         );
     }
 

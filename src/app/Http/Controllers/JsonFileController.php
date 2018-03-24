@@ -23,14 +23,22 @@ class JsonFileController
         return compact('locales');
     }
 
-    public function edit(Language $language)
+    public function edit(Language $language, string $subDir)
     {
-        return (new Reader($language))->content();
+        return (new Reader($language, $subDir))->content();
     }
 
-    public function update(Request $request, Language $language)
+    public function update(Request $request, Language $language, string $subDir)
     {
-        (new Updater($language, $request->get('langFile')))->run();
+        (new Updater($language, $request->get('langFile'), $subDir))->run();
+
+        return ['message' => __(config('enso.labels.successfulOperation'))];
+    }
+
+    public function addKey(Request $request)
+    {
+        $data = [$request->get('langKey') => ''];
+        (new Updater(new Language, $data))->addKey();
 
         return ['message' => __(config('enso.labels.successfulOperation'))];
     }
