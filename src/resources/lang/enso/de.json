@@ -1,4 +1,10 @@
 {
+    "Thursday": "Donnerstag",
+    "Friday": "Freitag",
+    "Wednesday": "Mittwoch",
+    "Tuesday": "Dienstag",
+    "Monday": "Montag",
+    "Sunday": "Sonntag",
     "App": "App",
     "Value": "Wert",
     "Key": "Schl\u00fcssel",
