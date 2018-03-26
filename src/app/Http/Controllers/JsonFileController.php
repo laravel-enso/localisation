@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Handlers\Json\Reader;
 use LaravelEnso\Localisation\app\Handlers\Json\Updater;
+use LaravelEnso\Localisation\app\Handlers\Json\Merger;
 
 class JsonFileController
 {
@@ -39,6 +40,13 @@ class JsonFileController
     {
         $data = [$request->get('langKey') => ''];
         (new Updater(new Language, $data))->addKey();
+
+        return ['message' => __(config('enso.labels.successfulOperation'))];
+    }
+
+    public function merge($locale = null)
+    {
+        (new Merger())->run($locale);
 
         return ['message' => __(config('enso.labels.successfulOperation'))];
     }

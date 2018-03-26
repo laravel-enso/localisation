@@ -21,6 +21,8 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('saveLangFile');
                 Route::patch('addKey', 'JsonFileController@addKey')
                     ->name('addKey');
+                Route::patch('merge/{locale?}', 'JsonFileController@merge')
+                    ->name('merge');
             });
 
         Route::resource('localisation', 'LocalisationController', ['except' => ['show']]);
