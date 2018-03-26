@@ -4,9 +4,9 @@ namespace LaravelEnso\Localisation\app\Http\Controllers;
 
 use Illuminate\Http\Request;
 use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Localisation\app\Handlers\Json\Merger;
 use LaravelEnso\Localisation\app\Handlers\Json\Reader;
 use LaravelEnso\Localisation\app\Handlers\Json\Updater;
-use LaravelEnso\Localisation\app\Handlers\Json\Merger;
 
 class JsonFileController
 {

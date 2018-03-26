@@ -16,7 +16,7 @@ class AddRoutes extends Command
     {
         $routes = collect([
             'system.localisation.addKey',
-            'system.localisation.merge'
+            'system.localisation.merge',
         ]);
 
         if (Permission::whereName($routes->first())->count()) {
