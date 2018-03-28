@@ -20,7 +20,6 @@ class Updater extends Handler
     public function run()
     {
         $this->savePartial($this->locale, $this->langArray, $this->subDir);
-        $this->merge($this->locale);
 
         $this->extraLangs()->each(function ($locale) {
             $this->updateDifferences($locale);
@@ -33,7 +32,6 @@ class Updater extends Handler
             $extraLangFile = $this->extraLangFile($locale, $this->updateDir());
             [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
             $this->savePartial($locale, $extraLangFile, $this->updateDir());
-            $this->merge($locale);
         });
     }
 
@@ -46,7 +44,6 @@ class Updater extends Handler
 
         if ($addedCount || $removedCount) {
             $this->savePartial($locale, $extraLangFile, $this->subDir);
-            $this->merge($locale);
         }
     }
 

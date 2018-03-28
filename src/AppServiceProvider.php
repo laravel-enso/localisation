@@ -3,7 +3,7 @@
 namespace LaravelEnso\Localisation;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Localisation\app\Console\AddNewRoute;
+use LaravelEnso\Localisation\app\Console\AddRoutes;
 use LaravelEnso\Localisation\app\Console\MergeCommand;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
 
@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->commands([
             MergeCommand::class,
-            AddNewRoute::class,
+            AddRoutes::class,
         ]);
     }
 
