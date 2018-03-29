@@ -35,7 +35,7 @@
             "label": "Flag",
             "name": "flag",
             "data": "languages.flag",
-            "meta": ["render", "sortable"]
+            "meta": ["slot", "sortable"]
         },
         {
             "label": "Active",
