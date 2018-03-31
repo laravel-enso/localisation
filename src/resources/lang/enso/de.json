@@ -371,5 +371,11 @@
     "Warning": "Warnung",
     "Impersonating": "Imitieren von",
     "Impersonate": "Imitieren",
-    "Welcome Back": "Willkommen zur\u00fcck"
+    "Welcome Back": "Willkommen zur\u00fcck",
+    "Please set or reset your password by clicking the button below.": "Sie k\u00f6nnen Ihr Passwort zur\u00fccksetzen indem Sie auf den unten stehenden Link klicken.",
+    "Direct Link": "Link",
+    "Reset Password Notification": "Passwort zur\u00fccksetzen",
+    "Export Notification": "Export Benachrichtung",
+    "Table": "Tabelle",
+    "Export emailed": "Export per Mail gesendet"
 }
