@@ -100,7 +100,7 @@ using the existing ones as example
 
 At this stage, you've made the necessary changes, and everything should work, after compiling the front-end assets with
 `npm run webpack`.
-Next we need to commit all updated files to their respective repositories, 
+Next, we need to commit all updated files to their respective repositories, 
 since we've been working on the published resources and some of these might get overwritten at the next Enso update.
 
 #### Changes per package
@@ -117,7 +117,7 @@ since we've been working on the published resources and some of these might get 
 1. copy the updated `flatpickrLocale.js` from `resources/assets/js/components/enso/vueforms/` to `vendor/laravel-enso/formbuilder/src/resources/assets/js/components/enso/vueforms` 
 
 #### Finally
-Make pull requests for these four packages, with the files mentioned above.
+Make pull requests for these three packages, with the files mentioned above.
 
 ### TO DO
 
