@@ -65,6 +65,60 @@ import the required flag icon SVG and declare the corresponding class. The prope
 - `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the VueJS assets,
 once a newer version is released, can be used with the `--force` flag
 
+### Contributing a new language
+
+First off, thanks for taking the time to contribute a new language and translations.
+
+For country flags, we're using the [flag-icon-css](http://flag-icon-css.lip.is/) library, 
+so make sure to take a look and identify your country's xx
+[2 letter iso_3166_2 standard](https://www.iso.org/obp/ui/#search) short name.
+
+#### Adding support for the new language
+Due to the modular structure of the project, a few steps are necessary:
+
+1. From the UI, at `/system/localisation/create`, add a new language. Under the hood, this creates a few files:
+    - a new language file in `src/resources/lang/app/xx.json`, 
+    - a new folder in `src/resources/lang/xx` which contains
+    the required Laravel translation files (`auth.php`, `pagination.php`, `passwords.php` and `validation.php`)
+
+    At this stage, the new language will appear in the list without a flag, 
+    and that's ok, since the flag class is not yet imported.    
+ 
+2. Use the interface to translate the existing core keys, by accessing `/system/localisation/editTexts`, 
+selecting the new language and flipping the `app/core` switch to core
+
+3. Update the `vendor/laravel-enso/localisation/src/database/migrations/2017_01_01_134500_create_structure_for_localisation.php` 
+migration to include the new language
+
+4. Add a new SCSS class for the country flag in `resources/assets/sass/flags.scss`, 
+using the existing ones as example
+
+5. Add the new language in `resources/assets/js/components/enso/vueforms/flatpickrLocale.js`, 
+using the existing ones as example
+
+6. Add the new language in `src/resources/assets/js/modules/enso/plugins/date-fns/i18n.js`
+
+At this stage, you've made the necessary changes, and everything should work, after compiling the front-end assets with
+`npm run webpack`.
+Next, we need to commit all updated files to their respective repositories, 
+since we've been working on the published resources and some of these might get overwritten at the next Enso update.
+
+#### Changes per package
+##### The Localisation package
+1. already contains the updated migration `2017_01_01_134500_create_structure_for_localisation.php` (ref. step 3, above)
+2. copy the new app lang file `xx.json` from `resources/lang/app/` to `vendor/laravel-enso/localisation/src/resources/lang/app/`
+3. copy the new folder `xx` from  `resources/lang/` to `vendor/laravel-enso/localisation/src/resources/lang/`
+
+##### The Core package
+1. copy the updated `flags.scss` from `resources/assets/sass/` to `vendor/laravel-enso/core/src/resources/assets/sass/`
+2. copy the updated `i18n.js` from `src/resources/assets/js/modules/enso/plugins/date-fns/` to `vendor/laravel-enso/core/src/resources/assets/js/modules/enso/plugins/date-fns`
+
+##### The Formbuilder package
+1. copy the updated `flatpickrLocale.js` from `resources/assets/js/components/enso/vueforms/` to `vendor/laravel-enso/formbuilder/src/resources/assets/js/components/enso/vueforms` 
+
+#### Finally
+Make pull requests for these three packages, with the files mentioned above.
+
 ### TO DO
 
 - [ ] sync-json command / button
