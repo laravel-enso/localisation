@@ -132,14 +132,14 @@ From time to time, as the project grows, new text/keys are added and the transla
 missing translations, and want to add them, please follow the steps below.
 
 #### Adding missing translations
-1. Run `composer update` to make sure you have the latest version of the translations
-1. From the UI, navigate to `/system/localisation/` and click on `Edit Texts`.
-2. Choose the desired language, flip the type switch to `Core` and ideally also enable the `Only missing` filter
-3. Fill in the missing texts and save your changes by clicking `Update`
-4. Copy the content of `resources/lang/enso/xx.json` as this is where your changes are saved
-5. Navigate [here](https://github.com/laravel-enso/Localisation/tree/master/src/resources/lang/enso) and click on the pencil button to edit the file
-6. Paste your translations
-7. Create a pull request for the changes
+1. Make sure you have the latest version of the translation files (you may manually update/replace the contents of your local`resources/lang/enso/xx.json` from [here](https://github.com/laravel-enso/Localisation/tree/master/src/resources/lang/enso))
+2. From the UI, navigate to `/system/localisation/` and click on `Edit Texts`.
+3. Choose the desired language, flip the type switch to `Core` and ideally also enable the `Only missing` filter
+4. Fill in the missing texts and save your changes by clicking `Update`
+5. Copy the content of `resources/lang/enso/xx.json` as this is where your changes are saved
+6. Navigate [here](https://github.com/laravel-enso/Localisation/tree/master/src/resources/lang/enso) and click on the pencil button to edit the file
+7. Paste your translations
+8. Create a pull request for the changes
 
 ### TO DO
 
