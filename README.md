@@ -31,16 +31,18 @@ Localisation management dependency for [Laravel Enso](https://github.com/laravel
 - when translating, the new Laravel mechanism is used, respectively the `__()` function 
 - the main language is considered to be english
 - the keys are, by convention, in english and in a human readable format e.g. 'Date of Birth', and if a key is not found, the value of the key is used instead
-- the keys and the values for the keys are kept in `resources/lang/*code*.json`  where code is the language code, e.g. 'de' for german, with the exception for the english language, since keys are already in english
+- the keys and the values for the project specific keys are kept in `resources/lang/app/*code*.json`  where code is the language code, e.g. 'de' for german, with the exception for the English language, since keys are already in English
+- the keys and the values for the core/Enso specific keys are kept in `resources/lang/enso/*code*.json` 
 - due to Laravel's implementation, there are 4 translation categories which cannot be implemented using the new mechanism: `auth`, `pagination`, `passwords`, `validation`. For this reason, we keep the respective language files in their proper language sub-folders
 - the moment a new language is added from the interface
     - the new language is saved in the database
     - the four php translation files are copied to a newly created language folder
-    - a new JSON language file is generated, containing the keys for the existing translations. The keys are collected using as reference the first existing JSON file
+    - a new JSON language file is generated, containing the keys for the existing core/Enso translations, at `resources/lang/enso/`. The keys are collected using as reference the first existing JSON file
+    - a new JSON language file is generated, which is empty, and which will hold project specific keys
 - when deleting a language
     - the language is removed from the database
     - the language folder and its contents are removed
-    - the JSON language file is removed
+    - the two JSON language files are removed
 
 - the `set-language` middleware is used to set the locale for the backend, for each request, depending on 
 the user's language preference
@@ -76,8 +78,9 @@ so make sure to take a look and identify your country's xx
 #### Adding support for the new language
 Due to the modular structure of the project, a few steps are necessary:
 
-1. From the UI, at `/system/localisation/create`, add a new language. Under the hood, this creates a few files:
-    - a new language file in `src/resources/lang/app/xx.json`, 
+1. From the UI, navigate to `/system/localisation/create`, add a new language. Under the hood, this creates a few files:
+    - a new language file in `src/resources/lang/app/xx.json`, for the project specific translations, 
+    - a new language file in `src/resources/lang/enso/xx.json`, for the core Enso translations, 
     - a new folder in `src/resources/lang/xx` which contains
     the required Laravel translation files (`auth.php`, `pagination.php`, `passwords.php` and `validation.php`)
 
@@ -107,7 +110,8 @@ since we've been working on the published resources and some of these might get 
 ##### The Localisation package
 1. already contains the updated migration `2017_01_01_134500_create_structure_for_localisation.php` (ref. step 3, above)
 2. copy the new app lang file `xx.json` from `resources/lang/app/` to `vendor/laravel-enso/localisation/src/resources/lang/app/`
-3. copy the new folder `xx` from  `resources/lang/` to `vendor/laravel-enso/localisation/src/resources/lang/`
+3. copy the new core Enso lang file `xx.json` from `resources/lang/enso/` to `vendor/laravel-enso/localisation/src/resources/lang/enso/`
+4. copy the new folder `xx` from  `resources/lang/` to `vendor/laravel-enso/localisation/src/resources/lang/`
 
 ##### The Core package
 1. copy the updated `flags.scss` from `resources/assets/sass/` to `vendor/laravel-enso/core/src/resources/assets/sass/`
@@ -118,6 +122,24 @@ since we've been working on the published resources and some of these might get 
 
 #### Finally
 Make pull requests for these three packages, with the files mentioned above.
+
+
+### Contributing translations for an existing language 
+
+First off, thanks for taking the time to contribute with translations for the project.
+
+From time to time, as the project grows, new text/keys are added and the translations need to be updated. If you notice 
+missing translations, and want to add them, please follow the steps below.
+
+#### Adding missing translations
+1. Run `composer update` to make sure you have the latest version of the translations
+1. From the UI, navigate to `/system/localisation/` and click on `Edit Texts`.
+2. Choose the desired language, flip the type switch to `Core` and ideally also enable the `Only missing` filter
+3. Fill in the missing texts and save your changes by clicking `Update`
+4. Copy the content of `resources/lang/enso/xx.json` as this is where your changes are saved
+5. Navigate [here](https://github.com/laravel-enso/Localisation/tree/master/src/resources/lang/enso) and click on the pencil button to edit the file
+6. Paste your translations
+7. Create a pull request for the changes
 
 ### TO DO
 
