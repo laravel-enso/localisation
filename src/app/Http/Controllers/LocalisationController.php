@@ -4,8 +4,8 @@ namespace LaravelEnso\Localisation\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\Localisation\app\Classes\Storer;
-use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Classes\Updater;
+use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Classes\Destroyer;
 use LaravelEnso\Localisation\app\Forms\Builders\LocalisationForm;
 use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
