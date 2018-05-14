@@ -39,7 +39,7 @@ class LocalisationTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message' => 'The language was created!',
+                'message' => __('The language was successfully created'),
                 'redirect' => 'system.localisation.edit',
                 'id' => $language->id,
             ]);
@@ -82,7 +82,7 @@ class LocalisationTest extends TestCase
             $language->toArray() + ['flag_sufix' => $language->name]
         )->assertStatus(200)
             ->assertJson([
-                'message' => __(config('enso.labels.savedChanges')),
+                'message' => __('The language was successfully updated'),
             ]);
 
         $this->assertEquals('zz', $language->fresh()->name);
@@ -110,7 +110,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.destroy', $language->id, false)
         )->assertStatus(200)
             ->assertJson([
-                'message' => 'The operation was successful',
+                'message' => __('The language was successfully deleted'),
                 'redirect' => 'system.localisation.index',
             ]);
 

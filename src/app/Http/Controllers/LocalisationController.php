@@ -23,7 +23,7 @@ class LocalisationController extends Controller
             ->create();
 
         return [
-            'message' => __('The language was created!'),
+            'message' => __('The language was successfully created'),
             'redirect' => 'system.localisation.edit',
             'id' => $localisation->id,
         ];
