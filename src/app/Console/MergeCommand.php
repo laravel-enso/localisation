@@ -3,7 +3,7 @@
 namespace LaravelEnso\Localisation\app\Console;
 
 use Illuminate\Console\Command;
-use LaravelEnso\Localisation\app\Handlers\Json\Merger;
+use LaravelEnso\Localisation\app\Classes\Json\Merger;
 
 class MergeCommand extends Command
 {
@@ -13,7 +13,9 @@ class MergeCommand extends Command
     public function handle()
     {
         $locale = $this->option('locale');
+
         (new Merger())->run($locale);
+
         $this->info('Language files merged ('.($locale ?: 'all').')!');
     }
 }

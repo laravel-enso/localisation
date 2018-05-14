@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Handlers;
+namespace LaravelEnso\Localisation\app\Classes;
 
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Handlers\Traits\JsonFilePathResolver;
-use LaravelEnso\Localisation\app\Handlers\Traits\LegacyFolderPathResolver;
+use LaravelEnso\Localisation\app\Classes\Traits\JsonFilePathResolver;
+use LaravelEnso\Localisation\app\Classes\Traits\LegacyFolderPathResolver;
 
 class Destroyer
 {

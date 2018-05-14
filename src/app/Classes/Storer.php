@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Handlers;
+namespace LaravelEnso\Localisation\app\Classes;
 
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Handlers\Json\Storer as JsonStorer;
-use LaravelEnso\Localisation\app\Handlers\Legacy\Storer as LegacyStorer;
+use LaravelEnso\Localisation\app\Classes\Json\Storer as JsonStorer;
+use LaravelEnso\Localisation\app\Classes\Legacy\Storer as LegacyStorer;
 
 class Storer
 {

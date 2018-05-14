@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Handlers\Traits;
+namespace LaravelEnso\Localisation\app\Classes\Traits;
 
 trait LegacyFolderPathResolver
 {

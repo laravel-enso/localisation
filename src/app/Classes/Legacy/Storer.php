@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Handlers\Legacy;
+namespace LaravelEnso\Localisation\app\Classes\Legacy;
 
 use LaravelEnso\Localisation\app\Exceptions\LocalisationException;
-use LaravelEnso\Localisation\app\Handlers\Traits\LegacyFolderPathResolver;
+use LaravelEnso\Localisation\app\Classes\Traits\LegacyFolderPathResolver;
 
 class Storer
 {
@@ -29,6 +29,9 @@ class Storer
             ));
         }
 
-        \File::copyDirectory($this->fallbackLocaleFolder, $this->newLocaleFolder);
+        \File::copyDirectory(
+            $this->fallbackLocaleFolder,
+            $this->newLocaleFolder
+        );
     }
 }

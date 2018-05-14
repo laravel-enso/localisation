@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Handlers\Json;
+namespace LaravelEnso\Localisation\app\Classes\Json;
 
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Handlers\Traits\JsonFilePathResolver;
+use LaravelEnso\Localisation\app\Classes\Traits\JsonFilePathResolver;
 
 abstract class Handler
 {

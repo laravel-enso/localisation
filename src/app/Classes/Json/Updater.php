@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Handlers\Json;
+namespace LaravelEnso\Localisation\app\Classes\Json;
 
 use LaravelEnso\Localisation\app\Models\Language;
 
@@ -19,20 +19,26 @@ class Updater extends Handler
 
     public function run()
     {
-        $this->savePartial($this->locale, $this->langArray, $this->subDir);
+        $this->savePartial(
+            $this->locale,
+            $this->langArray,
+            $this->subDir
+        );
 
-        $this->extraLangs()->each(function ($locale) {
-            $this->updateDifferences($locale);
-        });
+        $this->extraLangs()
+            ->each(function ($locale) {
+                $this->updateDifferences($locale);
+            });
     }
 
     public function addKey()
     {
-        $this->extraLangs()->each(function ($locale) {
-            $extraLangFile = $this->extraLangFile($locale, $this->updateDir());
-            [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
-            $this->savePartial($locale, $extraLangFile, $this->updateDir());
-        });
+        $this->extraLangs()
+            ->each(function ($locale) {
+                $extraLangFile = $this->extraLangFile($locale, $this->updateDir());
+                [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
+                $this->savePartial($locale, $extraLangFile, $this->updateDir());
+            });
     }
 
     private function updateDifferences(string $locale)
@@ -65,7 +71,8 @@ class Updater extends Handler
             ->diffKeys($extraLangFile);
 
         $arrayToAdd = $this->newTranslations($keysToAdd->all());
-        $extraLangFile = collect($arrayToAdd)->merge($extraLangFile);
+        $extraLangFile = collect($arrayToAdd)
+            ->merge($extraLangFile);
 
         return [count($keysToAdd), $extraLangFile->all()];
     }

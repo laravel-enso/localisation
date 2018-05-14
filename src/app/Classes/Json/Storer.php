@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Handlers\Json;
+namespace LaravelEnso\Localisation\app\Classes\Json;
 
 use LaravelEnso\Localisation\app\Models\Language;
 
@@ -34,6 +34,9 @@ class Storer extends Handler
 
     private function existingTranslations(string $subDir)
     {
-        return (array) $this->jsonFileContent($this->jsonFileName($this->language->name), $subDir);
+        return (array) $this->jsonFileContent(
+            $this->jsonFileName($this->language->name),
+            $subDir
+        );
     }
 }
