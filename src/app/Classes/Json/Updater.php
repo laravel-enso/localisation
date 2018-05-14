@@ -56,9 +56,10 @@ class Updater extends Handler
     private function removeExtraKeys(array $extraLangFile)
     {
         $keysToRemove = collect($extraLangFile)
-            ->diffKeys($this->langArray);
+            ->diffKeys($this->langArray)
+            ->keys();
 
-        $keysToRemove->each(function ($valueToRemove, $keyToRemove) use (&$extraLangFile) {
+        $keysToRemove->each(function ($keyToRemove) use (&$extraLangFile) {
             unset($extraLangFile[$keyToRemove]);
         });
 
