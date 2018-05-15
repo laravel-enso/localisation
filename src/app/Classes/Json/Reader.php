@@ -2,11 +2,10 @@
 
 namespace LaravelEnso\Localisation\app\Classes\Json;
 
-use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Classes\Traits\JsonFilePathResolver;
 
-class Reader implements Responsable
+class Reader
 {
     use JsonFilePathResolver;
 
@@ -17,7 +16,7 @@ class Reader implements Responsable
         $this->jsonFile = $this->jsonFileName($language->name, $subDir);
     }
 
-    public function toResponse($request)
+    public function get()
     {
         return \File::get($this->jsonFile);
     }

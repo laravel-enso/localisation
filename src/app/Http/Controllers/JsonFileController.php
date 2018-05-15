@@ -24,7 +24,7 @@ class JsonFileController
 
     public function edit(Language $language, string $subDir)
     {
-        return new Reader($language, $subDir);
+        return (new Reader($language, $subDir))->get();
     }
 
     public function update(Request $request, Language $language, string $subDir)
