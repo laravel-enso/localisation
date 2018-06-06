@@ -18,7 +18,7 @@ class ValidateLanguageRequest extends FormRequest
         $nameUnique = Rule::unique('languages', 'name');
         $displayNameUnique = Rule::unique('languages', 'display_name');
 
-        if (request()->getMethod() === 'PATCH') {
+        if ($this->method() === 'PATCH') {
             $nameUnique = $nameUnique->ignore($localisation->id);
             $displayNameUnique = $displayNameUnique->ignore($localisation->id);
         }

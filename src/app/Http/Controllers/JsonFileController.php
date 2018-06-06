@@ -35,7 +35,9 @@ class JsonFileController
             $subDir
         ))->run();
 
-        return ['message' => __('The language files were successfully updated')];
+        return [
+            'message' => __('The language files were successfully updated')
+        ];
     }
 
     public function addKey(Request $request)
@@ -45,7 +47,9 @@ class JsonFileController
         (new Updater(new Language, $data))
             ->addKey();
 
-        return ['message' => __('The translation key was successfully added')];
+        return [
+            'message' => __('The translation key was successfully added')
+        ];
     }
 
     public function merge($locale = null)
@@ -53,6 +57,8 @@ class JsonFileController
         (new Merger())
             ->run($locale);
 
-        return ['message' => __('The language files were successfully merged')];
+        return [
+            'message' => __('The language files were successfully merged')
+        ];
     }
 }

@@ -10,10 +10,24 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/api.php');
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadDependencies();
+        $this->publishesAll();
+
         $this->app['router']->aliasMiddleware('set-language', SetLanguage::class);
 
+        $this->commands([
+            MergeCommand::class,
+        ]);
+    }
+
+    private function loadDependencies()
+    {
+        $this->loadRoutesFrom(__DIR__.'/routes/api.php');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+    }
+
+    public function publishesAll()
+    {
         $this->publishes([
             __DIR__.'/config' => config_path('enso'),
         ], 'localisation-config');
@@ -30,10 +44,6 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang'),
         ], 'localisation-lang-files');
-
-        $this->commands([
-            MergeCommand::class,
-        ]);
     }
 
     public function register()

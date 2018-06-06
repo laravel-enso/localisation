@@ -10,10 +10,12 @@ class CreateLanguagesTable extends Migration
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('name')->unique();
             $table->string('display_name')->unique();
             $table->string('flag')->unique();
             $table->boolean('is_active')->default(true);
+
             $table->timestamps();
         });
 
