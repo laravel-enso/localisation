@@ -3,6 +3,7 @@
 namespace LaravelEnso\Localisation\app\Http\Middleware;
 
 use Closure;
+use Jenssegers\Date\Date;
 
 class SetLanguage
 {
@@ -11,6 +12,8 @@ class SetLanguage
         $language = $request->user()->lang();
 
         app()->setLocale($language);
+
+        Date::setLocale($language);
 
         return $next($request);
     }
