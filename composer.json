@@ -24,7 +24,7 @@
         "jenssegers/date": "^3.4",
         "laravel-enso/select": "2.4.*",
         "laravel-enso/structuremanager": "2.2.*",
-        "laravel-enso/vuedatatable": "1.1.*"
+        "laravel-enso/vuedatatable": "1.2.*"
     },
     "require-dev": {
         "laravel-enso/testhelper": "1.4.*"
