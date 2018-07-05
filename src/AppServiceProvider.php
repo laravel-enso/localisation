@@ -3,7 +3,7 @@
 namespace LaravelEnso\Localisation;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Localisation\app\Console\MergeCommand;
+use LaravelEnso\Localisation\app\Commands\MergeCommand;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
 
 class AppServiceProvider extends ServiceProvider

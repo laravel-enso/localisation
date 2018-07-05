@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Console;
+namespace LaravelEnso\Localisation\app\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Localisation\app\Classes\Json\Merger;

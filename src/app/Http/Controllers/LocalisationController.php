@@ -19,7 +19,7 @@ class LocalisationController extends Controller
 
     public function store(ValidateLanguageRequest $request)
     {
-        $localisation = (new Storer($request->all()))
+        $localisation = (new Storer($request->validated()))
             ->create();
 
         return [
@@ -36,7 +36,7 @@ class LocalisationController extends Controller
 
     public function update(ValidateLanguageRequest $request, Language $localisation)
     {
-        (new Updater($localisation, $request->all()))
+        (new Updater($localisation, $request->validated()))
             ->run();
 
         return [
