@@ -187,6 +187,13 @@ class LocalisationTest extends TestCase
         \File::delete(
             resource_path('lang'.DIRECTORY_SEPARATOR.$language->name.'.json')
         );
+        \File::delete(
+            resource_path('lang/app'.DIRECTORY_SEPARATOR.$language->name.'.json')
+        );
+        \File::delete(
+            resource_path('lang/enso'.DIRECTORY_SEPARATOR.$language->name.'.json')
+        );
+
         \File::deleteDirectory(
             resource_path('lang'.DIRECTORY_SEPARATOR.$language->name)
         );
