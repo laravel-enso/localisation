@@ -1,15 +1,13 @@
 {
     "routePrefix": "system.localisation",
     "readSuffix": "getTableData",
-    "name": "Languages",
-    "icon": "language",
     "crtNo": true,
     "buttons": [
         "excel",
         {
             "type": "global",
             "icon": "edit",
-            "class": "is-primary",
+            "class": null,
             "routeSuffix": "editTexts",
             "event": "edit-texts",
             "action": "router",
