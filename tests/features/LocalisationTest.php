@@ -23,8 +23,11 @@ class LocalisationTest extends TestCase
         parent::setUp();
 
         // $this->withoutExceptionHandling();
+
+        $this->seed()
+            ->signIn(User::first());
+
         $this->faker = Factory::create();
-        $this->signIn(User::first());
     }
 
     /** @test */
@@ -47,6 +50,7 @@ class LocalisationTest extends TestCase
         $this->assertTrue(
             \File::exists(resource_path('lang/'.$language->name))
         );
+
         $this->assertTrue(
             \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
@@ -86,9 +90,11 @@ class LocalisationTest extends TestCase
             ]);
 
         $this->assertEquals('zz', $language->fresh()->name);
+
         $this->assertTrue(
             \File::exists(resource_path('lang/'.$language->name))
         );
+
         $this->assertTrue(
             \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
@@ -103,6 +109,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->postParams()
         );
+
         $language = Language::whereName(self::NAME)->first();
         $languageName = $language->name;
 
@@ -117,6 +124,7 @@ class LocalisationTest extends TestCase
         $this->assertFalse(
             \File::exists(resource_path('lang/'.$languageName))
         );
+
         $this->assertFalse(
             \File::exists(resource_path('lang/'.$languageName.'.json'))
         );
@@ -126,6 +134,7 @@ class LocalisationTest extends TestCase
     public function cant_destroy_default_language()
     {
         $language = $this->createLanguage();
+
         config()->set('app.fallback_locale', $language->name);
 
         $this->delete(route('system.localisation.destroy', $language->id, false))
@@ -141,6 +150,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->postParams()
         );
+
         $language = Language::whereName(self::NAME)->first();
 
         $this->setLanguage($language);
@@ -151,6 +161,7 @@ class LocalisationTest extends TestCase
         $this->assertTrue(
             \File::exists(resource_path('lang/'.$language->name))
         );
+
         $this->assertTrue(
             \File::exists(resource_path('lang/'.$language->name.'.json'))
         );
@@ -187,9 +198,11 @@ class LocalisationTest extends TestCase
         \File::delete(
             resource_path('lang'.DIRECTORY_SEPARATOR.$language->name.'.json')
         );
+
         \File::delete(
             resource_path('lang/app'.DIRECTORY_SEPARATOR.$language->name.'.json')
         );
+
         \File::delete(
             resource_path('lang/enso'.DIRECTORY_SEPARATOR.$language->name.'.json')
         );
