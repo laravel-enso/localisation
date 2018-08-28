@@ -10,23 +10,24 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadDependencies();
-        $this->publishesAll();
-
-        $this->app['router']->aliasMiddleware('set-language', SetLanguage::class);
-
         $this->commands([
             MergeCommand::class,
         ]);
+
+        $this->app['router']->aliasMiddleware('set-language', SetLanguage::class);
+
+        $this->load();
+
+        $this->publish();
     }
 
-    private function loadDependencies()
+    private function load()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
-    public function publishesAll()
+    public function publish()
     {
         $this->publishes([
             __DIR__.'/config' => config_path('enso'),
