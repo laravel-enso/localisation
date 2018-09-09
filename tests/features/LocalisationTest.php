@@ -186,7 +186,7 @@ class LocalisationTest extends TestCase
 
     private function setLanguage($language)
     {
-        $preferences = (new DefaultPreferences())->data();
+        $preferences = DefaultPreferences::data();
         $preferences->global->lang = $language->name;
         $preference = new Preference(['value' => $preferences]);
         $preference->user_id = 1;

@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Localisation\app\Classes\Json;
 
+use LaravelEnso\Helpers\app\Classes\JsonParser;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Classes\Traits\JsonFilePathResolver;
 
@@ -15,13 +16,6 @@ abstract class Handler
         $values = collect()->pad($keys->count(), null);
 
         return $keys->combine($values);
-    }
-
-    protected function jsonFileContent(string $jsonFile)
-    {
-        return json_decode(
-            \File::get($jsonFile)
-        );
     }
 
     protected function saveMerged(string $locale, array $langFile)
@@ -58,8 +52,10 @@ abstract class Handler
 
     private function mergeLocale(string $locale)
     {
-        $core = (array) $this->jsonFileContent($this->coreJsonFileName($locale));
-        $app = (array) $this->jsonFileContent($this->appJsonFileName($locale));
+        $core = (new JsonParser($this->coreJsonFileName($locale)))
+            ->array();
+        $app = (new JsonParser($this->appJsonFileName($locale)))
+            ->array();
 
         $this->saveMerged($locale, array_merge($core, $app));
     }
