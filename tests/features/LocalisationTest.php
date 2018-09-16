@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use LaravelEnso\Core\app\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
