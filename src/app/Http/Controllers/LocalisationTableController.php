@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Localisation\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\VueDatatable\app\Traits\Excel;
 use LaravelEnso\VueDatatable\app\Traits\Datatable;
 use LaravelEnso\Localisation\app\Tables\Builders\LocalisationTable;
