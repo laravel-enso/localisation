@@ -21,20 +21,17 @@
             "name": "display_name",
             "data": "languages.display_name",
             "meta": ["searchable", "sortable"]
-        },
-        {
+        }, {
             "label": "Name",
             "name": "name",
             "data": "languages.name",
             "meta": ["searchable", "sortable"]
-        },
-        {
+        }, {
             "label": "Flag",
             "name": "flag",
             "data": "languages.flag",
             "meta": ["slot", "sortable"]
-        },
-        {
+        }, {
             "label": "Active",
             "name": "is_active",
             "data": "languages.is_active",
@@ -42,17 +39,10 @@
                 "sortable",
                 "boolean"
             ]
-        },
-        {
+        }, {
             "label": "Created At",
             "name": "created_at",
             "data": "languages.created_at",
-            "meta": ["sortable", "date"]
-        },
-        {
-            "label": "Updated At",
-            "name": "updated_at",
-            "data": "languages.updated_at",
             "meta": ["sortable", "date"]
         }
     ]
