@@ -1,22 +1,27 @@
 <?php
 
-use LaravelEnso\Core\app\Models\User;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use Tests\TestCase;
+use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Models\Preference;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\TestHelper\app\Traits\SignIn;
-use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
-use LaravelEnso\TestHelper\app\Traits\TestDataTable;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
+use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
+use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
+use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
 
 class LocalisationTest extends TestCase
 {
-    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
-    const NAME = 'xx';
-    private $faker;
-    private $prefix = 'system.localisation';
+    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
+
+    private const LangName = 'xx';
+
+    private $permissionGroup = 'system.localisation';
+
+    private $testModel;
+    private $user;
 
     protected function setUp()
     {
@@ -25,20 +30,26 @@ class LocalisationTest extends TestCase
         // $this->withoutExceptionHandling();
 
         $this->seed()
-            ->signIn(User::first());
+            ->actingAs($this->user = User::first());
 
-        $this->faker = Factory::create();
+        $this->testModel = factory(Language::class)
+            ->make([
+                'name' => self::LangName,
+                'flag' => 'flag-icon flag-icon-'.self::LangName,
+            ]);
     }
 
     /** @test */
-    public function store()
+    public function can_store_language()
     {
         $response = $this->post(
-            route('system.localisation.store', [], false),
-            $this->postParams()
+            route('system.localisation.store'),
+            $this->testModel->toArray() + [
+                'flag_sufix' => self::LangName,
+            ]
         );
 
-        $language = Language::whereName(self::NAME)->first();
+        $language = Language::whereName(self::LangName)->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
@@ -59,25 +70,16 @@ class LocalisationTest extends TestCase
     }
 
     /** @test */
-    public function edit()
-    {
-        $language = $this->createLanguage();
-
-        $this->get(route('system.localisation.edit', $language->id, false))
-            ->assertStatus(200)
-            ->assertJsonStructure(['form']);
-
-        $this->cleanUp($language);
-    }
-
-    /** @test */
-    public function update()
+    public function can_update_language()
     {
         $this->post(
             route('system.localisation.store', [], false),
-            $this->postParams()
+            $this->testModel->toArray() + [
+                'flag_sufix' => self::LangName,
+            ]
         );
-        $language = Language::whereName(self::NAME)->first();
+
+        $language = Language::whereName(self::LangName)->first();
 
         $language->name = 'zz';
 
@@ -103,14 +105,16 @@ class LocalisationTest extends TestCase
     }
 
     /** @test */
-    public function destroy()
+    public function can_destroy_language()
     {
         $this->post(
             route('system.localisation.store', [], false),
-            $this->postParams()
+            $this->testModel->toArray() + [
+                'flag_sufix' => self::LangName,
+            ]
         );
 
-        $language = Language::whereName(self::NAME)->first();
+        $language = Language::whereName(self::LangName)->first();
         $languageName = $language->name;
 
         $this->delete(
@@ -133,14 +137,17 @@ class LocalisationTest extends TestCase
     /** @test */
     public function cant_destroy_default_language()
     {
-        $language = $this->createLanguage();
+        $this->testModel->save();
 
-        config()->set('app.fallback_locale', $language->name);
+        config()->set(
+            'app.fallback_locale',
+            $this->testModel->name
+        );
 
-        $this->delete(route('system.localisation.destroy', $language->id, false))
+        $this->delete(route('system.localisation.destroy', $this->testModel->id, false))
             ->assertStatus(403);
 
-        $this->assertNotNull($language->fresh());
+        $this->assertNotNull($this->testModel->fresh());
     }
 
     /** @test */
@@ -148,10 +155,12 @@ class LocalisationTest extends TestCase
     {
         $this->post(
             route('system.localisation.store', [], false),
-            $this->postParams()
+            $this->testModel->toArray() + [
+                'flag_sufix' => self::LangName,
+            ]
         );
 
-        $language = Language::whereName(self::NAME)->first();
+        $language = Language::whereName(self::LangName)->first();
 
         $this->setLanguage($language);
 
@@ -169,28 +178,15 @@ class LocalisationTest extends TestCase
         $this->cleanUp($language);
     }
 
-    private function createLanguage()
-    {
-        return Language::create($this->postParams());
-    }
-
-    private function postParams()
-    {
-        return [
-            'display_name' => strtolower($this->faker->country),
-            'name' => self::NAME,
-            'flag_sufix' => self::NAME,
-            'flag' => 'flag-icon flag-icon-'.self::NAME,
-        ];
-    }
-
     private function setLanguage($language)
     {
         $preferences = DefaultPreferences::data();
         $preferences->global->lang = $language->name;
-        $preference = new Preference(['value' => $preferences]);
-        $preference->user_id = 1;
-        $preference->save();
+
+        Preference::create([
+            'user_id' => $this->user->id,
+            'value' => $preferences,
+        ]);
     }
 
     private function cleanUp($language)

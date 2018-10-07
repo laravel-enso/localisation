@@ -7,14 +7,13 @@ use LaravelEnso\Localisation\app\Classes\Storer;
 use LaravelEnso\Localisation\app\Classes\Updater;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Classes\Destroyer;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LaravelEnso\Localisation\app\Forms\Builders\LocalisationForm;
 use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
 
 class LocalisationController extends Controller
 {
-    use AuthorizesRequests, ValidatesRequests;
+    use AuthorizesRequests;
 
     public function create(LocalisationForm $form)
     {

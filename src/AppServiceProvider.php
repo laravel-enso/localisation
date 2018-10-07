@@ -30,6 +30,14 @@ class AppServiceProvider extends ServiceProvider
     public function publish()
     {
         $this->publishes([
+            __DIR__.'/database/factories' => database_path('factories'),
+        ], 'localisation-factory');
+
+        $this->publishes([
+            __DIR__.'/database/factories' => database_path('factories'),
+        ], 'enso-factories');
+
+        $this->publishes([
             __DIR__.'/config' => config_path('enso'),
         ], 'localisation-config');
 
