@@ -14,20 +14,24 @@ class AppServiceProvider extends ServiceProvider
             MergeCommand::class,
         ]);
 
-        $this->app['router']->aliasMiddleware('set-language', SetLanguage::class);
+        $this->app['router']->middleware(
+            'set-language', SetLanguage::class
+        );
 
-        $this->load();
-
-        $this->publish();
+        $this->loadDependencies()
+            ->publishDependencies();
     }
 
-    private function load()
+    private function loadDependencies()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
+
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
+        return $this;
     }
 
-    public function publish()
+    public function publishDependencies()
     {
         $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
@@ -36,6 +40,14 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
         ], 'enso-factories');
+
+        $this->publishes([
+            __DIR__.'/database/seeds' => database_path('seeds'),
+        ], 'localisation-seeder');
+
+        $this->publishes([
+            __DIR__.'/database/seeds' => database_path('seeds'),
+        ], 'enso-seeders');
 
         $this->publishes([
             __DIR__.'/config' => config_path('enso'),
