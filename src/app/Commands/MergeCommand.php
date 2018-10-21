@@ -15,7 +15,7 @@ class MergeCommand extends Command
     {
         $locale = $this->option('locale');
 
-        if (!Schema::hasTable('languages')) {
+        if (! Schema::hasTable('languages')) {
             $this->info('Couldn\'t merge the localisation files because the migrations were not ran.');
 
             return;
