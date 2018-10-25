@@ -1,6 +1,5 @@
 {
     "routePrefix": "system.localisation",
-    "readSuffix": "getTableData",
     "crtNo": true,
     "buttons": [
         "excel",

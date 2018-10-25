@@ -28,7 +28,7 @@ class LocalisationController extends Controller
         return [
             'message' => __('The language was successfully created'),
             'redirect' => 'system.localisation.edit',
-            'id' => $localisation->id,
+            'param' => ['localisation' => $localisation->id],
         ];
     }
 

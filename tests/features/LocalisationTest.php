@@ -55,7 +55,7 @@ class LocalisationTest extends TestCase
             ->assertJsonFragment([
                 'message' => __('The language was successfully created'),
                 'redirect' => 'system.localisation.edit',
-                'id' => $language->id,
+                'param' => ['localisation' => $language->id],
             ]);
 
         $this->assertTrue(
