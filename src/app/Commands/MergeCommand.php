@@ -20,6 +20,7 @@ class MergeCommand extends Command
 
             return;
         }
+
         (new Merger())->run($locale);
 
         $this->info('Language files merged ('.($locale ?: 'all').')!');
