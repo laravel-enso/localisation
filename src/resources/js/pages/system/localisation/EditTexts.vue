@@ -202,7 +202,6 @@ export default {
 
             return this.langKeys.filter(key => (key.toLowerCase().indexOf(query) > -1
                 || (this.langFile[key] && this.langFile[key].toLowerCase().indexOf(query) > -1)));
-            });
         },
         isNewKey() {
             return this.selectedLocale &&
