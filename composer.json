@@ -23,7 +23,7 @@
         "laravel-enso/helpers": "1.10.*",
         "jenssegers/date": "^3.4",
         "laravel-enso/select": "2.7.*",
-        "laravel-enso/structuremanager": "2.4.*",
+        "laravel-enso/structuremanager": "2.5.*",
         "laravel-enso/vuedatatable": "1.9.*"
     },
     "autoload": {
