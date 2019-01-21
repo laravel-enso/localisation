@@ -22,7 +22,7 @@
         "laravel-enso/formbuilder": "2.12.*",
         "laravel-enso/helpers": "1.10.*",
         "jenssegers/date": "^3.4",
-        "laravel-enso/select": "2.7.*",
+        "laravel-enso/select": "2.8.*",
         "laravel-enso/structuremanager": "2.5.*",
         "laravel-enso/vuedatatable": "1.9.*"
     },
