@@ -8,8 +8,8 @@ Route::middleware(['web', 'auth', 'core'])
             ->group(function () {
                 Route::get('initTable', 'LocalisationTableController@init')
                     ->name('initTable');
-                Route::get('getTableData', 'LocalisationTableController@data')
-                    ->name('getTableData');
+                Route::get('tableData', 'LocalisationTableController@data')
+                    ->name('tableData');
                 Route::get('exportExcel', 'LocalisationTableController@excel')
                     ->name('exportExcel');
 
@@ -25,5 +25,5 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('merge');
             });
 
-        Route::resource('localisation', 'LocalisationController', ['except' => ['show']]);
+        Route::resource('localisation', 'LocalisationController', ['except' => ['show', 'index']]);
     });

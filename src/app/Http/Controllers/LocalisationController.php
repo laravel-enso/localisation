@@ -2,16 +2,19 @@
 
 namespace LaravelEnso\Localisation\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use LaravelEnso\Localisation\app\Handlers\Storer;
+use Illuminate\Routing\Controller;
+use LaravelEnso\Localisation\app\Classes\Storer;
+use LaravelEnso\Localisation\app\Classes\Updater;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Handlers\Updater;
-use LaravelEnso\Localisation\app\Handlers\Destroyer;
+use LaravelEnso\Localisation\app\Classes\Destroyer;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LaravelEnso\Localisation\app\Forms\Builders\LocalisationForm;
 use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
 
 class LocalisationController extends Controller
 {
+    use AuthorizesRequests;
+
     public function create(LocalisationForm $form)
     {
         return ['form' => $form->create()];
@@ -19,12 +22,13 @@ class LocalisationController extends Controller
 
     public function store(ValidateLanguageRequest $request)
     {
-        $localisation = (new Storer($request->all()))->create();
+        $localisation = (new Storer($request->validated()))
+            ->create();
 
         return [
-            'message' => __('The language was created!'),
+            'message' => __('The language was successfully created'),
             'redirect' => 'system.localisation.edit',
-            'id' => $localisation->id,
+            'param' => ['localisation' => $localisation->id],
         ];
     }
 
@@ -35,10 +39,11 @@ class LocalisationController extends Controller
 
     public function update(ValidateLanguageRequest $request, Language $localisation)
     {
-        (new Updater($localisation, $request->all()))->run();
+        (new Updater($localisation, $request->validated()))
+            ->run();
 
         return [
-            'message' => __(config('enso.labels.savedChanges')),
+            'message' => __('The language was successfully updated'),
         ];
     }
 
@@ -46,10 +51,11 @@ class LocalisationController extends Controller
     {
         $this->authorize('destroy', $localisation);
 
-        (new Destroyer($localisation))->run();
+        (new Destroyer($localisation))
+            ->run();
 
         return [
-            'message' => __(config('enso.labels.successfulOperation')),
+            'message' => __('The language was successfully deleted'),
             'redirect' => 'system.localisation.index',
         ];
     }

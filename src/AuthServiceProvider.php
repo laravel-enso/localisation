@@ -8,14 +8,12 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 class AuthServiceProvider extends ServiceProvider
 {
-    protected $policies;
+    protected $policies = [
+        Language::class => LanguagePolicy::class,
+    ];
 
     public function boot()
     {
-        $this->policies = [
-            Language::class => LanguagePolicy::class,
-        ];
-
         $this->registerPolicies();
     }
 }

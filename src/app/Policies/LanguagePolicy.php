@@ -23,6 +23,6 @@ class LanguagePolicy
 
     private function isNotUserLocale(User $user, Language $language)
     {
-        return $language->name !== $user->preferences->global->lang;
+        return $language->name !== $user->lang();
     }
 }
