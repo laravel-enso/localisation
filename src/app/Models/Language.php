@@ -4,10 +4,11 @@ namespace LaravelEnso\Localisation\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
+use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 
 class Language extends Model
 {
-    use ActiveState;
+    use ActiveState, SystemConnection;
 
     const FlagClassPrefix = 'flag-icon flag-icon-';
 

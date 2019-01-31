@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "laravel-enso/core": "3.6.*",
+        "laravel-enso/core": "3.7.*",
         "laravel-enso/formbuilder": "2.12.*",
         "laravel-enso/helpers": "1.10.*",
         "jenssegers/date": "^3.4",
