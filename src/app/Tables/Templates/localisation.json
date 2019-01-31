@@ -1,6 +1,7 @@
 {
     "routePrefix": "system.localisation",
     "crtNo": true,
+    "cache": true,
     "buttons": [
         "excel",
         {

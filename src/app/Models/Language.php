@@ -16,6 +16,8 @@ class Language extends Model
 
     protected $casts = ['is_active' => 'boolean'];
 
+    protected $cachedTable = 'localisation';
+
     public function updateWithFlagSufix($attributes, string $sufix)
     {
         $this->fill($attributes);
