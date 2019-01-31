@@ -3,6 +3,7 @@
 namespace LaravelEnso\Localisation\app\Http\Controllers;
 
 use Illuminate\Http\Request;
+use LaravelEnso\Localisation\app\Jobs\AddKey;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Classes\Json\Merger;
 use LaravelEnso\Localisation\app\Classes\Json\Reader;
@@ -44,11 +45,10 @@ class JsonFileController
     {
         $data = [$request->get('langKey') => ''];
 
-        (new Updater(new Language, $data))
-            ->addKey();
+        AddKey::dispatch($data);
 
         return [
-            'message' => __('The translation key was successfully added'),
+            'message' => __('The add translation key job was successfully added to queue'),
         ];
     }
 
