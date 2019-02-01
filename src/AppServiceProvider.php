@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
             MergeCommand::class,
         ]);
 
-        $this->app['router']->middleware(
+        $this->app['router']->aliasMiddleware(
             'set-language', SetLanguage::class
         );
 
