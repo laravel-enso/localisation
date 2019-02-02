@@ -7,6 +7,7 @@ use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Classes\Json\Merger;
 use LaravelEnso\Localisation\app\Classes\Json\Reader;
 use LaravelEnso\Localisation\app\Classes\Json\Updater;
+use LaravelEnso\Localisation\app\Http\Requests\ValidateKeyRequest;
 
 class JsonFileController
 {
@@ -40,11 +41,16 @@ class JsonFileController
         ];
     }
 
-    public function addKey(Request $request)
+    public function addKey(ValidateKeyRequest $request)
     {
-        $data = [$request->get('langKey') => ''];
+        $keys = collect($request->get('keys'))
+            ->reduce(function ($keys, $key) {
+                $keys[$key] = '';
 
-        (new Updater(new Language, $data))
+                return $keys;
+            }, []);
+
+        (new Updater(new Language, $keys))
             ->addKey();
 
         return [
