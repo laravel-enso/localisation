@@ -4,11 +4,12 @@ namespace LaravelEnso\Localisation\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
+use LaravelEnso\VueDatatable\app\Traits\TableCache;
 use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 
 class Language extends Model
 {
-    use ActiveState, SystemConnection;
+    use ActiveState, SystemConnection, TableCache;
 
     const FlagClassPrefix = 'flag-icon flag-icon-';
 
