@@ -54,11 +54,6 @@ class AppServiceProvider extends ServiceProvider
         ], 'localisation-config');
 
         $this->publishes([
-            __DIR__.'/resources/js' => resource_path('js'),
-        ], 'localisation-assets');
-
-        $this->publishes([
-            __DIR__.'/resources/js' => resource_path('js'),
             __DIR__.'/resources/lang/enso' => resource_path('lang/enso'),
         ], 'enso-assets');
 

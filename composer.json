@@ -18,13 +18,13 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "laravel-enso/core": "3.7.*",
-        "laravel-enso/formbuilder": "2.12.*",
+        "laravel-enso/core": "4.0.*",
+        "laravel-enso/formbuilder": "3.0.*",
         "laravel-enso/helpers": "1.10.*",
         "jenssegers/date": "^3.4",
-        "laravel-enso/select": "2.8.*",
-        "laravel-enso/structuremanager": "2.5.*",
-        "laravel-enso/vuedatatable": "1.9.*"
+        "laravel-enso/select": "3.0.*",
+        "laravel-enso/structuremanager": "3.0.*",
+        "laravel-enso/vuedatatable": "2.0.*"
     },
     "autoload": {
         "psr-4": {
