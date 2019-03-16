@@ -21,7 +21,7 @@ Localisation management dependency for [Laravel Enso](https://github.com/laravel
 
 ### Configuration & Usage
 
-Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/packages/localisation.html)
+Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/localisation.html)
 
 ### Contributions
 
