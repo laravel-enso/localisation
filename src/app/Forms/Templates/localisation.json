@@ -1,7 +1,7 @@
 {
     "routePrefix": "system.localisation",
     "sections": [{
-        "columns": "2",
+        "columns": 2,
         "fields": [{
             "label": "Display Name",
             "name": "display_name",
