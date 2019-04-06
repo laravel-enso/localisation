@@ -10,9 +10,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->commands([
-            MergeCommand::class,
-        ]);
+        $this->commands(MergeCommand::class);
 
         $this->app['router']->aliasMiddleware(
             'set-language', SetLanguage::class
@@ -60,10 +58,5 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang'),
         ], 'localisation-lang-files');
-    }
-
-    public function register()
-    {
-        //
     }
 }

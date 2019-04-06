@@ -19,7 +19,6 @@ class LocalisationTest extends TestCase
     private const LangName = 'xx';
 
     private $permissionGroup = 'system.localisation';
-
     private $testModel;
     private $user;
 
@@ -44,9 +43,7 @@ class LocalisationTest extends TestCase
     {
         $response = $this->post(
             route('system.localisation.store'),
-            $this->testModel->toArray() + [
-                'flag_sufix' => self::LangName,
-            ]
+            $this->testModel->toArray() + ['flag_sufix' => self::LangName]
         );
 
         $language = Language::whereName(self::LangName)->first();
@@ -74,9 +71,7 @@ class LocalisationTest extends TestCase
     {
         $this->post(
             route('system.localisation.store', [], false),
-            $this->testModel->toArray() + [
-                'flag_sufix' => self::LangName,
-            ]
+            $this->testModel->toArray() + ['flag_sufix' => self::LangName]
         );
 
         $language = Language::whereName(self::LangName)->first();
@@ -87,9 +82,9 @@ class LocalisationTest extends TestCase
             route('system.localisation.update', $language->id, false),
             $language->toArray() + ['flag_sufix' => $language->name]
         )->assertStatus(200)
-            ->assertJson([
-                'message' => __('The language was successfully updated'),
-            ]);
+        ->assertJson([
+            'message' => __('The language was successfully updated'),
+        ]);
 
         $this->assertEquals('zz', $language->fresh()->name);
 
@@ -111,8 +106,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->testModel->toArray() + [
                 'flag_sufix' => self::LangName,
-            ]
-        );
+            ]);
 
         $language = Language::whereName(self::LangName)->first();
         $languageName = $language->name;
@@ -120,10 +114,10 @@ class LocalisationTest extends TestCase
         $this->delete(
             route('system.localisation.destroy', $language->id, false)
         )->assertStatus(200)
-            ->assertJson([
-                'message' => __('The language was successfully deleted'),
-                'redirect' => 'system.localisation.index',
-            ]);
+        ->assertJson([
+            'message' => __('The language was successfully deleted'),
+            'redirect' => 'system.localisation.index',
+        ]);
 
         $this->assertFalse(
             \File::exists(resource_path('lang/'.$languageName))
@@ -157,8 +151,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->testModel->toArray() + [
                 'flag_sufix' => self::LangName,
-            ]
-        );
+            ]);
 
         $language = Language::whereName(self::LangName)->first();
 

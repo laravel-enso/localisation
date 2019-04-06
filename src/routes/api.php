@@ -25,5 +25,6 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('merge');
             });
 
-        Route::resource('localisation', 'LocalisationController', ['except' => ['show', 'index']]);
+        Route::resource('localisation', 'LocalisationController')
+            ->except('show', 'index');
     });
