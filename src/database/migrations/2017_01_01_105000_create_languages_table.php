@@ -13,7 +13,9 @@ class CreateLanguagesTable extends Migration
             $table->string('name')->unique();
             $table->string('display_name')->unique();
             $table->string('flag')->unique();
-            $table->boolean('is_active')->default(true);
+
+            $table->boolean('is_rtl');
+            $table->boolean('is_active');
 
             $table->timestamps();
         });

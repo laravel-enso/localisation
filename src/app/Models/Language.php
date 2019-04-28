@@ -12,9 +12,9 @@ class Language extends Model
 
     const FlagClassPrefix = 'flag-icon flag-icon-';
 
-    protected $fillable = ['name', 'display_name', 'flag', 'is_active'];
+    protected $fillable = ['name', 'display_name', 'flag', 'is_rtl', 'is_active'];
 
-    protected $casts = ['is_active' => 'boolean'];
+    protected $casts = ['is_rtl' => 'boolean', 'is_active' => 'boolean'];
 
     public function updateWithFlagSufix($attributes, string $sufix)
     {

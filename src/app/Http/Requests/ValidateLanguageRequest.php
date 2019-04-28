@@ -27,7 +27,8 @@ class ValidateLanguageRequest extends FormRequest
             'name' => ['required', $nameUnique],
             'display_name' => ['required', $displayNameUnique],
             'flag_sufix' => 'required|string|size:2',
-            'is_active' => 'boolean',
+            'is_rtl' => 'required|boolean',
+            'is_active' => 'required|boolean',
         ];
     }
 }

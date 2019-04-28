@@ -36,6 +36,14 @@
                 "disabled": true
             }
         }, {
+            "label": "RTL",
+            "name": "is_rtl",
+            "value": false,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
             "label": "Active",
             "name": "is_active",
             "value": true,

@@ -32,6 +32,11 @@
             "data": "languages.flag",
             "meta": ["slot", "sortable"]
         }, {
+            "label": "RTL",
+            "name": "is_rtl",
+            "data": "languages.is_rtl",
+            "meta": ["sortable", "boolean"]
+        }, {
             "label": "Active",
             "name": "is_active",
             "data": "languages.is_active",
