@@ -1,8 +1,8 @@
 <?php
 
-use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+use LaravelEnso\Migrator\app\Database\Migration;
 
-class CreateStructureForLocalisation extends StructureMigration
+class CreateStructureForLocalisation extends Migration
 {
     protected $permissions = [
         ['name' => 'system.localisation.index', 'description' => 'Localisation index', 'type' => 0, 'is_default' => false],

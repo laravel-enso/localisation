@@ -4,11 +4,12 @@ namespace LaravelEnso\Localisation\app\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Localisation\app\Classes\Json\Merger;
+use LaravelEnso\Localisation\app\Services\Json\Merger;
 
 class MergeCommand extends Command
 {
     protected $signature = 'enso:localisation:merge {--L|locale= : Language key to merge (default: all)}';
+
     protected $description = 'Merges the core language files with the app language files';
 
     public function handle()

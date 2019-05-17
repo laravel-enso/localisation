@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Classes\Legacy;
+namespace LaravelEnso\Localisation\app\Services\Legacy;
 
 use LaravelEnso\Localisation\app\Exceptions\LocalisationException;
-use LaravelEnso\Localisation\app\Classes\Traits\LegacyFolderPathResolver;
+use LaravelEnso\Localisation\app\Services\Traits\LegacyFolderPathResolver;
 
 class Storer
 {

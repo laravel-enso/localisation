@@ -1,30 +1,29 @@
 <?php
 
 Route::middleware(['web', 'auth', 'core'])
-    ->prefix('api/system')->as('system.')
     ->namespace('LaravelEnso\Localisation\app\Http\Controllers')
+    ->prefix('api/system/localisation')
+    ->as('system.localisation.')
     ->group(function () {
-        Route::prefix('localisation')->as('localisation.')
+        Route::namespace('Language')
             ->group(function () {
-                Route::get('initTable', 'LocalisationTableController@init')
-                    ->name('initTable');
-                Route::get('tableData', 'LocalisationTableController@data')
-                    ->name('tableData');
-                Route::get('exportExcel', 'LocalisationTableController@excel')
-                    ->name('exportExcel');
+                Route::get('create', 'Create')->name('create');
+                Route::post('', 'Store')->name('store');
+                Route::get('{localisation}/edit', 'Edit')->name('edit');
+                Route::patch('{localisation}', 'Update')->name('update');
+                Route::delete('{localisation}', 'Destroy')->name('destroy');
 
-                Route::get('editTexts', 'JsonFileController@index')
-                    ->name('editTexts');
-                Route::get('getLangFile/{language}/{subDir}', 'JsonFileController@edit')
-                    ->name('getLangFile');
-                Route::patch('saveLangFile/{language}/{subDir}', 'JsonFileController@update')
-                    ->name('saveLangFile');
-                Route::patch('addKey', 'JsonFileController@addKey')
-                    ->name('addKey');
-                Route::patch('merge/{locale?}', 'JsonFileController@merge')
-                    ->name('merge');
+                Route::get('initTable', 'Table@init')->name('initTable');
+                Route::get('tableData', 'Table@data')->name('tableData');
+                Route::get('exportExcel', 'Table@excel')->name('exportExcel');
             });
 
-        Route::resource('localisation', 'LocalisationController')
-            ->except('show', 'index');
+        Route::namespace('Json')
+            ->group(function () {
+                Route::get('editTexts', 'Index')->name('editTexts');
+                Route::get('getLangFile/{language}/{subDir}', 'Edit')->name('getLangFile');
+                Route::patch('saveLangFile/{language}/{subDir}', 'Update')->name('saveLangFile');
+                Route::patch('addKey', 'AddKey')->name('addKey');
+                Route::patch('merge/{locale?}', 'Merge')->name('merge');
+            });
     });

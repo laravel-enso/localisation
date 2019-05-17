@@ -1,10 +1,11 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Classes;
+namespace LaravelEnso\Localisation\app\Services;
 
+use Illuminate\Support\Facades\DB;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Classes\Json\Storer as JsonStorer;
-use LaravelEnso\Localisation\app\Classes\Legacy\Storer as LegacyStorer;
+use LaravelEnso\Localisation\app\Services\Json\Storer as JsonStorer;
+use LaravelEnso\Localisation\app\Services\Legacy\Storer as LegacyStorer;
 
 class Storer
 {
@@ -19,7 +20,7 @@ class Storer
     {
         $localisation = null;
 
-        \DB::transaction(function () use (&$localisation) {
+        DB::transaction(function () use (&$localisation) {
             $localisation = new Language();
             $localisation = $localisation
                 ->storeWithFlagSufix($this->request, $this->request['flag_sufix']);

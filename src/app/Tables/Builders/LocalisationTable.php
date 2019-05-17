@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Localisation\app\Tables\Builders;
 
-use LaravelEnso\VueDatatable\app\Classes\Table;
+use LaravelEnso\Tables\app\Services\Table;
 use LaravelEnso\Localisation\app\Models\Language;
 
 class LocalisationTable extends Table
@@ -11,9 +11,9 @@ class LocalisationTable extends Table
 
     public function query()
     {
-        return Language::select(\DB::raw('
+        return Language::selectRaw('
             languages.id as "dtRowId", languages.display_name, languages.name,
             languages.flag, is_rtl, is_active, languages.created_at
-        '));
+        ');
     }
 }

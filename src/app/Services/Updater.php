@@ -1,10 +1,11 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Classes;
+namespace LaravelEnso\Localisation\app\Services;
 
+use Illuminate\Support\Facades\DB;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Classes\Traits\JsonFilePathResolver;
-use LaravelEnso\Localisation\app\Classes\Traits\LegacyFolderPathResolver;
+use LaravelEnso\Localisation\app\Services\Traits\JsonFilePathResolver;
+use LaravelEnso\Localisation\app\Services\Traits\LegacyFolderPathResolver;
 
 class Updater
 {
@@ -21,7 +22,7 @@ class Updater
 
     public function run()
     {
-        \DB::transaction(function () {
+        DB::transaction(function () {
             $oldName = $this->localisation->name;
             $this->localisation->updateWithFlagSufix($this->request, $this->request['flag_sufix']);
             $this->updateLangFiles($oldName, $this->request['name']);

@@ -1,10 +1,11 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Classes;
+namespace LaravelEnso\Localisation\app\Services;
 
+use Illuminate\Support\Facades\DB;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Classes\Traits\JsonFilePathResolver;
-use LaravelEnso\Localisation\app\Classes\Traits\LegacyFolderPathResolver;
+use LaravelEnso\Localisation\app\Services\Traits\JsonFilePathResolver;
+use LaravelEnso\Localisation\app\Services\Traits\LegacyFolderPathResolver;
 
 class Destroyer
 {
@@ -19,7 +20,7 @@ class Destroyer
 
     public function run()
     {
-        \DB::transaction(function () {
+        DB::transaction(function () {
             $this->localisation->delete();
             \File::deleteDirectory($this->legacyFolderName($this->localisation->name));
             \File::delete($this->jsonFileName($this->localisation->name, 'enso'));

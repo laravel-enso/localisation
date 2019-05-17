@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Localisation\app\Forms\Builders;
 
-use LaravelEnso\FormBuilder\app\Classes\Form;
+use LaravelEnso\Forms\app\Services\Form;
 use LaravelEnso\Localisation\app\Models\Language;
 
 class LocalisationForm

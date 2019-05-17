@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Classes\Json;
+namespace LaravelEnso\Localisation\app\Services\Json;
 
 use LaravelEnso\Helpers\app\Classes\JsonParser;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Classes\Traits\JsonFilePathResolver;
+use LaravelEnso\Localisation\app\Services\Traits\JsonFilePathResolver;
 
 class Reader
 {

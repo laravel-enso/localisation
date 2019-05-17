@@ -1,16 +1,15 @@
 <?php
 
-use Faker\Factory;
 use Tests\TestCase;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Models\Preference;
+use LaravelEnso\Forms\app\TestTraits\EditForm;
+use LaravelEnso\Forms\app\TestTraits\CreateForm;
+use LaravelEnso\Forms\app\TestTraits\DestroyForm;
 use LaravelEnso\Localisation\app\Models\Language;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
-use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
-use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
-use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
-use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
+use LaravelEnso\Tables\app\Traits\Tests\Datatable;
+use LaravelEnso\Core\app\Services\DefaultPreferences;
 
 class LocalisationTest extends TestCase
 {

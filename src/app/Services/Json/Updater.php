@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Classes\Json;
+namespace LaravelEnso\Localisation\app\Services\Json;
 
 use LaravelEnso\Helpers\app\Classes\JsonParser;
 use LaravelEnso\Localisation\app\Models\Language;
