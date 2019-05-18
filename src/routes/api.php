@@ -13,9 +13,9 @@ Route::middleware(['web', 'auth', 'core'])
                 Route::patch('{localisation}', 'Update')->name('update');
                 Route::delete('{localisation}', 'Destroy')->name('destroy');
 
-                Route::get('initTable', 'Table@init')->name('initTable');
-                Route::get('tableData', 'Table@data')->name('tableData');
-                Route::get('exportExcel', 'Table@excel')->name('exportExcel');
+                Route::get('initTable', 'InitTable')->name('initTable');
+                Route::get('tableData', 'TableData')->name('tableData');
+                Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
             });
 
         Route::namespace('Json')
