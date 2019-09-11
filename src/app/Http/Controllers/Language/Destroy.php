@@ -15,8 +15,7 @@ class Destroy extends Controller
     {
         $this->authorize('destroy', $localisation);
 
-        (new Destroyer($localisation))
-            ->run();
+        (new Destroyer($localisation))->run();
 
         return [
             'message' => __('The language was successfully deleted'),

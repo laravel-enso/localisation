@@ -19,13 +19,16 @@ class Language extends Model
     public function updateWithFlagSufix($attributes, string $sufix)
     {
         $this->fill($attributes);
+
         $this->flag = self::FlagClassPrefix.$sufix;
+
         $this->update();
     }
 
     public function storeWithFlagSufix($attributes, string $sufix)
     {
         $this->fill($attributes);
+
         $this->flag = self::FlagClassPrefix.$sufix;
 
         return tap($this)->save();

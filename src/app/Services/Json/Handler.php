@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Localisation\app\Services\Json;
 
+use Illuminate\Support\Facades\File;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Services\Traits\JsonFilePathResolver;
@@ -30,7 +31,7 @@ abstract class Handler
 
     protected function saveToDisk(string $locale, array $langFile, string $subDir = null)
     {
-        \File::put(
+        File::put(
             $this->jsonFileName($locale, $subDir),
             json_encode($langFile, JSON_FORCE_OBJECT | ($subDir ? JSON_PRETTY_PRINT : 0))
         );

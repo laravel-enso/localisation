@@ -10,8 +10,7 @@ class Store extends Controller
 {
     public function __invoke(ValidateLanguageStore $request)
     {
-        $localisation = (new Storer($request->validated()))
-            ->create();
+        $localisation = (new Storer($request->validated()))->create();
 
         return [
             'message' => __('The language was successfully created'),

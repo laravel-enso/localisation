@@ -3,6 +3,7 @@
 namespace LaravelEnso\Localisation\app\Services;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Services\Traits\JsonFilePathResolver;
 use LaravelEnso\Localisation\app\Services\Traits\LegacyFolderPathResolver;
@@ -43,7 +44,7 @@ class Updater
 
     public function updateJson($oldName, $newName)
     {
-        \File::move(
+        File::move(
             $this->jsonFileName($oldName),
             $this->jsonFileName($newName)
         );
@@ -51,7 +52,7 @@ class Updater
 
     public function updateAppJson($oldName, $newName)
     {
-        \File::move(
+        File::move(
             $this->jsonFileName($oldName, 'app'),
             $this->jsonFileName($newName, 'app')
         );
@@ -59,7 +60,7 @@ class Updater
 
     public function updateEnsoJson($oldName, $newName)
     {
-        \File::move(
+        File::move(
             $this->jsonFileName($oldName, 'enso'),
             $this->jsonFileName($newName, 'enso')
         );
@@ -67,7 +68,7 @@ class Updater
 
     private function updateLegacyFolder($oldName, $newName)
     {
-        \File::move(
+        File::move(
             $this->legacyFolderName($oldName),
             $this->legacyFolderName($newName)
         );

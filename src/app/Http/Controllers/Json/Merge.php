@@ -8,11 +8,8 @@ class Merge
 {
     public function __invoke($locale = null)
     {
-        (new Merger())
-            ->run($locale);
+        (new Merger())->run($locale);
 
-        return [
-            'message' => __('The language files were successfully merged'),
-        ];
+        return ['message' => __('The language files were successfully merged')];
     }
 }

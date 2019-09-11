@@ -11,8 +11,7 @@ class Update extends Controller
 {
     public function __invoke(ValidateLanguageUpdate $request, Language $localisation)
     {
-        (new Updater($localisation, $request->validated()))
-            ->run();
+        (new Updater($localisation, $request->validated()))->run();
 
         return [
             'message' => __('The language was successfully updated'),

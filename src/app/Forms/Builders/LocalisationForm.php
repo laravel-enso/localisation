@@ -7,13 +7,13 @@ use LaravelEnso\Localisation\app\Models\Language;
 
 class LocalisationForm
 {
-    private const FormPath = __DIR__.'/../Templates/localisation.json';
+    protected const FormPath = __DIR__.'/../Templates/localisation.json';
 
-    private $form;
+    protected $form;
 
     public function __construct()
     {
-        $this->form = new Form(self::FormPath);
+        $this->form = new Form(static::FormPath);
     }
 
     public function create()

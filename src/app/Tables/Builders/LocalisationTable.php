@@ -12,7 +12,7 @@ class LocalisationTable extends Table
     public function query()
     {
         return Language::selectRaw('
-            languages.id as "dtRowId", languages.display_name, languages.name,
+            languages.id, languages.display_name, languages.name,
             languages.flag, is_rtl, is_active, languages.created_at
         ');
     }

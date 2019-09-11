@@ -16,11 +16,11 @@ class AppServiceProvider extends ServiceProvider
             'set-language', SetLanguage::class
         );
 
-        $this->loadDependencies()
-            ->publishDependencies();
+        $this->load()
+            ->publish();
     }
 
-    private function loadDependencies()
+    private function load()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
 
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         return $this;
     }
 
-    public function publishDependencies()
+    public function publish()
     {
         $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
