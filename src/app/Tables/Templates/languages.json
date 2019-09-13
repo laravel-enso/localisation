@@ -1,5 +1,6 @@
 {
     "routePrefix": "system.localisation",
+    "model": "language",
     "crtNo": true,
     "cache": true,
     "buttons": [

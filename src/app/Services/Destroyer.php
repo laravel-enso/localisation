@@ -12,21 +12,21 @@ class Destroyer
 {
     use JsonFilePathResolver, LegacyFolderPathResolver;
 
-    private $localisation;
+    private $language;
 
-    public function __construct(Language $localisation)
+    public function __construct(Language $language)
     {
-        $this->localisation = $localisation;
+        $this->language = $language;
     }
 
     public function run()
     {
         DB::transaction(function () {
-            $this->localisation->delete();
-            File::deleteDirectory($this->legacyFolderName($this->localisation->name));
-            File::delete($this->jsonFileName($this->localisation->name, 'enso'));
-            File::delete($this->jsonFileName($this->localisation->name, 'app'));
-            File::delete($this->jsonFileName($this->localisation->name));
+            $this->language->delete();
+            File::deleteDirectory($this->legacyFolderName($this->language->name));
+            File::delete($this->jsonFileName($this->language->name, 'enso'));
+            File::delete($this->jsonFileName($this->language->name, 'app'));
+            File::delete($this->jsonFileName($this->language->name));
         });
     }
 }

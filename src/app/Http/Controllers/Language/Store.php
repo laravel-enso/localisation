@@ -10,12 +10,12 @@ class Store extends Controller
 {
     public function __invoke(ValidateLanguageStore $request)
     {
-        $localisation = (new Storer($request->validated()))->create();
+        $language = (new Storer($request->validated()))->create();
 
         return [
             'message' => __('The language was successfully created'),
             'redirect' => 'system.localisation.edit',
-            'param' => ['localisation' => $localisation->id],
+            'param' => ['language' => $language->id],
         ];
     }
 }

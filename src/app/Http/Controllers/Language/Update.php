@@ -9,9 +9,9 @@ use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageUpdate;
 
 class Update extends Controller
 {
-    public function __invoke(ValidateLanguageUpdate $request, Language $localisation)
+    public function __invoke(ValidateLanguageUpdate $request, Language $language)
     {
-        (new Updater($localisation, $request->validated()))->run();
+        (new Updater($language, $request->validated()))->run();
 
         return [
             'message' => __('The language was successfully updated'),

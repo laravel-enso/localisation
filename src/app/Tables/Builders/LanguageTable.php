@@ -5,9 +5,9 @@ namespace LaravelEnso\Localisation\app\Tables\Builders;
 use LaravelEnso\Tables\app\Services\Table;
 use LaravelEnso\Localisation\app\Models\Language;
 
-class LocalisationTable extends Table
+class LanguageTable extends Table
 {
-    protected $templatePath = __DIR__.'/../Templates/localisation.json';
+    protected $templatePath = __DIR__.'/../Templates/languages.json';
 
     public function query()
     {

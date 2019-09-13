@@ -18,9 +18,9 @@ Route::middleware(['web', 'auth', 'core'])
             ->group(function () {
                 Route::get('create', 'Create')->name('create');
                 Route::post('', 'Store')->name('store');
-                Route::get('{localisation}/edit', 'Edit')->name('edit');
-                Route::patch('{localisation}', 'Update')->name('update');
-                Route::delete('{localisation}', 'Destroy')->name('destroy');
+                Route::get('{language}/edit', 'Edit')->name('edit');
+                Route::patch('{language}', 'Update')->name('update');
+                Route::delete('{language}', 'Destroy')->name('destroy');
 
                 Route::get('initTable', 'InitTable')->name('initTable');
                 Route::get('tableData', 'TableData')->name('tableData');

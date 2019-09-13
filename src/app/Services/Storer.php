@@ -18,18 +18,18 @@ class Storer
 
     public function create()
     {
-        $localisation = null;
+        $language = null;
 
-        DB::transaction(function () use (&$localisation) {
-            $localisation = new Language();
-            $localisation = $localisation
+        DB::transaction(function () use (&$language) {
+            $language = new Language();
+            $language = $language
                 ->storeWithFlagSufix($this->request, $this->request['flag_sufix']);
 
             (new LegacyStorer($this->request['name']))->create();
             (new JsonStorer($this->request['name']))->create();
-            $localisation->save();
+            $language->save();
         });
 
-        return $localisation;
+        return $language;
     }
 }

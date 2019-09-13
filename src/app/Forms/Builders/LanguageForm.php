@@ -5,9 +5,9 @@ namespace LaravelEnso\Localisation\app\Forms\Builders;
 use LaravelEnso\Forms\app\Services\Form;
 use LaravelEnso\Localisation\app\Models\Language;
 
-class LocalisationForm
+class LanguageForm
 {
-    protected const FormPath = __DIR__.'/../Templates/localisation.json';
+    protected const FormPath = __DIR__.'/../Templates/language.json';
 
     protected $form;
 

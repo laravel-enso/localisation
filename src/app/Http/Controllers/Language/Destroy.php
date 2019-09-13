@@ -11,11 +11,11 @@ class Destroy extends Controller
 {
     use AuthorizesRequests;
 
-    public function __invoke(Language $localisation)
+    public function __invoke(Language $language)
     {
-        $this->authorize('destroy', $localisation);
+        $this->authorize('destroy', $language);
 
-        (new Destroyer($localisation))->run();
+        (new Destroyer($language))->run();
 
         return [
             'message' => __('The language was successfully deleted'),

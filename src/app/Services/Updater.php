@@ -12,20 +12,20 @@ class Updater
 {
     use JsonFilePathResolver, LegacyFolderPathResolver;
 
-    private $localisation;
+    private $language;
     private $request;
 
-    public function __construct(Language $localisation, array $request)
+    public function __construct(Language $language, array $request)
     {
-        $this->localisation = $localisation;
+        $this->language = $language;
         $this->request = $request;
     }
 
     public function run()
     {
         DB::transaction(function () {
-            $oldName = $this->localisation->name;
-            $this->localisation->updateWithFlagSufix($this->request, $this->request['flag_sufix']);
+            $oldName = $this->language->name;
+            $this->language->updateWithFlagSufix($this->request, $this->request['flag_sufix']);
             $this->updateLangFiles($oldName, $this->request['name']);
         });
     }
