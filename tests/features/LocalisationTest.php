@@ -30,11 +30,10 @@ class LocalisationTest extends TestCase
         $this->seed()
             ->actingAs($this->user = User::first());
 
-        $this->testModel = factory(Language::class)
-            ->make([
-                'name' => self::LangName,
-                'flag' => 'flag-icon flag-icon-'.self::LangName,
-            ]);
+        $this->testModel = factory(Language::class)->make([
+            'name' => self::LangName,
+            'flag' => 'flag-icon flag-icon-'.self::LangName,
+        ]);
     }
 
     /** @test */
@@ -51,7 +50,7 @@ class LocalisationTest extends TestCase
             ->assertJsonFragment([
                 'message' => __('The language was successfully created'),
                 'redirect' => 'system.localisation.edit',
-                'param' => ['localisation' => $language->id],
+                'param' => ['language' => $language->id],
             ]);
 
         $this->assertTrue(
