@@ -4,11 +4,11 @@ namespace LaravelEnso\Localisation\app\Http\Controllers\Language;
 
 use Illuminate\Routing\Controller;
 use LaravelEnso\Localisation\app\Services\Storer;
-use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageStore;
+use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
 
 class Store extends Controller
 {
-    public function __invoke(ValidateLanguageStore $request)
+    public function __invoke(ValidateLanguageRequest $request)
     {
         $language = (new Storer($request->validated()))->create();
 

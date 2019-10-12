@@ -5,7 +5,7 @@ namespace LaravelEnso\Localisation\app\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateLanguageStore extends FormRequest
+class ValidateLanguageRequest extends FormRequest
 {
     public function authorize()
     {
@@ -25,11 +25,13 @@ class ValidateLanguageStore extends FormRequest
 
     protected function nameUnique()
     {
-        return Rule::unique('languages', 'name');
+        return Rule::unique('languages', 'name')
+            ->ignore(optional($this->route('language'))->id);
     }
 
     protected function displayNameUnique()
     {
-        return Rule::unique('languages', 'display_name');
+        return Rule::unique('languages', 'display_name')
+            ->ignore(optional($this->route('language'))->id);
     }
 }
