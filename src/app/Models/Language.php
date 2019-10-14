@@ -5,8 +5,9 @@ namespace LaravelEnso\Localisation\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
+use LaravelEnso\Helpers\app\Contracts\Activatable;
 
-class Language extends Model
+class Language extends Model implements Activatable
 {
     use ActiveState, TableCache;
 
