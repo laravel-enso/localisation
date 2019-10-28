@@ -19,18 +19,7 @@ For live examples and demos, you may visit [laravel-enso.com](https://www.larave
 [![Watch the demo](https://laravel-enso.github.io/localisation/screenshots/bulma_011_thumb.png)](https://laravel-enso.github.io/localisation/videos/bulma_demo_01.webm)
 <sup>click on the photo to view a short demo in compatible browsers</sup>
 
-## Installation
-
-Comes pre-installed in Enso.
-
-## Features
-
-- allows an easier management of languages, keys and translations in the context of a multi language application
-- uses the newer Laravel `__()` translation method and stores keys and translations inside a JSON file
-- permits adding as many languages as you require and the quick creation of translations for the keys you need
-- the language selector is easily accessible in the right-hand sidebar
-
-### Configuration & Usage
+### Installation, Configuration & Usage
 
 Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/localisation.html)
 
@@ -41,4 +30,3 @@ are welcome. Pull requests are great, but issues are good too.
 ### License
 
 This package is released under the MIT license.
-<!--/h-->
