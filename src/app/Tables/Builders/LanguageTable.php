@@ -3,8 +3,8 @@
 namespace LaravelEnso\Localisation\app\Tables\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
-use LaravelEnso\Tables\app\Contracts\Table;
 use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Tables\app\Contracts\Table;
 
 class LanguageTable implements Table
 {

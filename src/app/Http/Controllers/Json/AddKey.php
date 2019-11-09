@@ -2,9 +2,9 @@
 
 namespace LaravelEnso\Localisation\app\Http\Controllers\Json;
 
+use LaravelEnso\Localisation\app\Http\Requests\ValidateKeyRequest;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Localisation\app\Services\Json\Updater;
-use LaravelEnso\Localisation\app\Http\Requests\ValidateKeyRequest;
 
 class AddKey
 {

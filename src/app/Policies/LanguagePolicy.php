@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Localisation\app\Policies;
 
-use LaravelEnso\Core\app\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Localisation\app\Models\Language;
 
 class LanguagePolicy
