@@ -136,7 +136,7 @@
     "January": null,
     "Revenue": null,
     "Income": null,
-    "Bucharest": null,
+    "Bucharest": "Bucuresti",
     "Besel": null,
     "Geneva": null,
     "City Population by Age": null,
@@ -151,7 +151,7 @@
     "Azzure": null,
     "Red": null,
     "Again Colors": null,
-    "Green": null,
+    "Green": "Verde",
     "Notifications": null,
     "Bookmarks": null,
     "Colors": null,
@@ -549,5 +549,7 @@
     "Menu Collapse": "Restrange Meniu",
     "Flag Icon Class": "Clasa iconita steag",
     "Send a password reset link": "Genereaza link pentru reset parola",
-    "Search": "Cauta"
+    "Search": "Cauta",
+    "The application was updated, please save your work & refresh your browser": "Aplicatia a fost actualizata, salveaza-ti modificarile curente si reincarca pagina",
+    "Click here to refresh your page and update to the latest version": "Apasa aici pentru a folosi ultima versiune a aplicatiei"
 }
