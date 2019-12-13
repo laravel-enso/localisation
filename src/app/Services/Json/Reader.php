@@ -13,7 +13,7 @@ class Reader
     private $language;
     private $subDirectory;
 
-    public function __construct(Language $language, string $subDirectory = null)
+    public function __construct(Language $language, ?string $subDirectory = null)
     {
         $this->language = $language;
         $this->subDirectory = $subDirectory;

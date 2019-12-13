@@ -30,18 +30,6 @@ class Updater
         });
     }
 
-    private function updateLangFiles(string $oldName, string $newName)
-    {
-        if ($oldName === $newName) {
-            return;
-        }
-
-        $this->updateJson($oldName, $newName);
-        $this->updateAppJson($oldName, $newName);
-        $this->updateEnsoJson($oldName, $newName);
-        $this->updateLegacyFolder($oldName, $newName);
-    }
-
     public function updateJson($oldName, $newName)
     {
         File::move(
@@ -64,6 +52,18 @@ class Updater
             $this->jsonFileName($oldName, 'enso'),
             $this->jsonFileName($newName, 'enso')
         );
+    }
+
+    private function updateLangFiles(string $oldName, string $newName)
+    {
+        if ($oldName === $newName) {
+            return;
+        }
+
+        $this->updateJson($oldName, $newName);
+        $this->updateAppJson($oldName, $newName);
+        $this->updateEnsoJson($oldName, $newName);
+        $this->updateLegacyFolder($oldName, $newName);
     }
 
     private function updateLegacyFolder($oldName, $newName)

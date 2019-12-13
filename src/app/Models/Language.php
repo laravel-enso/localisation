@@ -11,7 +11,7 @@ class Language extends Model implements Activatable
 {
     use ActiveState, TableCache;
 
-    const FlagClassPrefix = 'flag-icon flag-icon-';
+    private const FlagClassPrefix = 'flag-icon flag-icon-';
 
     protected $fillable = ['name', 'display_name', 'flag', 'is_rtl', 'is_active'];
 

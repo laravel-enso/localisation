@@ -17,7 +17,7 @@ class AddKey
                 return $keys;
             }, []);
 
-        (new Updater(new Language, $keys))->addKey();
+        (new Updater(new Language(), $keys))->addKey();
 
         return [
             'message' => __('The translation key was successfully added'),
