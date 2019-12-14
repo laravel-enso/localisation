@@ -24,6 +24,6 @@ class MergeCommand extends Command
 
         (new Merger())->run($locale);
 
-        $this->info('Language files merged ('.($locale ?: 'all').')!');
+        $this->info('Language files merged ('.($locale ? $locale : 'all').')!');
     }
 }

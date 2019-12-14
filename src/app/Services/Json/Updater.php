@@ -11,7 +11,7 @@ class Updater extends Handler
     private $langArray;
     private $subDir;
 
-    public function __construct(Language $language, array $langArray, string $subDir = null)
+    public function __construct(Language $language, array $langArray, ?string $subDir = null)
     {
         $this->langArray = $langArray;
         $this->locale = $language->name;
