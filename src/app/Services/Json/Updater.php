@@ -25,9 +25,7 @@ class Updater extends Handler
         );
 
         $this->extraLangs()
-            ->each(function ($locale) {
-                $this->updateDifferences($locale);
-            });
+            ->each(fn($locale) => $this->updateDifferences($locale));
     }
 
     public function addKey()

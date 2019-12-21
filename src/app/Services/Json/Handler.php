@@ -46,9 +46,7 @@ abstract class Handler
         }
 
         $languages->pluck('name')
-            ->each(function ($locale) {
-                $this->mergeLocale($locale);
-            });
+            ->each(fn($locale) => $this->mergeLocale($locale));
     }
 
     private function mergeLocale(string $locale)

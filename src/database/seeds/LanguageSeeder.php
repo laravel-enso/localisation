@@ -21,12 +21,10 @@ class LanguageSeeder extends Seeder
 
     public function run()
     {
-        DB::transaction(function () {
-            collect(self::Languages)
-                ->each(function ($language) {
-                    factory(Language::class)
-                        ->create($language);
-                });
-        });
+        DB::transaction(fn() => (
+            collect(self::Languages)->each(fn($language) => (
+                factory(Language::class)->create($language)
+            ))
+        ));
     }
 }

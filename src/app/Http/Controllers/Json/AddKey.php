@@ -11,11 +11,8 @@ class AddKey
     public function __invoke(ValidateKeyRequest $request)
     {
         $keys = collect($request->get('keys'))
-            ->reduce(function ($keys, $key) {
-                $keys[$key] = '';
-
-                return $keys;
-            }, []);
+            ->mapWithKeys(fn($key) => [$key => ''])
+            ->toArray();
 
         (new Updater(new Language(), $keys))->addKey();
 
