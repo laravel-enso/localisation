@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Controllers\Language;
+namespace LaravelEnso\Localisation\App\Http\Controllers\Language;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Tables\app\Traits\Init;
-use LaravelEnso\Localisation\app\Tables\Builders\LanguageTable;
+use LaravelEnso\Localisation\App\Tables\Builders\LanguageTable;
+use LaravelEnso\Tables\App\Traits\Init;
 
 class InitTable extends Controller
 {

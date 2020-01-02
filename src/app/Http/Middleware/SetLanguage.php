@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Middleware;
+namespace LaravelEnso\Localisation\App\Http\Middleware;
 
 use Closure;
 use Jenssegers\Date\Date;

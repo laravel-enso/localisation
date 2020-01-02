@@ -1,15 +1,15 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Forms\Builders;
+namespace LaravelEnso\Localisation\App\Forms\Builders;
 
-use LaravelEnso\Forms\app\Services\Form;
-use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Forms\App\Services\Form;
+use LaravelEnso\Localisation\App\Models\Language;
 
 class LanguageForm
 {
     protected const FormPath = __DIR__.'/../Templates/language.json';
 
-    protected $form;
+    protected Form $form;
 
     public function __construct()
     {

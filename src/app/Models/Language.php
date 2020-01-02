@@ -1,17 +1,17 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Models;
+namespace LaravelEnso\Localisation\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Tables\app\Traits\TableCache;
-use LaravelEnso\Helpers\app\Traits\ActiveState;
-use LaravelEnso\Helpers\app\Contracts\Activatable;
+use LaravelEnso\Helpers\App\Contracts\Activatable;
+use LaravelEnso\Helpers\App\Traits\ActiveState;
+use LaravelEnso\Tables\App\Traits\TableCache;
 
 class Language extends Model implements Activatable
 {
     use ActiveState, TableCache;
 
-    const FlagClassPrefix = 'flag-icon flag-icon-';
+    public const FlagClassPrefix = 'flag-icon flag-icon-';
 
     protected $fillable = ['name', 'display_name', 'flag', 'is_rtl', 'is_active'];
 

@@ -1,22 +1,20 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Services\Legacy;
+namespace LaravelEnso\Localisation\App\Services\Legacy;
 
 use Illuminate\Support\Facades\File;
-use LaravelEnso\Localisation\app\Exceptions\LocalisationException;
-use LaravelEnso\Localisation\app\Services\Traits\LegacyFolderPathResolver;
+use LaravelEnso\Localisation\App\Exceptions\Localisation;
+use LaravelEnso\Localisation\App\Services\Traits\LegacyFolderPathResolver;
 
 class Storer
 {
     use LegacyFolderPathResolver;
 
-    private $locale;
     private $newLocaleFolder;
     private $fallbackLocaleFolder;
 
     public function __construct(string $locale)
     {
-        $this->locale = $locale;
         $this->newLocaleFolder = $this->legacyFolderName($locale);
         $this->fallbackLocaleFolder = $this->legacyFolderName(config('app.fallback_locale'));
     }
@@ -24,10 +22,7 @@ class Storer
     public function create()
     {
         if (File::isDirectory($this->newLocaleFolder)) {
-            throw new LocalisationException(__(
-                "Can't create the language for locale :locale files because the legacy folder :folder already exists",
-                ['locale' => $this->locale, 'folder' => $this->newLocaleFolder]
-            ));
+            throw Localisation::legacyFolderExists($this->folder, $this->newLocaleFolder);
         }
 
         File::copyDirectory(

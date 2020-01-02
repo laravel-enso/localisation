@@ -1,19 +1,17 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Services\Json;
+namespace LaravelEnso\Localisation\App\Services\Json;
 
-use LaravelEnso\Helpers\app\Classes\JsonParser;
-use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Localisation\App\Models\Language;
 
 class Storer extends Handler
 {
-    private $locale;
-    private $language;
+    private string $locale;
 
     public function __construct(string $locale)
     {
         $this->locale = $locale;
-        $this->language = Language::extra()->first();
     }
 
     public function create()
@@ -35,14 +33,13 @@ class Storer extends Handler
 
     private function existingTranslations(string $subDirectory)
     {
-        return (new JsonParser($this->filename($subDirectory)))
-            ->array();
+        return (new JsonParser($this->filename($subDirectory)))->array();
     }
 
     private function filename($subDirectory)
     {
         return $this->jsonFileName(
-            $this->language->name,
+            Language::extra()->first()->name,
             $subDirectory
         );
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Controllers\Language;
+namespace LaravelEnso\Localisation\App\Http\Controllers\Language;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Forms\Builders\LanguageForm;
+use LaravelEnso\Localisation\App\Forms\Builders\LanguageForm;
+use LaravelEnso\Localisation\App\Models\Language;
 
 class Edit extends Controller
 {

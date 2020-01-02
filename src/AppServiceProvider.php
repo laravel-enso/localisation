@@ -3,21 +3,18 @@
 namespace LaravelEnso\Localisation;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Localisation\app\Commands\MergeCommand;
-use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
+use LaravelEnso\Localisation\App\Commands\Merge;
+use LaravelEnso\Localisation\App\Http\Middleware\SetLanguage;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->commands(MergeCommand::class);
-
-        $this->app['router']->aliasMiddleware(
-            'set-language', SetLanguage::class
-        );
+        $this->app['router']->aliasMiddleware('set-language', SetLanguage::class);
 
         $this->load()
-            ->publish();
+            ->publish()
+            ->commands(Merge::class);
     }
 
     private function load()
@@ -29,27 +26,19 @@ class AppServiceProvider extends ServiceProvider
         return $this;
     }
 
-    public function publish()
+    private function publish()
     {
         $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
-        ], 'localisation-factory');
-
-        $this->publishes([
-            __DIR__.'/database/factories' => database_path('factories'),
-        ], 'enso-factories');
+        ], ['localisation-factory', 'enso-factories']);
 
         $this->publishes([
             __DIR__.'/database/seeds' => database_path('seeds'),
-        ], 'localisation-seeder');
-
-        $this->publishes([
-            __DIR__.'/database/seeds' => database_path('seeds'),
-        ], 'enso-seeders');
+        ], ['localisation-seeder', 'enso-seeders']);
 
         $this->publishes([
             __DIR__.'/config' => config_path('enso'),
-        ], 'localisation-config');
+        ], ['localisation-config', 'enso-config']);
 
         $this->publishes([
             __DIR__.'/resources/lang/enso' => resource_path('lang/enso'),
@@ -58,5 +47,7 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang'),
         ], 'localisation-lang-files');
+
+        return $this;
     }
 }

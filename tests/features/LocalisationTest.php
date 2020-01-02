@@ -1,15 +1,15 @@
 <?php
 
 use Tests\TestCase;
-use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Core\app\Models\Preference;
-use LaravelEnso\Forms\app\TestTraits\EditForm;
-use LaravelEnso\Forms\app\TestTraits\CreateForm;
-use LaravelEnso\Forms\app\TestTraits\DestroyForm;
-use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\App\Models\Preference;
+use LaravelEnso\Forms\App\TestTraits\EditForm;
+use LaravelEnso\Forms\App\TestTraits\CreateForm;
+use LaravelEnso\Forms\App\TestTraits\DestroyForm;
+use LaravelEnso\Localisation\App\Models\Language;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Tables\app\Traits\Tests\Datatable;
-use LaravelEnso\Core\app\Services\DefaultPreferences;
+use LaravelEnso\Tables\App\Traits\Tests\Datatable;
+use LaravelEnso\Core\App\Services\DefaultPreferences;
 
 class LocalisationTest extends TestCase
 {

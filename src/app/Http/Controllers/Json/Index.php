@@ -1,20 +1,16 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Controllers\Json;
+namespace LaravelEnso\Localisation\App\Http\Controllers\Json;
 
-use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Localisation\App\Models\Language;
 
 class Index
 {
     public function __invoke()
     {
-        return Language::extra()
-            ->get(['display_name', 'id'])
-            ->map(function ($locale) {
-                $locale->name = $locale->display_name;
-                unset($locale->display_name);
-
-                return $locale;
-            });
+        return Language::extra()->get()->map(fn ($locale) => [
+            'id' => $locale->id,
+            'name' => $locale->display_name,
+        ]);
     }
 }

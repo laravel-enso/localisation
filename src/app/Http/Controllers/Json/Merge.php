@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Controllers\Json;
+namespace LaravelEnso\Localisation\App\Http\Controllers\Json;
 
-use LaravelEnso\Localisation\app\Services\Json\Merger;
+use LaravelEnso\Localisation\App\Services\Json\Merger;
 
 class Merge
 {

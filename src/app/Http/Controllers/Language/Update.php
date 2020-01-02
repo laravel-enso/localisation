@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Controllers\Language;
+namespace LaravelEnso\Localisation\App\Http\Controllers\Language;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Services\Updater;
-use LaravelEnso\Localisation\app\Http\Requests\ValidateLanguageRequest;
+use LaravelEnso\Localisation\App\Http\Requests\ValidateLanguageRequest;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Localisation\App\Services\Updater;
 
 class Update extends Controller
 {
@@ -13,8 +13,6 @@ class Update extends Controller
     {
         (new Updater($language, $request->validated()))->run();
 
-        return [
-            'message' => __('The language was successfully updated'),
-        ];
+        return ['message' => __('The language was successfully updated')];
     }
 }

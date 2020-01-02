@@ -12,30 +12,48 @@
             "action": "router",
             "label": "Edit Texts"
         },
-        "create", "edit", "destroy"
+        "create",
+        "edit",
+        "destroy"
     ],
     "columns": [
         {
             "label": "Display Name",
             "name": "display_name",
             "data": "languages.display_name",
-            "meta": ["searchable", "sortable"]
-        }, {
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
             "label": "Name",
             "name": "name",
             "data": "languages.name",
-            "meta": ["searchable", "sortable"]
-        }, {
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
             "label": "Flag",
             "name": "flag",
             "data": "languages.flag",
-            "meta": ["slot", "sortable"]
-        }, {
+            "meta": [
+                "slot",
+                "sortable"
+            ]
+        },
+        {
             "label": "RTL",
             "name": "is_rtl",
             "data": "languages.is_rtl",
-            "meta": ["sortable", "boolean"]
-        }, {
+            "meta": [
+                "sortable",
+                "boolean"
+            ]
+        },
+        {
             "label": "Active",
             "name": "is_active",
             "data": "languages.is_active",
@@ -43,11 +61,15 @@
                 "sortable",
                 "boolean"
             ]
-        }, {
+        },
+        {
             "label": "Created At",
             "name": "created_at",
             "data": "languages.created_at",
-            "meta": ["sortable", "date"]
+            "meta": [
+                "sortable",
+                "date"
+            ]
         }
     ]
 }

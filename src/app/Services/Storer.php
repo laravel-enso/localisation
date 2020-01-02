@@ -1,15 +1,15 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Services;
+namespace LaravelEnso\Localisation\App\Services;
 
 use Illuminate\Support\Facades\DB;
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Services\Json\Storer as JsonStorer;
-use LaravelEnso\Localisation\app\Services\Legacy\Storer as LegacyStorer;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Localisation\App\Services\Json\Storer as JsonStorer;
+use LaravelEnso\Localisation\App\Services\Legacy\Storer as LegacyStorer;
 
 class Storer
 {
-    private $request;
+    private array $request;
 
     public function __construct(array $request)
     {
@@ -18,17 +18,15 @@ class Storer
 
     public function create()
     {
-        $language = null;
+        DB::beginTransaction();
 
-        DB::transaction(function () use (&$language) {
-            $language = new Language();
-            $language = $language
+        $language = (new Language())
                 ->storeWithFlagSufix($this->request, $this->request['flag_sufix']);
 
-            (new LegacyStorer($this->request['name']))->create();
-            (new JsonStorer($this->request['name']))->create();
-            $language->save();
-        });
+        (new LegacyStorer($this->request['name']))->create();
+        (new JsonStorer($this->request['name']))->create();
+
+        DB::commit();
 
         return $language;
     }

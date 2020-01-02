@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Requests;
+namespace LaravelEnso\Localisation\App\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ValidateLanguageRequest extends FormRequest
 {
@@ -15,23 +15,17 @@ class ValidateLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', $this->nameUnique()],
-            'display_name' => ['required', $this->displayNameUnique()],
+            'name' => ['required', $this->unique('name')],
+            'display_name' => ['required', $this->unique('display_name')],
             'flag_sufix' => 'required|string|size:2',
             'is_rtl' => 'required|boolean',
             'is_active' => 'required|boolean',
         ];
     }
 
-    protected function nameUnique()
+    protected function unique($attribute)
     {
-        return Rule::unique('languages', 'name')
-            ->ignore(optional($this->route('language'))->id);
-    }
-
-    protected function displayNameUnique()
-    {
-        return Rule::unique('languages', 'display_name')
+        return Rule::unique('languages', $attribute)
             ->ignore(optional($this->route('language'))->id);
     }
 }

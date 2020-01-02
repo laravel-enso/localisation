@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Requests;
+namespace LaravelEnso\Localisation\App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,8 +13,6 @@ class ValidateKeyRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            'keys' => 'required|array',
-        ];
+        return ['keys' => 'required|array'];
     }
 }

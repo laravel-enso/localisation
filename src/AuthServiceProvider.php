@@ -2,14 +2,14 @@
 
 namespace LaravelEnso\Localisation;
 
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Policies\LanguagePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Localisation\App\Policies\Language as Policy;
 
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        Language::class => LanguagePolicy::class,
+        Language::class => Policy::class,
     ];
 
     public function boot()

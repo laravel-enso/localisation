@@ -1,12 +1,17 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Services\Traits;
+namespace LaravelEnso\Localisation\App\Services\Traits;
+
+use Illuminate\Support\Collection;
 
 trait JsonFilePathResolver
 {
     protected function jsonFileName($locale, $subDir = null)
     {
-        return resource_path('lang/'.($subDir ? $subDir.'/' : '').$locale.'.json');
+        $path = (new Collection(['lang', $subDir, "{$locale}.json"]))
+            ->filter()->implode(DIRECTORY_SEPARATOR);
+
+        return resource_path($path);
     }
 
     protected function coreJsonFileName($locale)

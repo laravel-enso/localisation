@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Services\Traits;
+namespace LaravelEnso\Localisation\App\Services\Traits;
 
 trait LegacyFolderPathResolver
 {
     protected function legacyFolderName($locale)
     {
-        return resource_path('lang/'.$locale);
+        return resource_path('lang'.DIRECTORY_SEPARATOR.$locale);
     }
 }

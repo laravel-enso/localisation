@@ -1,31 +1,30 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Services\Json;
+namespace LaravelEnso\Localisation\App\Services\Json;
 
-use LaravelEnso\Helpers\app\Classes\JsonParser;
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Services\Traits\JsonFilePathResolver;
+use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Localisation\App\Services\Traits\JsonFilePathResolver;
 
 class Reader
 {
     use JsonFilePathResolver;
 
-    private $language;
-    private $subDirectory;
+    private Language $language;
+    private string $subDirectory;
 
-    public function __construct(Language $language, string $subDirectory = null)
+    public function __construct(Language $language, ?string $subDirectory = null)
     {
         $this->language = $language;
         $this->subDirectory = $subDirectory;
     }
 
-    public function get()
+    public function get(): string
     {
-        return (new JsonParser($this->filename()))
-            ->json();
+        return (new JsonParser($this->filename()))->json();
     }
 
-    private function filename()
+    private function filename(): string
     {
         return $this->jsonFileName(
             $this->language->name,

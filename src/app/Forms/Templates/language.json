@@ -1,56 +1,65 @@
 {
     "routePrefix": "system.localisation",
-    "sections": [{
-        "columns": 2,
-        "fields": [{
-            "label": "Display Name",
-            "name": "display_name",
-            "value": "",
-            "meta": {
-                "type": "input",
-                "content": "text"
-            }
-        }, {
-            "label": "Name",
-            "name": "name",
-            "value": "",
-            "meta": {
-                "type": "input",
-                "content": "text"
-            }
-        }, {
-            "label": "Flag Sufix",
-            "name": "flag_sufix",
-            "value": "",
-            "meta": {
-                "type": "input",
-                "content": "text"
-            }
-        }, {
-            "label": "Flag",
-            "name": "flag",
-            "value": null,
-            "meta": {
-                "custom": "true",
-                "type": "text",
-                "disabled": true
-            }
-        }, {
-            "label": "RTL",
-            "name": "is_rtl",
-            "value": false,
-            "meta": {
-                "type": "input",
-                "content": "checkbox"
-            }
-        }, {
-            "label": "Active",
-            "name": "is_active",
-            "value": true,
-            "meta": {
-                "type": "input",
-                "content": "checkbox"
-            }
-        }]
-    }]
+    "sections": [
+        {
+            "columns": 2,
+            "fields": [
+                {
+                    "label": "Display Name",
+                    "name": "display_name",
+                    "value": "",
+                    "meta": {
+                        "type": "input",
+                        "content": "text"
+                    }
+                },
+                {
+                    "label": "Name",
+                    "name": "name",
+                    "value": "",
+                    "meta": {
+                        "type": "input",
+                        "content": "text"
+                    }
+                },
+                {
+                    "label": "Flag Sufix",
+                    "name": "flag_sufix",
+                    "value": "",
+                    "meta": {
+                        "type": "input",
+                        "content": "text"
+                    }
+                },
+                {
+                    "label": "Flag",
+                    "name": "flag",
+                    "value": null,
+                    "meta": {
+                        "custom": "true",
+                        "type": "text",
+                        "disabled": true
+                    }
+                },
+                {
+                    "label": "RTL",
+                    "name": "is_rtl",
+                    "value": false,
+                    "meta": {
+                        "type": "input",
+                        "content": "checkbox"
+                    }
+                },
+                {
+                    "label": "Active",
+                    "name": "is_active",
+                    "value": true,
+                    "meta": {
+                        "type": "input",
+                        "content": "checkbox"
+                    }
+                }
+            ]
+        }
+    ]
 }

@@ -1,35 +1,34 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Services\Json;
+namespace LaravelEnso\Localisation\App\Services\Json;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use LaravelEnso\Helpers\app\Classes\JsonParser;
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Services\Traits\JsonFilePathResolver;
+use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Localisation\App\Services\Traits\JsonFilePathResolver;
 
 abstract class Handler
 {
     use JsonFilePathResolver;
 
-    protected function newTranslations(array $array)
+    protected function newTranslations(array $array): Collection
     {
-        $keys = collect($array)->keys();
-        $values = collect()->pad($keys->count(), null);
-
-        return $keys->combine($values);
+        return (new Collection($array))
+            ->mapWithKeys(fn ($key) => [$key => null]);
     }
 
-    protected function saveMerged(string $locale, array $langFile)
+    protected function saveMerged(string $locale, array $langFile): void
     {
         $this->saveToDisk($locale, $langFile);
     }
 
-    protected function savePartial(string $locale, array $langFile, string $subDir)
+    protected function savePartial(string $locale, array $langFile, string $subDir): void
     {
         $this->saveToDisk($locale, $langFile, $subDir);
     }
 
-    protected function saveToDisk(string $locale, array $langFile, string $subDir = null)
+    protected function saveToDisk(string $locale, array $langFile, ?string $subDir = null): void
     {
         File::put(
             $this->jsonFileName($locale, $subDir),
@@ -37,7 +36,7 @@ abstract class Handler
         );
     }
 
-    protected function merge(string $locale = null)
+    protected function merge(?string $locale = null): void
     {
         $languages = Language::extra();
 
@@ -46,17 +45,13 @@ abstract class Handler
         }
 
         $languages->pluck('name')
-            ->each(function ($locale) {
-                $this->mergeLocale($locale);
-            });
+            ->each(fn ($locale) => $this->mergeLocale($locale));
     }
 
-    private function mergeLocale(string $locale)
+    private function mergeLocale(string $locale): void
     {
-        $core = (new JsonParser($this->coreJsonFileName($locale)))
-            ->array();
-        $app = (new JsonParser($this->appJsonFileName($locale)))
-            ->array();
+        $core = (new JsonParser($this->coreJsonFileName($locale)))->array();
+        $app = (new JsonParser($this->appJsonFileName($locale)))->array();
 
         $this->saveMerged($locale, array_merge($core, $app));
     }

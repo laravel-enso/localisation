@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Controllers\Json;
+namespace LaravelEnso\Localisation\App\Http\Controllers\Json;
 
 use Illuminate\Http\Request;
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Services\Json\Updater;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Localisation\App\Services\Json\Updater;
 
 class Update
 {

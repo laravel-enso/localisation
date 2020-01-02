@@ -1,27 +1,27 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Policies;
+namespace LaravelEnso\Localisation\App\Policies;
 
-use LaravelEnso\Core\app\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Localisation\App\Models\Language as Model;
 
-class LanguagePolicy
+class Language
 {
     use HandlesAuthorization;
 
-    public function destroy(User $user, Language $language)
+    public function destroy(User $user, Model $language)
     {
         return $this->isNotDefault($language)
             && $this->isNotUserLocale($user, $language);
     }
 
-    private function isNotDefault(Language $language)
+    private function isNotDefault(Model $language)
     {
         return $language->name !== config('app.fallback_locale');
     }
 
-    private function isNotUserLocale(User $user, Language $language)
+    private function isNotUserLocale(User $user, Model $language)
     {
         return $language->name !== $user->lang();
     }

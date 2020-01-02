@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Controllers\Json;
+namespace LaravelEnso\Localisation\App\Http\Controllers\Json;
 
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Services\Json\Reader;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Localisation\App\Services\Json\Reader;
 
 class Edit
 {

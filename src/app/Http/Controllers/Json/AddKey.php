@@ -1,26 +1,22 @@
 <?php
 
-namespace LaravelEnso\Localisation\app\Http\Controllers\Json;
+namespace LaravelEnso\Localisation\App\Http\Controllers\Json;
 
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Localisation\app\Services\Json\Updater;
-use LaravelEnso\Localisation\app\Http\Requests\ValidateKeyRequest;
+use Illuminate\Support\Collection;
+use LaravelEnso\Localisation\App\Http\Requests\ValidateKeyRequest;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Localisation\App\Services\Json\Updater;
 
 class AddKey
 {
-    public function __invoke(ValidateKeyRequest $request)
+    public function __invoke(ValidateKeyRequest $request, Language $language)
     {
-        $keys = collect($request->get('keys'))
-            ->reduce(function ($keys, $key) {
-                $keys[$key] = '';
+        $keys = (new Collection($request->get('keys')))
+            ->mapWithKeys(fn ($keys, $key) => [$key => ''])
+            ->toArray();
 
-                return $keys;
-            }, []);
+        (new Updater($language, $keys))->addKey();
 
-        (new Updater(new Language, $keys))->addKey();
-
-        return [
-            'message' => __('The translation key was successfully added'),
-        ];
+        return ['message' => __('The translation key was successfully added')];
     }
 }
