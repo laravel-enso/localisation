@@ -645,5 +645,12 @@
     "video": "Video",
     "was changed": "wurde geändert",
     "was last updated": "wurde zuletzt geändert",
-    "yesterday": "Gestern"
+    "yesterday": "Gestern",
+    "Client Payments": null,
+    "Receipt": null,
+    "Payment Order": null,
+    "Cheque": null,
+    "Promissory Note": null,
+    "Cash Register Receipt": null,
+    "POS Receipt": null
 }

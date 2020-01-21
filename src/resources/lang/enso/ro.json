@@ -645,5 +645,12 @@
     "video": "video",
     "was changed": "a fost schimbat",
     "was last updated": "a fost modificat",
-    "yesterday": "ieri"
+    "yesterday": "ieri",
+    "Client Payments": "Plati clienti",
+    "Receipt": "Chitanta",
+    "Payment Order": "OP",
+    "Cheque": "Cec",
+    "Promissory Note": "Bilet la ordin",
+    "Cash Register Receipt": "Bon fiscal",
+    "POS Receipt": "Chitanta POS"
 }

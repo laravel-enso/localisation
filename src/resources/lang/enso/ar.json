@@ -644,5 +644,12 @@
     "video": null,
     "was changed": null,
     "was last updated": null,
-    "yesterday": null
+    "yesterday": null,
+    "Client Payments": null,
+    "Receipt": null,
+    "Payment Order": null,
+    "Cheque": null,
+    "Promissory Note": null,
+    "Cash Register Receipt": null,
+    "POS Receipt": null
 }
