@@ -17,7 +17,6 @@
         }
     ],
     "require": {
-        "jenssegers/date": "^3.4",
         "laravel-enso/core": "4.8.*",
         "laravel-enso/forms": "3.4.*",
         "laravel-enso/helpers": "1.15.*",

@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Localisation\App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
-use Jenssegers\Date\Date;
 
 class SetLanguage
 {
@@ -13,7 +13,7 @@ class SetLanguage
 
         app()->setLocale($language);
 
-        Date::setLocale($language);
+        Carbon::setLocale($language);
 
         return $next($request);
     }
