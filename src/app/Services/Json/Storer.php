@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Localisation\App\Services\Json;
 
-use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Helpers\App\Classes\JsonReader;
 use LaravelEnso\Localisation\App\Models\Language;
 
 class Storer extends Handler
@@ -33,7 +33,7 @@ class Storer extends Handler
 
     private function existingTranslations(string $subDirectory)
     {
-        return (new JsonParser($this->filename($subDirectory)))->array();
+        return (new JsonReader($this->filename($subDirectory)))->array();
     }
 
     private function filename($subDirectory)

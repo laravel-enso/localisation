@@ -3,7 +3,7 @@
 namespace LaravelEnso\Localisation\App\Services\Json;
 
 use Illuminate\Support\Collection;
-use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Helpers\App\Classes\JsonReader;
 use LaravelEnso\Localisation\App\Models\Language;
 
 class Updater extends Handler
@@ -81,7 +81,7 @@ class Updater extends Handler
 
     private function extraLangFile(string $locale, string $subDir)
     {
-        return (new JsonParser($this->jsonFileName($locale, $subDir)))->array();
+        return (new JsonReader($this->jsonFileName($locale, $subDir)))->array();
     }
 
     private function extraLangs()
