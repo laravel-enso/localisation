@@ -4,7 +4,7 @@ namespace LaravelEnso\Localisation\App\Services\Json;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
-use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Helpers\App\Classes\JsonReader;
 use LaravelEnso\Localisation\App\Models\Language;
 use LaravelEnso\Localisation\App\Services\Traits\JsonFilePathResolver;
 
@@ -50,8 +50,8 @@ abstract class Handler
 
     private function mergeLocale(string $locale): void
     {
-        $core = (new JsonParser($this->coreJsonFileName($locale)))->array();
-        $app = (new JsonParser($this->appJsonFileName($locale)))->array();
+        $core = (new JsonReader($this->coreJsonFileName($locale)))->array();
+        $app = (new JsonReader($this->appJsonFileName($locale)))->array();
 
         $this->saveMerged($locale, array_merge($core, $app));
     }

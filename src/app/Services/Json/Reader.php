@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Localisation\App\Services\Json;
 
-use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Helpers\App\Classes\JsonReader;
 use LaravelEnso\Localisation\App\Models\Language;
 use LaravelEnso\Localisation\App\Services\Traits\JsonFilePathResolver;
 
@@ -21,7 +21,7 @@ class Reader
 
     public function get(): string
     {
-        return (new JsonParser($this->filename()))->json();
+        return (new JsonReader($this->filename()))->json();
     }
 
     private function filename(): string
