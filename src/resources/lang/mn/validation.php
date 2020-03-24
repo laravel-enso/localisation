@@ -147,7 +147,7 @@ return [
 
     'attributes' => [
         'price' => 'Үнэ',
-        'password'=>'Нууц үг'
+        'password'=>'Нууц үг',
     ],
 
 ];
