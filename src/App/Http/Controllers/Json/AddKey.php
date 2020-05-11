@@ -12,7 +12,7 @@ class AddKey
     public function __invoke(ValidateKeyRequest $request, Language $language)
     {
         $keys = (new Collection($request->get('keys')))
-            ->mapWithKeys(fn ($keys, $key) => [$key => ''])
+            ->mapWithKeys(fn ($key) => [$key => null])
             ->toArray();
 
         (new Updater($language, $keys))->addKey();

@@ -14,7 +14,7 @@ abstract class Handler
 
     protected function newTranslations(array $array): Collection
     {
-        return (new Collection($array))
+        return (new Collection($array))->keys()
             ->mapWithKeys(fn ($key) => [$key => null]);
     }
 

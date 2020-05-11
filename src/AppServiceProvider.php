@@ -42,11 +42,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/lang/enso' => resource_path('lang/enso'),
-        ], 'enso-assets');
-
-        $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang'),
-        ], 'localisation-lang-files');
+        ], 'enso-localisation');
 
         return $this;
     }
