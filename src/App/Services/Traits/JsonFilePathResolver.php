@@ -11,7 +11,9 @@ trait JsonFilePathResolver
         $path = (new Collection(['lang', $subDir, "{$locale}.json"]))
             ->filter()->implode(DIRECTORY_SEPARATOR);
 
-        return resource_path($path);
+        return $subDir === 'enso'
+            ? __DIR__.'/../../../resources/'.$path
+            : resource_path($path);
     }
 
     protected function coreJsonFileName($locale)
