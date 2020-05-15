@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\File;
 use LaravelEnso\Localisation\App\Services\Traits\JsonFilePathResolver;
 
-class SanitizeLocalKeys
+class SanitizeAppKeys
 {
     use JsonFilePathResolver;
 
@@ -22,7 +22,7 @@ class SanitizeLocalKeys
     public function sanitize(string $locale): array
     {
         $sanitized = $this->app->reject(fn ($value, $key) => $this->core
-            ->keys()->contains($key))->toArray();
+            ->keys()->contains($key))->sortKeys()->toArray();
 
         File::put(
             $this->appJsonFileName($locale),
