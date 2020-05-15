@@ -2,12 +2,15 @@
 
 namespace LaravelEnso\Localisation;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Localisation\App\Commands\Merge;
 use LaravelEnso\Localisation\App\Http\Middleware\SetLanguage;
 
 class AppServiceProvider extends ServiceProvider
 {
+    private array $langs = ['ar', 'br', 'de', 'es', 'fr', 'hu', 'mn', 'nl', 'ro'];
+
     public function boot()
     {
         $this->app['router']->aliasMiddleware('set-language', SetLanguage::class);
@@ -40,13 +43,12 @@ class AppServiceProvider extends ServiceProvider
             __DIR__.'/config' => config_path('enso'),
         ], ['localisation-config', 'enso-config']);
 
-        $this->publishes([
-            __DIR__.'/resources/lang/enso' => resource_path('lang/enso'),
-        ], 'enso-assets');
-
-        $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang'),
-        ], 'localisation-lang-files');
+        $this->publishes((new Collection($this->langs))
+                ->mapWithKeys(fn ($key) => [
+                    __DIR__.'/resources/lang/'.$key => resource_path('lang/'.$key),
+                ])->toArray(),
+            'enso-localisation'
+        );
 
         return $this;
     }

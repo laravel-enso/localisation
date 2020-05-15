@@ -5,6 +5,7 @@ namespace LaravelEnso\Localisation\App\Services\Json;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use LaravelEnso\Helpers\App\Classes\JsonReader;
+use LaravelEnso\Localisation\App\Classes\SanitizeAppKeys;
 use LaravelEnso\Localisation\App\Models\Language;
 use LaravelEnso\Localisation\App\Services\Traits\JsonFilePathResolver;
 
@@ -14,7 +15,7 @@ abstract class Handler
 
     protected function newTranslations(array $array): Collection
     {
-        return (new Collection($array))
+        return (new Collection($array))->keys()
             ->mapWithKeys(fn ($key) => [$key => null]);
     }
 
@@ -52,7 +53,8 @@ abstract class Handler
     {
         $core = (new JsonReader($this->coreJsonFileName($locale)))->array();
         $app = (new JsonReader($this->appJsonFileName($locale)))->array();
+        $sanitizedApp = (new SanitizeAppKeys($app, $core))->sanitize($locale);
 
-        $this->saveMerged($locale, array_merge($core, $app));
+        $this->saveMerged($locale, array_merge($core, $sanitizedApp));
     }
 }
