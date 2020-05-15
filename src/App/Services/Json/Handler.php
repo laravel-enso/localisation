@@ -5,6 +5,7 @@ namespace LaravelEnso\Localisation\App\Services\Json;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use LaravelEnso\Helpers\App\Classes\JsonReader;
+use LaravelEnso\Localisation\App\Classes\SanitizeLocalKeys;
 use LaravelEnso\Localisation\App\Models\Language;
 use LaravelEnso\Localisation\App\Services\Traits\JsonFilePathResolver;
 
@@ -53,6 +54,9 @@ abstract class Handler
         $core = (new JsonReader($this->coreJsonFileName($locale)))->array();
         $app = (new JsonReader($this->appJsonFileName($locale)))->array();
 
-        $this->saveMerged($locale, array_merge($core, $app));
+        $this->saveMerged($locale, array_merge(
+            $core,
+            (new SanitizeLocalKeys($app, $core))->sanitize($locale)
+        ));
     }
 }

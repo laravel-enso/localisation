@@ -10,9 +10,10 @@ trait JsonFilePathResolver
     {
         $path = (new Collection(['lang', $subDir, "{$locale}.json"]))
             ->filter()->implode(DIRECTORY_SEPARATOR);
+        $basePath = base_path();
 
         return $subDir === 'enso'
-            ? __DIR__.'/../../../resources/'.$path
+            ? "{$basePath}/vendor/laravel-enso/localisation/src/resources/{$path}"
             : resource_path($path);
     }
 
