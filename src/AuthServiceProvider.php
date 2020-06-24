@@ -3,8 +3,8 @@
 namespace LaravelEnso\Localisation;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use LaravelEnso\Localisation\App\Models\Language;
-use LaravelEnso\Localisation\App\Policies\Language as Policy;
+use LaravelEnso\Localisation\Models\Language;
+use LaravelEnso\Localisation\Policies\Language as Policy;
 
 class AuthServiceProvider extends ServiceProvider
 {
