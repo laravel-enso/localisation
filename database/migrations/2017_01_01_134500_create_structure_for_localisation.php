@@ -25,5 +25,5 @@ class CreateStructureForLocalisation extends Migration
         'name' => 'Localisation', 'icon' => 'language', 'route' => 'system.localisation.index', 'order_index' => 999, 'has_children' => false,
     ];
 
-    protected string $parentMenu = 'System';
+    protected ?string $parentMenu = 'System';
 }
