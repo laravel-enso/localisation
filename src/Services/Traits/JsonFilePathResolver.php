@@ -13,7 +13,7 @@ trait JsonFilePathResolver
         $basePath = base_path();
 
         return $subDir === 'enso'
-            ? "{$basePath}/vendor/laravel-enso/localisation/src/resources/{$path}"
+            ? "{$basePath}/vendor/laravel-enso/localisation/resources/{$path}"
             : resource_path($path);
     }
 

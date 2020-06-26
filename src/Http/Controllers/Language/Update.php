@@ -11,7 +11,11 @@ class Update extends Controller
 {
     public function __invoke(ValidateLanguageRequest $request, Language $language)
     {
-        (new Updater($language, $request->validated()))->run();
+        (new Updater(
+            $language,
+            $request->validatedExcept('flag_sufix'),
+            $request->get('flag_sufix')
+        ))->run();
 
         return ['message' => __('The language was successfully updated')];
     }

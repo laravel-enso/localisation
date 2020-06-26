@@ -21,9 +21,10 @@ class Storer
 
     public function create()
     {
-        if (File::isDirectory($this->newLocaleFolder)) {
-            throw Localisation::legacyFolderExists($this->folder, $this->newLocaleFolder);
-        }
+        // TODO:: remove this. It seems following code is dead code because there isn't folder field!
+        // if (File::isDirectory($this->newLocaleFolder)) {
+        //     throw Localisation::legacyFolderExists($this->folder, $this->newLocaleFolder);
+        // }
 
         File::copyDirectory(
             $this->fallbackLocaleFolder,

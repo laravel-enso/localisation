@@ -14,18 +14,20 @@ class Updater
 
     private Language $language;
     private array $request;
+    private string $flagSufix;
 
-    public function __construct(Language $language, array $request)
+    public function __construct(Language $language, array $request, string $flagSufix)
     {
         $this->language = $language;
         $this->request = $request;
+        $this->flagSufix = $flagSufix;
     }
 
     public function run()
     {
         DB::transaction(function () {
             $oldName = $this->language->name;
-            $this->language->updateWithFlagSufix($this->request, $this->request['flag_sufix']);
+            $this->language->updateWithFlagSufix($this->request, $this->flagSufix);
             $this->updateLangFiles($oldName, $this->request['name']);
         });
     }

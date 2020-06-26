@@ -4,9 +4,12 @@ namespace LaravelEnso\Localisation\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use LaravelEnso\Helpers\Traits\FiltersRequest;
 
 class ValidateLanguageRequest extends FormRequest
 {
+    use FiltersRequest;
+
     public function authorize()
     {
         return true;
