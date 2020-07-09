@@ -1,6 +1,6 @@
 # Localisation
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/235db862227e460792a72a1e65427d1f)](https://www.codacy.com/app/laravel-enso/localisation?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/localisation&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a3b72a5041ba407bb86c1bdcec04a7fe)](https://www.codacy.com/gh/laravel-enso/localisation?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/localisation&amp;utm_campaign=Badge_Grade) 
 [![StyleCI](https://github.styleci.io/repos/85617309/shield?branch=master)](https://github.styleci.io/repos/85617309)
 [![License](https://poser.pugx.org/laravel-enso/localisation/license)](https://packagist.org/packages/laravel-enso/localisation)
 [![Total Downloads](https://poser.pugx.org/laravel-enso/localisation/downloads)](https://packagist.org/packages/laravel-enso/localisation)
