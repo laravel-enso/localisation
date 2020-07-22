@@ -13,4 +13,5 @@ Route::namespace('Language')
         Route::get('initTable', 'InitTable')->name('initTable');
         Route::get('tableData', 'TableData')->name('tableData');
         Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
+        Route::get('options', 'Options')->name('options');
     });

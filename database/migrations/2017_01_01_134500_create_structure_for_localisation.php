@@ -9,6 +9,7 @@ class CreateStructureForLocalisation extends Migration
         ['name' => 'system.localisation.initTable', 'description' => 'Init table data for localisation', 'is_default' => false],
         ['name' => 'system.localisation.tableData', 'description' => 'Get table data for localisation', 'is_default' => false],
         ['name' => 'system.localisation.exportExcel', 'description' => 'Export excel for localisation', 'is_default' => false],
+        ['name' => 'system.localisation.options', 'description' => 'Get options for select', 'is_default' => true],
         ['name' => 'system.localisation.create', 'description' => 'Create langugage', 'is_default' => false],
         ['name' => 'system.localisation.edit', 'description' => 'Edit language', 'is_default' => false],
         ['name' => 'system.localisation.editTexts', 'description' => 'Edit lang file', 'is_default' => false],
