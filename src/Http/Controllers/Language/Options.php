@@ -10,8 +10,5 @@ class Options extends Controller
 {
     use OptionsBuilder;
 
-    public function query()
-    {
-        return Language::query();
-    }
+    protected $model = Language::class;
 }
