@@ -22,7 +22,9 @@ class Updater extends Handler
     public function run()
     {
         $this->savePartial(
-            $this->locale, $this->langArray, $this->subDir
+            $this->locale,
+            $this->langArray,
+            $this->subDir
         );
 
         $this->extraLangs()

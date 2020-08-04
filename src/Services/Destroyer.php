@@ -9,7 +9,8 @@ use LaravelEnso\Localisation\Services\Traits\LegacyFolderPathResolver;
 
 class Destroyer
 {
-    use JsonFilePathResolver, LegacyFolderPathResolver;
+    use JsonFilePathResolver;
+    use LegacyFolderPathResolver;
 
     private $language;
 

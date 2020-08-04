@@ -12,10 +12,10 @@ return [
     |
     */
 
-    'password' => 'A jelszónak minimum 6 karakter hosszúnak kell lennie és a megerősítéssel egyeznie kell.',
-    'reset' => 'Az új jelszó beállítva!',
-    'sent' => 'Jelszó-emlékeztető elküldve!',
+    'password'  => 'A jelszónak minimum 6 karakter hosszúnak kell lennie és a megerősítéssel egyeznie kell.',
+    'reset'     => 'Az új jelszó beállítva!',
+    'sent'      => 'Jelszó-emlékeztető elküldve!',
     'throttled' => 'Kérjük várjon, mielőtt újra megpróbálná.',
-    'token' => 'Ez az új jelszó generálásához tartozó token érvénytelen.',
-    'user' => 'Nem található felhasználó a megadott email címmel.',
+    'token'     => 'Ez az új jelszó generálásához tartozó token érvénytelen.',
+    'user'      => 'Nem található felhasználó a megadott email címmel.',
 ];

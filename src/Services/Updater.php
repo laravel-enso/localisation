@@ -10,7 +10,8 @@ use LaravelEnso\Localisation\Services\Traits\LegacyFolderPathResolver;
 
 class Updater
 {
-    use JsonFilePathResolver, LegacyFolderPathResolver;
+    use JsonFilePathResolver;
+    use LegacyFolderPathResolver;
 
     private Language $language;
     private array $request;

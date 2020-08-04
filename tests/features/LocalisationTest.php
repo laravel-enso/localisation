@@ -1,19 +1,23 @@
 <?php
 
-use Tests\TestCase;
-use LaravelEnso\Core\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\Core\Models\Preference;
-use LaravelEnso\Forms\TestTraits\EditForm;
+use LaravelEnso\Core\Models\User;
+use LaravelEnso\Core\Services\DefaultPreferences;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
+use LaravelEnso\Forms\TestTraits\EditForm;
 use LaravelEnso\Localisation\Models\Language;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
-use LaravelEnso\Core\Services\DefaultPreferences;
+use Tests\TestCase;
 
 class LocalisationTest extends TestCase
 {
-    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
+    use CreateForm;
+    use Datatable;
+    use DestroyForm;
+    use EditForm;
+    use RefreshDatabase;
 
     private const LangName = 'xx';
 
@@ -48,9 +52,9 @@ class LocalisationTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message' => __('The language was successfully created'),
+                'message'  => __('The language was successfully created'),
                 'redirect' => 'system.localisation.edit',
-                'param' => ['language' => $language->id],
+                'param'    => ['language' => $language->id],
             ]);
 
         $this->assertTrue(
@@ -104,7 +108,8 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->testModel->toArray() + [
                 'flag_sufix' => self::LangName,
-            ]);
+            ]
+        );
 
         $language = Language::whereName(self::LangName)->first();
         $languageName = $language->name;
@@ -113,7 +118,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.destroy', $language->id, false)
         )->assertStatus(200)
         ->assertJson([
-            'message' => __('The language was successfully deleted'),
+            'message'  => __('The language was successfully deleted'),
             'redirect' => 'system.localisation.index',
         ]);
 
@@ -149,7 +154,8 @@ class LocalisationTest extends TestCase
             route('system.localisation.store', [], false),
             $this->testModel->toArray() + [
                 'flag_sufix' => self::LangName,
-            ]);
+            ]
+        );
 
         $language = Language::whereName(self::LangName)->first();
 
@@ -176,7 +182,7 @@ class LocalisationTest extends TestCase
 
         Preference::create([
             'user_id' => $this->user->id,
-            'value' => $preferences,
+            'value'   => $preferences,
         ]);
     }
 

@@ -18,11 +18,11 @@ class ValidateLanguageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', $this->unique('name')],
+            'name'         => ['required', $this->unique('name')],
             'display_name' => ['required', $this->unique('display_name')],
-            'flag_sufix' => 'required|string|size:2',
-            'is_rtl' => 'required|boolean',
-            'is_active' => 'required|boolean',
+            'flag_sufix'   => 'required|string|size:2',
+            'is_rtl'       => 'required|boolean',
+            'is_active'    => 'required|boolean',
         ];
     }
 
