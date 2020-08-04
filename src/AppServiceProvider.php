@@ -43,7 +43,8 @@ class AppServiceProvider extends ServiceProvider
             __DIR__.'/../config' => config_path('enso'),
         ], ['localisation-config', 'enso-config']);
 
-        $this->publishes((new Collection($this->langs))
+        $this->publishes(
+            (new Collection($this->langs))
                 ->mapWithKeys(fn ($key) => [
                     __DIR__.'/../resources/lang/'.$key => resource_path('lang/'.$key),
                 ])->toArray(),
