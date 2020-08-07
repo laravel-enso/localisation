@@ -762,7 +762,6 @@
     "Billing Address": null,
     "Shipping Address": null,
     "Payment method": null,
-    "Reference \\ PO#": null,
     "here": null,
     "to manage your addresses": null,
     "to manage your cards": null,
@@ -791,5 +790,16 @@
     "The order #:number was placed by :person": null,
     "on behalf of :company": null,
     "into your web browser": null,
-    "If you are having trouble clicking the action button, copy and paste the URL below": null
+    "If you are having trouble clicking the action button, copy and paste the URL below": null,
+    "Please review your order and payment details": null,
+    "Items": null,
+    "Pay Later": null,
+    "Cash On Delivery": null,
+    "Reference \\ PO": null,
+    "to manage your companies": null,
+    "Thank you for your order": null,
+    "We will keep you updated on its progress": null,
+    "You can click": null,
+    "to view your order": null,
+    "In a few minutes you will receive a confirmation email": null
 }
