@@ -33,7 +33,7 @@ abstract class Handler
     {
         File::put(
             $this->jsonFileName($locale, $subDir),
-            json_encode($langFile, JSON_FORCE_OBJECT | ($subDir ? JSON_PRETTY_PRINT : 0))
+            json_encode($langFile, JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE | ($subDir ? JSON_PRETTY_PRINT : 0))
         );
     }
 
