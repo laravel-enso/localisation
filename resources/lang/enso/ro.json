@@ -806,5 +806,12 @@
     "Limited Stock": "Stoc limitat",
     "On Demand": "In stoc furnizor",
     "In Stock": "In stoc",
-    "Stock: :stock": "Stoc: :stock"
+    "Stock: :stock": "Stoc: :stock",
+    "Supplier Stock": "Stoc furnizor",
+    "Next Page": "Pagina urmatoare",
+    "Found :total results": ":total rezultate gasite",
+    "Showing :from - :to of :total results": "Se afiseaza de la :from pana la :to din :total de rezultate",
+    "Previous Page": "Pagina anterioara",
+    "Don't have an account?": "Nu ai cont?",
+    "Forgot Password?": "Ai uitat parola?"
 }
