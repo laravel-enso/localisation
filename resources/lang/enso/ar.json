@@ -806,5 +806,14 @@
     "Limited Stock": null,
     "On Demand": null,
     "In Stock": null,
-    "Stock: :stock": null
+    "Stock: :stock": null,
+    "Supplier Stock": null,
+    "Next Page": null,
+    "Found :total results": null,
+    "Showing :from - :to of :total results": null,
+    "Previous Page": null,
+    "Don't have an account?": null,
+    "Forgot Password?": null,
+    "Edit personal details": null,
+    "Proforma Invoice": null
 }
