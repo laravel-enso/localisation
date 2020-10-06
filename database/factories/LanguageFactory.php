@@ -1,16 +1,24 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace LaravelEnso\Localisation\Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
 use LaravelEnso\Localisation\Models\Language;
 
-$factory->define(Language::class, function (Faker $faker) {
-    $countryCode = $faker->countryCode;
+class LanguageFactory extends Factory
+{
+    protected $model = Language::class;
 
-    return [
-        'name'         => $countryCode,
-        'display_name' => strtolower($faker->country),
-        'flag'         => 'flag-icon flag-icon-'.$countryCode,
-        'is_rtl'       => $faker->boolean,
-        'is_active'    => $faker->boolean,
-    ];
-});
+    public function definition()
+    {
+        $countryCode = $this->faker->countryCode;
+
+        return [
+            'name'         => $countryCode,
+            'display_name' => strtolower($this->faker->country),
+            'flag'         => 'flag-icon flag-icon-'.$countryCode,
+            'is_rtl'       => $this->faker->boolean,
+            'is_active'    => $this->faker->boolean,
+        ];
+    }
+}

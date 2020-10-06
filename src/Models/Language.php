@@ -5,12 +5,12 @@ namespace LaravelEnso\Localisation\Models;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Helpers\Contracts\Activatable;
 use LaravelEnso\Helpers\Traits\ActiveState;
+use LaravelEnso\Helpers\Traits\HasFactory;
 use LaravelEnso\Tables\Traits\TableCache;
 
 class Language extends Model implements Activatable
 {
-    use ActiveState;
-    use TableCache;
+    use ActiveState, HasFactory, TableCache;
 
     private const FlagClassPrefix = 'flag-icon flag-icon-';
 

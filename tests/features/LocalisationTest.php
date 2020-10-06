@@ -34,7 +34,7 @@ class LocalisationTest extends TestCase
         $this->seed()
             ->actingAs($this->user = User::first());
 
-        $this->testModel = factory(Language::class)->make([
+        $this->testModel = Language::factory()->make([
             'name' => self::LangName,
             'flag' => 'flag-icon flag-icon-'.self::LangName,
         ]);

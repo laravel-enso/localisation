@@ -1,5 +1,7 @@
 <?php
 
+namespace LaravelEnso\Localisation\Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 use LaravelEnso\Localisation\Models\Language;
@@ -22,6 +24,6 @@ class LanguageSeeder extends Seeder
     public function run()
     {
         (new Collection(self::Languages))
-            ->each(fn ($language) => factory(Language::class)->create($language));
+            ->each(fn ($language) => Language::factory()->create($language));
     }
 }
