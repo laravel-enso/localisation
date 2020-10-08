@@ -15,7 +15,7 @@
         "role": "Developer"
     }],
     "require": {
-        "laravel-enso/core": "^5.0",
+        "laravel-enso/core": "^6.0",
         "laravel-enso/forms": "^4.0",
         "laravel-enso/helpers": "^2.0",
         "laravel-enso/select": "^4.0",
@@ -24,7 +24,9 @@
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Localisation\\": "src/"
+            "LaravelEnso\\Localisation\\": "src/",
+            "LaravelEnso\\Localisation\\Database\\Factories\\": "database/factories/",
+            "LaravelEnso\\Localisation\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "extra": {
