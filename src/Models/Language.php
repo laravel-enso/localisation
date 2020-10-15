@@ -10,7 +10,9 @@ use LaravelEnso\Tables\Traits\TableCache;
 
 class Language extends Model implements Activatable
 {
-    use ActiveState, HasFactory, TableCache;
+    use ActiveState;
+    use HasFactory;
+    use TableCache;
 
     private const FlagClassPrefix = 'flag-icon flag-icon-';
 
