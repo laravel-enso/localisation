@@ -52,7 +52,11 @@ abstract class Handler
     private function mergeLocale(string $locale): void
     {
         $core = (new JsonReader($this->coreJsonFileName($locale)))->array();
-        $app = (new JsonReader($this->appJsonFileName($locale)))->array();
+
+        $app = File::exists($this->appJsonFileName($locale))
+            ? (new JsonReader($this->appJsonFileName($locale)))->array()
+            : [];
+
         $sanitizedApp = (new SanitizeAppKeys($app, $core))->sanitize($locale);
 
         $this->saveMerged($locale, array_merge($core, $sanitizedApp));
