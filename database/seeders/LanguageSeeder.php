@@ -19,6 +19,7 @@ class LanguageSeeder extends Seeder
         ['name' => 'mn', 'display_name' => 'Mongolia', 'flag' => 'flag-icon flag-icon-mn', 'is_rtl' => false, 'is_active' => true],
         ['name' => 'hu', 'display_name' => 'Magyar', 'flag' => 'flag-icon flag-icon-hu', 'is_rtl' => false, 'is_active' => true],
         ['name' => 'es', 'display_name' => 'Español', 'flag' => 'flag-icon flag-icon-es', 'is_rtl' => false, 'is_active' => true],
+        ['name' => 'ru', 'display_name' => 'Russian', 'flag' => 'flag-icon flag-icon-ru', 'is_rtl' => false, 'is_active' => true],
     ];
 
     public function run()
