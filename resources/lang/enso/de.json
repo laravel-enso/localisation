@@ -336,7 +336,6 @@
     "Log out": null,
     "Log Out": null,
     "log": null,
-    "Login": null,
     "Logins": null,
     "logins": null,
     "Logout": null,
@@ -482,7 +481,6 @@
     "records": null,
     "Red": null,
     "Regards": null,
-    "Register": null,
     "Registered Entities": null,
     "Registered Users": null,
     "Registry Of Commerce": null,
@@ -905,5 +903,7 @@
     "Emag Documentation": null,
     "Emag Price": null,
     "products": null,
-    "Out Of Stock": null
+    "Out Of Stock": null,
+    "register": null,
+    "Hi :name,": null
 }

@@ -336,7 +336,6 @@
     "Log out": "Delogare",
     "Log Out": "Iesiti",
     "log": "log",
-    "Login": "Autentificare in sistem",
     "Logins": "Logari",
     "logins": "logari",
     "Logout": "Iesire",
@@ -482,7 +481,6 @@
     "records": "inregistrari",
     "Red": "Rosu",
     "Regards": "Toate cele bune",
-    "Register": "Înregistrare",
     "Registered Entities": "Entitati inregistrate",
     "Registered Users": "Useri Inregistrati",
     "Registry Of Commerce": "Nr. Inreg. Reg. Com.",
@@ -905,5 +903,7 @@
     "Emag Documentation": "Emag documentatie",
     "Emag Price": "Emag pret",
     "products": "produse",
-    "Out Of Stock": "Stoc epuizat"
+    "Out Of Stock": "Stoc epuizat",
+    "register": "inregistrare",
+    "Hi :name,": "Salut :name,"
 }
