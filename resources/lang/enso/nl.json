@@ -1181,5 +1181,10 @@
     "This review is awaiting approval": null,
     "This review was approved": null,
     "This review was rejected. You may edit and repost it.": null,
-    "Edit review": null
+    "Edit review": null,
+    "category": null,
+    "terms-of-use": null,
+    "privacy": null,
+    "about-us": null,
+    "favorites": null
 }
