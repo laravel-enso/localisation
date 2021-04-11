@@ -990,7 +990,7 @@
     "The log was cleaned": "Log-ul a fost curatat",
     "The menu was created!": "Meniul a fost creat!",
     "The operation was successful": "Operatiunea a fost efectuata cu succes",
-    "The order #:number was placed by :person": "Comanda # :number a fost plasată de :person",
+    "The order #:number was placed by :person": "Comanda #:number a fost plasată de :person",
     "The permission group was created!": "Grupul de permisii a fost creat!",
     "The permission was created!": "Permisia a fost creata!",
     "The permissions were created!": "Permisiile au fost create!",
@@ -1199,7 +1199,7 @@
     "Your Webshop.": "Magazinul tau.",
     "Message:": "Mesaj:",
     "Contact phone: :phone": "Telefon de contact: :phone",
-    "Your order :number": "Comanda ta cu numarul :number",
+    "Your order :number was successfully placed": "Comanda ta cu numarul :number a fost plasata cu succes",
     "You have a new webshop order": "Ai o nouă comandă pe webshop",
     "New user registration": "S-a inregistrat un nou utilizator",
     "Before adjusting stock, select the product default supplier": "Înainte de a ajusta stocul, selecteaza furnizorul implicit al produsului",
@@ -1311,6 +1311,6 @@
     "Invoice issued for order #:number": "Factura emisa pentru comanda #:number",
     "Your order #:number": "Comanda dvs #:number",
     "Payment via :type was successful for order :number": "Plata prin :type a reușit pentru comanda :number",
-    "A payment was received for order #:number": "S-a primit o plată pentru comanda :number",
+    "A payment was received for order #:number (:total :currency)": "S-a inregistrat plata pentru comanda :number (:total :currency)",
     "Insufficient stock for :product, only :left left": "Stoc insuficient pentru :product, numai :left ramas"
 }
