@@ -1353,5 +1353,13 @@
     "Task Reminder": "Memento Task",
     "This is a reminder for the following task:": "Acesta este un memento pentru următorul task:",
     "View Task": "Vezi task-ul",
-    "Task :description": "Task :description"
+    "Task :description": "Task :description",
+    "You cannot delete the default address": "Nu poți șterge adresa implicită",
+    "You cannot delete an address that you have previously used": "Nu poți șterge o adresă pe care ai folosit-o anterior",
+    "You cannot edit this company, please contact support": "Nu poți edita această companie, te rugăm să contactezi echipa de asistenta",
+    "Your cart is empty": "Coșul tau este gol",
+    "You cannot delete the default card": "Nu poți șterge cardul implicit",
+    "You cannot edit this :model, please contact support": "Nu poți edita acest :model, te rugăm să contactezi echipa de asistență",
+    "Company information": "Informațiile companiei",
+    "Billing address": "Adresa de facturare"
 }

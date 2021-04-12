@@ -1353,5 +1353,13 @@
     "Task Reminder": null,
     "This is a reminder for the following task:": null,
     "View Task": null,
-    "Task :description": null
+    "Task :description": null,
+    "You cannot delete the default address": null,
+    "You cannot delete an address that you have previously used": null,
+    "You cannot edit this company, please contact support": null,
+    "Your cart is empty": null,
+    "You cannot delete the default card": null,
+    "You cannot edit this :model, please contact support": null,
+    "Company information": null,
+    "Billing address": null
 }
