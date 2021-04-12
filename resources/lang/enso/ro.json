@@ -1336,5 +1336,22 @@
     "Skip": "Sari",
     "You have a new webshop order (#:number -> :total :currency)": "Ai o noua comanda in magazinul online (#:number -> :total :currency)",
     "fast-checkout": "checkout-rapid",
-    "Fast Checkout": "Checkout Rapid"
+    "Fast Checkout": "Checkout Rapid",
+    "The action :action failed with the following error code: :code": "Acțiunea :action a eșuat cu următorul cod de eroare: :code",
+    "Reported error message: :message": "Mesaj de eroare raportat: :message",
+    "Request payload: :payload": "Payload Request: :payload",
+    "API call for :action failed": "Apelul API pentru :action a esuat",
+    "Notification, :title": "Notificare, :title",
+    "New Comment Tag": "Etichetare noua in comentarii",
+    "You were just tagged": "Tocmai ai fost etichetat",
+    "Comment Tag Notification": "Notificare etichetare in comentariu",
+    "Your password will expire soon": "Parola ta va expira curand",
+    "You've got :days days left to change it": "Mai ai :days zile ramase pentru a o schimba",
+    "You've got until tomorrow to change it": "Mai ai timp pana maine pentru a o schimba",
+    "You must change it today": "Trebuie schimbata astazi",
+    "Welcome!": "Bine ai venit!",
+    "Task Reminder": "Memento Task",
+    "This is a reminder for the following task:": "Acesta este un memento pentru următorul task:",
+    "View Task": "Vezi task-ul",
+    "Task :description": "Task :description"
 }

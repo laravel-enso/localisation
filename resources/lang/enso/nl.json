@@ -1336,5 +1336,22 @@
     "Skip": null,
     "You have a new webshop order (#:number -> :total :currency)": null,
     "fast-checkout": null,
-    "Fast Checkout": null
+    "Fast Checkout": null,
+    "The action :action failed with the following error code: :code": null,
+    "Reported error message: :message": null,
+    "Request payload: :payload": null,
+    "API call for :action failed": null,
+    "Notification, :title": null,
+    "New Comment Tag": null,
+    "You were just tagged": null,
+    "Comment Tag Notification": null,
+    "Your password will expire soon": null,
+    "You've got :days days left to change it": null,
+    "You've got until tomorrow to change it": null,
+    "You must change it today": null,
+    "Welcome!": null,
+    "Task Reminder": null,
+    "This is a reminder for the following task:": null,
+    "View Task": null,
+    "Task :description": null
 }
