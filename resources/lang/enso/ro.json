@@ -1377,5 +1377,14 @@
     "Approve": "Aproba",
     "Disapprove": "Dezaproba",
     "for \":query\"": "pentru \":query\"",
-    "Review was rejected": "Această recenzie a fost respinsă"
+    "Review was rejected": "Această recenzie a fost respinsă",
+    "Review updated for :product": "Recenzie actualizata pentru produsul :product",
+    "New review submitted for :product": "Recenzie adaugata pt produsul :product",
+    "A product review was updated by :person:": "Recenzie de produs actualizata de :person:",
+    "A new product review was posted by :person:": "Recenzie de produs adaugata de :person:",
+    "Your review for :product was :approval": "Recenzia ta pentru produsul :product a fost :approval",
+    "If you want, you can revise your review here:": "Daca vrei, poti actualiza recenzia ta aici:",
+    "Review :approval": "Recenzie :approval",
+    "approved": "aprobata",
+    "rejected": "respinsa"
 }
