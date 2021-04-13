@@ -1361,5 +1361,21 @@
     "You cannot delete the default card": null,
     "You cannot edit this :model, please contact support": null,
     "Company information": null,
-    "Billing address": null
+    "Billing address": null,
+    "Free": null,
+    "Get to know us": null,
+    "Registration successful": null,
+    "Your account needs to be activated before you can login": null,
+    "You will receive a confirmation email upon approval": null,
+    "Thank you!": null,
+    "Frequently asked questions": null,
+    "Edit address details": null,
+    "Edit company details": null,
+    "Card": null,
+    "Click": null,
+    "Not Implemented": null,
+    "Approve": null,
+    "Disapprove": null,
+    "for \":query\"": null,
+    "Review was rejected": null
 }

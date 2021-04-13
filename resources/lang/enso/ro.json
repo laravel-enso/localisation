@@ -1361,5 +1361,21 @@
     "You cannot delete the default card": "Nu poți șterge cardul implicit",
     "You cannot edit this :model, please contact support": "Nu poți edita acest :model, te rugăm să contactezi echipa de asistență",
     "Company information": "Informațiile companiei",
-    "Billing address": "Adresa de facturare"
+    "Billing address": "Adresa de facturare",
+    "Free": "Gratuit",
+    "Get to know us": "Cunoaște-ne",
+    "Registration successful": "Inregistrare realizata",
+    "Your account needs to be activated before you can login": "Contul trebuie să fie activat înainte de a te putea autentifica",
+    "You will receive a confirmation email upon approval": "Vei primi un e-mail de confirmare după aprobare",
+    "Thank you!": "Iti multumim!",
+    "Frequently asked questions": "Intrebari frecvente",
+    "Edit address details": "Editeaza detaliile adresei",
+    "Edit company details": "Editeaza detalii despre companie",
+    "Card": "Card",
+    "Click": "Click",
+    "Not Implemented": "Neimplementat",
+    "Approve": "Aproba",
+    "Disapprove": "Dezaproba",
+    "for \":query\"": "pentru \":query\"",
+    "Review was rejected": "Această recenzie a fost respinsă"
 }
