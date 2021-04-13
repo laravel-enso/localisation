@@ -990,7 +990,7 @@
     "The log was cleaned": null,
     "The menu was created!": null,
     "The operation was successful": null,
-    "The order #:number was placed by :person": null,
+    "The order #:number was placed by :person (:paymentMethod)": null,
     "The permission group was created!": null,
     "The permission was created!": null,
     "The permissions were created!": null,
@@ -1025,6 +1025,7 @@
     "This password reset link will expire in :count minutes.": null,
     "This password reset token is invalid.": null,
     "This website uses cookies to deliver its services and to analyze traffic. For more details please visit our": null,
+    "privacy policy": null,
     "this week": null,
     "this year": null,
     "Thursday": null,
@@ -1312,7 +1313,7 @@
     "Your order #:number": null,
     "Payment via :type was successful for order :number": null,
     "A payment was received for order #:number (:total :currency)": null,
-    "Insufficient stock for :product, :left left": null,
+    "Insufficient stock for :product, only :left left": null,
     "Registration is restricted for the moment, please return soon": null,
     "Hello :name": null,
     "Thank you for creating an account on :shop": null,
@@ -1386,6 +1387,5 @@
     "If you want, you can revise your review here:": null,
     "Review :approval": null,
     "approved": null,
-    "rejected": null,
-    "Unavailable quantity": null
+    "rejected": null
 }

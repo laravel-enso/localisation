@@ -990,7 +990,7 @@
     "The log was cleaned": "Log-ul a fost curatat",
     "The menu was created!": "Meniul a fost creat!",
     "The operation was successful": "Operatiunea a fost efectuata cu succes",
-    "The order #:number was placed by :person": "Comanda #:number a fost plasată de :person",
+    "The order #:number was placed by :person (:paymentMethod)": "Comanda #:number a fost plasată de :person",
     "The permission group was created!": "Grupul de permisii a fost creat!",
     "The permission was created!": "Permisia a fost creata!",
     "The permissions were created!": "Permisiile au fost create!",
@@ -1025,6 +1025,7 @@
     "This password reset link will expire in :count minutes.": "Acest link de resetare a parolei va expira în :count minute.",
     "This password reset token is invalid.": "Codul de resetare a parolei este greșit.",
     "This website uses cookies to deliver its services and to analyze traffic. For more details please visit our": "Acest site web folosește cookie-uri pentru a-și furniza serviciile și pentru a analiza traficul. Pentru mai multe detalii viziteaza",
+    "privacy policy": "politica de confidentialitate",
     "this week": "săptămâna aceasta",
     "this year": "anul acesta",
     "Thursday": "Joi",
@@ -1312,7 +1313,7 @@
     "Your order #:number": "Comanda dvs #:number",
     "Payment via :type was successful for order :number": "Plata prin :type a reușit pentru comanda :number",
     "A payment was received for order #:number (:total :currency)": "S-a inregistrat plata pentru comanda :number (:total :currency)",
-    "Insufficient stock for :product, :left left": "Stoc insuficient pentru :product, :left ramas",
+    "Insufficient stock for :product, only :left left": "Stoc insuficient pentru :product, numai :left ramas",
     "Registration is restricted for the moment, please return soon": "Înregistrarea este restricționată pentru moment, te rugăm să revii în curând",
     "Hello :name": "Salut :name",
     "Thank you for creating an account on :shop": "Îți mulțumim pentru crearea unui cont pe :shop",
@@ -1386,6 +1387,5 @@
     "If you want, you can revise your review here:": "Daca vrei, poti actualiza recenzia ta aici:",
     "Review :approval": "Recenzie :approval",
     "approved": "aprobata",
-    "rejected": "respinsa",
-    "Unavailable quantity": "Cantitate indisponibilă"
+    "rejected": "respinsa"
 }

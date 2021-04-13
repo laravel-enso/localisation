@@ -990,7 +990,7 @@
     "The log was cleaned": null,
     "The menu was created!": null,
     "The operation was successful": null,
-    "The order #:number was placed by :person": null,
+    "The order #:number was placed by :person (:paymentMethod)": null,
     "The permission group was created!": null,
     "The permission was created!": null,
     "The permissions were created!": null,
