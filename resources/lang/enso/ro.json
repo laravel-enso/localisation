@@ -1312,7 +1312,7 @@
     "Your order #:number": "Comanda dvs #:number",
     "Payment via :type was successful for order :number": "Plata prin :type a reușit pentru comanda :number",
     "A payment was received for order #:number (:total :currency)": "S-a inregistrat plata pentru comanda :number (:total :currency)",
-    "Insufficient stock for :product, only :left left": "Stoc insuficient pentru :product, numai :left ramas",
+    "Insufficient stock for :product, :left left": "Stoc insuficient pentru :product, :left ramas",
     "Registration is restricted for the moment, please return soon": "Înregistrarea este restricționată pentru moment, te rugăm să revii în curând",
     "Hello :name": "Salut :name",
     "Thank you for creating an account on :shop": "Îți mulțumim pentru crearea unui cont pe :shop",
@@ -1386,5 +1386,6 @@
     "If you want, you can revise your review here:": "Daca vrei, poti actualiza recenzia ta aici:",
     "Review :approval": "Recenzie :approval",
     "approved": "aprobata",
-    "rejected": "respinsa"
+    "rejected": "respinsa",
+    "Unavailable quantity": "Cantitate indisponibilă"
 }
