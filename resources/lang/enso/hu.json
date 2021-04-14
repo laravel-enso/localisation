@@ -675,8 +675,6 @@
     "our location": null,
     "Our Location": null,
     "Our team has been notified.": null,
-    "Out Of Stock": null,
-    "out of stock": null,
     "Overdue": null,
     "Own Stock": null,
     "Owners Index": null,
@@ -1395,5 +1393,8 @@
     "similar-products": null,
     "description": null,
     "characteristics": null,
-    "about-this-brand": null
+    "about-this-brand": null,
+    "not in stock": null,
+    "Not In Stock": null,
+    "Hold tight, your order is being processed. We will email you when your order succeeds": null
 }

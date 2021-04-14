@@ -675,8 +675,6 @@
     "our location": "locatia noastra",
     "Our Location": "Locația noastră",
     "Our team has been notified.": "Echipa noastra a fost notificata",
-    "Out Of Stock": "Stoc epuizat",
-    "out of stock": "stoc epuizat",
     "Overdue": "Depășit",
     "Own Stock": "Stoc propriu",
     "Owners Index": "Index owneri",
@@ -1395,5 +1393,8 @@
     "similar-products": "produse-similare",
     "description": "descriere",
     "characteristics": "caracteristici",
-    "about-this-brand": "despre-acest-brand"
+    "about-this-brand": "despre-acest-brand",
+    "not in stock": "nu este in stoc",
+    "Not In Stock": "Nu este in stoc",
+    "Hold tight, your order is being processed. We will email you when your order succeeds": "Ține-te bine, comanda ta este în curs de procesare. Iti vom trimite un e-mail când comanda va reuși"
 }
