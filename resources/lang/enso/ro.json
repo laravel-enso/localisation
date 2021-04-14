@@ -7,7 +7,7 @@
     "30 days": "30 zile",
     "7 days": "7 zile",
     "A fresh verification link has been sent to your email address.": "Am trimis un nou link de verificare pe adresa dvs. de e-mail",
-    "About this brand": "Despre aceast brand",
+    "About this brand": "Despre acest brand",
     "About Us": "Despre noi",
     "Above": "Deasupra",
     "Accessories": "Accesorii",
@@ -962,7 +962,7 @@
     "terms and conditions": "termenii si conditiile",
     "Terms of use": "Termeni si conditii",
     "Terms Of Use": "Termeni si conditii",
-    "terms of use": "termenii si conditii",
+    "terms of use": "termenii si conditiile",
     "Thank you for shopping with us": "Îți multumim pentru cumparaturile facute",
     "Thank you for using our application!": "Îți multumim ca ne folosești aplicatia!",
     "Thank you for your order": "Îți mulțumim pentru comandă",
@@ -1388,5 +1388,12 @@
     "Review :approval": "Recenzie :approval",
     "approved": "aprobata",
     "rejected": "respinsa",
-    "Terms of Use": "Termeni si conditii"
+    "Terms of Use": "Termeni si conditii",
+    "Similar products": "Produse similare",
+    "Enter your email to reset your password": "Introduceți adresa de e-mail pentru a vă reseta parola",
+    "We'll send you an email with the instructions to follow": "Iti vom trimite un e-mail cu instrucțiunile de urmat",
+    "similar-products": "produse-similare",
+    "description": "descriere",
+    "characteristics": "caracteristici",
+    "about-this-brand": "despre-acest-brand"
 }
