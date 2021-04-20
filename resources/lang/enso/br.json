@@ -667,6 +667,7 @@
     "Operation was successfull": null,
     "order #:number invoice": null,
     "order #:number": null,
+    "Order #:number": null,
     "Order details :number": null,
     "Order Line Limit": null,
     "Order Payment": null,
@@ -898,7 +899,8 @@
     "Shipping charges may be incurred": null,
     "Shipping charges of :value (+VAT) will be added": null,
     "Shipping cost": null,
-    "You will pay": null, "Visit the product page": null,
+    "You will pay": null,
+    "Visit the product page": null,
     "Shop Categories": null,
     "Shopping Cart": null,
     "Show Log": null,
@@ -1192,7 +1194,6 @@
     ":type quantity and total were successfully updated": null,
     ":type update": null,
     "Please find attached the order details": null,
-    
     "Succeeded": null,
     "External Reference": null,
     "Incomplete order (#:number)": null,
@@ -1400,5 +1401,6 @@
     "about-this-brand": null,
     "not in stock": null,
     "Not In Stock": null,
-    "Hold tight, your order is being processed. We will email you when your order succeeds": null
+    "Hold tight, your order is being processed. We will email you when your order succeeds": null,
+    "Wire Transfer": null
 }
