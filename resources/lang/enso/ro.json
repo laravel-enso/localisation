@@ -1339,7 +1339,6 @@
     "I want to issue the invoice for a company": "Vreau să emit factura pentru o companie",
     "Your order #:number was successfully placed": "Comanda ta #:number a fost plasată cu succes",
     "Skip": "Sari",
-    "New order #:number from :channel for :total :currency": "Comanda noua #:number din :channel in valoare de :total :currency",
     "fast-checkout": "checkout-rapid",
     "Fast Checkout": "Checkout Rapid",
     "The action :action failed with the following error code: :code": "Acțiunea :action a eșuat cu următorul cod de eroare: :code",
