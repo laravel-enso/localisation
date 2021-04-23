@@ -1414,5 +1414,7 @@
     "and optionally contact the client": "si eventual contacteaza clientul",
     "You may access the corresponding sale": "Poti accesa vanzarea corespondenta comenzii",
     "using the button below": "dand click pe butonul de mai jos",
-    "If you need to change your email please contact us": "Dacă dorești schimbarea emailului te rugăm contactează-ne"
+    "If you need to change your email please contact us": "Dacă dorești schimbarea emailului te rugăm contactează-ne",
+    "Awb status was updated to \":status\" for emag order #:id": "Statusul Awb pentru comanda emag #:id a fost actualizat in \":status\"",
+    "Awb status update for emag order #:id": "Actualizare status awb pentru comanda emag #:id"
 }

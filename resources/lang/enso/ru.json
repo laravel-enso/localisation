@@ -1339,6 +1339,7 @@
     "I want to issue the invoice for a company": null,
     "Your order #:number was successfully placed": null,
     "Skip": null,
+    "New order #:number from :channel for :total :currency": null,
     "fast-checkout": null,
     "Fast Checkout": null,
     "The action :action failed with the following error code: :code": null,
@@ -1413,5 +1414,7 @@
     "and optionally contact the client": null,
     "You may access the corresponding sale": null,
     "using the button below": null,
-    "If you need to change your email please contact us": null
+    "If you need to change your email please contact us": null,
+    "Awb status was updated to \":status\" for emag order #:id": null,
+    "Awb status update for emag order #:id": null
 }
