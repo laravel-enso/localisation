@@ -1403,5 +1403,14 @@
     "Not In Stock": null,
     "Hold tight, your order is being processed. We will email you when your order succeeds": null,
     "Wire Transfer": null,
-    "Grand Total": null
+    "Grand Total": null,
+    "A cancellation request was received for order #:id": null,
+    "Cancellation request for order #:id": null,
+    "Please let us know if you are able to cancel the order": null,
+    "Cancellation request for emag order with id :id": null,
+    "An emag order cancellation request was received": null,
+    "Ensure the order may still be cancellable": null,
+    "and optionally contact the client": null,
+    "You may access the corresponding sale": null,
+    "using the button below": null
 }

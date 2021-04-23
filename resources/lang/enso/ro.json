@@ -1403,5 +1403,14 @@
     "Not In Stock": "Nu este în stoc",
     "Hold tight, your order is being processed. We will email you when your order succeeds": "Ține-te bine, comanda ta este în curs de procesare. Iți vom trimite un e-mail când comanda va reuși",
     "Wire Transfer": "Ordin de Plata",
-    "Grand Total": "Total General"
+    "Grand Total": "Total General",
+    "A cancellation request was received for order #:id": "Am primit o cerere de anulare pentru comanda #:id",
+    "Cancellation request for order #:id": "Cerere de anulare pentru comanda #:id",
+    "Please let us know if you are able to cancel the order": "Va rugam sa ne comunicati daca puteti efectua anularea",
+    "Cancellation request for emag order with id :id": "Cerere de anulare pentru comanda emag cu id :id",
+    "An emag order cancellation request was received": "Am primit cerere de anulare pentru o comanda emag",
+    "Ensure the order may still be cancellable": "Verifica posibilitatea de anulare a comenzii",
+    "and optionally contact the client": "si eventual contacteaza clientul",
+    "You may access the corresponding sale": "Poti accesa vanzarea corespondenta comenzii",
+    "using the button below": "dand click pe butonul de mai jos"
 }
