@@ -2,7 +2,6 @@
     ":name export done": "Export :name efectuat",
     ":name export started": "Exportul :name a început",
     ":type import done": "Import :type efectuat",
-    "": null,
     "#": "#",
     "30 days": "30 zile",
     "7 days": "7 zile",
@@ -1415,5 +1414,18 @@
     "using the button below": "dand click pe butonul de mai jos",
     "If you need to change your email please contact us": "Dacă dorești schimbarea emailului te rugăm contactează-ne",
     "Awb status was updated to \":status\" for emag order #:id": "Statusul Awb pentru comanda emag #:id a fost actualizat in \":status\"",
-    "Awb status update for emag order #:id": "Actualizare status awb pentru comanda emag #:id"
+    "Awb status update for emag order #:id": "Actualizare status awb pentru comanda emag #:id",
+    "e.g. Acme Inc": "Firma Mea SRL",
+    "e.g. RO123123": "RO123456",
+    "e.g. contact@acme.com": "contact@firma-mea.ro",
+    "e.g. +1 123 456 7890": "+40 720 123 123",
+    "e.g. CITIBANK": "BRD",
+    "e.g. US22 1080 0021 2798 7005 0000 0000": "RO49AAAA1B31007593840000",
+    "e.g. Bob Smith": "Nume Prenume",
+    "e.g. 1234 1234 1234 1234": "1234 1234 1234 1234",
+    "e.g. 02 \/ :year": "12 \/ :year",
+    "e.g. 123": "123",
+    "e.g. Bobby": "Nume scurt",
+    "e.g. bob@gmail.com": "nume@email.com",
+    "e.g. 1-541-754-3010": "0720 123 123"
 }
