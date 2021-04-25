@@ -24,13 +24,12 @@
     "Activity Start Date": "Data de începere a activității",
     "Activity": "Activitate",
     "Add :entity": "Adaugă :entity",
-    "Add address details": "Adaugă detalii despre adresă",
-    "Add Address": "Adaugă adresă",
+    "Add address": "Adaugă adresă",
     "Add Brand": "Adaugă brand",
-    "Add card details": "Adaugă detaliile cardului",
+    "Add card": "Adaugă card",
     "Add Card": "Adaugă card",
     "Add Comment": "Adaugă comentariu",
-    "Add company details": "Adaugă detalii despre companie",
+    "Add company": "Adaugă companie",
     "Add File": "Adaugă fișier",
     "Add Key": "Adaugă cheie",
     "Add Payment": "Adaugă plată",
@@ -1414,5 +1413,5 @@
     "using the button below": "dand click pe butonul de mai jos",
     "If you need to change your email please contact us": "Dacă dorești schimbarea emailului te rugăm contactează-ne",
     "Awb status was updated to \":status\" for emag order #:id": "Statusul Awb pentru comanda emag #:id a fost actualizat in \":status\"",
-    "Awb status update for emag order #:id": "Actualizare status awb pentru comanda emag #:id",
+    "Awb status update for emag order #:id": "Actualizare status awb pentru comanda emag #:id"
 }

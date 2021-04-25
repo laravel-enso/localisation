@@ -84,9 +84,9 @@ class LocalisationTest extends TestCase
             route('system.localisation.update', $language->id, false),
             $language->toArray() + ['flag_sufix' => $language->name]
         )->assertStatus(200)
-        ->assertJson([
-            'message' => __('The language was successfully updated'),
-        ]);
+            ->assertJson([
+                'message' => __('The language was successfully updated'),
+            ]);
 
         $this->assertEquals('zz', $language->fresh()->name);
 
@@ -117,10 +117,10 @@ class LocalisationTest extends TestCase
         $this->delete(
             route('system.localisation.destroy', $language->id, false)
         )->assertStatus(200)
-        ->assertJson([
-            'message'  => __('The language was successfully deleted'),
-            'redirect' => 'system.localisation.index',
-        ]);
+            ->assertJson([
+                'message'  => __('The language was successfully deleted'),
+                'redirect' => 'system.localisation.index',
+            ]);
 
         $this->assertFalse(
             \File::exists(resource_path('lang/'.$languageName))
