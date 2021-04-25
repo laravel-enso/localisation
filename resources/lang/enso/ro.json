@@ -1413,5 +1413,8 @@
     "using the button below": "dand click pe butonul de mai jos",
     "If you need to change your email please contact us": "Dacă dorești schimbarea emailului te rugăm contactează-ne",
     "Awb status was updated to \":status\" for emag order #:id": "Statusul Awb pentru comanda emag #:id a fost actualizat in \":status\"",
-    "Awb status update for emag order #:id": "Actualizare status awb pentru comanda emag #:id"
+    "Awb status update for emag order #:id": "Actualizare status awb pentru comanda emag #:id",
+    "You just asked for a password reset. To complete the process click the button below.": "Tocmai ai solicitat resetarea parolei. Pentru a finaliza procesul, accesează butonul de mai jos.",
+    "Set your new password": "Setează noua parolă",
+    "The company already exists in our system. Please contact us about that": "Compania există deja în sistemul nostru. Te rugăm să ne contactezi referitor la această situație"
 }

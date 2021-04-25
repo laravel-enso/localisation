@@ -1,4 +1,10 @@
 {
+    "The company already exists in our system. Please contact us about that": null,
+    "Set your new password": null,
+    "If you are having trouble clicking the action button, copy and paste the URL below into your web browser": null,
+    "Company Name": null,
+    "Ship to a different addressed": null,
+    "You just asked for a password reset. To complete the process click the button below.": null,
     ":name export done": null,
     ":name export started": null,
     ":type import done": null,
