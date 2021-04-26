@@ -1416,5 +1416,7 @@
     "Awb status update for emag order #:id": "Actualizare status awb pentru comanda emag #:id",
     "You just asked for a password reset. To complete the process click the button below.": "Tocmai ai solicitat resetarea parolei. Pentru a finaliza procesul, accesează butonul de mai jos.",
     "Set your new password": "Setează noua parolă",
-    "The company already exists in our system. Please contact us about that": "Compania există deja în sistemul nostru. Te rugăm să ne contactezi referitor la această situație"
+    "The company already exists in our system. Please contact us about that": "Compania există deja în sistemul nostru. Te rugăm să ne contactezi referitor la această situație",
+    "Pay safely with": "Plătește în siguranță prin",
+    "We will create an account for your future orders": "Iți vom crea un cont pentru comenzile tale viitoare"
 }
