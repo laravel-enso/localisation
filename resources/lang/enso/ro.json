@@ -1420,5 +1420,6 @@
     "Pay safely with": "Plătește în siguranță prin",
     "We will create an account for your future orders": "Iți vom crea un cont pentru comenzile tale viitoare",
     "Go back to the store": "Întoarce-te în magazin",
-    "Added": "Adăugat"
+    "Added": "Adăugat",
+    "A payment method was already set for this order": "O metodă de plată a fost deja stabilită pentru această comandă"
 }
