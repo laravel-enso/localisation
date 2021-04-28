@@ -1421,5 +1421,7 @@
     "We will create an account for your future orders": "Iți vom crea un cont pentru comenzile tale viitoare",
     "Go back to the store": "Întoarce-te în magazin",
     "Added": "Adăugat",
-    "A payment method was already set for this order": "O metodă de plată a fost deja stabilită pentru această comandă"
+    "A payment method was already set for this order": "O metodă de plată a fost deja stabilită pentru această comandă",
+    "Street line 1": "Nume stradă, număr etc.",
+    "Street line 2": "Apartament, complex, unitate etc. (opțional)"
 }
