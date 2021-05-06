@@ -1204,7 +1204,7 @@
     "Your Webshop.": "Magazinul tau.",
     "Message:": "Mesaj:",
     "Contact phone: :phone": "Telefon de contact: :phone",
-    "Your order #:number was successfully placed": "Comanda ta cu numarul #:number a fost plasata cu succes",
+    "Your order #:number on :shop was successfully placed": "Comanda ta cu numarul #:number de pe :shop a fost plasata cu succes",
     "You have a new webshop order": "Ai o nouă comandă pe webshop",
     "New user registration": "S-a inregistrat un nou utilizator",
     "Before adjusting stock, select the product default supplier": "Înainte de a ajusta stocul, selecteaza furnizorul implicit al produsului",
