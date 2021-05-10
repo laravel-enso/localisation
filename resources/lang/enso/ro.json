@@ -1273,7 +1273,7 @@
     "Reception participants": "Participanți la recepție",
     "for Sale": "de vanzare",
     "Emag API call for :action failed": "Apelul API Emag pentru :action a esuat",
-    "The action :action failed with the following error messages": "Acțiunea :action a eșuat cu următoarele mesaje de eroare",
+    "The action :action on url :url failed with the following error messages:": "Acțiunea :action catre url :url a eșuat cu următoarele mesaje de eroare",
     "New :type callback from emag": "Un nou callback :type de la emag",
     "New :type callback from emag for id :id": "Un nou callback :type de la emag pentru id-ul :id",
     "Missing app product for emag order :id": "Lipseste produsul din aplicatie pentru comanda emag :id",

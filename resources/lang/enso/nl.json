@@ -1290,7 +1290,7 @@
     "Reception participants": null,
     "for Sale": null,
     "Emag API call for :action failed": null,
-    "The action :action failed with the following error messages": null,
+    "The action :action on url :url failed with the following error messages:": null,
     "New :type callback from emag": null,
     "New :type callback from emag for id :id": null,
     "Missing app product for emag order :id": null,
