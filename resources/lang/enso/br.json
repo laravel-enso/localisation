@@ -1,4 +1,6 @@
 {
+    "Status update for order #:number": null,
+    "Order #:number from :channel, placed by :person, has a new status update :status": null,
     "Your order #:number has been delivered. We hope you enjoy your purchase and we’d really love to receive your feedback. If you wish, you can leave us a product review.": null,
     "Your order #:number has been shipped to the following address: :address": null,
     "Your order #:number has been packed and is ready for shipping. We’ll let you know once it’s shipped.": null,
