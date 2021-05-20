@@ -1,4 +1,13 @@
 {
+    "Your order #:number has been delivered. We hope you enjoy your purchase and we’d really love to receive your feedback. If you wish, you can leave us a product review.": null,
+    "Your order #:number has been shipped to the following address: :address": null,
+    "Your order #:number has been packed and is ready for shipping. We’ll let you know once it’s shipped.": null,
+    "Your order #:number is being processed. We’ll keep you updated.": null,
+    "Your order #:number was delivered": null,
+    "Your order #:number was shipped": null,
+    "Your order #:number is ready to be shipped": null,
+    "Navigation": null,
+    "Your order #:number is being processed": null,
     "Author": null,
     "Subgenre": null,
     "Genre": null,
