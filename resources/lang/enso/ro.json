@@ -1440,13 +1440,14 @@
     "Subgenre": "Subgen",
     "Author": "Autor",
     "Your order #:number is being processed": "Comanda ta #:number este în curs de procesare",
-    "Your order #:number is ready to be shipped": "Comanda ta #:number este gata de livrare",
+    "Your order #:number is ready to be shipped": "Comanda ta #:number este pregatită de livrare",
     "Your order #:number was shipped": "Comanda ta #:number a fost expediată",
     "Your order #:number was delivered": "Comanda ta #:number a fost livrată",
-    "Your order #:number is being processed. We’ll keep you updated.": "Comanda ta #number este în curs de procesare. Te vom ține la curent.",
-    "Your order #:number has been packed and is ready for shipping. We’ll let you know once it’s shipped.": "Comanda ta #:number a fost ambalată și este gata de expediere. Te vom anunța după expediere.",
+    "Your order #:number is being processed. We'll keep you updated.": "Comanda ta #:number este în curs de procesare. Te vom ține la curent.",
     "Your order #:number has been shipped to the following address: :address": "Comanda ta #:number a fost expediată la următoarea adresă: :address",
-    "Your order #:number has been delivered. We hope you enjoy your purchase and we’d really love to receive your feedback. If you wish, you can leave us a product review.": "Comanda ta #:number a fost livrată. Sperăm să te bucuri de achiziție și ne-am bucura să primim feedbackul tău. Dacă dorești, ne poți lăsa un review produselor.",
+    "Your order #:number has been delivered. We hope you enjoy your purchase and we'd really love to receive your feedback. If you wish, you can leave us a product review.": "Comanda ta #:number a fost livrată. Sperăm să te bucuri de achiziție și ne-am bucura să primim feedbackul tău. Dacă dorești, ne poți lăsa un review produselor.",
+    "Don't hesitate to contact us for any questions.": "Pentru orice întrebări, nu ezita să ne contactezi.",
+    "Your order #:number has been packed and is ready for shipping. We'll let you know once it's shipped.": "Comanda ta #:number a fost ambalată și este pregatită de expediere. Te vom anunța de îndată ce a fost expediată.",
     "Order #:number from :channel, placed by :person, has a new status update :status": "Comanda #:number de pe :channel, plasată de :person, are o nouă actualizare status :status",
     "Status update for order #:number": "Actualizare status pentru comanda #:number"
 }
