@@ -1408,10 +1408,7 @@
     "Pay by Wire Transfer": "Plătește prin Transfer Bancar",
     "Grand Total": "Total General",
     "A cancellation request was received for order #:id": "Am primit o cerere de anulare pentru comanda #:id",
-    "Cancellation request for order #:id": "Cerere de anulare pentru comanda #:id",
     "Please let us know if you are able to cancel the order": "Va rugam sa ne comunicati daca puteti efectua anularea",
-    "Cancellation request for emag order with id :id": "Cerere de anulare pentru comanda emag cu id :id",
-    "An emag order cancellation request was received": "Am primit cerere de anulare pentru o comanda emag",
     "Ensure the order may still be cancellable": "Verifica posibilitatea de anulare a comenzii",
     "and optionally contact the client": "si eventual contacteaza clientul",
     "You may access the corresponding sale": "Poti accesa vanzarea corespondenta comenzii",
@@ -1449,5 +1446,7 @@
     "Don't hesitate to contact us for any questions.": "Pentru orice întrebări, nu ezita să ne contactezi.",
     "Your order #:number has been packed and is ready for shipping. We'll let you know once it's shipped.": "Comanda ta #:number a fost ambalată și este pregatită de expediere. Te vom anunța de îndată ce a fost expediată.",
     "Order #:number from :channel, placed by :person, has a new status update :status": "Comanda #:number de pe :channel, plasată de :person, are o nouă actualizare status :status",
-    "Status update for order #:number": "Actualizare status pentru comanda #:number"
+    "Status update for order #:number": "Actualizare status pentru comanda #:number",
+    "A :channel order cancellation request was received": "Am primit cerere de anulare pentru o comanda :channel",
+    "Cancellation request for :channel order #:number": "Cerere de anulare pentru comanda :channel #:number"
 }
