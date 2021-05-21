@@ -1404,7 +1404,10 @@
     "Pay by Wire Transfer": "Plătește prin Transfer Bancar",
     "Grand Total": "Total General",
     "A cancellation request was received for order #:id": "Am primit o cerere de anulare pentru comanda #:id",
+    "Cancellation request for order #:id": "Cerere de anulare pentru comanda #:id",
     "Please let us know if you are able to cancel the order": "Va rugam sa ne comunicati daca puteti efectua anularea",
+    "Cancellation request for emag order with id :id": "Cerere de anulare pentru comanda emag cu id :id",
+    "An emag order cancellation request was received": "Am primit cerere de anulare pentru o comanda emag",
     "Ensure the order may still be cancellable": "Verifica posibilitatea de anulare a comenzii",
     "and optionally contact the client": "si eventual contacteaza clientul",
     "You may access the corresponding sale": "Poti accesa vanzarea corespondenta comenzii",
@@ -1438,7 +1441,7 @@
     "Your order #:number was delivered": "Comanda ta #:number a fost livrată",
     "Your order #:number is being processed. We'll keep you updated.": "Comanda ta #:number este în curs de procesare. Te vom ține la curent.",
     "Your order #:number has been shipped to the following address: :address": "Comanda ta #:number a fost expediată la următoarea adresă: :address",
-    "Your order #:number has been delivered. We hope you enjoy your purchase and we'd really love to receive your feedback. If you wish, you can leave us a product review.": "Comanda ta #:number a fost livrată. Sperăm să te bucuri de achiziție și ne-am bucura să primim feedbackul tău. Dacă dorești, ne poți lăsa un review produselor.",
+    "Your order #:number has been delivered. We hope you enjoy your purchase and we'd really love to receive your feedback. If you wish, you can leave us a product review.": "Comanda ta #:number a fost livrată. Sperăm să te bucuri de achiziție și ne-ar încânta să primim feedbackul tău. Dacă dorești, ne poți lăsa un review produselor.",
     "Don't hesitate to contact us for any questions.": "Pentru orice întrebări, nu ezita să ne contactezi.",
     "Your order #:number has been packed and is ready for shipping. We'll let you know once it's shipped.": "Comanda ta #:number a fost ambalată și este pregatită de expediere. Te vom anunța de îndată ce a fost expediată.",
     "Order #:number from :channel, placed by :person, has a new status update :status": "Comanda #:number de pe :channel, plasată de :person, are o nouă actualizare status :status",
@@ -1470,5 +1473,7 @@
     "Receive": "Receptioneaza",
     "Undo receive": "Anuleaza receptia",
     "Download goods received note": "Descarca nota receptie marfa",
-    "New Position": "Pozitie noua"
+    "New Position": "Pozitie noua",
+    "Order #:number from :channel, placed by :person, has a new status update: :status": "Comanda #:number de pe :channel, plasată de :person, are o nouă actualizare de status: :status",
+    "Status update for order #:number": "Actualizare status pentru comanda #:number"
 }
