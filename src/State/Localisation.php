@@ -22,16 +22,16 @@ class Localisation implements ProvidesState
             ->get(['name', 'flag', 'is_rtl']);
 
         return [
-            'i18n' => $this->i18n(),
+            'i18n'      => $this->i18n(),
             'languages' => $this->languages->pluck('flag', 'name'),
-            'rtl' => $this->rtl(),
+            'rtl'       => $this->rtl(),
         ];
     }
 
     private function i18n(): Collection
     {
         return $this->languages
-            ->reject(fn ($language) => $language->name === 'en')
+            ->reject(fn ($language)      => $language->name === 'en')
             ->mapWithKeys(fn ($language) => [
                 $language->name => $this->lang($language),
             ]);

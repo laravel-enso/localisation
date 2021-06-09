@@ -14,11 +14,11 @@ class LanguageFactory extends Factory
         $countryCode = $this->faker->countryCode;
 
         return [
-            'name' => $countryCode,
+            'name'         => $countryCode,
             'display_name' => strtolower($this->faker->country),
-            'flag' => 'flag-icon flag-icon-'.$countryCode,
-            'is_rtl' => $this->faker->boolean,
-            'is_active' => $this->faker->boolean,
+            'flag'         => 'flag-icon flag-icon-'.$countryCode,
+            'is_rtl'       => $this->faker->boolean,
+            'is_active'    => $this->faker->boolean,
         ];
     }
 }
