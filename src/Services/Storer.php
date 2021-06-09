@@ -9,13 +9,10 @@ use LaravelEnso\Localisation\Services\Legacy\Storer as LegacyStorer;
 
 class Storer
 {
-    private array $request;
-    private ?string $flagSuffix;
-
-    public function __construct(array $request, $flagSuffix)
-    {
-        $this->request = $request;
-        $this->flagSuffix = $flagSuffix;
+    public function __construct(
+        private array $request,
+        private ?string $flagSuffix
+    ) {
     }
 
     public function create()

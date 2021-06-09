@@ -8,14 +8,16 @@
     "homepage": "https://github.com/laravel-enso/localisation",
     "type": "library",
     "license": "MIT",
-    "authors": [{
-        "name": "Adrian Ocneanu",
-        "email": "aocneanu@gmail.com",
-        "homepage": "https://laravel-enso.com",
-        "role": "Developer"
-    }],
+    "authors": [
+        {
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "laravel-enso/core": "^6.0",
+        "laravel-enso/core": "^7.0",
         "laravel-enso/forms": "^4.0",
         "laravel-enso/helpers": "^2.0",
         "laravel-enso/select": "^4.0",

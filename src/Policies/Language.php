@@ -3,8 +3,8 @@
 namespace LaravelEnso\Localisation\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\Localisation\Models\Language as Model;
+use LaravelEnso\Users\Models\User;
 
 class Language
 {

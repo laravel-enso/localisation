@@ -15,7 +15,7 @@ abstract class Handler
 
     protected function newTranslations(array $array): Collection
     {
-        return (new Collection($array))->keys()
+        return Collection::wrap($array)->keys()
             ->mapWithKeys(fn ($key) => [$key => null]);
     }
 
@@ -62,7 +62,7 @@ abstract class Handler
 
     private function getOrCreateApp(string $locale): array
     {
-        if (!File::exists($this->appJsonFileName($locale))) {
+        if (! File::exists($this->appJsonFileName($locale))) {
             File::copy(
                 $this->appJsonFileName(Language::extra()->first()->name),
                 $this->appJsonFileName($locale)

@@ -2,13 +2,13 @@
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\Core\Models\Preference;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Services\DefaultPreferences;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
 use LaravelEnso\Forms\TestTraits\EditForm;
 use LaravelEnso\Localisation\Models\Language;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
+use LaravelEnso\Users\Models\User;
 use Tests\TestCase;
 
 class LocalisationTest extends TestCase
@@ -28,8 +28,6 @@ class LocalisationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        // $this->withoutExceptionHandling();
 
         $this->seed()
             ->actingAs($this->user = User::first());

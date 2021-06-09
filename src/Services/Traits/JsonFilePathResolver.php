@@ -8,8 +8,9 @@ trait JsonFilePathResolver
 {
     protected function jsonFileName($locale, $subDir = null)
     {
-        $path = (new Collection(['lang', $subDir, "{$locale}.json"]))
+        $path = Collection::wrap(['lang', $subDir, "{$locale}.json"])
             ->filter()->implode(DIRECTORY_SEPARATOR);
+
         $basePath = base_path();
 
         return $subDir === 'enso'

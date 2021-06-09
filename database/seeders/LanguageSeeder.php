@@ -24,7 +24,7 @@ class LanguageSeeder extends Seeder
 
     public function run()
     {
-        (new Collection(self::Languages))
+        Collection::wrap(self::Languages)
             ->each(fn ($language) => Language::factory()->create($language));
     }
 }

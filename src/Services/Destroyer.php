@@ -12,11 +12,8 @@ class Destroyer
     use JsonFilePathResolver;
     use LegacyFolderPathResolver;
 
-    private $language;
-
-    public function __construct(Language $language)
+    public function __construct(private Language $language)
     {
-        $this->language = $language;
     }
 
     public function run()

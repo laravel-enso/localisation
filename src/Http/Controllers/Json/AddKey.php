@@ -11,7 +11,7 @@ class AddKey
 {
     public function __invoke(ValidateKeyRequest $request, Language $language)
     {
-        $keys = (new Collection($request->get('keys')))
+        $keys = Collection::wrap($request->get('keys'))
             ->mapWithKeys(fn ($key) => [$key => null])
             ->toArray();
 

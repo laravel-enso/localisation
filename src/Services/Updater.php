@@ -13,15 +13,11 @@ class Updater
     use JsonFilePathResolver;
     use LegacyFolderPathResolver;
 
-    private Language $language;
-    private array $request;
-    private string $flagSufix;
-
-    public function __construct(Language $language, array $request, string $flagSufix)
-    {
-        $this->language = $language;
-        $this->request = $request;
-        $this->flagSufix = $flagSufix;
+    public function __construct(
+        private Language $language,
+        private array $request,
+        private string $flagSufix
+    ) {
     }
 
     public function run()

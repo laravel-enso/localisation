@@ -58,11 +58,11 @@ class Updater extends Handler
 
     private function removeExtraKeys(array $extraLangFile)
     {
-        $keysToRemove = (new Collection($extraLangFile))
+        $keysToRemove = Collection::wrap($extraLangFile)
             ->diffKeys($this->langArray)
             ->keys();
 
-        $extraLangFile = (new Collection($extraLangFile))
+        $extraLangFile = Collection::wrap($extraLangFile)
             ->filter(fn ($key) => $keysToRemove->contains($key));
 
         return [$keysToRemove->count(), $extraLangFile->toArray()];
@@ -70,12 +70,12 @@ class Updater extends Handler
 
     private function addNewKeys(array $extraLangFile)
     {
-        $keysToAdd = (new Collection($this->langArray))
+        $keysToAdd = Collection::wrap($this->langArray)
             ->diffKeys($extraLangFile);
 
         $arrayToAdd = $this->newTranslations($keysToAdd->all());
 
-        $extraLangFile = (new Collection($arrayToAdd))
+        $extraLangFile = Collection::wrap($arrayToAdd)
             ->merge($extraLangFile);
 
         return [$keysToAdd->count(), $extraLangFile->toArray()];
