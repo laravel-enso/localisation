@@ -1472,5 +1472,6 @@
     "Order #:number from :channel, placed by :person, has a new status update: :status": "Comanda #:number de pe :channel, plasată de :person, are o nouă actualizare de status: :status",
     "Please take the necessary steps.": "Te rog sa iei masurile necesare.",
     "A cancellation request was received for a :channel order.": "Am primit cerere de anulare pentru o comada din :channel.",
-    "Sale": "Vanzare"
+    "Sale": "Vanzare",
+    "The application is briefly unavailable for scheduled maintenance. Please check back in a few minutes": "Aplicația este indisponibilă momentan pentru întreținere programată. Vă rugăm să reveniți în câteva minute"
 }
