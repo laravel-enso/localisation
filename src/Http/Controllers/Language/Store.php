@@ -16,9 +16,9 @@ class Store extends Controller
         ))->create();
 
         return [
-            'message'  => __('The language was successfully created'),
+            'message' => __('The language was successfully created'),
             'redirect' => 'system.localisation.edit',
-            'param'    => ['language' => $language->id],
+            'param' => ['language' => $language->id],
         ];
     }
 }

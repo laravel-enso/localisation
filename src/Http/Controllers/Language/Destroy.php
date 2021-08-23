@@ -18,7 +18,7 @@ class Destroy extends Controller
         (new Destroyer($language))->run();
 
         return [
-            'message'  => __('The language was successfully deleted'),
+            'message' => __('The language was successfully deleted'),
             'redirect' => 'system.localisation.index',
         ];
     }
