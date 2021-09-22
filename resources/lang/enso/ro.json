@@ -1473,5 +1473,10 @@
     "Please take the necessary steps.": "Te rog sa iei masurile necesare.",
     "A cancellation request was received for a :channel order.": "Am primit cerere de anulare pentru o comada din :channel.",
     "Sale": "Vanzare",
-    "The application is briefly unavailable for scheduled maintenance. Please check back in a few minutes": "Aplicația este indisponibilă momentan pentru întreținere programată. Vă rugăm să reveniți în câteva minute"
+    "The application is briefly unavailable for scheduled maintenance. Please check back in a few minutes": "Aplicația este indisponibilă momentan pentru întreținere programată. Vă rugăm să reveniți în câteva minute",
+    "Availability": "Disponibilitate",
+    "price ascending": "pret crescator",
+    "price descending": "pret descrescator",
+    "Sort": "Ordoneaza",
+    "newest": "cele mai noi"
 }
