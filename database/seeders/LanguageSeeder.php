@@ -8,7 +8,7 @@ use LaravelEnso\Localisation\Models\Language;
 
 class LanguageSeeder extends Seeder
 {
-    private const Languages = [
+    protected array $languages = [
         ['name' => 'ro', 'display_name' => 'Romana', 'flag' => 'flag-icon flag-icon-ro', 'is_rtl' => false, 'is_active' => true],
         ['name' => 'en', 'display_name' => 'English-GB', 'flag' => 'flag-icon flag-icon-gb', 'is_rtl' => false, 'is_active' => true],
         ['name' => 'de', 'display_name' => 'German', 'flag' => 'flag-icon flag-icon-de', 'is_rtl' => false, 'is_active' => true],
@@ -24,7 +24,7 @@ class LanguageSeeder extends Seeder
 
     public function run()
     {
-        Collection::wrap(self::Languages)
+        Collection::wrap($this->languages)
             ->each(fn ($language) => Language::factory()->create($language));
     }
 }
