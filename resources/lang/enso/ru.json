@@ -39,6 +39,7 @@
     "Sale": null,
     "The application is briefly unavailable for scheduled maintenance. Please check back in a few minutes": null,
     "Availability": null,
+    "Price Range": null,
     "Status update for order #:number": null,
     "Order #:number from :channel, placed by :person, has a new status update :status": null,
     "Your order #:number has been delivered. We hope you enjoy your purchase and we’d really love to receive your feedback. If you wish, you can leave us a product review.": null,
