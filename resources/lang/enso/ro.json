@@ -1505,5 +1505,7 @@
     "Min Price": "Pret minim",
     "Auto AWB Generation": "Generare automata AWB",
     "Pagination": "Paginatie",
-    "Locality ID": "ID localitate"
+    "Locality ID": "ID localitate",
+    "activate auto pricing": "activeaza auto pricing",
+    "deactivate auto pricing": "dezactiveaza auto pricing"
 }
