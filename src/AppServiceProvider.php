@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         ], ['localisation-factory', 'enso-factories']);
 
         $this->publishes([
-            __DIR__.'/../database/seeds' => database_path('seeds'),
+            __DIR__.'/../database/seeders' => database_path('seeders'),
         ], ['localisation-seeder', 'enso-seeders']);
 
         $this->publishes([
