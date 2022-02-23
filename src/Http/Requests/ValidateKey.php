@@ -4,7 +4,7 @@ namespace LaravelEnso\Localisation\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateKeyRequest extends FormRequest
+class ValidateKey extends FormRequest
 {
     public function authorize()
     {

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use LaravelEnso\Helpers\Traits\FiltersRequest;
 
-class ValidateLanguageRequest extends FormRequest
+class ValidateLanguage extends FormRequest
 {
     use FiltersRequest;
 

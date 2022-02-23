@@ -3,12 +3,12 @@
 namespace LaravelEnso\Localisation\Http\Controllers\Language;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Localisation\Http\Requests\ValidateLanguageRequest;
+use LaravelEnso\Localisation\Http\Requests\ValidateLanguage;
 use LaravelEnso\Localisation\Services\Storer;
 
 class Store extends Controller
 {
-    public function __invoke(ValidateLanguageRequest $request)
+    public function __invoke(ValidateLanguage $request)
     {
         $language = (new Storer(
             $request->validatedExcept('flag_sufix'),
