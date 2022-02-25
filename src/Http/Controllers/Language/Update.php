@@ -3,13 +3,13 @@
 namespace LaravelEnso\Localisation\Http\Controllers\Language;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Localisation\Http\Requests\ValidateLanguageRequest;
+use LaravelEnso\Localisation\Http\Requests\ValidateLanguage;
 use LaravelEnso\Localisation\Models\Language;
 use LaravelEnso\Localisation\Services\Updater;
 
 class Update extends Controller
 {
-    public function __invoke(ValidateLanguageRequest $request, Language $language)
+    public function __invoke(ValidateLanguage $request, Language $language)
     {
         (new Updater(
             $language,

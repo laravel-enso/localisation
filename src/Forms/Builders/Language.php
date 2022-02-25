@@ -3,17 +3,17 @@
 namespace LaravelEnso\Localisation\Forms\Builders;
 
 use LaravelEnso\Forms\Services\Form;
-use LaravelEnso\Localisation\Models\Language;
+use LaravelEnso\Localisation\Models\Language as Model;
 
-class LanguageForm
+class Language
 {
-    protected const FormPath = __DIR__.'/../Templates/language.json';
+    private const TemplatePath = __DIR__.'/../Templates/language.json';
 
     protected Form $form;
 
     public function __construct()
     {
-        $this->form = new Form(static::FormPath);
+        $this->form = new Form($this->templatePath());
     }
 
     public function create()
@@ -22,10 +22,15 @@ class LanguageForm
             ->create();
     }
 
-    public function edit(Language $language)
+    public function edit(Model $language)
     {
         return $this->form
             ->value('flag_sufix', substr($language->flag, -2))
             ->edit($language);
+    }
+
+    protected function templatePath(): string
+    {
+        return self::TemplatePath;
     }
 }
