@@ -9,13 +9,13 @@ trait JsonFilePathResolver
 {
     protected function jsonFileName($locale, $subDir = null): string
     {
-        $path = Collection::wrap(['lang', $subDir, "{$locale}.json"])
+        $path = Collection::wrap([$subDir, "{$locale}.json"])
             ->filter()->implode('/');
 
         $basePath = base_path();
 
         return $subDir === 'enso'
-            ? "{$basePath}/vendor/laravel-enso/localisation/{$path}"
+            ? "{$basePath}/vendor/laravel-enso/localisation/lang/{$path}"
             : App::langPath($path);
     }
 
