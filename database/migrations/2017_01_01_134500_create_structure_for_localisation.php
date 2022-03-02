@@ -2,7 +2,7 @@
 
 use LaravelEnso\Migrator\Database\Migration;
 
-class CreateStructureForLocalisation extends Migration
+return new class extends Migration
 {
     protected array $permissions = [
         ['name' => 'system.localisation.index', 'description' => 'Localisation index', 'is_default' => false],
@@ -27,4 +27,4 @@ class CreateStructureForLocalisation extends Migration
     ];
 
     protected ?string $parentMenu = 'System';
-}
+};
