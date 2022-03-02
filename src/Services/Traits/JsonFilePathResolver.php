@@ -3,32 +3,33 @@
 namespace LaravelEnso\Localisation\Services\Traits;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 
 trait JsonFilePathResolver
 {
-    protected function jsonFileName($locale, $subDir = null)
+    protected function jsonFileName($locale, $subDir = null): string
     {
         $path = Collection::wrap(['lang', $subDir, "{$locale}.json"])
-            ->filter()->implode(DIRECTORY_SEPARATOR);
+            ->filter()->implode('/');
 
         $basePath = base_path();
 
         return $subDir === 'enso'
-            ? "{$basePath}/vendor/laravel-enso/localisation/resources/{$path}"
-            : resource_path($path);
+            ? "{$basePath}/vendor/laravel-enso/localisation/{$path}"
+            : App::langPath($path);
     }
 
-    protected function coreJsonFileName($locale)
+    protected function coreJsonFileName($locale): string
     {
         return $this->jsonFileName($locale, 'enso');
     }
 
-    protected function appJsonFileName($locale)
+    protected function appJsonFileName($locale): string
     {
         return $this->jsonFileName($locale, 'app');
     }
 
-    protected function updateDir()
+    protected function updateDir(): string
     {
         return config('enso.localisation.core') ? 'enso' : 'app';
     }

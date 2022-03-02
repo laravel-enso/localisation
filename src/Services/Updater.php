@@ -2,21 +2,20 @@
 
 namespace LaravelEnso\Localisation\Services;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use LaravelEnso\Localisation\Models\Language;
 use LaravelEnso\Localisation\Services\Traits\JsonFilePathResolver;
-use LaravelEnso\Localisation\Services\Traits\LegacyFolderPathResolver;
 
 class Updater
 {
     use JsonFilePathResolver;
-    use LegacyFolderPathResolver;
 
     public function __construct(
         private Language $language,
         private array $request,
-        private string $flagSufix
+        private string $flagSuffix
     ) {
     }
 
@@ -24,12 +23,12 @@ class Updater
     {
         DB::transaction(function () {
             $oldName = $this->language->name;
-            $this->language->updateWithFlagSufix($this->request, $this->flagSufix);
+            $this->language->updateWithFlagSufix($this->request, $this->flagSuffix);
             $this->updateLangFiles($oldName, $this->request['name']);
         });
     }
 
-    public function updateJson($oldName, $newName)
+    public function updateJson($oldName, $newName): void
     {
         File::move(
             $this->jsonFileName($oldName),
@@ -37,7 +36,7 @@ class Updater
         );
     }
 
-    public function updateAppJson($oldName, $newName)
+    public function updateAppJson($oldName, $newName): void
     {
         File::move(
             $this->jsonFileName($oldName, 'app'),
@@ -45,7 +44,7 @@ class Updater
         );
     }
 
-    public function updateEnsoJson($oldName, $newName)
+    public function updateEnsoJson($oldName, $newName): void
     {
         File::move(
             $this->jsonFileName($oldName, 'enso'),
@@ -53,7 +52,7 @@ class Updater
         );
     }
 
-    private function updateLangFiles(string $oldName, string $newName)
+    private function updateLangFiles(string $oldName, string $newName): void
     {
         if ($oldName === $newName) {
             return;
@@ -65,11 +64,8 @@ class Updater
         $this->updateLegacyFolder($oldName, $newName);
     }
 
-    private function updateLegacyFolder($oldName, $newName)
+    private function updateLegacyFolder($oldName, $newName): void
     {
-        File::move(
-            $this->legacyFolderName($oldName),
-            $this->legacyFolderName($newName)
-        );
+        File::move(App::langPath($oldName), App::langPath($newName));
     }
 }

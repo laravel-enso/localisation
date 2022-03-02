@@ -3,6 +3,7 @@
 namespace LaravelEnso\Localisation\State;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use LaravelEnso\Core\Contracts\ProvidesState;
 use LaravelEnso\Helpers\Services\JsonReader;
 use LaravelEnso\Localisation\Models\Language;
@@ -39,7 +40,7 @@ class Localisation implements ProvidesState
 
     private function lang(Language $language)
     {
-        $file = resource_path('lang'.DIRECTORY_SEPARATOR."{$language->name}.json");
+        $file = App::langPath("{$language->name}.json");
 
         return (new JsonReader($file))->array();
     }

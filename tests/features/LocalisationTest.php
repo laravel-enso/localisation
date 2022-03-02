@@ -99,7 +99,7 @@ class LocalisationTest extends TestCase
         $this->cleanUp($language);
 
         File::delete(
-            base_path('vendor/laravel-enso/localisation/resources/lang/enso/'.$language->name.'.json')
+            base_path('vendor/laravel-enso/localisation/lang/enso/'.$language->name.'.json')
         );
     }
 

@@ -2,23 +2,24 @@
 
 namespace LaravelEnso\Localisation\Services\Legacy;
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
-use LaravelEnso\Localisation\Services\Traits\LegacyFolderPathResolver;
 
 class Storer
 {
-    use LegacyFolderPathResolver;
-
     private $newLocaleFolder;
     private $fallbackLocaleFolder;
 
     public function __construct(string $locale)
     {
-        $this->newLocaleFolder = $this->legacyFolderName($locale);
-        $this->fallbackLocaleFolder = $this->legacyFolderName(config('app.fallback_locale'));
+        $fallback = Config::get('app.fallback_locale');
+
+        $this->newLocaleFolder = App::langPath($locale);
+        $this->fallbackLocaleFolder = App::langPath($fallback);
     }
 
-    public function create()
+    public function create(): void
     {
         File::copyDirectory(
             $this->fallbackLocaleFolder,

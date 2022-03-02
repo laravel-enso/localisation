@@ -3,6 +3,7 @@
 namespace LaravelEnso\Localisation;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Localisation\Commands\Merge;
 use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
@@ -45,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes(
             Collection::wrap($this->langs)->mapWithKeys(fn ($key) => [
-                __DIR__.'/../resources/lang/'.$key => resource_path('lang/'.$key),
+                __DIR__.'/../lang/'.$key => App::langPath($key),
             ])->toArray(),
             'enso-localisation'
         );
