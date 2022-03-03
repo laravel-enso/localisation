@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\App;
 use LaravelEnso\Core\Models\Preference;
 use LaravelEnso\Core\Services\DefaultPreferences;
 use LaravelEnso\Forms\TestTraits\CreateForm;
@@ -56,11 +57,11 @@ class LocalisationTest extends TestCase
             ]);
 
         $this->assertTrue(
-            File::exists(resource_path('lang/'.$language->name))
+            File::exists(App::langPath($language->name))
         );
 
         $this->assertTrue(
-            File::exists(resource_path('lang/'.$language->name.'.json'))
+            File::exists(App::langPath($language->name.'.json'))
         );
 
         $this->cleanUp($language);
@@ -89,11 +90,11 @@ class LocalisationTest extends TestCase
         $this->assertEquals('zz', $language->fresh()->name);
 
         $this->assertTrue(
-            File::exists(resource_path('lang/'.$language->name))
+            File::exists(App::langPath($language->name))
         );
 
         $this->assertTrue(
-            File::exists(resource_path('lang/'.$language->name.'.json'))
+            File::exists(App::langPath($language->name.'.json'))
         );
 
         $this->cleanUp($language);
@@ -125,11 +126,11 @@ class LocalisationTest extends TestCase
             ]);
 
         $this->assertFalse(
-            File::exists(resource_path('lang/'.$languageName))
+            File::exists(App::langPath($languageName))
         );
 
         $this->assertFalse(
-            File::exists(resource_path('lang/'.$languageName.'.json'))
+            File::exists(App::langPath($languageName.'.json'))
         );
     }
 
@@ -167,11 +168,11 @@ class LocalisationTest extends TestCase
             ->assertStatus(403);
 
         $this->assertTrue(
-            File::exists(resource_path('lang/'.$language->name))
+            File::exists(App::langPath($language->name))
         );
 
         $this->assertTrue(
-            File::exists(resource_path('lang/'.$language->name.'.json'))
+            File::exists(App::langPath($language->name.'.json'))
         );
 
         $this->cleanUp($language);
@@ -191,19 +192,19 @@ class LocalisationTest extends TestCase
     private function cleanUp($language)
     {
         File::delete(
-            resource_path('lang'.DIRECTORY_SEPARATOR.$language->name.'.json')
+            App::langPath($language->name.'.json')
         );
 
         File::delete(
-            resource_path('lang/app'.DIRECTORY_SEPARATOR.$language->name.'.json')
+            App::langPath('app'.DIRECTORY_SEPARATOR.$language->name.'.json')
         );
 
         File::delete(
-            resource_path('lang/enso'.DIRECTORY_SEPARATOR.$language->name.'.json')
+            App::langPath('enso'.DIRECTORY_SEPARATOR.$language->name.'.json')
         );
 
         File::deleteDirectory(
-            resource_path('lang'.DIRECTORY_SEPARATOR.$language->name)
+            App::langPath($language->name)
         );
     }
 }

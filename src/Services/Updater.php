@@ -66,6 +66,6 @@ class Updater
 
     private function updateLegacyFolder($oldName, $newName): void
     {
-        File::move(App::langPath($oldName), App::langPath($newName));
+        File::moveDirectory(App::langPath($oldName), App::langPath($newName));
     }
 }
