@@ -4,6 +4,7 @@ namespace LaravelEnso\Localisation\Services\Traits;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 
 trait JsonFilePathResolver
 {
@@ -31,6 +32,6 @@ trait JsonFilePathResolver
 
     protected function updateDir(): string
     {
-        return config('enso.localisation.core') ? 'enso' : 'app';
+        return Config::get('enso.localisation.core') ? 'enso' : 'app';
     }
 }
