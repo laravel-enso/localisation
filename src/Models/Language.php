@@ -18,8 +18,6 @@ class Language extends Model implements Activatable
 
     protected $guarded = ['id'];
 
-    protected $casts = ['is_rtl' => 'boolean', 'is_active' => 'boolean'];
-
     public function updateWithFlagSufix($attributes, string $sufix)
     {
         $this->fill($attributes);
@@ -41,5 +39,12 @@ class Language extends Model implements Activatable
     public function scopeExtra($query)
     {
         return $query->where('name', '<>', config('app.fallback_locale'));
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_rtl' => 'boolean', 'is_active' => 'boolean',
+        ];
     }
 }
