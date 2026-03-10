@@ -2,8 +2,6 @@
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
-use LaravelEnso\Core\Models\Preference;
-use LaravelEnso\Core\Services\DefaultPreferences;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
 use LaravelEnso\Forms\TestTraits\EditForm;
@@ -51,9 +49,9 @@ class LocalisationTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message'  => __('The language was successfully created'),
+                'message' => __('The language was successfully created'),
                 'redirect' => 'system.localisation.edit',
-                'param'    => ['language' => $language->id],
+                'param' => ['language' => $language->id],
             ]);
 
         $this->assertTrue(
@@ -121,7 +119,7 @@ class LocalisationTest extends TestCase
             route('system.localisation.destroy', $language->id, false)
         )->assertStatus(200)
             ->assertJson([
-                'message'  => __('The language was successfully deleted'),
+                'message' => __('The language was successfully deleted'),
                 'redirect' => 'system.localisation.index',
             ]);
 
@@ -161,8 +159,7 @@ class LocalisationTest extends TestCase
         );
 
         $language = Language::whereName(self::LangName)->first();
-
-        $this->setLanguage($language);
+        $this->user->preferences->setLanguage($language);
 
         $this->delete(route('system.localisation.destroy', $language->id, false))
             ->assertStatus(403);
@@ -176,17 +173,6 @@ class LocalisationTest extends TestCase
         );
 
         $this->cleanUp($language);
-    }
-
-    private function setLanguage($language)
-    {
-        $preferences = DefaultPreferences::data();
-        $preferences->global->lang = $language->name;
-
-        Preference::create([
-            'user_id' => $this->user->id,
-            'value'   => $preferences,
-        ]);
     }
 
     private function cleanUp($language)
