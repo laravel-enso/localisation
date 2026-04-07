@@ -12,12 +12,12 @@ class Localisation implements ProvidesState
 {
     protected Collection $languages;
 
-    public function mutation(): string
+    public function store(): string
     {
-        return 'localisation/configure';
+        return 'localisation';
     }
 
-    public function state(): mixed
+    public function state(): array
     {
         $this->languages = Language::active()
             ->get(['name', 'flag', 'is_rtl']);
