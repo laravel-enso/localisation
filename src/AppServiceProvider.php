@@ -10,7 +10,7 @@ use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
 
 class AppServiceProvider extends ServiceProvider
 {
-    private array $langs = ['ar', 'br', 'de', 'es', 'fr', 'hu', 'mn', 'nl', 'ro', 'ru'];
+    private array $langs = ['br', 'de', 'es', 'fr', 'hu', 'mn', 'nl', 'ro', 'ru'];
 
     public function boot()
     {
