@@ -9,6 +9,7 @@ use LaravelEnso\Localisation\Models\Language;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LocalisationTest extends TestCase
 {
@@ -37,7 +38,7 @@ class LocalisationTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function can_store_language()
     {
         $response = $this->post(
@@ -65,7 +66,7 @@ class LocalisationTest extends TestCase
         $this->cleanUp($language);
     }
 
-    /** @test */
+    #[Test]
     public function can_update_language()
     {
         $this->post(
@@ -102,7 +103,7 @@ class LocalisationTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function can_destroy_language()
     {
         $this->post(
@@ -132,7 +133,7 @@ class LocalisationTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function cant_destroy_default_language()
     {
         $this->testModel->save();
@@ -148,7 +149,7 @@ class LocalisationTest extends TestCase
         $this->assertNotNull($this->testModel->fresh());
     }
 
-    /** @test */
+    #[Test]
     public function cant_destroy_if_language_is_in_use()
     {
         $this->post(
