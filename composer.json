@@ -22,7 +22,7 @@
         "laravel-enso/helpers": "^4.0",
         "laravel-enso/migrator": "^2.0",
         "laravel-enso/select": "^5.0",
-        "laravel-enso/tables": "^5.1.0",
+        "laravel-enso/tables": "^5.1",
         "laravel-enso/users": "^2.0",
         "php": "^8.0"
     },
