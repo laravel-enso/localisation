@@ -37,21 +37,42 @@ abstract class Handler
         );
     }
 
+    protected function langFile(string $locale, string $subDir): array
+    {
+        return (new JsonReader($this->jsonFileName($locale, $subDir)))->array();
+    }
+
+    protected function syncKeys(array $source, array $target): array
+    {
+        $sourceKeys = Collection::wrap($source)->keys();
+        $target = Collection::wrap($target)
+            ->reject(fn ($value, $key) => ! $sourceKeys->contains($key));
+
+        return $this->appendMissingKeys($source, $target->toArray());
+    }
+
+    protected function appendMissingKeys(array $source, array $target): array
+    {
+        $keysToAdd = Collection::wrap($source)->diffKeys($target);
+        $newTranslations = $this->newTranslations($keysToAdd->all());
+
+        return Collection::wrap($newTranslations)
+            ->merge($target)
+            ->sortKeys()
+            ->toArray();
+    }
+
     protected function merge(?string $locale = null): void
     {
-        $languages = Language::extra();
-
-        if ($locale) {
-            $languages->where('name', $locale);
-        }
-
-        $languages->pluck('name')
+        Language::extra()
+            ->when($locale, fn ($languages) => $languages->where('name', $locale))
+            ->pluck('name')
             ->each(fn ($locale) => $this->mergeLocale($locale));
     }
 
     private function mergeLocale(string $locale): void
     {
-        $core = (new JsonReader($this->coreJsonFileName($locale)))->array();
+        $core = $this->langFile($locale, 'enso');
 
         $app = $this->getOrCreateApp($locale);
 
@@ -62,13 +83,13 @@ abstract class Handler
 
     private function getOrCreateApp(string $locale): array
     {
-        if (! File::exists($this->appJsonFileName($locale))) {
+        if (!File::exists($this->appJsonFileName($locale))) {
             File::copy(
                 $this->appJsonFileName(Language::extra()->first()->name),
                 $this->appJsonFileName($locale)
             );
         }
 
-        return (new JsonReader($this->appJsonFileName($locale)))->array();
+        return $this->langFile($locale, 'app');
     }
 }
