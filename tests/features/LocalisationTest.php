@@ -395,7 +395,7 @@ class LocalisationTest extends TestCase
             'is_rtl' => false,
         ]);
 
-        $this->artisan('enso:localisation:scan', ['--ignored-examples' => 0])
+        $this->artisan('enso:localisation:scan', ['--ignored' => 0])
             ->expectsOutput('Found keys: 7')
             ->expectsOutput('New keys: 7')
             ->expectsOutput('Existing keys: 0')
@@ -416,6 +416,76 @@ class LocalisationTest extends TestCase
             'Ignored Nested',
             json_decode(File::get(App::langPath($other->name.'.json')), true)
         );
+
+        $this->cleanUp($language);
+        $this->cleanUp($other);
+        $other->delete();
+    }
+
+    #[Test]
+    public function scan_can_report_and_deduplicate_duplicate_translation_keys()
+    {
+        config()->set('enso.localisation.scan.paths', []);
+
+        $this->post(
+            route('system.localisation.store', [], false),
+            $this->testModel->toArray()
+        );
+
+        $language = Language::whereName(self::LangName)->first();
+        $other = Language::factory()->create([
+            'name' => 'yy',
+            'display_name' => 'yy',
+            'flag' => 'yy',
+            'is_active' => true,
+            'is_rtl' => false,
+        ]);
+
+        File::put(App::langPath($language->name.'.json'), <<<'JSON'
+{
+    "Same": "value",
+    "Same": "value",
+    "Different": "one",
+    "Different": "two"
+}
+JSON);
+
+        File::put(App::langPath('yy.json'), <<<'JSON'
+{
+    "Other Same": "value",
+    "Other Same": "value"
+}
+JSON);
+
+        $this->artisan('enso:localisation:scan', ['--ignored' => 0])
+            ->expectsOutput('Found keys: 0')
+            ->expectsOutput('New keys: 0')
+            ->expectsOutput('Existing keys: 0')
+            ->expectsOutput('Ignored non-literal calls: 0')
+            ->expectsOutput('Duplicate keys with same translations: 2')
+            ->expectsOutput('Duplicate keys with conflicting translations: 1')
+            ->expectsOutput('Deduplicated duplicate keys with same translations: 2')
+            ->expectsTable(
+                ['Locale', 'File', 'Key', 'Translation', 'Duplicates'],
+                [
+                    [$language->name, App::langPath($language->name.'.json'), 'Same', 'value', 2],
+                    ['yy', App::langPath('yy.json'), 'Other Same', 'value', 2],
+                ]
+            )->expectsTable(
+                ['Locale', 'File', 'Key', 'Translations', 'Duplicates'],
+                [
+                    [$language->name, App::langPath($language->name.'.json'), 'Different', 'one | two', 2],
+                ]
+            )->assertSuccessful();
+
+        $contents = File::get(App::langPath($language->name.'.json'));
+
+        $this->assertSame(1, substr_count($contents, '"Same"'));
+        $this->assertSame(2, substr_count($contents, '"Different"'));
+
+        $otherContents = File::get(App::langPath('yy.json'));
+
+        $this->assertSame(1, substr_count($otherContents, '"Other Same"'));
 
         $this->cleanUp($language);
         $this->cleanUp($other);

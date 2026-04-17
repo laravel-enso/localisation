@@ -38,7 +38,7 @@
                     "label": "Flag",
                     "name": "flagIcon",
                     "value": "",
-                    "column": 12,
+                    "column": 6,
                     "meta": {
                         "custom": "true",
                         "type": "input",
