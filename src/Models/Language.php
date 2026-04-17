@@ -10,31 +10,11 @@ use LaravelEnso\Tables\Traits\TableCache;
 
 class Language extends Model implements Activatable
 {
-    use ActiveState;
-    use HasFactory;
-    use TableCache;
+    use ActiveState, HasFactory, TableCache;
 
-    private const FlagClassPrefix = 'flag-icon flag-icon-';
+    public const FlagPrefix = 'flag-icon flag-icon-';
 
     protected $guarded = ['id'];
-
-    public function updateWithFlagSufix($attributes, string $sufix)
-    {
-        $this->fill($attributes);
-
-        $this->flag = self::FlagClassPrefix.$sufix;
-
-        $this->update();
-    }
-
-    public function storeWithFlagSufix($attributes, string $sufix)
-    {
-        $this->fill($attributes);
-
-        $this->flag = self::FlagClassPrefix.$sufix;
-
-        return tap($this)->save();
-    }
 
     public function scopeExtra($query)
     {
@@ -46,5 +26,10 @@ class Language extends Model implements Activatable
         return [
             'is_rtl' => 'boolean', 'is_active' => 'boolean',
         ];
+    }
+
+    public function flag(): string
+    {
+        return self::FlagPrefix.$this->flag;
     }
 }

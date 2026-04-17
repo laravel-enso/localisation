@@ -7,7 +7,7 @@
                 {
                     "label": "Display Name",
                     "name": "display_name",
-                    "column": 6,
+                    "column": 12,
                     "value": "",
                     "meta": {
                         "type": "input",
@@ -18,7 +18,7 @@
                     "label": "Name",
                     "name": "name",
                     "value": "",
-                    "column": 3,
+                    "column": 6,
                     "meta": {
                         "type": "input",
                         "content": "text"
@@ -26,9 +26,9 @@
                 },
                 {
                     "label": "Flag Sufix",
-                    "name": "flag_sufix",
+                    "name": "flag",
                     "value": "",
-                    "column": 3,
+                    "column": 6,
                     "meta": {
                         "type": "input",
                         "content": "text"
@@ -36,12 +36,13 @@
                 },
                 {
                     "label": "Flag",
-                    "name": "flag",
-                    "value": null,
-                    "column": 6,
+                    "name": "flagIcon",
+                    "value": "",
+                    "column": 12,
                     "meta": {
                         "custom": "true",
-                        "type": "text",
+                        "type": "input",
+                        "content": "text",
                         "disabled": true
                     }
                 },

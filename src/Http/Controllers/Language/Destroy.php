@@ -4,8 +4,8 @@ namespace LaravelEnso\Localisation\Http\Controllers\Language;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use LaravelEnso\Localisation\Models\Language;
-use LaravelEnso\Localisation\Services\Destroyer;
 
 class Destroy extends Controller
 {
@@ -15,7 +15,7 @@ class Destroy extends Controller
     {
         $this->authorize('destroy', $language);
 
-        (new Destroyer($language))->run();
+        DB::transaction(fn () => $language->delete());
 
         return [
             'message' => __('The language was successfully deleted'),

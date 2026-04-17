@@ -3,93 +3,55 @@
 namespace LaravelEnso\Localisation\Services\Json;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 use LaravelEnso\Helpers\Services\JsonReader;
 use LaravelEnso\Localisation\Models\Language;
 
-class Updater extends Handler
+class Updater
 {
-    private ?string $locale;
-    private array $langArray;
-    private ?string $subDir;
-
-    public function __construct(Language $language, array $langArray, ?string $subDir = null)
-    {
-        $this->langArray = $langArray;
-        $this->locale = $language->name;
-        $this->subDir = $subDir;
+    public function __construct(
+        private Language $language,
+        private array $langArray
+    ) {
     }
 
-    public function run()
+    public function run(): void
     {
-        $this->savePartial(
-            $this->locale,
-            $this->langArray,
-            $this->subDir
-        );
+        SaveToDisk::handle($this->language->name, $this->langArray);
 
         $this->extraLangs()
-            ->each(fn ($locale) => $this->updateDifferences($locale));
+            ->each(fn (string $locale) => $this->updateDifferences($locale));
     }
 
-    public function addKey()
+    private function updateDifferences(string $locale): void
     {
-        $this->extraLangs()
-            ->each(fn ($locale) => $this->processKey($locale));
-    }
+        $langFile = $this->langFile($locale);
+        $synced = $this->sync($langFile);
 
-    private function processKey($locale)
-    {
-        $extraLangFile = $this->extraLangFile($locale, $this->updateDir());
-        [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
-        $this->savePartial($locale, $extraLangFile, $this->updateDir());
-    }
-
-    private function updateDifferences(string $locale)
-    {
-        $removedCount = $addedCount = 0;
-        $extraLangFile = $this->extraLangFile($locale, $this->subDir);
-        [$removedCount, $extraLangFile] = $this->removeExtraKeys($extraLangFile);
-        [$addedCount, $extraLangFile] = $this->addNewKeys($extraLangFile);
-
-        if ($addedCount || $removedCount) {
-            $this->savePartial($locale, $extraLangFile, $this->subDir);
+        if ($langFile !== $synced) {
+            SaveToDisk::handle($locale, $synced);
         }
     }
 
-    private function removeExtraKeys(array $extraLangFile)
+    private function sync(array $langFile): array
     {
-        $keysToRemove = Collection::wrap($extraLangFile)
-            ->diffKeys($this->langArray)
-            ->keys();
-
-        $extraLangFile = Collection::wrap($extraLangFile)
-            ->filter(fn ($key) => $keysToRemove->contains($key));
-
-        return [$keysToRemove->count(), $extraLangFile->toArray()];
+        return Collection::wrap($this->langArray)
+            ->mapWithKeys(fn ($value, $key) => [$key => $langFile[$key] ?? null])
+            ->all();
     }
 
-    private function addNewKeys(array $extraLangFile)
+    private function langFile(string $locale): array
     {
-        $keysToAdd = Collection::wrap($this->langArray)
-            ->diffKeys($extraLangFile);
-
-        $arrayToAdd = $this->newTranslations($keysToAdd->all());
-
-        $extraLangFile = Collection::wrap($arrayToAdd)
-            ->merge($extraLangFile);
-
-        return [$keysToAdd->count(), $extraLangFile->toArray()];
+        return File::exists(App::langPath("{$locale}.json"))
+            ? (new JsonReader(App::langPath("{$locale}.json")))->array()
+            : [];
     }
 
-    private function extraLangFile(string $locale, string $subDir)
-    {
-        return (new JsonReader($this->jsonFileName($locale, $subDir)))->array();
-    }
-
-    private function extraLangs()
+    private function extraLangs(): Collection
     {
         return Language::extra()
-            ->where('name', '<>', $this->locale)
+            ->where('name', '<>', $this->language->name)
             ->pluck('name');
     }
 }

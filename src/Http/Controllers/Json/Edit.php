@@ -2,13 +2,16 @@
 
 namespace LaravelEnso\Localisation\Http\Controllers\Json;
 
+use Illuminate\Support\Facades\App;
+use LaravelEnso\Helpers\Services\JsonReader;
 use LaravelEnso\Localisation\Models\Language;
-use LaravelEnso\Localisation\Services\Json\Reader;
 
 class Edit
 {
-    public function __invoke(Language $language, string $subDir)
+    public function __invoke(Language $language): string
     {
-        return (new Reader($language, $subDir))->get();
+        $filename = App::langPath("{$language->name}.json");
+
+        return (new JsonReader($filename))->json();
     }
 }

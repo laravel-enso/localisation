@@ -4,6 +4,7 @@ namespace LaravelEnso\Localisation\Http\Middleware;
 
 use Carbon\Carbon;
 use Closure;
+use Illuminate\Support\Facades\App;
 
 class SetLanguage
 {
@@ -11,7 +12,7 @@ class SetLanguage
     {
         $language = $request->user()->preferences->lang();
 
-        app()->setLocale($language);
+        App::setLocale($language);
 
         Carbon::setLocale($language);
 

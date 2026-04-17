@@ -38,10 +38,10 @@
         {
             "label": "Flag",
             "name": "flag",
-            "data": "languages.flag",
+            "data": "flag",
             "meta": [
                 "slot",
-                "sortable"
+                "method"
             ]
         },
         {

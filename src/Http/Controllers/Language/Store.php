@@ -3,17 +3,15 @@
 namespace LaravelEnso\Localisation\Http\Controllers\Language;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use LaravelEnso\Localisation\Http\Requests\ValidateLanguage;
-use LaravelEnso\Localisation\Services\Storer;
+use LaravelEnso\Localisation\Models\Language;
 
 class Store extends Controller
 {
-    public function __invoke(ValidateLanguage $request)
+    public function __invoke(ValidateLanguage $request, Language $language)
     {
-        $language = (new Storer(
-            $request->validatedExcept('flag_sufix'),
-            $request->get('flag_sufix')
-        ))->create();
+        $language = DB::transaction(fn () => Language::create($request->validated()));
 
         return [
             'message' => __('The language was successfully created'),

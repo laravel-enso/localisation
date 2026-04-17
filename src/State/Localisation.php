@@ -25,7 +25,8 @@ class Localisation implements ProvidesState
         return [
             'i18n' => $this->i18n(),
             'languages' => $this->languages->pluck('flag', 'name'),
-            'rtl' => $this->rtl(),
+            'rtlLanguages' => $this->rtl(),
+            'flagPrefix' => Language::FlagPrefix,
         ];
     }
 

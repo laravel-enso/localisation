@@ -18,14 +18,13 @@ class Language
 
     public function create()
     {
-        return $this->form->hide('flag')
-            ->create();
+        return $this->form->hide('flagIcon')->create();
     }
 
     public function edit(Model $language)
     {
         return $this->form
-            ->value('flag_sufix', substr($language->flag, -2))
+            ->value('flagIcon', $language->flag())
             ->edit($language);
     }
 

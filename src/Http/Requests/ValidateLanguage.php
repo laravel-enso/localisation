@@ -20,7 +20,7 @@ class ValidateLanguage extends FormRequest
         return [
             'name' => ['required', $this->unique('name')],
             'display_name' => ['required', $this->unique('display_name')],
-            'flag_sufix' => 'required|string|size:2',
+            'flag' => 'required|string|size:2',
             'is_rtl' => 'required|boolean',
             'is_active' => 'required|boolean',
         ];

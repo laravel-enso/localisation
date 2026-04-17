@@ -37,7 +37,8 @@
         "laravel": {
             "providers": [
                 "LaravelEnso\\Localisation\\AppServiceProvider",
-                "LaravelEnso\\Localisation\\AuthServiceProvider"
+                "LaravelEnso\\Localisation\\AuthServiceProvider",
+                "LaravelEnso\\Localisation\\EventServiceProvider"
             ],
             "aliases": []
         }
