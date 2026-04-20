@@ -101,6 +101,10 @@ Required Enso packages:
 - [`laravel-enso/tables`](https://docs.laravel-enso.com/backend/tables.html) [↗](https://github.com/laravel-enso/tables)
 - [`laravel-enso/users`](https://docs.laravel-enso.com/backend/users.html) [↗](https://github.com/laravel-enso/users)
 
+Companion frontend package:
+
+- [`@enso-ui/localisation`](https://docs.laravel-enso.com/frontend/localisation.html) [↗](https://github.com/enso-ui/localisation)
+
 ## Contributions
 
 are welcome. Pull requests are great, but issues are good too.
