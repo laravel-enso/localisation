@@ -99,6 +99,29 @@ class LocalisationTest extends TestCase
     }
 
     #[Test]
+    public function saving_en_language_file_does_not_create_an_en_json_file()
+    {
+        $language = Language::query()->firstOrCreate(['name' => 'en'], [
+            'display_name' => 'English',
+            'flag' => 'gb',
+            'is_active' => true,
+            'is_rtl' => false,
+        ]);
+        File::delete(App::langPath('en.json'));
+
+        $this->patch(
+            route('system.localisation.saveLangFile', $language, false),
+            ['langFile' => ['Hello' => 'Hello']]
+        )->assertStatus(200)
+            ->assertJson([
+                'message' => __('The language files were successfully updated'),
+            ]);
+
+        $this->assertTrue(File::exists(App::langPath('en')));
+        $this->assertFalse(File::exists(App::langPath('en.json')));
+    }
+
+    #[Test]
     public function can_update_language()
     {
         File::put(App::langPath('de.json'), json_encode([
@@ -151,6 +174,32 @@ class LocalisationTest extends TestCase
         );
 
         $this->cleanUp($language);
+    }
+
+    #[Test]
+    public function renaming_a_language_to_en_does_not_create_an_en_json_file()
+    {
+        $this->post(
+            route('system.localisation.store', [], false),
+            $this->testModel->toArray()
+        );
+
+        $language = Language::whereName(self::LangName)->first();
+        $oldName = $language->name;
+
+        File::delete(App::langPath('en.json'));
+        File::deleteDirectory(App::langPath('en'));
+
+        $language->syncOriginal();
+        $language->name = 'en';
+
+        (new \LaravelEnso\Localisation\Observers\Language())->updated($language);
+
+        $this->assertFalse(File::exists(App::langPath($oldName.'.json')));
+        $this->assertTrue(File::exists(App::langPath('en')));
+        $this->assertFalse(File::exists(App::langPath('en.json')));
+
+        File::deleteDirectory(App::langPath('en'));
     }
 
     #[Test]
@@ -260,6 +309,7 @@ class LocalisationTest extends TestCase
         $this->assertSame([
             'Hello' => null,
             'Bye' => null,
+            'Legacy' => 'value',
         ], json_decode(File::get(App::langPath('yy.json')), true));
 
         $this->cleanUp($language);
@@ -490,6 +540,70 @@ JSON);
         $this->cleanUp($language);
         $this->cleanUp($other);
         $other->delete();
+    }
+
+    #[Test]
+    public function scan_does_not_create_an_en_json_file_even_if_en_exists_as_a_language()
+    {
+        config()->set('app.fallback_locale', 'ro');
+        config()->set('enso.localisation.scan.paths', []);
+
+        Language::query()->firstOrCreate(['name' => 'en'], [
+            'display_name' => 'English',
+            'flag' => 'gb',
+            'is_active' => true,
+            'is_rtl' => false,
+        ]);
+        File::delete(App::langPath('en.json'));
+
+        $this->artisan('enso:localisation:scan', ['--ignored' => 0])
+            ->expectsOutput('Found keys: 0')
+            ->expectsOutput('New keys: 0')
+            ->expectsOutput('Existing keys: 0')
+            ->expectsOutput('Ignored non-literal calls: 0')
+            ->assertSuccessful();
+
+        $this->assertFalse(File::exists(App::langPath('en.json')));
+    }
+
+    #[Test]
+    public function publish_does_not_create_an_en_json_file_even_if_en_exists_as_a_language()
+    {
+        Language::query()->firstOrCreate(['name' => 'en'], [
+            'display_name' => 'English',
+            'flag' => 'gb',
+            'is_active' => true,
+            'is_rtl' => false,
+        ]);
+        File::delete(App::langPath('en.json'));
+
+        $this->artisan('enso:localisation:publish', ['--locale' => 'en'])
+            ->expectsOutput('Language files published (en)!')
+            ->assertSuccessful();
+
+        $this->assertTrue(File::exists(App::langPath('en')));
+        $this->assertFalse(File::exists(App::langPath('en.json')));
+    }
+
+    #[Test]
+    public function audit_duplicates_does_not_touch_en_json_file()
+    {
+        File::put(App::langPath('en.json'), <<<'JSON'
+{
+    "Same": "value",
+    "Same": "value"
+}
+JSON);
+
+        $original = File::get(App::langPath('en.json'));
+
+        $result = (new \LaravelEnso\Localisation\Services\Json\AuditDuplicates(['en'], true))
+            ->handle();
+
+        $this->assertSame($original, File::get(App::langPath('en.json')));
+        $this->assertCount(0, $result['same']);
+        $this->assertCount(0, $result['conflicting']);
+        $this->assertSame(0, $result['deduplicated']);
     }
 
     private function cleanUp($language): void

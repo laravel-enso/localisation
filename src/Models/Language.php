@@ -18,7 +18,10 @@ class Language extends Model implements Activatable
 
     public function scopeExtra($query)
     {
-        return $query->where('name', '<>', config('app.fallback_locale'));
+        return $query->whereNotIn('name', [
+            config('app.fallback_locale'),
+            'en',
+        ]);
     }
 
     protected function casts(): array

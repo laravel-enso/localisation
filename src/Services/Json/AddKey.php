@@ -29,7 +29,7 @@ class AddKey
         $updated = Collection::wrap($this->keys)->merge($langFile)->all();
 
         if ($updated !== $langFile) {
-            SaveToDisk::handle($locale, $updated);
+            SaveToDisk::handle($locale, $updated, overwrite: true);
         }
     }
 }

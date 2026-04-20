@@ -23,6 +23,7 @@ class AuditDuplicates
         $deduplicated = 0;
 
         Collection::wrap($this->locales)
+            ->reject(fn (string $locale) => $locale === 'en')
             ->each(function (string $locale) use (&$same, &$conflicting, &$deduplicated): void {
                 [
                     'same' => $fileSame,

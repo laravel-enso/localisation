@@ -18,7 +18,7 @@ class Updater
 
     public function run(): void
     {
-        SaveToDisk::handle($this->language->name, $this->langArray);
+        SaveToDisk::handle($this->language->name, $this->langArray, overwrite: true);
 
         $this->extraLangs()
             ->each(fn (string $locale) => $this->updateDifferences($locale));
@@ -30,15 +30,16 @@ class Updater
         $synced = $this->sync($langFile);
 
         if ($langFile !== $synced) {
-            SaveToDisk::handle($locale, $synced);
+            SaveToDisk::handle($locale, $synced, overwrite: true);
         }
     }
 
     private function sync(array $langFile): array
     {
-        return Collection::wrap($this->langArray)
-            ->mapWithKeys(fn ($value, $key) => [$key => $langFile[$key] ?? null])
-            ->all();
+        $synced = Collection::wrap($this->langArray)
+            ->mapWithKeys(fn ($value, $key) => [$key => $langFile[$key] ?? null]);
+
+        return $synced->union($langFile)->all();
     }
 
     private function langFile(string $locale): array

@@ -25,8 +25,17 @@ class Language
         if ($old !== $new) {
             $path = fn ($locale) => App::langPath("{$locale}");
 
-            File::move($path("{$old}.json"), $path("{$new}.json"));
-            File::moveDirectory($path($old), $path($new));
+            if (File::exists($path("{$old}.json"))) {
+                if ($new === 'en') {
+                    File::delete($path("{$old}.json"));
+                } else {
+                    File::move($path("{$old}.json"), $path("{$new}.json"));
+                }
+            }
+
+            if (File::isDirectory($path($old))) {
+                File::moveDirectory($path($old), $path($new));
+            }
         }
     }
 
