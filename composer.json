@@ -1,6 +1,6 @@
 {
     "name": "laravel-enso/localisation",
-    "description": "Localisation management dependency for Laravel Enso",
+    "description": "Language and translation management for Laravel Enso",
     "keywords": [
         "laravel-enso",
         "localisation"
