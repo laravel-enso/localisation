@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
+use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
 use LaravelEnso\Forms\TestTraits\EditForm;
@@ -402,6 +404,74 @@ class LocalisationTest extends TestCase
     }
 
     #[Test]
+    public function get_option_list()
+    {
+        $this->testModel->save();
+
+        $this->get(route('system.localisation.options', [
+            'query' => $this->testModel->name,
+            'limit' => 10,
+        ], false))->assertStatus(200)
+            ->assertJsonFragment(['name' => $this->testModel->name]);
+    }
+
+    #[Test]
+    public function can_fetch_edit_text_languages_excluding_en_and_fallback_locale()
+    {
+        config()->set('app.fallback_locale', 'ro');
+
+        Language::query()->firstOrCreate(['name' => 'ro'], [
+            'name' => 'ro',
+            'display_name' => 'Romanian',
+            'flag' => 'ro',
+            'is_active' => true,
+            'is_rtl' => false,
+        ]);
+        Language::query()->firstOrCreate(['name' => 'en'], [
+            'name' => 'en',
+            'display_name' => 'English',
+            'flag' => 'gb',
+            'is_active' => true,
+            'is_rtl' => false,
+        ]);
+        $language = Language::query()->create([
+            'name' => 'de',
+            'display_name' => 'German',
+            'flag' => 'de',
+            'is_active' => true,
+            'is_rtl' => false,
+        ]);
+
+        $response = $this->get(route('system.localisation.editTexts', [], false))
+            ->assertStatus(200);
+
+        $response->assertJsonFragment([
+            'id' => $language->id,
+            'name' => 'German',
+        ])->assertJsonMissing([
+            'name' => 'Romanian',
+        ])->assertJsonMissing([
+            'name' => 'English',
+        ]);
+    }
+
+    #[Test]
+    public function can_get_language_json_file_contents()
+    {
+        $this->testModel->save();
+
+        File::put(App::langPath(self::LangName.'.json'), json_encode([
+            'Hello' => 'Salut',
+        ], JSON_FORCE_OBJECT));
+
+        $response = $this->get(
+            route('system.localisation.getLangFile', $this->testModel, false)
+        )->assertStatus(200);
+
+        $this->assertSame(['Hello' => 'Salut'], json_decode($response->getContent(), true));
+    }
+
+    #[Test]
     public function can_scan_configured_sources_and_add_unique_translation_keys()
     {
         $this->scanPath = sys_get_temp_dir().'/localisation-scan-'.uniqid();
@@ -583,6 +653,27 @@ JSON);
 
         $this->assertTrue(File::exists(App::langPath('en')));
         $this->assertFalse(File::exists(App::langPath('en.json')));
+    }
+
+    #[Test]
+    public function middleware_sets_application_locale_from_user_preferences()
+    {
+        $language = Language::query()->create([
+            'name' => 'de',
+            'display_name' => 'German',
+            'flag' => 'de',
+            'is_active' => true,
+            'is_rtl' => false,
+        ]);
+        $this->user->preferences->setLanguage($language);
+
+        $request = Request::create('/localisation-test', 'GET');
+        $request->setUserResolver(fn () => $this->user->fresh());
+
+        $response = (new SetLanguage())->handle($request, fn () => response('ok'));
+
+        $this->assertSame('ok', $response->getContent());
+        $this->assertSame('de', App::getLocale());
     }
 
     #[Test]
