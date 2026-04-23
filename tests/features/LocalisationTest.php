@@ -435,9 +435,9 @@ class LocalisationTest extends TestCase
             'is_rtl' => false,
         ]);
         $language = Language::query()->create([
-            'name' => 'de',
-            'display_name' => 'German',
-            'flag' => 'de',
+            'name' => 'zz',
+            'display_name' => 'Test German',
+            'flag' => 'zz',
             'is_active' => true,
             'is_rtl' => false,
         ]);
@@ -447,7 +447,7 @@ class LocalisationTest extends TestCase
 
         $response->assertJsonFragment([
             'id' => $language->id,
-            'name' => 'German',
+            'name' => 'Test German',
         ])->assertJsonMissing([
             'name' => 'Romanian',
         ])->assertJsonMissing([
@@ -659,9 +659,9 @@ JSON);
     public function middleware_sets_application_locale_from_user_preferences()
     {
         $language = Language::query()->create([
-            'name' => 'de',
-            'display_name' => 'German',
-            'flag' => 'de',
+            'name' => 'zz',
+            'display_name' => 'Test German',
+            'flag' => 'zz',
             'is_active' => true,
             'is_rtl' => false,
         ]);
@@ -673,7 +673,7 @@ JSON);
         $response = (new SetLanguage())->handle($request, fn () => response('ok'));
 
         $this->assertSame('ok', $response->getContent());
-        $this->assertSame('de', App::getLocale());
+        $this->assertSame('zz', App::getLocale());
     }
 
     #[Test]
