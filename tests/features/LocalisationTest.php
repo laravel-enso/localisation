@@ -675,6 +675,46 @@ JSON);
     }
 
     #[Test]
+    public function scan_collects_literal_enso_exception_messages()
+    {
+        config()->set('enso.localisation.scan.enums', false);
+
+        $this->scanPath = sys_get_temp_dir().'/localisation-scan-'.uniqid();
+
+        File::makeDirectory("{$this->scanPath}/app", recursive: true);
+
+        File::put("{$this->scanPath}/app/Test.php", <<<'PHP'
+<?php
+
+use LaravelEnso\Helpers\Exceptions\EnsoException;
+
+throw new EnsoException('Direct exception message');
+throw new EnsoException(__('Already scanned'));
+throw new EnsoException('Runtime '.$message);
+
+class TestException extends EnsoException
+{
+    public static function make()
+    {
+        return new static('Static exception message');
+    }
+}
+PHP);
+
+        config()->set('enso.localisation.scan.paths', [
+            ['path' => "{$this->scanPath}/app"],
+        ]);
+
+        ['found' => $found, 'ignored' => $ignored] = (new Scan())->handle();
+
+        $this->assertContains('Already scanned', $found);
+        $this->assertContains('Direct exception message', $found);
+        $this->assertContains('Static exception message', $found);
+        $this->assertNotContains('Runtime ', $found);
+        $this->assertCount(0, $ignored);
+    }
+
+    #[Test]
     public function publish_does_not_create_an_en_json_file_even_if_en_exists_as_a_language()
     {
         Language::query()->firstOrCreate(['name' => 'en'], [

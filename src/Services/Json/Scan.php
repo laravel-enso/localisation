@@ -79,7 +79,32 @@ class Scan
 
                 return Collection::wrap($matches[2] ?? [])
                     ->map(fn (string $key) => stripcslashes($key));
+            })
+            ->merge($this->exceptionKeys($content));
+    }
+
+    private function exceptionKeys(string $content): Collection
+    {
+        return Collection::wrap($this->exceptionPatterns($content))
+            ->flatMap(function (string $pattern) use ($content): Collection {
+                preg_match_all($pattern, $content, $matches);
+
+                return Collection::wrap($matches[2] ?? [])
+                    ->map(fn (string $key) => stripcslashes($key));
             });
+    }
+
+    private function exceptionPatterns(string $content): array
+    {
+        $patterns = [
+            '/new\s+(?:\\\\?LaravelEnso\\\\Helpers\\\\Exceptions\\\\)?EnsoException\s*\(\s*([\'"])((?:\\\\.|(?!\1).)*?)\1\s*(?:,|\))/s',
+        ];
+
+        if (preg_match('/extends\s+(?:\\\\?LaravelEnso\\\\Helpers\\\\Exceptions\\\\)?EnsoException\b/', $content)) {
+            $patterns[] = '/new\s+(?:self|static)\s*\(\s*([\'"])((?:\\\\.|(?!\1).)*?)\1\s*(?:,|\))/s';
+        }
+
+        return $patterns;
     }
 
     private function extractIgnored(SplFileInfo $file): Collection
