@@ -656,6 +656,7 @@ JSON);
 
         $this->assertContains('Localisation Test Legacy Enum Label', $found);
         $this->assertContains('Localisation Test Native Enum Label', $found);
+        $this->assertContains('Localisation Test Select Enum Label', $found);
     }
 
     #[Test]
@@ -670,6 +671,7 @@ JSON);
 
         $this->assertNotContains('Localisation Test Legacy Enum Label', $found);
         $this->assertNotContains('Localisation Test Native Enum Label', $found);
+        $this->assertNotContains('Localisation Test Select Enum Label', $found);
     }
 
     #[Test]
@@ -790,7 +792,32 @@ enum ScanFrontendEnum: int implements Frontend, Mappable
 }
 PHP);
 
+        File::put("{$packagePath}/src/Enums/ScanSelectEnum.php", <<<'PHP'
+<?php
+
+namespace LocalisationTest\EnumsPackage\Enums;
+
+use LaravelEnso\Enums\Contracts\Mappable;
+use LaravelEnso\Enums\Contracts\Select;
+use LaravelEnso\Enums\Traits\Select as Options;
+
+enum ScanSelectEnum: int implements Select, Mappable
+{
+    use Options;
+
+    case Pending = 1;
+
+    public function map(): string
+    {
+        return match ($this) {
+            self::Pending => 'Localisation Test Select Enum Label',
+        };
+    }
+}
+PHP);
+
         require_once "{$packagePath}/src/Enums/ScanFrontendEnum.php";
+        require_once "{$packagePath}/src/Enums/ScanSelectEnum.php";
 
         config()->set('enso.enums.vendors', ['localisation-test']);
     }

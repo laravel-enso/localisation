@@ -6,7 +6,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use LaravelEnso\Enums\Contracts\Select;
 use LaravelEnso\Enums\Services\Enums as FrontendEnums;
+use ReflectionEnum;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -122,7 +124,8 @@ class Scan
 
         return Collection::wrap($this->legacyEnums())
             ->merge($this->nativeEnums())
-            ->flatMap(fn (array $enum) => Collection::wrap($enum)->values())
+            ->merge($this->selectEnumKeys())
+            ->flatMap(fn ($enum) => Collection::wrap($enum)->values())
             ->filter(fn ($value) => is_string($value) && $value !== '')
             ->values();
     }
@@ -139,5 +142,75 @@ class Scan
         return class_exists(FrontendEnums::class)
             ? (new FrontendEnums())->handle()
             : [];
+    }
+
+    private function selectEnumKeys(): Collection
+    {
+        if (! interface_exists(Select::class)) {
+            return Collection::empty();
+        }
+
+        return $this->enumSources()
+            ->flatMap(fn (string $source) => $this->selectEnums($source))
+            ->unique()
+            ->flatMap(fn (string $enum) => Collection::wrap($enum::select())->pluck('name'));
+    }
+
+    private function enumSources(): Collection
+    {
+        return Collection::wrap(Config::get('enso.enums.vendors', ['laravel-enso']))
+            ->map(fn (string $vendor) => base_path("vendor/{$vendor}"))
+            ->filter(fn (string $vendor) => File::isDirectory($vendor))
+            ->flatMap(fn (string $vendor) => File::directories($vendor))
+            ->push(base_path());
+    }
+
+    private function selectEnums(string $source): Collection
+    {
+        if (! File::isFile("{$source}/composer.json")) {
+            return Collection::empty();
+        }
+
+        return Collection::wrap($this->psr4($source))
+            ->flatMap(fn (string|array $folders, string $namespace) => Collection::wrap($folders)
+                ->flatMap(fn (string $folder) => $this->selectEnumsFromPsr4($source, $namespace, $folder)));
+    }
+
+    private function selectEnumsFromPsr4(string $source, string $namespace, string $folder): Collection
+    {
+        $path = Collection::wrap([
+            $source,
+            rtrim($folder, DIRECTORY_SEPARATOR),
+            'Enums',
+        ])->implode(DIRECTORY_SEPARATOR);
+
+        if (! File::isDirectory($path)) {
+            return Collection::empty();
+        }
+
+        return Collection::wrap(File::allFiles($path))
+            ->map(fn (SplFileInfo $file) => $this->enumClass($file, $namespace))
+            ->filter(fn (string $class) => $this->isSelectEnum($class));
+    }
+
+    private function enumClass(SplFileInfo $file, string $namespace): string
+    {
+        return Collection::wrap([
+            rtrim($namespace, '\\'),
+            'Enums',
+            ...explode('/', $file->getRelativePath()),
+            $file->getFilenameWithoutExtension(),
+        ])->filter()->implode('\\');
+    }
+
+    private function isSelectEnum(string $class): bool
+    {
+        return enum_exists($class)
+            && (new ReflectionEnum($class))->implementsInterface(Select::class);
+    }
+
+    private function psr4(string $source): array
+    {
+        return json_decode(File::get("{$source}/composer.json"), true)['autoload']['psr-4'] ?? [];
     }
 }
