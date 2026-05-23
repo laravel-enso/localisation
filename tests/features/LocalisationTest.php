@@ -4,11 +4,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
+use LaravelEnso\Enums\Facades\Enums;
+use LaravelEnso\Enums\Services\Enum;
 use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
 use LaravelEnso\Forms\TestTraits\EditForm;
 use LaravelEnso\Localisation\Models\Language;
+use LaravelEnso\Localisation\Services\Json\Scan;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
 use PHPUnit\Framework\Attributes\Test;
@@ -30,6 +33,7 @@ class LocalisationTest extends TestCase
     private string $originalLangPath;
     private string $testLangPath;
     private ?string $scanPath = null;
+    private ?string $enumPackagePath = null;
 
     protected function setUp(): void
     {
@@ -55,6 +59,7 @@ class LocalisationTest extends TestCase
         $this->app->useLangPath($this->originalLangPath);
         File::deleteDirectory($this->testLangPath);
         File::deleteDirectory($this->scanPath);
+        File::deleteDirectory($this->enumPackagePath);
 
         parent::tearDown();
     }
@@ -474,6 +479,8 @@ class LocalisationTest extends TestCase
     #[Test]
     public function can_scan_configured_sources_and_add_unique_translation_keys()
     {
+        config()->set('enso.localisation.scan.enums', false);
+
         $this->scanPath = sys_get_temp_dir().'/localisation-scan-'.uniqid();
 
         File::makeDirectory("{$this->scanPath}/app", recursive: true);
@@ -545,6 +552,7 @@ class LocalisationTest extends TestCase
     #[Test]
     public function scan_can_report_and_deduplicate_duplicate_translation_keys()
     {
+        config()->set('enso.localisation.scan.enums', false);
         config()->set('enso.localisation.scan.paths', []);
 
         $this->post(
@@ -616,6 +624,7 @@ JSON);
     public function scan_does_not_create_an_en_json_file_even_if_en_exists_as_a_language()
     {
         config()->set('app.fallback_locale', 'ro');
+        config()->set('enso.localisation.scan.enums', false);
         config()->set('enso.localisation.scan.paths', []);
 
         Language::query()->firstOrCreate(['name' => 'en'], [
@@ -634,6 +643,33 @@ JSON);
             ->assertSuccessful();
 
         $this->assertFalse(File::exists(App::langPath('en.json')));
+    }
+
+    #[Test]
+    public function scan_collects_frontend_enum_values_by_default()
+    {
+        config()->set('enso.localisation.scan.paths', []);
+
+        $this->registerEnumFixtures();
+
+        ['found' => $found] = (new Scan())->handle();
+
+        $this->assertContains('Localisation Test Legacy Enum Label', $found);
+        $this->assertContains('Localisation Test Native Enum Label', $found);
+    }
+
+    #[Test]
+    public function scan_can_skip_frontend_enum_values()
+    {
+        config()->set('enso.localisation.scan.enums', false);
+        config()->set('enso.localisation.scan.paths', []);
+
+        $this->registerEnumFixtures();
+
+        ['found' => $found] = (new Scan())->handle();
+
+        $this->assertNotContains('Localisation Test Legacy Enum Label', $found);
+        $this->assertNotContains('Localisation Test Native Enum Label', $found);
     }
 
     #[Test]
@@ -707,4 +743,62 @@ JSON);
             App::langPath($language->name)
         );
     }
+
+    private function registerEnumFixtures(): void
+    {
+        Enums::register([
+            'localisationScanLegacy' => LocalisationScanLegacyEnum::class,
+        ]);
+
+        $this->enumPackagePath = base_path('vendor/localisation-test');
+        $packagePath = "{$this->enumPackagePath}/enums";
+
+        File::makeDirectory("{$packagePath}/src/Enums", recursive: true);
+        File::put("{$packagePath}/composer.json", <<<'JSON'
+{
+    "autoload": {
+        "psr-4": {
+            "LocalisationTest\\EnumsPackage\\": "src/"
+        }
+    }
+}
+JSON);
+
+        File::put("{$packagePath}/src/Enums/ScanFrontendEnum.php", <<<'PHP'
+<?php
+
+namespace LocalisationTest\EnumsPackage\Enums;
+
+use LaravelEnso\Enums\Contracts\Frontend;
+use LaravelEnso\Enums\Contracts\Mappable;
+
+enum ScanFrontendEnum: int implements Frontend, Mappable
+{
+    case Pending = 1;
+
+    public function map(): string
+    {
+        return match ($this) {
+            self::Pending => 'Localisation Test Native Enum Label',
+        };
+    }
+
+    public static function registerBy(): string
+    {
+        return 'localisationScanNative';
+    }
+}
+PHP);
+
+        require_once "{$packagePath}/src/Enums/ScanFrontendEnum.php";
+
+        config()->set('enso.enums.vendors', ['localisation-test']);
+    }
+}
+
+class LocalisationScanLegacyEnum extends Enum
+{
+    protected static array $data = [
+        1 => 'Localisation Test Legacy Enum Label',
+    ];
 }

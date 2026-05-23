@@ -2,6 +2,7 @@
 
 return [
     'scan' => [
+        'enums' => true,
         'paths' => [
             ['path' => base_path('app')],
             ['path' => config_path()],

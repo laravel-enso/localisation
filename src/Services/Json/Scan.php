@@ -3,8 +3,10 @@
 namespace LaravelEnso\Localisation\Services\Json;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use LaravelEnso\Enums\Services\Enums as FrontendEnums;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -14,6 +16,7 @@ class Scan
     {
         $found = Collection::wrap($this->paths())
             ->flatMap(fn (array $path) => $this->scanPath($path))
+            ->merge($this->enumKeys())
             ->filter()
             ->unique()
             ->sort()
@@ -109,5 +112,32 @@ class Scan
     private function patterns(): array
     {
         return Config::get('enso.localisation.scan.patterns');
+    }
+
+    private function enumKeys(): Collection
+    {
+        if (! Config::get('enso.localisation.scan.enums', true)) {
+            return Collection::empty();
+        }
+
+        return Collection::wrap($this->legacyEnums())
+            ->merge($this->nativeEnums())
+            ->flatMap(fn (array $enum) => Collection::wrap($enum)->values())
+            ->filter(fn ($value) => is_string($value) && $value !== '')
+            ->values();
+    }
+
+    private function legacyEnums(): array
+    {
+        return App::bound('legacyEnums')
+            ? App::make('legacyEnums')->all()
+            : [];
+    }
+
+    private function nativeEnums(): array
+    {
+        return class_exists(FrontendEnums::class)
+            ? (new FrontendEnums())->handle()
+            : [];
     }
 }
