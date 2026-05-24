@@ -2,16 +2,21 @@
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Enums\Facades\Enums;
 use LaravelEnso\Enums\Services\Enum;
 use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
 use LaravelEnso\Forms\TestTraits\EditForm;
+use LaravelEnso\Localisation\Contracts\TranslatableAttributes;
 use LaravelEnso\Localisation\Models\Language;
 use LaravelEnso\Localisation\Services\Json\Scan;
+use LaravelEnso\Localisation\TranslatableModelServiceProvider;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
 use PHPUnit\Framework\Attributes\Test;
@@ -60,6 +65,7 @@ class LocalisationTest extends TestCase
         File::deleteDirectory($this->testLangPath);
         File::deleteDirectory($this->scanPath);
         File::deleteDirectory($this->enumPackagePath);
+        Schema::dropIfExists('localisation_scan_models');
 
         parent::tearDown();
     }
@@ -715,6 +721,80 @@ PHP);
     }
 
     #[Test]
+    public function scan_collects_registered_model_attribute_values()
+    {
+        config()->set('enso.localisation.scan.enums', false);
+        config()->set('enso.localisation.scan.paths', []);
+        config()->set('enso.localisation.scan.models', [LocalisationScanModel::class]);
+
+        Schema::create('localisation_scan_models', function (Blueprint $table): void {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->string('title')->nullable();
+            $table->string('ignored')->nullable();
+        });
+
+        LocalisationScanModel::query()->insert([
+            ['name' => 'Model Name', 'title' => 'Model Title', 'ignored' => 'Ignored Value'],
+            ['name' => 'Model Name', 'title' => '', 'ignored' => 'Ignored Value'],
+            ['name' => null, 'title' => 'Second Title', 'ignored' => 'Ignored Value'],
+        ]);
+
+        ['found' => $found] = (new Scan())->handle();
+
+        $this->assertContains('Model Name', $found);
+        $this->assertContains('Model Title', $found);
+        $this->assertContains('Second Title', $found);
+        $this->assertNotContains('', $found);
+        $this->assertNotContains('Ignored Value', $found);
+        $this->assertSame(1, $found->filter(fn ($key) => $key === 'Model Name')->count());
+    }
+
+    #[Test]
+    public function scan_fails_for_invalid_translatable_model_attributes()
+    {
+        config()->set('enso.localisation.scan.enums', false);
+        config()->set('enso.localisation.scan.paths', []);
+        config()->set('enso.localisation.scan.models', [LocalisationScanInvalidModel::class]);
+
+        Schema::create('localisation_scan_models', function (Blueprint $table): void {
+            $table->id();
+            $table->string('name')->nullable();
+        });
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        (new Scan())->handle();
+    }
+
+    #[Test]
+    public function translatable_model_provider_registers_only_during_scan()
+    {
+        $originalArgv = $_SERVER['argv'] ?? [];
+        $provider = new LocalisationScanTranslatableModelServiceProvider($this->app);
+
+        try {
+            config()->set('enso.localisation.scan.models', []);
+            $_SERVER['argv'] = ['artisan', 'about'];
+
+            $provider->boot();
+
+            $this->assertSame([], config('enso.localisation.scan.models'));
+
+            $_SERVER['argv'] = ['artisan', 'enso:localisation:scan'];
+
+            $provider->boot();
+
+            $this->assertSame(
+                [LocalisationScanModel::class],
+                config('enso.localisation.scan.models')
+            );
+        } finally {
+            $_SERVER['argv'] = $originalArgv;
+        }
+    }
+
+    #[Test]
     public function publish_does_not_create_an_en_json_file_even_if_en_exists_as_a_language()
     {
         Language::query()->firstOrCreate(['name' => 'en'], [
@@ -867,5 +947,32 @@ class LocalisationScanLegacyEnum extends Enum
 {
     protected static array $data = [
         1 => 'Localisation Test Legacy Enum Label',
+    ];
+}
+
+class LocalisationScanModel extends Model implements TranslatableAttributes
+{
+    protected $guarded = ['id'];
+
+    protected $table = 'localisation_scan_models';
+
+    public function translatableAttributes(): array
+    {
+        return ['name', 'title'];
+    }
+}
+
+class LocalisationScanInvalidModel extends LocalisationScanModel
+{
+    public function translatableAttributes(): array
+    {
+        return ['missing'];
+    }
+}
+
+class LocalisationScanTranslatableModelServiceProvider extends TranslatableModelServiceProvider
+{
+    protected array $models = [
+        LocalisationScanModel::class,
     ];
 }

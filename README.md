@@ -43,7 +43,7 @@ php artisan vendor:publish --tag=localisation-seeder
 - JSON translation editing, saving, and key-creation endpoints.
 - `set-language` middleware alias for per-request locale switching.
 - `enso:localisation:publish` command for generating locale folders and JSON files.
-- `enso:localisation:scan` command for finding missing keys, frontend and selectable enum labels, and duplicate translations.
+- `enso:localisation:scan` command for finding missing keys, frontend and selectable enum labels, registered model values, and duplicate translations.
 
 ## Usage
 
@@ -69,6 +69,11 @@ The scan command reads the configured source paths and also collects labels from
     'enums' => false,
 ],
 ```
+
+Packages may expose database-backed translation keys by extending
+`LaravelEnso\Localisation\TranslatableModelServiceProvider` and listing models
+that implement `LaravelEnso\Localisation\Contracts\TranslatableAttributes`.
+The provider registers models only while `enso:localisation:scan` is running.
 
 ## API
 

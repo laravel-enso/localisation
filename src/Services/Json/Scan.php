@@ -2,12 +2,16 @@
 
 namespace LaravelEnso\Localisation\Services\Json;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
+use InvalidArgumentException;
 use LaravelEnso\Enums\Contracts\Select;
 use LaravelEnso\Enums\Services\Enums as FrontendEnums;
+use LaravelEnso\Localisation\Contracts\TranslatableAttributes;
 use ReflectionEnum;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -19,6 +23,7 @@ class Scan
         $found = Collection::wrap($this->paths())
             ->flatMap(fn (array $path) => $this->scanPath($path))
             ->merge($this->enumKeys())
+            ->merge($this->modelKeys())
             ->filter()
             ->unique()
             ->sort()
@@ -118,12 +123,17 @@ class Scan
         preg_match_all('/(@lang|__|trans|i18n)\(\s*(.*?)\)/', $line, $matches, PREG_SET_ORDER);
 
         return Collection::wrap($matches)
-            ->reject(fn (array $match) => preg_match('/^\s*([\'"])((?:\\\\.|(?!\1).)*?)\1\s*$/s', $match[2]) === 1)
+            ->reject(fn (array $match) => $this->hasLiteralFirstArgument($match[2]))
             ->map(fn (array $match) => [
                 'file' => $file->getPathname(),
                 'line' => $lineNumber,
                 'call' => trim($match[0]),
             ]);
+    }
+
+    private function hasLiteralFirstArgument(string $arguments): bool
+    {
+        return preg_match('/^\s*([\'"])((?:\\\\.|(?!\1).)*?)\1\s*(?:,|$)/s', $arguments) === 1;
     }
 
     private function paths(): array
@@ -153,6 +163,46 @@ class Scan
             ->flatMap(fn ($enum) => Collection::wrap($enum)->values())
             ->filter(fn ($value) => is_string($value) && $value !== '')
             ->values();
+    }
+
+    private function modelKeys(): Collection
+    {
+        return Collection::wrap(Config::get('enso.localisation.scan.models', []))
+            ->unique()
+            ->flatMap(fn (string $model) => $this->translatableValues($model))
+            ->filter(fn ($value) => is_string($value) && trim($value) !== '')
+            ->values();
+    }
+
+    private function translatableValues(string $model): Collection
+    {
+        $instance = App::make($model);
+
+        if (! $instance instanceof Model || ! $instance instanceof TranslatableAttributes) {
+            throw new InvalidArgumentException(
+                "{$model} must be an Eloquent model implementing ".TranslatableAttributes::class
+            );
+        }
+
+        return Collection::wrap($instance->translatableAttributes())
+            ->filter(fn ($attribute) => is_string($attribute) && $attribute !== '')
+            ->unique()
+            ->flatMap(fn (string $attribute) => $this->attributeValues($instance, $attribute));
+    }
+
+    private function attributeValues(Model $model, string $attribute): Collection
+    {
+        if (! Schema::connection($model->getConnectionName())->hasColumn($model->getTable(), $attribute)) {
+            throw new InvalidArgumentException(
+                "{$attribute} is not a valid translatable attribute for ".get_class($model)
+            );
+        }
+
+        return $model->newQuery()
+            ->select($attribute)
+            ->whereNotNull($attribute)
+            ->distinct()
+            ->pluck($attribute);
     }
 
     private function legacyEnums(): array
