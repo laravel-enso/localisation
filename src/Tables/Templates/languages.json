@@ -5,7 +5,7 @@
         "excel",
         {
             "type": "global",
-            "icon": "edit",
+            "icon": "pen",
             "class": null,
             "routeSuffix": "editTexts",
             "event": "edit-texts",
